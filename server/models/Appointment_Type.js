@@ -5,11 +5,13 @@ const {Schema, model} = require("mongoose");
 const AppointmentTypeSchema = new Schema(
     {
         appointment_id: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'Appointment'
             //randomly generate string
         },
         business_id: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'Business'
             //reference business model
         },
         // user_id: {
