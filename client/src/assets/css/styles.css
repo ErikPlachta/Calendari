@@ -4,6 +4,7 @@
 :root {
 
     /* BASIC COLOR SCHEMA PLACEHOLDER */
+    /*TODO:: 04/05/2022 #EP || Define this color schema */
     --C01: #f9f9f9;
     --C02: #999;
     --C03: #888;
@@ -16,13 +17,44 @@
     --C10: #111;
   
   
+
+    /* BOX-SHADOWS */
+    /*TODO:: 04/05/2022 #EP || Convert to pixels */
+    --bs-01: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
+    /*TODO:: 04/05/2022 #EP || Add this focus */
+    /* --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3); */
+    --bs-02: 0 0rem .5rem var(--a_01);
+    /*TODO:: 04/05/2022 #EP || Add this focus */
+    /* --bs-02_focus: 0 0rem .5rem var(--a_01); */
+
+
+
     /* SHADOWS */
-  
-  
+    --s_black_a25: 0 0 .5rem var(--a_01);
+    --s_black_2px_a25: 2px solid var(--a_01);
+
+
     /* BORDERS */
-  
+    /*TODO:: 04/05/2022 #EP || Define these colors */
+    --b_01: 1px solid var(--c_00); /* default border and font color */ 
+    --b_01_focus: 2px solid var(--c_00); /* secondary for more obvious accents hovered */
+    --b_02: 1px solid var(--c_02); /* secondary for more obvious accents */
+    --b_02_focus: 1px solid var(--c_02); /* secondary for more obvious accents */
+    --b_03: 1px solid var(--c_03); /* secondary for more obvious accents */
+    --b_03_focus: 2px solid var(--c_03); /* secondary for more obvious accents hovered */
+
+
+    /* RADIUS */
+    /*TODO:: 04/05/2022 #EP || Verify these  */
+    --br_primary: .5rem;
+    --br_secondary: .25rem;
+
   
     /* ALPHAS */
+    /*TODO:: 04/05/2022 #EP || Verify these */
+    --a_01: rgba(0 0 0 /.25);
+    --a_02: rgba(0 0 0 /.5);
+
   
   }
   
