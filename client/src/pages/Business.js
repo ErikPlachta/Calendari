@@ -73,25 +73,50 @@ export default function Business() {
         <section>
           <h2>{business.name}</h2>
         </section>
+        {/* Business Menu */}
+        <ul>
+          {/* Default landing page for business */}
+          <li>Home</li>
+          {/* A summary of the business details overall */}
+          <li>Dashboard</li>
+          {/* Details on upcoming appointments */}
+          <li>Appointments</li>
+          {/* <li>Reporting</li> */}
+          {/* Used to configure options */}
+          <li>Settings
+            <ul>
+              {/* User account specific settings */}
+              <li>My Account</li>
+              <li>My Business
+                <ul>
+                  <li>Calendar</li>
+                  <li>Appointment Types</li>
+                  <li>Users</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </aside>
 
       {/* Main content within Business Page */}
-      <main className="container">
+      <main className="container business">
         
         {/* Main Header Section on Business Page */}
-        <header>
+        <header className="business">
           
           <p>Welcome, {user.name_first}. </p>
         </header>
         
+        
 
         {/* Setup Days of Week, section. */}
-        <section className="configure_DayOfWeek">
+        <section className="configureMenu dayOfWeek">
           <h3>It looks like your account needs to be setup!</h3>
           
-          <div className='configure_DayOfWeek'>
+          <div className='dayOfWeek'>
             <p>Please confirm the times and days you are available.</p>
-            <form className='configure_DayOfWeek'>
+            <form className='dayOfWeek'>
               {Object.keys(schedule).map( (dayOfWeek, index) => (
                 <div>
                   
