@@ -2,7 +2,7 @@
 
 const {Schema, model} = require("mongoose");
 
-const Appointment_TypeSchema = new Schema(
+const AppointmentTypeSchema = new Schema(
     {
         appointment_id: {
             type: String,
@@ -12,18 +12,18 @@ const Appointment_TypeSchema = new Schema(
             type: String,
             //reference business model
         },
-        user_id: {
-            type: Schema.Type.user_id,
-            ref: 'User'
-        },
-        client_details: {//this below format is probably incorrect but revisiting later with tutor!
-            type: Schema.Types.name_first,
-            ref: 'User',
-            type: Schema.Types.email,
-            ref:'User',
-            type: Schema.Types.phone,
-            ref: 'User'
-        },
+        // user_id: {
+        //     type: Schema.Type.user_id,
+        //     ref: 'User'
+        // },
+        // client_details: {//this below format is probably incorrect but revisiting later with tutor!
+        //     type: Schema.Types.name_first,
+        //     ref: 'User',
+        //     type: Schema.Types.email,
+        //     ref:'User',
+        //     type: Schema.Types.phone,
+        //     ref: 'User'
+        // },
         summary: {
             type: String,
             trim: true,
@@ -40,6 +40,6 @@ const Appointment_TypeSchema = new Schema(
     }
 )
 
-const Appointment_Type = model('Appointment_Type', Appointment_TypeSchema);
+const AppointmentType = model('AppointmentType', AppointmentTypeSchema);
 
-module.exports = Appointment_Type
+module.exports = AppointmentType

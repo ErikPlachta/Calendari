@@ -20,7 +20,7 @@ const { Schema, model } = require('mongoose');
 const dateFormat = require('../../client/src/utils/dateFormat'); /*THIS DOESNT SEEM LIKE RIGHT PATH, TRAFFIC CONE HERE*/
 const bcrypt = require('bcrypt');
 
-const UserSchema = new Schema(
+const userSchema = new Schema(
     {
         user_id: {
             type: String,
@@ -95,5 +95,5 @@ userSchema.methods.isCorrectPassword = async function (password) {
 
 //GET TOTAL COUNT OF APPOINTMENTS ON RETRIEVAL after i build out the appointments model
 
-const User = model("User", UserSchema);
+const User = model("User", userSchema);
 module.exports = User;
