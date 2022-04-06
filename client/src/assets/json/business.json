@@ -6,6 +6,7 @@
         "configuration"     :   {
                                     "schedule"  : {
                                         "sunday": {
+
                                             "start"     :   "00:00",
                                             "end"       :   "00:00",
                                             "verified"  :   "false"
@@ -100,7 +101,7 @@
         "brand_name"        :   "Mary's Business Brand Name",
         "configuration"     :   {
                                     "schedule"  : {
-                                        "sunday": {
+                                        "sunday": 
                                             "start"     :   "00:00",
                                             "end"       :   "00:00",
                                             "verified"  :   "false"
