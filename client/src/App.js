@@ -1,5 +1,6 @@
 // import logo from './logo.svg';
-// import './App.css';
+import './assets/css/styles.css';
+import './assets/css/animations.css';
 
 import React from 'react';
 import Home from './pages/Home';

@@ -18,6 +18,7 @@
         },
         "Details"           :   {
                                     "subject"       : "Want to discuss X with You",
+                                    "summary"       : "I want to talk about x and go over y to accomplish z",
                                     "date_time"          : "1649216132913",
                                     "duration"      : "45",
                                     "timezone"      : "EST",
@@ -76,6 +77,7 @@
         },
         "Details"           :   {
                                     "subject"       : "Want to discuss X with You",
+                                    "summary"       : "I want to talk about x and go over y to accomplish z",
                                     "date_time"          : "1649216132913",
                                     "duration"      : "45",
                                     "timezone"      : "EST",

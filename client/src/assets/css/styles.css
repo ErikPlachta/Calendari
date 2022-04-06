@@ -27,6 +27,13 @@
     /*TODO:: 04/05/2022 #EP || Add this focus */
     /* --bs-02_focus: 0 0rem .5rem var(--a_01); */
 
+    --base-container:
+        border-radius: 50px;
+        background: linear-gradient(145deg, #f0f0f0, #cacaca);
+        box-shadow:  41px 41px 80px #bebebe,
+                    -41px -41px 80px #ffffff;
+    
+
 
 
     /* SHADOWS */
