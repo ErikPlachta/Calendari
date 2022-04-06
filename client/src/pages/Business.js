@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+const { capitalizeFirstLetter } = require('../utils/helpers');
 
 //-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -96,7 +97,7 @@ export default function Business() {
               {Object.keys(schedule).map( (dayOfWeek, index) => (
                 <div>
                   
-                  <h4>{dayOfWeek}</h4>
+                  <h4>{capitalizeFirstLetter(dayOfWeek)}</h4>
                     {/* Go through each day of week, present days with times and if verified */}
                     {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
                       <span>
