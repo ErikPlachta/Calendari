@@ -14,10 +14,10 @@ export default function Business() {
   
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-  const [businesses, setBusinesses] = useState(DB_Business);
-  const [users, setUsers] = useState(DB_User);
-  const [appointments, setAppointments] = useState(DB_Appointment);
-  const [appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
+  const [Businesses, setBusinesses] = useState(DB_Business);
+  const [Users, setUsers] = useState(DB_User);
+  const [Appointments, setAppointments] = useState(DB_Appointment);
+  const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
   /*  1. VERIFY IF LOGGED IN    */
@@ -43,32 +43,19 @@ export default function Business() {
   //TODO:: 04/05/22 #EP || Testing basic integrity. Need to build out what these should actually do.
   
   //-- extract business from database based on JWT id
-  const business = businesses[business_id];
+  const business = Businesses[business_id];
   //-- extract schedule from extracted business
   const schedule = business.configuration.schedule;
   //-- extract all users from business //TODO:: 04/05/2022 #EP || Make this the logged in
-  const user     = users[user_id];
+  const user     = Users[user_id];
   
-  //TODO:: 04/05/22 #EP || Onboard Appointments
-  const getAppointments = (business_id) =>{
-    // console.table(appointments)
-    let myAppointments = [];
-    // console.table(myAppointments)
-    for (let entry = 0; entry < business.Appointment.length; entry++){
-      console.log(appointments[business.Appointment[entry]])
-      
-      myAppointments.push(appointments[business.Appointment[entry]]);
-    }
-
-
+  const appointments = business.Appointment;
     
-    return [myAppointments];
-    // return myAppointments;
-  };
+  
 
 
   //TODO:: 04/05/22 #EP || Onboard Appointment_Types
-  const appointment_Type = appointment_Types;
+  const appointment_Type = business.Appointment_Type;
 
 
   //----------------------------------------------------------------------------
@@ -133,23 +120,35 @@ export default function Business() {
           <div className='appointments'>
             <p>info to go here.</p>
               
-            { getAppointments(business_id).map( project => (
-              project
-            ))};
-
-              {/* {Object.keys(getAppointments(business_id)).map((values, index) => ( 
-                  // console.log(index,values)
-                  <span>{values}</span>
-              ))} */}
             
+            {Object.keys(business.Appointment).map((appointment, index) => (
+              // <h4>{capitalizeFirstLetter(appointment)}</h4>
+              business['Appointment'][appointment]["status"]
               
+              
+              // {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
+              // {Object.keys(appointments[appointment]).map((value, index) => ( 
+                // <span>
+                //   {(() => {
+                //     switch (value) {
+                //         case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                //         case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                //         case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
+                //         // checked={checked ? 'checked' : ''}
+                //         default         :   return "NULL";
+                //       }
+                //     })()}
+                //   {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
+                // </span>
+              
+              
+            ))}
             
             
           </div>
 
         </section>
 
-        
 
         {/* Setup Days of Week, section. */}
         <section className="containerResults dayOfWeek">
