@@ -40,9 +40,13 @@ export default function Business() {
   /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
 
   //TODO:: 04/05/22 #EP || Testing basic integrity. Need to build out what these should actually do.
-  const business = businesses[business_id].name;
-  const user     = users[user_id].username;
+  const business = businesses[business_id];
+  const schedule = business.configuration.schedule;
+  const user     = users[user_id];
+  
+  //TODO:: 04/05/22 #EP || Onboard Appointments
   const appointment = appointments;
+  //TODO:: 04/05/22 #EP || Onboard Appointment_Types
   const appointment_Type = appointment_Types;
 
 
@@ -64,10 +68,41 @@ export default function Business() {
         
         {/* Main Header Section on Business Page */}
         <header>
-          <h2>{business}</h2>
-          <p>Welcome, {user} </p>
+          <h2>{business.name}</h2>
+          <p>Welcome, {user.name_first}. </p>
         </header>
         
+
+        {/* Setup Section */}
+        <section>
+          <h3>It looks like your account needs to be setup!</h3>
+          <div>
+            <p>Please confirm the times and days you are available.</p>
+            {Object.keys(schedule).map( (dayOfWeek, index) => (
+              <div>
+                
+                <h4>{dayOfWeek}</h4>
+                {Object.keys(schedule[dayOfWeek]).map((time, index) => ( 
+                  <span>
+                    {(() => {
+                      switch (index) {
+                          case 0:   return `${schedule[dayOfWeek][time]} - `;
+                          case 1:   return `${schedule[dayOfWeek][time]}`;
+                          default:      return "NULL";
+                        }
+                      })()}
+                    {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
+                  </span>
+                  
+                ))}
+                
+              </div>
+            ))}
+            
+          </div>
+
+        </section>
+
       </main>
 
     </section>
