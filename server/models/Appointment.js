@@ -25,6 +25,7 @@
             - Completed
             - Canceled
 */
+const {Schema, model} = require("mongoose");
 
 const AppointmentSchema = new Schema(
     {
@@ -53,8 +54,27 @@ const AppointmentSchema = new Schema(
             //is universal time zone mvp?
         },
         client: {
+            name: {
+
+            },
+            email: {
+
+            },
+            phone: {
+
+            },
+            summary: {
+
+            },
+            //is timezone mvp?
+        },
+        appointment_status: {
             
         },
         id: false
     }
 )
+
+const Appointment = model('Appointment', AppointmentSchema);
+
+module.exports = Appointment;
