@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from 'react';
 
 //-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
+//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_User =              require('../assets/json/user.json');
 const DB_Business =          require('../assets/json/business.json');
 const DB_Appointment =       require('../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 
+
+//-- Business Page to load for users that are logged in, otherwise redirect.
 export default function Business() {
   
-  
+  //-- Onboarding connections to take data to verify integrity
+  //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
   const [businesses, setBusinesses] = useState(DB_Business);
   const [users, setUsers] = useState(DB_User);
+  const [appointments, setAppointments] = useState(DB_Appointment);
+  const [appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
   /*  1. VERIFY IF LOGGED IN    */
@@ -32,10 +38,15 @@ export default function Business() {
 
 
   /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
- const business = businesses[business_id].name;
- const user     = users[user_id].username;
- console.log(business,user)
 
+  //TODO:: 04/05/22 #EP || Testing basic integrity. Need to build out what these should actually do.
+  const business = businesses[business_id].name;
+  const user     = users[user_id].username;
+  const appointment = appointments;
+  const appointment_Type = appointment_Types;
+
+
+  //-- RETURN FUNCTION
   return (
     <section>
       
