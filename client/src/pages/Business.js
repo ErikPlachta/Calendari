@@ -50,10 +50,25 @@ export default function Business() {
   const user     = users[user_id];
   
   //TODO:: 04/05/22 #EP || Onboard Appointments
-  const appointment = appointments;
+  const getAppointments = (business_id) =>{
+    // console.table(appointments)
+    let myAppointments = [];
+    // console.table(myAppointments)
+    for (let entry = 0; entry < business.Appointment.length; entry++){
+      console.log(appointments[business.Appointment[entry]])
+      
+      myAppointments.push(appointments[business.Appointment[entry]]);
+    }
+
+
+    
+    return [myAppointments];
+    // return myAppointments;
+  };
+
+
   //TODO:: 04/05/22 #EP || Onboard Appointment_Types
   const appointment_Type = appointment_Types;
-
 
 
   //----------------------------------------------------------------------------
@@ -61,6 +76,9 @@ export default function Business() {
 
   //TODO:: 04/05/22 #EP || Build this out
   const approveTimes = dateTimes => {
+
+    
+
     dateTimes.preventDefault();
   };
 
@@ -103,19 +121,42 @@ export default function Business() {
       <main className="container business">
         
         {/* Main Header Section on Business Page */}
-        <header className="business">
-          
+        <header className="business">  
           <p>Welcome, {user.name_first}. </p>
         </header>
         
+
+         {/* Build appointment details here. */}
+         <section className="containerResults appointments">
+          <h3>Here are your schedule appointments</h3>
+          
+          <div className='appointments'>
+            <p>info to go here.</p>
+              
+            { getAppointments(business_id).map( project => (
+              project
+            ))};
+
+              {/* {Object.keys(getAppointments(business_id)).map((values, index) => ( 
+                  // console.log(index,values)
+                  <span>{values}</span>
+              ))} */}
+            
+              
+            
+            
+          </div>
+
+        </section>
+
         
 
         {/* Setup Days of Week, section. */}
-        <section className="configureMenu dayOfWeek">
-          <h3>It looks like your account needs to be setup!</h3>
+        <section className="containerResults dayOfWeek">
+          <h3>It looks like your schedule needs to be setup!</h3>
           
           <div className='dayOfWeek'>
-            <p>Please confirm the times and days you are available.</p>
+            <p>Please confirm the days and times you are available for appointments.</p>
             <form className='dayOfWeek'>
               {Object.keys(schedule).map( (dayOfWeek, index) => (
                 <div>
@@ -151,3 +192,4 @@ export default function Business() {
     </section>
   )
 }
+

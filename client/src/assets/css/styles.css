@@ -162,7 +162,7 @@ button {
 }
 
 /* Used for ALL business configuration menus ?  */
-.configureMenu {
+.containerResults {
   margin: 2rem;
   padding: 2rem;
   border-radius: 25px;
