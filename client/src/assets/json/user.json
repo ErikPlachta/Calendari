@@ -1,0 +1,35 @@
+{
+    "0000-0000": {
+        "_id"           : "0000-0000",
+        "name_first"    : "Erik",
+        "name_Last"     : "Plachta",
+        "username"      : "EP",
+        "password_has"  : "abcdefg-heres-my-password-don't-hack-me",
+        "date_created"  : "1649213599934",
+        "date_login"    : "1649213599934",
+        "appointments"  : {},
+        "business_id"   : "0000-AAAA"
+    },
+    "1111-1111": {
+        "_id"           : "1111-1111",
+        "name_first"    : "Christiana",
+        "name_Last"     : "Sullivan Morales",
+        "username"      : "Christiana",
+        "password_has"  : "abcdefg-heres-my-password-don't-hack-me",
+        "date_created"  : "1649213599934",
+        "date_login"    : "1649213599934",
+        "appointments"  : {},
+        "business_id"   : "0000-BBBB"
+    },
+    "2222-2222": {
+        "_id"           : "2222-2222",
+        "name_first"    : "Mary",
+        "name_Last"     : "Lawton",
+        "username"      : "Mary",
+        "password_has"  : "abcdefg-heres-my-password-don't-hack-me",
+        "date_created"  : "1649213599934",
+        "date_login"    : "1649213599934",
+        "appointments"  : {},
+        "business_id"   : "0000-CCCC"
+    }
+}
