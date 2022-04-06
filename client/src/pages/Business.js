@@ -94,7 +94,7 @@ export default function Business() {
                         switch (value) {
                             case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_sart`)} defaultValue={schedule[dayOfWeek][value]}></input>;
                             case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                            // case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
+                            case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
                             // checked={checked ? 'checked' : ''}
                             default         :   return "NULL";
                           }
