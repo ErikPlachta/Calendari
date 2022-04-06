@@ -2,6 +2,7 @@
 import './assets/css/styles.css';
 import './assets/css/animations.css';
 
+
 import React from 'react';
 import Home from './pages/Home';
 import Business from './pages/Business';
