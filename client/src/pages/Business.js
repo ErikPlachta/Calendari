@@ -123,7 +123,18 @@ export default function Business() {
             
             {Object.keys(business.Appointment).map((appointment, index) => (
               // <h4>{capitalizeFirstLetter(appointment)}</h4>
-              business['Appointment'][appointment]["status"]
+              <section>
+                <div>
+                  <h4>Appointment</h4>
+                  {appointments[appointment]["_id"]}
+                  {appointments[appointment]["status"]}
+                </div>
+                <div>
+                  <h4>User</h4>
+                  {appointments[appointment]["User"]["name_first"]}
+                  {appointments[appointment]["User"]["name_last"]}
+                </div>
+              </section>
               
               
               // {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
