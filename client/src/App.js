@@ -3,13 +3,18 @@
 
 import React from 'react';
 import Home from './pages/Home';
+import Business from './pages/Business';
 
 function App() {
   return (
     <section>
       <h1>Your Schedule</h1>
     
-      <Home></Home>
+      {/* <Home></Home> */}
+      {/* hard-coded business into default load for easy testing */}
+      <main>
+        <Business></Business>
+        </main>
     </section>
   );
 }

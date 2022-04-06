@@ -1,0 +1,124 @@
+{
+    "0000-AAAA" : {
+        "_id"               :   "0000-AAAA",
+        "name"              :   "Erik's Business Name",
+        "brand_name"        :   "Erik's Business Brand Name",
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "monday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "tuesday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "wednesday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "thursday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "friday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "saturday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        }
+                                    }
+        },
+        "Appointment_Type"  :   ["0000-0000"],
+        "Appointment"       :   ["0000-0000-1111"],
+        "Users"             :   ["0000-0000"]
+    },
+    "0000-BBBB" : {
+        "_id"               :   "0000-BBBB",
+        "name"              :   "Christiana's Business Name",
+        "brand_name"        :   "Christiana's Business Brand Name",
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "monday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "tuesday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "wednesday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "thursday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "friday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "saturday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        }
+                                    }
+        },
+        "Appointment_Type"  :   ["0000-0000"],
+        "Appointment"       :   ["0000-0000-1111"],
+        "Users"             :   ["1111-1111"]
+
+    },
+    "0000-CCCC" : {
+        "_id"               :   "0000-CCCC",
+        "name"              :   "Mary's Business Name",
+        "brand_name"        :   "Mary's Business Brand Name",
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "monday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "tuesday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "wednesday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "thursday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "friday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        },
+                                        "saturday": {
+                                            "start" :   "00:00:00",
+                                            "end"   :   "00:00:00"
+                                        }
+                                    }
+        },
+        "Appointment_Type"  :   ["0000-0000"],
+        "Appointment"       :   ["0000-0000-1111"],
+        "Users"             :   ["2222-2222"]
+
+    }
+}
