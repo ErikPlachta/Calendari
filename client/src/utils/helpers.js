@@ -17,13 +17,13 @@ export function emailValidate(email) {
 
 
 //-- first letter of string to capital letter
-const capitalizeFirstLetter = string => {
+export function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 
 //-- take a string payload, shrink it to a specific length. If length not defined, default is 100.
-const stringShrink = (content, length) => {
+export function stringShrink(content, length) {
     
     //-- if undefined, default is 100 characters
     if(!length){ length = 100; }
@@ -41,7 +41,7 @@ const stringShrink = (content, length) => {
 
 
 //-- Send in raw JavaScript Date/Time Value from date.Now() and returns MM/DD/YYYY format
-const dateFormat = date => {
+export function dateFormat(date) {
   return `${
     new Date(date).getMonth() + 1}
     /${new Date(date).getDate()}
@@ -50,7 +50,7 @@ const dateFormat = date => {
 };
 
 //-- Send in raw JavaScript Date/Time Value from date.Now(), get time passed in seconds, minutes, hours or days.
-const dateGetTimePassed = ( date ) => {
+export function dateGetTimePassed(date){
   //-- Get current time
   var now = moment(new Date()); 
   //-- Get the diff between now and created date
@@ -70,12 +70,3 @@ const dateGetTimePassed = ( date ) => {
 
 //------------------------------------------------------------------------------
 //-- Exports
-
-module.export = {
-    capitalizeFirstLetter,
-    stringShrink,
-    emailValidate,
-    dateFormat,
-    dateGetTimePassed,
-
-}

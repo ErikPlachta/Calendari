@@ -6,32 +6,40 @@
         "configuration"     :   {
                                     "schedule"  : {
                                         "sunday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
                                         },
                                         "monday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "tuesday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "wednesday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "thursday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "friday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "saturday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         }
                                     }
         },
@@ -46,32 +54,39 @@
         "configuration"     :   {
                                     "schedule"  : {
                                         "sunday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
                                         },
                                         "monday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "tuesday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "wednesday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "thursday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "friday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "saturday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         }
                                     }
         },
@@ -86,33 +101,40 @@
         "brand_name"        :   "Mary's Business Brand Name",
         "configuration"     :   {
                                     "schedule"  : {
-                                        "sunday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                        "sunday": 
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
                                         },
                                         "monday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "tuesday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "wednesday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "thursday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "friday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         },
                                         "saturday": {
-                                            "start" :   "00:00:00",
-                                            "end"   :   "00:00:00"
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
                                         }
                                     }
         },
