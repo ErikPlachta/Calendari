@@ -8,7 +8,8 @@ const {
   dateTimeFull,
   dateDayOfWeek,
   dateHourOfDay,
-  dateGetTimePassed
+  dateGetTimePassed,
+  dateTimeFullLocal
 } = require('../utils/helpers');
 
 
@@ -128,17 +129,17 @@ export default function Business() {
           <h3>Here are your schedule appointments</h3>
           
           <div className='scheduledAppointments'>
-            <p>info to go here.</p>
-              
             
             {Object.keys(business.Appointment).map((appointment, index) => (
               // <h4>{capitalizeFirstLetter(appointment)}</h4>
-              <section className="scheduledAppointment">
+              <section className="containerResults scheduledAppointment">
                 <div>
                   <h4>
-                    {appointments[appointment]['Appointment_Type']["name"]} Appointment
-                    with {appointments[appointment]['Details']['client']['name']}
-                    on {dateTimeFull((appointments[appointment]['Details']['date_time']))}
+                  {appointments[appointment]["User"]["name_first"]} {appointments[appointment]["User"]["name_last"]} has
+                  a {appointments[appointment]["status"]}
+                  - a {appointments[appointment]['Appointment_Type']["name"]} Appointment
+                    with {appointments[appointment]['Details']['client']['name']} on
+                    - {dateTimeFull((appointments[appointment]['Details']['date_time']))}
                   </h4>
 
                     {/* on {dateFormat((appointments[appointment]['Details']['date_time']))}
@@ -150,20 +151,28 @@ export default function Business() {
                   dateHourOfDay, */}
                   <div>
                     <h5>Appointment Details</h5>
-
+                    <ul>
+                      <li>Type: {appointments[appointment]['Details']["type"]}</li>
+                      <li>Subject: {appointments[appointment]['Details']["subject"]}</li>
+                      <li>Summary: {appointments[appointment]['Details']["summary"]}</li>
+                      <li>Date & Time for Host: {dateTimeFullLocal(appointments[appointment]['Details']["date_time"])}</li>
+                      <li>Duration: {appointments[appointment]['Details']["duration"]}</li>
+                      <li>Appointment ID: {appointments[appointment]["_id"]}</li>
+                    </ul>
                   </div>
 
                   <div>
                     <h5>Client Details</h5>
-                    {appointments[appointment]['Details']['client']['email']}
-                    {appointments[appointment]['Details']['client']['phone']}
-                    {appointments[appointment]["_id"]}
+                    <ul>
+                    <li>Name: {appointments[appointment]['Details']['client']['name']}   </li>
+                    <li>Email: {appointments[appointment]['Details']['client']['email']}  </li>
+                    <li>Phone: {appointments[appointment]['Details']['client']['phone']}  </li>
+                    <li>Date & Time for Client: {dateTimeFull(appointments[appointment]['Details']['date_time'])}  </li>
+                    <li>Timezone: {appointments[appointment]['Details']['timezone']}  </li>
+                    </ul>
                   </div>
-                  <br />
-                  {appointments[appointment]["status"]}
                 </div>
                 <div>
-                  <b>User:</b> {appointments[appointment]["User"]["name_first"]} {appointments[appointment]["User"]["name_last"]}
                 </div>
               </section>
             ))}

@@ -44,7 +44,13 @@ export function dateGetMonths(){
   return moment.months();
 }
 
+
+export function dateTimeFullLocal(date){
+  return moment(date).local().format("dddd, MMMM Do YYYY, h:mm:ss a");
+}
+
 export function dateTimeFull(date){
+  // moment(date)
   return moment(date).format("dddd, MMMM Do YYYY, h:mm:ss a");
 }
 

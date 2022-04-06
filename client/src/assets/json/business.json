@@ -93,12 +93,12 @@
                                 "Details"           :   {
                                                             "subject"       : "Want to discuss X with You",
                                                             "summary"       : "I want to talk about x and go over y to accomplish z",
-                                                            "date_time"          : 1649216132913,
-                                                            "duration"      : "45",
+                                                            "date_time"          : "2022-04-13 10:00:00",
+                                                            "duration"      : "45 minutes",
                                                             "timezone"      : "EST",
                                                             "client"        : {
-                                                                                "name": "Fake Client",
-                                                                                "email": "my@noemail.com",
+                                                                                "name": "Mary",
+                                                                                "email": "mary@noemail.com",
                                                                                 "phone": "000-867-5309"
                                                             }
                                 }
@@ -123,12 +123,12 @@
                                 "Details"           :   {
                                                             "subject"       : "Want to discuss X with You",
                                                             "summary"       : "I want to talk about x and go over y to accomplish z",
-                                                            "date_time"          : 1649216132913,
-                                                            "duration"      : "45",
+                                                            "date_time"          : "2022-04-10 14:00:00",
+                                                            "duration"      : "45 minutes",
                                                             "timezone"      : "EST",
                                                             "client"        : {
-                                                                                "name": "Fake Client",
-                                                                                "email": "my@noemail.com",
+                                                                                "name": "Christiana",
+                                                                                "email": "christiana@noemail.com",
                                                                                 "phone": "000-867-5309"
                                                             }
                                 }
@@ -230,7 +230,7 @@
                 "Details"           :   {
                                             "subject"       : "Want to discuss X with You",
                                             "date_time"          : 1649216132913,
-                                            "duration"      : "45",
+                                            "duration"      : "45 minutes",
                                             "timezone"      : "EST",
                                             "client"        : {
                                                                 "name": "Fake Client",
@@ -338,7 +338,7 @@
                                             "subject"       : "Want to discuss X with You",
                                             "summary"       : "I want to talk about x and go over y to accomplish z",
                                             "date_time"          : 1649216132913,
-                                            "duration"      : "45",
+                                            "duration"      : "45 minutes",
                                             "timezone"      : "EST",
                                             "client"        : {
                                                                 "name": "Fake Client",
