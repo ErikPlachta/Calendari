@@ -1,5 +1,16 @@
 import React, { useState, useEffect } from 'react';
-const { capitalizeFirstLetter } = require('../utils/helpers');
+// import BusinessSchedule from './BusinessSchedule';
+
+const { 
+  capitalizeFirstLetter,
+  dateGetMonths,
+  dateFormat,
+  dateTimeFull,
+  dateDayOfWeek,
+  dateHourOfDay,
+  dateGetTimePassed
+} = require('../utils/helpers');
+
 
 //-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -50,6 +61,7 @@ export default function Business() {
   const user     = Users[user_id];
   
   const appointments = business.Appointment;
+  //TODO:: 04/06/2022 #EP || only return scheduled upcoming by default
     
   
 
@@ -63,11 +75,9 @@ export default function Business() {
 
   //TODO:: 04/05/22 #EP || Build this out
   const approveTimes = dateTimes => {
-
-    
-
     dateTimes.preventDefault();
   };
+
 
   //-- RETURN FUNCTION
   return (
@@ -114,88 +124,91 @@ export default function Business() {
         
 
          {/* Build appointment details here. */}
-         <section className="containerResults appointments">
+         <section className="containerResults scheduledAppointments">
           <h3>Here are your schedule appointments</h3>
           
-          <div className='appointments'>
+          <div className='scheduledAppointments'>
             <p>info to go here.</p>
               
             
             {Object.keys(business.Appointment).map((appointment, index) => (
               // <h4>{capitalizeFirstLetter(appointment)}</h4>
-              <section>
+              <section className="scheduledAppointment">
                 <div>
-                  <h4>Appointment</h4>
-                  {appointments[appointment]["_id"]}
+                  <h4>
+                    {appointments[appointment]['Appointment_Type']["name"]} Appointment
+                    with {appointments[appointment]['Details']['client']['name']}
+                    on {dateTimeFull((appointments[appointment]['Details']['date_time']))}
+                  </h4>
+
+                    {/* on {dateFormat((appointments[appointment]['Details']['date_time']))}
+                    at {dateHourOfDay(appointments[appointment]['Details']['date_time'])}
+                    for {appointments[appointment]['Details']['durations']} */}
+                  
+                  {/* dateGetMonths,
+                  dateDayOfWeek,
+                  dateHourOfDay, */}
+                  <div>
+                    <h5>Appointment Details</h5>
+
+                  </div>
+
+                  <div>
+                    <h5>Client Details</h5>
+                    {appointments[appointment]['Details']['client']['email']}
+                    {appointments[appointment]['Details']['client']['phone']}
+                    {appointments[appointment]["_id"]}
+                  </div>
+                  <br />
                   {appointments[appointment]["status"]}
                 </div>
                 <div>
-                  <h4>User</h4>
-                  {appointments[appointment]["User"]["name_first"]}
-                  {appointments[appointment]["User"]["name_last"]}
+                  <b>User:</b> {appointments[appointment]["User"]["name_first"]} {appointments[appointment]["User"]["name_last"]}
                 </div>
               </section>
-              
-              
-              // {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
-              // {Object.keys(appointments[appointment]).map((value, index) => ( 
-                // <span>
-                //   {(() => {
-                //     switch (value) {
-                //         case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                //         case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                //         case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
-                //         // checked={checked ? 'checked' : ''}
-                //         default         :   return "NULL";
-                //       }
-                //     })()}
-                //   {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
-                // </span>
-              
-              
             ))}
             
             
           </div>
 
         </section>
-
-
-        {/* Setup Days of Week, section. */}
+        
+        
         <section className="containerResults dayOfWeek">
-          <h3>It looks like your schedule needs to be setup!</h3>
-          
-          <div className='dayOfWeek'>
-            <p>Please confirm the days and times you are available for appointments.</p>
-            <form className='dayOfWeek'>
-              {Object.keys(schedule).map( (dayOfWeek, index) => (
-                <div>
-                  
-                  <h4>{capitalizeFirstLetter(dayOfWeek)}</h4>
-                    {/* Go through each day of week, present days with times and if verified */}
-                    {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
-                      <span>
-                        {(() => {
-                          switch (value) {
-                              case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                              case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                              case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
-                              // checked={checked ? 'checked' : ''}
-                              default         :   return "NULL";
-                            }
-                          })()}
-                        {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
-                      </span>
-                    ))}
-                </div>
-              ))}
-              {/* submit button for times */}
-              <input type='button' value="Approve Times" onClick={approveTimes}></input>
-            </form>
+            {/* Setup Days of Week, section. */}
+            <h3>It looks like your schedule needs to be setup!</h3>
             
-          </div>
-
+            <div className='dayOfWeek'>
+                <p>Please confirm the days and times you are available for appointments.</p>
+                <form className='dayOfWeek'>
+                    {Object.keys(schedule).map( (dayOfWeek, index) => (
+                    <div>
+                        
+                        <h4>{capitalizeFirstLetter(dayOfWeek)}</h4>
+                        {/* Go through each day of week, present days with times and if verified */}
+                        {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
+                            <span>
+                            {(() => {
+                                switch (value) {
+                                    case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                                    case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                                    case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
+                                    // checked={checked ? 'checked' : ''}
+                                    default         :   return "NULL";
+                                }
+                                })()}
+                            {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
+                            </span>
+                        ))}
+                    </div>
+                    ))}
+                    {/* submit button for times */}
+                    <input type='button' value="Approve Times" onClick={approveTimes}></input>
+                </form>
+            </div>
         </section>
+        
+        
 
       </main>
 

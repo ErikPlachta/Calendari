@@ -39,14 +39,32 @@ export function stringShrink(content, length) {
 //------------------------------------------------------------------------------
 //-- Data Time Specific Helpers
 
+//-- list the 12 months
+export function dateGetMonths(){
+  return moment.months();
+}
+
+export function dateTimeFull(date){
+  return moment(date).format("dddd, MMMM Do YYYY, h:mm:ss a");
+}
+
+export function dateDayOfWeek(date){
+  return moment(date).day();
+}
+
+export function dateHourOfDay(date){
+  return moment(date).format("ddd, hA"); 
+}
 
 //-- Send in raw JavaScript Date/Time Value from date.Now() and returns MM/DD/YYYY format
 export function dateFormat(date) {
-  return `${
-    new Date(date).getMonth() + 1}
-    /${new Date(date).getDate()}
-    /${new Date(date ).getFullYear()
-  }`;
+  return moment(date).format('MM-DD-YYYY');
+
+  // return `${
+  //   new Date(date).getMonth() + 1}
+  //   /${new Date(date).getDate()}
+  //   /${new Date(date ).getFullYear()
+  // }`;
 };
 
 //-- Send in raw JavaScript Date/Time Value from date.Now(), get time passed in seconds, minutes, hours or days.
