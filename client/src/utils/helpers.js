@@ -23,7 +23,7 @@ const capitalizeFirstLetter = string => {
 
 
 //-- take a string payload, shrink it to a specific length. If length not defined, default is 100.
-const stringShrinkContent = (content, length) => {
+const stringShrink = (content, length) => {
     
     //-- if undefined, default is 100 characters
     if(!length){ length = 100; }
@@ -73,6 +73,7 @@ const dateGetTimePassed = ( date ) => {
 
 module.export = {
     capitalizeFirstLetter,
+    stringShrink,
     emailValidate,
     dateFormat,
     dateGetTimePassed,
