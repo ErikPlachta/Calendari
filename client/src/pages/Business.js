@@ -40,8 +40,12 @@ export default function Business() {
   /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
 
   //TODO:: 04/05/22 #EP || Testing basic integrity. Need to build out what these should actually do.
+  
+  //-- extract business from database based on JWT id
   const business = businesses[business_id];
+  //-- extract schedule from extracted business
   const schedule = business.configuration.schedule;
+  //-- extract all users from business //TODO:: 04/05/2022 #EP || Make this the logged in
   const user     = users[user_id];
   
   //TODO:: 04/05/22 #EP || Onboard Appointments
@@ -81,20 +85,24 @@ export default function Business() {
             {Object.keys(schedule).map( (dayOfWeek, index) => (
               <div>
                 
+                <div class='configure_DayOfWeek'>
                 <h4>{dayOfWeek}</h4>
-                {Object.keys(schedule[dayOfWeek]).map((time, index) => ( 
-                  <span>
-                    {(() => {
-                      switch (index) {
-                          case 0:   return `${schedule[dayOfWeek][time]} - `;
-                          case 1:   return `${schedule[dayOfWeek][time]}`;
-                          default:      return "NULL";
-                        }
-                      })()}
-                    {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
-                  </span>
-                  
-                ))}
+                  {/* Go through each day of week, present days with times and if verified */}
+                  {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
+                    <span>
+                      {(() => {
+                        switch (value) {
+                            case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_sart`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                            case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                            case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
+                            // checked={checked ? 'checked' : ''}
+                            default         :   return "NULL";
+                          }
+                        })()}
+                      {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
+                    </span>
+                  ))}
+                </div>
                 
               </div>
             ))}

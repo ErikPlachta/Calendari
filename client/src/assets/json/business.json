@@ -8,12 +8,12 @@
                                         "sunday": {
                                             "start"     :   "00:00",
                                             "end"       :   "00:00",
-                                            "verified"  :   "false"
+                                            "verified"  :   ""
                                         },
                                         "monday": {
                                             "start"     :   "09:00",
                                             "end"       :   "15:00",
-                                            "verified"  :   "false"
+                                            "verified"  :   "true"
                                         },
                                         "tuesday": {
                                             "start"     :   "09:00",
