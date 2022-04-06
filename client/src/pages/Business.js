@@ -54,6 +54,15 @@ export default function Business() {
   const appointment_Type = appointment_Types;
 
 
+
+  //----------------------------------------------------------------------------
+  //-- logic
+
+  //TODO:: 04/05/22 #EP || Build this out
+  const approveTimes = dateTimes => {
+    dateTimes.preventDefault();
+  };
+
   //-- RETURN FUNCTION
   return (
     <section>
@@ -77,35 +86,37 @@ export default function Business() {
         </header>
         
 
-        {/* Setup Section */}
-        <section>
+        {/* Setup Days of Week, section. */}
+        <section className="configure_DayOfWeek">
           <h3>It looks like your account needs to be setup!</h3>
-          <div>
+          
+          <div className='configure_DayOfWeek'>
             <p>Please confirm the times and days you are available.</p>
-            {Object.keys(schedule).map( (dayOfWeek, index) => (
-              <div>
-                
-                <div class='configure_DayOfWeek'>
-                <h4>{dayOfWeek}</h4>
-                  {/* Go through each day of week, present days with times and if verified */}
-                  {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
-                    <span>
-                      {(() => {
-                        switch (value) {
-                            case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_sart`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                            case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                            case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
-                            // checked={checked ? 'checked' : ''}
-                            default         :   return "NULL";
-                          }
-                        })()}
-                      {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
-                    </span>
-                  ))}
+            <form className='configure_DayOfWeek'>
+              {Object.keys(schedule).map( (dayOfWeek, index) => (
+                <div>
+                  
+                  <h4>{dayOfWeek}</h4>
+                    {/* Go through each day of week, present days with times and if verified */}
+                    {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
+                      <span>
+                        {(() => {
+                          switch (value) {
+                              case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                              case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                              case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
+                              // checked={checked ? 'checked' : ''}
+                              default         :   return "NULL";
+                            }
+                          })()}
+                        {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
+                      </span>
+                    ))}
                 </div>
-                
-              </div>
-            ))}
+              ))}
+              {/* submit button for times */}
+              <input type='button' value="Approve Times" onClick={approveTimes}></input>
+            </form>
             
           </div>
 
