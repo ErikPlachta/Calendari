@@ -8,34 +8,81 @@
                                     "name_Last"     :   "Plachta"
         },
         "Business"          :   {
-                                    "brand_name"    :   "Erik's Business Brand Name",
+                                    "_id"           :   "0000-AAAA",
+                                    "brand_name"    :   "Erik's Business Brand Name"
         },
         "Appointment_Type"  :   {
                                     "_id"           :   "0000-0000",
                                     "name"          :   "General",
-                                    "description"   :   "Schedule an appointment with ${brand_name}.",
-                                    "date"          :   "${date_time}",
-                                    "utz"           :   "${utz}"
+                                    "description"   :   "Schedule an appointment with ${brand_name}."
         },
         "Details"           :   {
-                                    "subject"       : "",
-                                    "date"          : "",
-                                    "duration"      : "",
-                                    "time_Start"    : "",
-                                    "timezone"      : "",
+                                    "subject"       : "Want to discuss X with You",
+                                    "date_time"          : "1649216132913",
+                                    "duration"      : "45",
+                                    "timezone"      : "EST",
                                     "client"        : {
-                                                        "name": "",
-                                                        "email": "",
-                                                        "phone": ""
+                                                        "name": "Fake Client",
+                                                        "email": "my@noemail.com",
+                                                        "phone": "000-867-5309"
                                     }
         }
     },
     "0000-0000-2222" : {
-        "_id"           :   "0000-0000-2222"
-
+        "_id"           :   "0000-0000-2222",
+        "status"            :   "Scheduled",
+        "User"              :   {
+                                    "_id"           :   "0000-1111",
+                                    "name_first"    :   "Christiana",
+                                    "name_Last"     :   "Sullivan Morales"
+        },
+        "Business"          :   {
+                                     "_id"           :   "0000-BBBB",
+                                     "brand_name"    :   "Christian's Business Brand Name"
+        },
+        "Appointment_Type"  :   {
+                                    "_id"           :   "0000-0000",
+                                    "name"          :   "General",
+                                    "description"   :   "Schedule an appointment with ${brand_name}."
+        },
+        "Details"           :   {
+                                    "subject"       : "Want to discuss X with You",
+                                    "date_time"          : "1649216132913",
+                                    "duration"      : "45",
+                                    "timezone"      : "EST",
+                                    "client"        : {
+                                                        "name": "Fake Client",
+                                                        "email": "my@noemail.com",
+                                                        "phone": "000-867-5309"
+                                    }
+        }
     },
     "0000-0000-3333" : {
-        "_id"           :   "0000-0000-3333"
-
-    }
+        "_id"           :   "0000-0000-3333",
+        "status"            :   "Scheduled",
+        "User"              :   {
+                                    "_id"           :   "0000-2222",
+                                    "name_first"    :   "Mary",
+                                    "name_Last"     :   "lawton"
+        },
+        "Business"          :   {
+                                    "_id"           :   "0000-CCCC",
+                                    "brand_name"    :   "Mary's Business Brand Name"
+        },
+        "Appointment_Type"  :   {
+                                    "_id"           :   "0000-0000",
+                                    "name"          :   "General",
+                                    "description"   :   "Schedule an appointment with ${brand_name}."
+        },
+        "Details"           :   {
+                                    "subject"       : "Want to discuss X with You",
+                                    "date_time"          : "1649216132913",
+                                    "duration"      : "45",
+                                    "timezone"      : "EST",
+                                    "client"        : {
+                                                        "name": "Fake Client",
+                                                        "email": "my@noemail.com",
+                                                        "phone": "000-867-5309"
+                                    }
+        }
 }
