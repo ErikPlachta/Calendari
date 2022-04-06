@@ -1,25 +1,10 @@
 /*
-
 - ### User
     - Anyone that can sign into the app.
     - Schema:
-        - _id
-        - name_first
-            - String
-            - Required
-        - name_last
-            - String
-            - Required
-        - username - __What your name previews as to others__
-            - String
-            - Required
         - emailEmailRequiredUnique
             - password_salt - __Their unique password salt created at time of user creation__
-            - Required
-            - String
         - password_hash
-            - Required
-            - String
             - Their password after being salted
         - verified - __User has verified their account__
         - date_Created - __Account created__
@@ -41,6 +26,58 @@
         - business_id - __Association to business__
         - account_id - __The state of their account__
         - user_type_id - __Association to user type__
-
-
 */
+
+const { Schema, model } = require('mongoose');
+const dateFormat = require('../../client/src/utils/dateFormat'); /*this looks weird to me heads up */
+
+const UserSchema = new Schema(
+    {
+        name_first: {
+            type: String,
+            require: true,
+            trim: true
+        },
+        name_last: {
+            type: String,
+            require: true,
+            trim: true
+        },
+        username: {
+            type: String,
+            required: true,
+            trim: true
+        },
+        emailRequiredUnique: {
+            type: String,
+            required: true,
+            /*MIGHT NEED HELP WITH THE SALTING PW*/ 
+        },
+        password_hash: {
+            type: String,
+            required: true,
+            /*NEED HELP WITH THE SALTING PW*/ 
+        },
+        /*IS VERIFIED ACCOUNT MVP?? IF SO NEED HELP*/
+        /*IS DATE CREATED MVP?*/
+        date_created: {
+            type: Date,
+            default: Date.now,
+            get: createdAtVal => dateFormat(createdAtVal)
+        },
+        /*IS DATE LOGIN MVP?*/
+        /*IS USER CALENDAR MVP?*/
+        appointments: [{
+            type: Schema.type.ObjectId,
+            ref: 'Appointment'
+        }],
+        id: false
+    }
+);
+
+//GET TOTAL COUNT OF APPOINTMENTS ON RETRIEVAL after i build out the appointments model
+
+
+
+const User = model("User", UserSchema);
+module.exports = User;

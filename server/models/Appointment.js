@@ -1,7 +1,4 @@
-
-
 /*
-
 - ### Appointment
     - All Existing Appointments
     - Schema:
@@ -27,6 +24,37 @@
             - Scheduled
             - Completed
             - Canceled
-
-
 */
+
+const AppointmentSchema = new Schema(
+    {
+        user_id: {
+            
+        },
+        business_id: {
+
+        },
+        appointment_details: {
+            name: {
+                
+            },
+            duration: {
+
+            },
+            date: {
+
+            },
+            start_time: {
+
+            },
+            end_time: {
+
+            },
+            //is universal time zone mvp?
+        },
+        client: {
+            
+        },
+        id: false
+    }
+)
