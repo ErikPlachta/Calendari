@@ -1,0 +1,41 @@
+{
+    "0000-0000-1111" : {
+        "_id"               :   "0000-0000-1111",
+        "status"            :   "Scheduled",
+        "User"              :   {
+                                    "_id"           :   "0000-0000",
+                                    "name_first"    :   "Erik",
+                                    "name_Last"     :   "Plachta"
+        },
+        "Business"          :   {
+                                    "brand_name"    :   "Erik's Business Brand Name",
+        },
+        "Appointment_Type"  :   {
+                                    "_id"           :   "0000-0000",
+                                    "name"          :   "General",
+                                    "description"   :   "Schedule an appointment with ${brand_name}.",
+                                    "date"          :   "${date_time}",
+                                    "utz"           :   "${utz}"
+        },
+        "Details"           :   {
+                                    "subject"       : "",
+                                    "date"          : "",
+                                    "duration"      : "",
+                                    "time_Start"    : "",
+                                    "timezone"      : "",
+                                    "client"        : {
+                                                        "name": "",
+                                                        "email": "",
+                                                        "phone": ""
+                                    }
+        }
+    },
+    "0000-0000-2222" : {
+        "_id"           :   "0000-0000-2222"
+
+    },
+    "0000-0000-3333" : {
+        "_id"           :   "0000-0000-3333"
+
+    }
+}
