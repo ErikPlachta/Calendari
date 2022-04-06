@@ -3,189 +3,233 @@
 */
 :root {
 
-    /* BASIC COLOR SCHEMA PLACEHOLDER */
-    /*TODO:: 04/05/2022 #EP || Define this color schema */
-    --C01: #f9f9f9;
-    --C02: #999;
-    --C03: #888;
-    --C04: #777;
-    --C05: #666;
-    --C06: #555;
-    --C07: #444;
-    --C08: #333;
-    --C09: #222;
-    --C10: #111;
-  
-  
-
-    /* BOX-SHADOWS */
-    /*TODO:: 04/05/2022 #EP || Convert to pixels */
-    --bs-01: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
-    /*TODO:: 04/05/2022 #EP || Add this focus */
-    /* --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3); */
-    --bs-02: 0 0rem .5rem var(--a_01);
-    /*TODO:: 04/05/2022 #EP || Add this focus */
-    /* --bs-02_focus: 0 0rem .5rem var(--a_01); */
-
-    --base-container:
-        border-radius: 50px;
-        background: linear-gradient(145deg, #f0f0f0, #cacaca);
-        box-shadow:  41px 41px 80px #bebebe,
-                    -41px -41px 80px #ffffff;
-    
+  /* BASIC COLOR SCHEMA PLACEHOLDER */
+  /*TODO:: 04/05/2022 #EP || Define this color schema */
+  --C00: #fcfdff;
+  --C01: #FEFEFE;
+  --C02: rgb(249, 250, 251); /* #f9fafb */
+  --C03: rgb(243, 244, 246); /* #f3f4f6 */
+  --C04: rgb(249, 251, 252); /* f9fbfc */
+  --C05: #666;
+  --C06: #555;
+  --C07: #444;
+  --C08: #333;
+  --C09: #222;
+  --C10: #111;
 
 
+  /* BOX-SHADOWS */
+  /*TODO:: 04/05/2022 #EP || Convert to pixels */
+  --bs-01: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
+  /*TODO:: 04/05/2022 #EP || Add this focus */
+  /* --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3); */
+  --bs-02: 0 0rem .5rem var(--a_01);
+  /*TODO:: 04/05/2022 #EP || Add this focus */
+  /* --bs-02_focus: 0 0rem .5rem var(--a_01); */  
 
-    /* SHADOWS */
-    --s_black_a25: 0 0 .5rem var(--a_01);
-    --s_black_2px_a25: 2px solid var(--a_01);
-
-
-    /* BORDERS */
-    /*TODO:: 04/05/2022 #EP || Define these colors */
-    --b_01: 1px solid var(--c_00); /* default border and font color */ 
-    --b_01_focus: 2px solid var(--c_00); /* secondary for more obvious accents hovered */
-    --b_02: 1px solid var(--c_02); /* secondary for more obvious accents */
-    --b_02_focus: 1px solid var(--c_02); /* secondary for more obvious accents */
-    --b_03: 1px solid var(--c_03); /* secondary for more obvious accents */
-    --b_03_focus: 2px solid var(--c_03); /* secondary for more obvious accents hovered */
+  /* SHADOWS */
+  --s_black_a25: 0 0 .5rem var(--a_01);
+  --s_black_2px_a25: 2px solid var(--a_01);
 
 
-    /* RADIUS */
-    /*TODO:: 04/05/2022 #EP || Verify these  */
-    --br_primary: .5rem;
-    --br_secondary: .25rem;
+  /* BORDERS */
+  /*TODO:: 04/05/2022 #EP || Define these colors */
+  --b_01: 1px solid var(--c_00); /* default border and font color */ 
+  --b_01_focus: 2px solid var(--c_00); /* secondary for more obvious accents hovered */
+  --b_02: 1px solid var(--c_02); /* secondary for more obvious accents */
+  --b_02_focus: 1px solid var(--c_02); /* secondary for more obvious accents */
+  --b_03: 1px solid var(--c_03); /* secondary for more obvious accents */
+  --b_03_focus: 2px solid var(--c_03); /* secondary for more obvious accents hovered */
 
-  
-    /* ALPHAS */
-    /*TODO:: 04/05/2022 #EP || Verify these */
-    --a_01: rgba(0 0 0 /.25);
-    --a_02: rgba(0 0 0 /.5);
 
-  
-  }
-  
-  
-  
-  /*------------------------------------------------------------------------------
-    UNIVERSAL ELEMENTS
+  /* RADIUS */
+  /*TODO:: 04/05/2022 #EP || Verify these  */
+  --br_primary: .5rem;
+  --br_secondary: .25rem;
+
+
+  /* ALPHAS */
+  /*TODO:: 04/05/2022 #EP || Verify these */
+  --a_01: rgba(0 0 0 /.25);
+  --a_02: rgba(0 0 0 /.5);
+}
+
+
+/*------------------------------------------------------------------------------
+  UNIVERSAL ELEMENTS
+*/
+
+/* Keeps elements from overflowing containers */
+*, *::before, *::after {  
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html{
+
+  scroll-behavior: smooth;
+
+  /* Disabling user selection 
+    //TODO: 04/05/22 #EP | Commented out for now left for reference
   */
-  
-  /* Keeps elements from overflowing containers */
-  *, *::before, *::after {  
-    -moz-box-sizing: border-box;
-    -ms-box-sizing: border-box;
-    box-sizing: border-box;
-  }
-  
-  html{
-  
-    scroll-behavior: smooth;
-  
-    /* Disabling user selection 
-      //TODO: 04/05/22 #EP | Commented out for now left for reference
-    */
-    /*
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: none;
-    -o-user-select: none;
-    user-select: none; */
-  
-      padding: 0;
-      margin: 0;
-  }
-  
-  
-  body {
-    margin: 0;
+  /*
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none; */
+
     padding: 0;
+    margin: 0;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--C04);
+}
+
+
+/* Default Inline Code Styling */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Default Hyperlink Styling */
+a {
+
+  /* --a-light: var(--body_fc_light);
+  --a-dark: var(--body_fc_dark);
+  color: var(--body_fc_dark); */
+  text-decoration: none;
+}
+
+/* Default button Styling */
+button {
+          
+  /* Buttons text color */
+  --btn_tc_inactive: var(--c_05); /* button inactive text color */
+  --btn_tc_active: var(--c_04); /* button active text color for hover and click */
+
+  /* Buttons background color */
+  --btn_bg_inactive: var(--c_05); /* button inactive text color */
+  --btn_bg_active: var(--c_04); /* button active text color for hover and click */
+
+}
   
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-      sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+
+/*------------------------------------------------------------------------------
+  UNIVERSAL CLASSES
+*/
+
+.page {
+  width: 100%;
+  /* border: 1px solid red; */
+  background-color: var(--C01);
+
+  display: flex;
+  flex-direction: row;
+  justify-content:left;
+  flex-wrap: wrap;
+  grid-gap: 1rem;
   
+}
+
+.sidebar{
+  /* border: 1px solid orangered; */
+  flex: 1 20%;
+  float: left;
+  max-width: 20%;
+}
+
+.container{
+  flex: 5 60%;
+  /* width: 100%; */
   
+  /* min-width: 80%; */
+  margin: 2rem;
+  padding: 2rem;
   
-  
-  /* Default Inline Code Styling */
-  code {
-    font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-      monospace;
-  }
-  
-  /* Default Hyperlink Styling */
-  a {
-  
-    /* --a-light: var(--body_fc_light);
-    --a-dark: var(--body_fc_dark);
-    color: var(--body_fc_dark); */
-    text-decoration: none;
-  }
-  
-  /* Default button Styling */
-  button {
-           
-    /* Buttons text color */
-    --btn_tc_inactive: var(--c_05); /* button inactive text color */
-    --btn_tc_active: var(--c_04); /* button active text color for hover and click */
-  
-    /* Buttons background color */
-    --btn_bg_inactive: var(--c_05); /* button inactive text color */
-    --btn_bg_active: var(--c_04); /* button active text color for hover and click */
-  
-  }
-  
-  /*------------------------------------------------------------------------------
-    HEADER, NAV, BRAND-NAME and LOGO 
-  */
-  
-  /* SPA HEADER holds nav, brand-name and logo */
-  header {
-  
-  }
-  
-  /* NAVIGATION MENU */
-  nav {
-  
-  }
-  
-  
-  /*------------------------------------------------------------------------------
-    CALENDAR
-  */
-  
-  
-  
-  /*------------------------------------------------------------------------------
-    BUSINESS-PROFILE-PAGE
-  */
-  
-  
-  
-  
-  /*------------------------------------------------------------------------------
-    FOOTER  
-  */
-  
-  footer {
-  
-  }
-  
-  
-  /*------------------------------------------------------------------------------
-    MEDIA TYPES
-  
-      Using min-width to make changes for all desktop views, not max-width.
-      - This allows for less complex CSS
-  */
-  
-  
-  
-  @media (min-width: 600px) {
-  
-  
-  }
+  border-radius: 25px;
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
+              2px 2px 10px -3px rgba(0,0,0,0.1);
+
+}
+
+
+/*------------------------------------------------------------------------------
+  PAGE SPECIFIC CLASSES
+*/
+
+.business {
+
+}
+
+.user {
+
+}
+
+.calendar {
+
+}
+
+/*------------------------------------------------------------------------------
+  HEADER, NAV, BRAND-NAME and LOGO 
+*/
+
+/* SPA HEADER holds nav, brand-name and logo */
+header {
+
+}
+
+/* NAVIGATION MENU */
+nav {
+
+}
+
+
+/*------------------------------------------------------------------------------
+  CALENDAR
+*/
+
+
+
+/*------------------------------------------------------------------------------
+  BUSINESS-PROFILE-PAGE
+*/
+
+
+
+
+/*------------------------------------------------------------------------------
+  FOOTER  
+*/
+
+footer {
+
+}
+
+
+/*------------------------------------------------------------------------------
+  MEDIA TYPES
+
+    Using min-width to make changes for all desktop views, not max-width.
+    - This allows for less complex CSS
+*/
+
+
+
+@media (min-width: 600px) {
+
+
+}

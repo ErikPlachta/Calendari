@@ -66,23 +66,21 @@ export default function Business() {
 
   //-- RETURN FUNCTION
   return (
-    <section>
+    <section className="page business">
       
       {/* Side Navigational Bar */}
-      <aside>
+      <aside className='sidebar'>
         <section>
-          <h3>
-
-          </h3>
+          <h2>{business.name}</h2>
         </section>
       </aside>
 
       {/* Main content within Business Page */}
-      <main>
+      <main className="container">
         
         {/* Main Header Section on Business Page */}
         <header>
-          <h2>{business.name}</h2>
+          
           <p>Welcome, {user.name_first}. </p>
         </header>
         
