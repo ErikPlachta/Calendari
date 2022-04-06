@@ -6,19 +6,7 @@
             - password_salt - __Their unique password salt created at time of user creation__
         - password_hash
             - Their password after being salted
-        - verified - __User has verified their account__
-        - date_Created - __Account created__
-            - DateTime
-            - Auto-Generated
-        - date_Login - __Last Login__
-            - DateTime
-            - Auto-Updated on login
-        - user_calendar - __Association to users calendar__
-            - Array
-                - Type __Internal / Google__
-                - Name
-                - DateTime - __availbiliy__
-        - Appointments - __relation to appointment data type__
+        - Appointments
             - Array
                 - Type __Internal / Google__
                 - Name
@@ -29,10 +17,14 @@
 */
 
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../../client/src/utils/dateFormat'); /*this looks weird to me heads up */
+const dateFormat = require('../../client/src/utils/dateFormat'); /*THIS DOESNT SEEM LIKE RIGHT PATH, TRAFFIC CONE HERE*/
 
 const UserSchema = new Schema(
     {
+        user_id: {
+            type: String,
+            //need to randomly generate integers here
+        },
         name_first: {
             type: String,
             require: true,
@@ -51,7 +43,7 @@ const UserSchema = new Schema(
         emailRequiredUnique: {
             type: String,
             required: true,
-            /*MIGHT NEED HELP WITH THE SALTING PW*/ 
+            /*NEED HELP WITH THE SALTING PW*/ 
         },
         password_hash: {
             type: String,
@@ -71,12 +63,10 @@ const UserSchema = new Schema(
             type: Schema.type.ObjectId,
             ref: 'Appointment'
         }],
-        id: false
     }
 );
 
 //GET TOTAL COUNT OF APPOINTMENTS ON RETRIEVAL after i build out the appointments model
-
 
 
 const User = model("User", UserSchema);
