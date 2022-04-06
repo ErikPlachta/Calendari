@@ -122,6 +122,22 @@ export default function Business() {
         <header className="business">  
           <p>Welcome, {user.name_first}. </p>
         </header>
+
+
+        <section className="containerResults dashboard">
+          {/* Dashboard is high-level summary  */}
+          <section className="containerResults">
+              <h3>Dashboard</h3>
+              <p>placeholder text for summary, here.</p>
+
+              <h4>Appointments</h4>
+              <ul>
+                <li>Scheduled: </li>
+                <li>Completed: </li>
+                <li>Canceled: </li>
+              </ul>
+            </section>
+        </section>
         
 
          {/* Build appointment details here. */}
