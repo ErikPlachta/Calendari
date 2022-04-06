@@ -9,8 +9,8 @@ const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 export default function Business() {
   
   
-  const [businesses, setBusinesses] = useState({DB_Business});
-  const [users, setUsers] = useState({DB_User});
+  const [businesses, setBusinesses] = useState(DB_Business);
+  const [users, setUsers] = useState(DB_User);
 
 
   /*  1. VERIFY IF LOGGED IN    */
@@ -32,8 +32,9 @@ export default function Business() {
 
 
   /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
- const business = businesses[business_id];
- const user     = users[user_id];
+ const business = businesses[business_id].name;
+ const user     = users[user_id].username;
+ console.log(business,user)
 
   return (
     <section>
@@ -52,8 +53,8 @@ export default function Business() {
         
         {/* Main Header Section on Business Page */}
         <header>
-          <h2>${business}</h2>
-          <p>Welcome, ${user}</p>
+          <h2>{business}</h2>
+          <p>Welcome, {user} </p>
         </header>
         
       </main>
