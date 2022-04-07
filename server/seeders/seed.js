@@ -51,6 +51,9 @@ db.once('open', async () => {
     console.table(userData)
 
 
+
+
+
      /*    APPOINTMENT_TYPE
 
             - Creates a basic appointment type
@@ -66,6 +69,7 @@ db.once('open', async () => {
         const name = "General";
         const description =  "Schedule an appointment.";
         const date_time =  "";
+        //-- template of what it needs to be, should be empty here.
         const Details = {
             "subject"       : "",
             "date"          : "",
@@ -93,6 +97,10 @@ db.once('open', async () => {
     console.table(appointmentTypeData)
 
 
+
+
+
+
     /*    APPOINTMENT
 
             - TBD
@@ -101,21 +109,23 @@ db.once('open', async () => {
     const appointmentData = [];
 
     //-- Create unique Business
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < 50; i += 1) {
         
-        
+        //-- used for username and email below, not sent directly
+        const name = faker.name.findName();
+
         const status = "scheduled";
         const date_created = "";
         const Details = {
-            "subject"       : "",
-            "date"          : "",
-            "duration"      : "",
-            "time_Start"    : "",
-            "timezone"      : "",
+            "subject"       : faker.lorem.words(Math.round(Math.random() * 10) + 1),
+            "date"          : "04/15/2022",
+            "duration"      : "45 minutes",
+            "time_Start"    : faker.date.between('2022-04-10T00:00:00.000Z', '2022-05-01T00:00:00.000Z'),
+            "timezone"      : "EST",
             "client"        : {
-                                "name": "",
-                                "email": "",
-                                "phone": ""
+                                "name": name,
+                                "email": faker.internet.exampleEmail(name), /* using example to ensure not real */
+                                "phone": faker.phone.phoneNumber()
             }
         };
         // const Appointments = {};
@@ -130,6 +140,10 @@ db.once('open', async () => {
 
     console.log("##-- Created Appointment Data complete.")
     console.table(appointmentData)
+
+
+
+
 
 
     /*    BUSINESS
@@ -201,11 +215,7 @@ db.once('open', async () => {
 
 
     
-
-
-
-    
-    // // create thoughts
+    // create thoughts
     // let createdThoughts = [];
     // for (let i = 0; i < 100; i += 1) {
     //     const thoughtText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
