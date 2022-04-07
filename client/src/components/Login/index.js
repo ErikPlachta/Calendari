@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router'
 import {capitalizeFirstLetter} from '../../utils/helpers';
 import Signup from "../Signup";
 
@@ -22,8 +23,7 @@ export default function Login(props) {
             <button type="submit">Login</button>
           </div>
           <div>
-            {/* need to figure out how to make this button click redirect too the signup page */}
-            <p>Don't have an account? <a>Sign up</a> to continue</p>
+            <li><Link to={"/Signup"} state={{from: Login}}>Don't have an account? Please Sign up to continue</Link></li>
           </div>
       </section>
   )
