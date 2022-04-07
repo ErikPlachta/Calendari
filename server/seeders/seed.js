@@ -1,4 +1,4 @@
-const faker = require('faker'); /* https://fakerjsdocs.netlify.app/api/date.html */
+const faker = require('faker'); /* https://fakerjs.dev/api/ */
 
 const db = require('../config/connection');
 const { User, Business, Appointment, Appointment_Type } = require('../models');
@@ -7,10 +7,20 @@ const { User, Business, Appointment, Appointment_Type } = require('../models');
 db.once('open', async () => {
     
     //-- Purge Data
-    await User.deleteMany({});
+    // try{
+        await User.deleteMany({});
+    // }
+    // catch (err){
+        console.log("No users to delete")
+    // }
     await Business.deleteMany({});
     await Appointment.deleteMany({});
+    // try {
     await Appointment_Type.deleteMany({});
+    // }
+    // catch (err){
+    //     console.log("No Appointment_Type to delete")
+    // }
 
 
     /*    USER
@@ -24,19 +34,21 @@ db.once('open', async () => {
    
     //-- Create 10 Users Data    
     for (let i = 0; i < 10; i += 1) {
-        const name_first = faker.internet.firstName();
-        const name_last = faker.internet.lastName();
+        const name_first = faker.name.firstName();
+        const name_last = faker.name.lastName();
         const username = faker.internet.userName();
         const email = faker.internet.exampleEmail(username); /* using example to ensure not real */
         const password = faker.internet.password();
         const date_created = faker.date.past(1); /* date in last 1 year */
-        userData.push({ username, email, password });
+        userData.push({ name_first, name_last, username, email, password, date_created });
     }
 
     //-- Add created users to database
     const createdUsers = await User.collection.insertMany(userData);
 
 
+    console.log("##-- Created Users complete.")
+    console.table(userData)
 
 
      /*    APPOINTMENT_TYPE
@@ -48,7 +60,7 @@ db.once('open', async () => {
     const appointmentTypeData = [];
 
     //-- Create unique Business
-    for (let i = 0; i < 10; i += 1) {
+    for (let i = 0; i < 1; i += 1) {
         
         
         const name = "General";
@@ -66,15 +78,19 @@ db.once('open', async () => {
                                 "phone": ""
             }
         };
-        const Appointments = {};
-        const Users = {};
+        // const Appointments = {};
+        // const Users = {};
 
         //-- build array
-        appointmentTypeData.push({ name, brand_name, Users });
+        appointmentTypeData.push({ name, description, date_time, Details });
     }
 
     //-- Add created appointment_type to database
     const createdAppointmentType = await Appointment_Type.collection.insertMany(appointmentTypeData);
+
+
+    console.log("##-- Created Appointment_Type complete.")
+    console.table(appointmentTypeData)
 
 
     /*    APPOINTMENT
@@ -82,36 +98,38 @@ db.once('open', async () => {
             - TBD
     */
 
-            const appointmentData = [];
+    const appointmentData = [];
 
-            //-- Create unique Business
-            for (let i = 0; i < 10; i += 1) {
-                
-                
-                const status = "scheduled";
-                const date_created = "";
-                const Details = {
-                    "subject"       : "",
-                    "date"          : "",
-                    "duration"      : "",
-                    "time_Start"    : "",
-                    "timezone"      : "",
-                    "client"        : {
-                                        "name": "",
-                                        "email": "",
-                                        "phone": ""
-                    }
-                };
-                const Appointments = {};
-                const Users = {};
+    //-- Create unique Business
+    for (let i = 0; i < 10; i += 1) {
         
-                //-- build array
-                appointmentData.push({ name, brand_name, Users });
+        
+        const status = "scheduled";
+        const date_created = "";
+        const Details = {
+            "subject"       : "",
+            "date"          : "",
+            "duration"      : "",
+            "time_Start"    : "",
+            "timezone"      : "",
+            "client"        : {
+                                "name": "",
+                                "email": "",
+                                "phone": ""
             }
-        
-            //-- Add created appointment_type to database
-            const createdAppointmentData = await Appointment.collection.insertMany(appointmentData);
+        };
+        // const Appointments = {};
+        // const Users = {};
 
+        //-- build array
+        appointmentData.push({ status, date_created, Details });
+    }
+
+    //-- Add created appointment_type to database
+    const createdAppointmentData = await Appointment.collection.insertMany(appointmentData);
+
+    console.log("##-- Created Appointment Data complete.")
+    console.table(appointmentData)
 
 
     /*    BUSINESS
@@ -174,6 +192,8 @@ db.once('open', async () => {
     //-- Add created users to database
     const createdBusinesses = await Business.collection.insertMany(businessData);
 
+    console.log("##-- Created Businesses complete.")
+    console.table(businessData)
     // await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
     
     // const Users = createdUser[createdUsers.length-1];
