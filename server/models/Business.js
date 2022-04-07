@@ -30,7 +30,7 @@ const BusinessSchema = new Schema(
         // configuration: {
         //     //MVP??
         // },
-        Appointment_Type: [
+        Appointment_Types: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'AppointmentType'

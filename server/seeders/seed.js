@@ -6,21 +6,12 @@ const { User, Business, Appointment, Appointment_Type } = require('../models');
 //-- Make db connection, delete ALL content, and build clean seed data.
 db.once('open', async () => {
     
-    //-- Purge Data
-    // try{
-        await User.deleteMany({});
-    // }
-    // catch (err){
-        console.log("No users to delete")
-    // }
+    //-- Purge local data to reset
+    await User.deleteMany({});
     await Business.deleteMany({});
     await Appointment.deleteMany({});
-    // try {
     await Appointment_Type.deleteMany({});
-    // }
-    // catch (err){
-    //     console.log("No Appointment_Type to delete")
-    // }
+    
 
 
     /*    USER
@@ -72,9 +63,8 @@ db.once('open', async () => {
         //-- template of what it needs to be, should be empty here.
         const Details = {
             "subject"       : "",
-            "date"          : "",
+            "date_time"          : "",
             "duration"      : "",
-            "time_Start"    : "",
             "timezone"      : "",
             "client"        : {
                                 "name": "",
@@ -100,11 +90,8 @@ db.once('open', async () => {
 
 
 
-
-    /*    APPOINTMENT
-
-            - TBD
-    */
+faker.date.recent(10)
+    /*-- APPOINTMENT  --------------------------------------------------------*/
 
     const appointmentData = [];
 
@@ -115,17 +102,16 @@ db.once('open', async () => {
         const name = faker.name.findName();
 
         const status = "scheduled";
-        const date_created = "";
+        const date_created = faker.date.recent(10);
         const Details = {
             "subject"       : faker.lorem.words(Math.round(Math.random() * 10) + 1),
-            "date"          : "04/15/2022",
             "duration"      : "45 minutes",
-            "time_Start"    : faker.date.between('2022-04-10T00:00:00.000Z', '2022-05-01T00:00:00.000Z'),
+            "date_time"    : faker.date.between('2022-04-10T00:00:00.000Z', '2022-05-01T00:00:00.000Z'),
             "timezone"      : "EST",
             "client"        : {
                                 "name": name,
                                 "email": faker.internet.exampleEmail(name), /* using example to ensure not real */
-                                "phone": faker.phone.phoneNumber()
+                                "phone": faker.phone.phoneNumber('###-###-###')
             }
         };
         // const Appointments = {};
@@ -199,7 +185,11 @@ db.once('open', async () => {
                     "verified"  :   "false"
                 }
             }
-};
+        };
+        const Appointment_Types = {};
+        const Appointments = {};
+        const Users = {};
+        
         businessData.push({ name, brand_name, configuration});
     }
 
@@ -208,48 +198,14 @@ db.once('open', async () => {
 
     console.log("##-- Created Businesses complete.")
     console.table(businessData)
-    // await User.updateOne({ _id: userId }, { $addToSet: { friends: friendId } });
     
+
+    //TODO:: 04/06/2022 #EP || Add relationships. ( basic concept below for future. )
+    // await Business.updateOne({ _id: userId }, { $addToSet: { Users: userId } });
     // const Users = createdUser[createdUsers.length-1];
-    // createdUsers.pop(); /* remove the last user from array after assigning it to busienss*/
+    // createdUsers.pop(); /* remove the last user from array after assigning it to business*/
 
 
-    
-    // create thoughts
-    // let createdThoughts = [];
-    // for (let i = 0; i < 100; i += 1) {
-    //     const thoughtText = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-    //     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    //     const { username, _id: userId } = createdUsers.ops[randomUserIndex];
-
-    //     const createdThought = await Thought.create({ thoughtText, username });
-
-    //     const updatedUser = await User.updateOne(
-    //     { _id: userId },
-    //     { $push: { thoughts: createdThought._id } }
-    //     );
-
-    //     createdThoughts.push(createdThought);
-    // }
-
-    // // create reactions
-    // for (let i = 0; i < 100; i += 1) {
-    //     const reactionBody = faker.lorem.words(Math.round(Math.random() * 20) + 1);
-
-    //     const randomUserIndex = Math.floor(Math.random() * createdUsers.ops.length);
-    //     const { username } = createdUsers.ops[randomUserIndex];
-
-    //     const randomThoughtIndex = Math.floor(Math.random() * createdThoughts.length);
-    //     const { _id: thoughtId } = createdThoughts[randomThoughtIndex];
-
-    //     await Thought.updateOne(
-    //     { _id: thoughtId },
-    //     { $push: { reactions: { reactionBody, username } } },
-    //     { runValidators: true }
-    //     );
-    // }
-
-    console.log('all done!');
+    console.log('//-- No relational seeding is completed');
     process.exit(0);
 });
