@@ -29,12 +29,10 @@ export default function Signup(props) {
       <h2 alt="please sign up">Please sign up to continue</h2>
       <div>
         <label htmlFor="email">Email:</label>
-        {/* need to add validation/handling below */}
         <input type="text" name="email" defaultValue={email} onBlur={errorPopup}/>
       </div>
       <div>
           <label htmlFor="password">Password:</label>
-          {/* need to add validation/handling below */}
           <input type="password" name="password" defaultValue={password}  onBlur={errorPopup}/>
       </div>
       <div>
