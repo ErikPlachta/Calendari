@@ -18,5 +18,5 @@ export default function Nav(props) {
                 </ul>
             </nav>
         </header>
-  )
+    )
 }
