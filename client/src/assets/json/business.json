@@ -3,7 +3,46 @@
         "_id"               :   "0000-AAAA",
         "name"              :   "Erik's Business Name",
         "brand_name"        :   "Erik's Business Brand Name",
-        "configuration"     :   {},
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+        },
         "Appointment_Type"  :   ["0000-0000"],
         "Appointment"       :   ["0000-0000-1111"],
         "Users"             :   ["0000-0000"]
@@ -12,7 +51,45 @@
         "_id"               :   "0000-BBBB",
         "name"              :   "Christiana's Business Name",
         "brand_name"        :   "Christiana's Business Brand Name",
-        "configuration"     :   {},
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+        },
         "Appointment_Type"  :   ["0000-0000"],
         "Appointment"       :   ["0000-0000-1111"],
         "Users"             :   ["1111-1111"]
@@ -22,7 +99,45 @@
         "_id"               :   "0000-CCCC",
         "name"              :   "Mary's Business Name",
         "brand_name"        :   "Mary's Business Brand Name",
-        "configuration"     :   {},
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": 
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+        },
         "Appointment_Type"  :   ["0000-0000"],
         "Appointment"       :   ["0000-0000-1111"],
         "Users"             :   ["2222-2222"]
