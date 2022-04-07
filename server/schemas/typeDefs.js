@@ -17,7 +17,6 @@ const typeDefs = gql`
         brand_name: String
         appointment_types: [AppointmentType]
         appointments: [Appointment]
-        users: [User]
     }
     type AppointmentType {
         _id: ID
@@ -26,10 +25,14 @@ const typeDefs = gql`
         summary: String
     }
     type Appointment {
+        _id: ID
         user_id: String
         business_id: String
     }
     type Query {
+        users: [User]
+        businesses: [Business]
+        appointments: [Appointment]
         user(username: String!): User
         business(brand_name: String!): Business
         userAppts(username: String!): [Appointment]

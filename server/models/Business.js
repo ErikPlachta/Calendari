@@ -21,7 +21,8 @@ const BusinessSchema = new Schema(
         },
         brand_name: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         // commenting these out until we know whether MVP or not
         // settings: {
@@ -42,12 +43,13 @@ const BusinessSchema = new Schema(
                 ref: 'Appointment'
             }
         ],
-        Users: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'Users'
-            }
-        ]
+        // Users: [
+        //     {
+        //         type: Schema.Types.ObjectId,
+        //         ref: 'Users'
+        //     }
+        // ] 
+        // not sure if users is necessary under business?
         // id: false -- not sure why this one was set to false?
     }
 )
