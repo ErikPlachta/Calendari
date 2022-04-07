@@ -22,17 +22,17 @@ const resolvers = {
                 .select('-__v')
         },
         // find user info by username
-        user: async () => {
-            return 'this will yield user by username'
+        user: async (parent, { username }) => {
+            return User.findOne({ username })
+                .select('-__v -password')
+                .populate('appointments');
         },
-        userAppts: async () => {
-            return 'this will yield appts by username'
-        },
-        businessApptTypes: async () => {
-            return 'this will yield appointment types by brand name'
-        },
-        businessAppts: async () => {
-            return 'this will yield appts by brand name'
+        // find business by brand name
+        business: async (parent, { brand_name }) => {
+            return Business.findOne({ brand_name })
+                .select('-__v -password')
+                .populate('appointment_types')
+                .populate('appointments')
         }
     }
 };

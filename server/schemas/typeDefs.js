@@ -35,9 +35,6 @@ const typeDefs = gql`
         appointments: [Appointment]
         user(username: String!): User
         business(brand_name: String!): Business
-        userAppts(username: String!): [Appointment]
-        businessApptTypes(brand_name: String!): [AppointmentType]
-        businessAppts(brand_name: String!): [Appointment]
     }
 `;
 
