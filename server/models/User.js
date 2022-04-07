@@ -17,13 +17,13 @@
 */
 
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../../client/src/utils/dateFormat'); /*THIS DOESNT SEEM LIKE RIGHT PATH, TRAFFIC CONE HERE*/
+const dateFormat = require('../../client/src/utils/dateFormat'); /*TRAFFIC CONE at this path, doesn't look right*/
 
 const UserSchema = new Schema(
     {
         user_id: {
             type: String,
-            //need to randomly generate integers here
+            //FUNCITON THAT USES UUID IN MONGO OR FIND A WAY MONGO DOES IT FOR US
         },
         name_first: {
             type: String,
@@ -43,12 +43,12 @@ const UserSchema = new Schema(
         emailRequiredUnique: {
             type: String,
             required: true,
-            /*NEED HELP WITH THE SALTING PW*/ 
+            //GOOGLE MONGODB ENCRYPTION/REVISIT MODULES, FOCUS ON THIS LAST
         },
         password_hash: {
             type: String,
             required: true,
-            /*NEED HELP WITH THE SALTING PW*/ 
+            //GOOGLE MONGODB ENCRYPTION/REVISIT MODULES, DO THIS LAST
         },
         /*IS VERIFIED ACCOUNT MVP?? IF SO NEED HELP*/
         /*IS DATE CREATED MVP?*/
