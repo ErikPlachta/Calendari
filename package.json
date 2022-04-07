@@ -10,10 +10,20 @@
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build"
   },
-  "keywords": ["mern", "mongodb", "express", "react", "node"],
+  "keywords": [
+    "mern",
+    "mongodb",
+    "express",
+    "react",
+    "node"
+  ],
   "author": "Erik Plachta, Christiana Sullivan Morales, and Mary Lawton",
   "license": "MIT",
   "devDependencies": {
     "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "react-router": "^6.3.0",
+    "react-router-dom": "^6.3.0"
   }
 }

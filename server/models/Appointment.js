@@ -15,7 +15,7 @@ const AppointmentSchema = new Schema(
         },
         appointment_details: {
             name: {
-                //1 or 2 hardcoded examples here
+                //1 or 2 hardcoded examples here, DO IN REACT
             },
             duration: {
                 //1 hour and 2 hour?
@@ -48,7 +48,7 @@ const AppointmentSchema = new Schema(
         //     //is timezone mvp?
         // },
         appointment_status: {
-            //Scheduled, Completed, Cancelled
+            //Scheduled, Completed, Cancelled. MODEL ISN'T CONCERNED WITH POST, PUT, DELETE
         },
         id: false
     }
