@@ -43,8 +43,98 @@
                                         }
                                     }
         },
-        "Appointment_Type"  :   ["0000-0000"],
-        "Appointment"       :   ["0000-0000-1111"],
+        "Appointment_Type"  :   {
+            "0000-0000" : {
+                "_id"           :   "0000-0000",
+                "name"          :   "General",
+                "description"   :   "Schedule an appointment with ${brand_name}.",
+                "date_time"          :   "${date_time}",
+                "Details"        :   {
+                                        "subject"       : "",
+                                        "date"          : "",
+                                        "duration"      : "",
+                                        "time_Start"    : "",
+                                        "timezone"      : "",
+                                        "client"        : {
+                                                            "name": "",
+                                                            "email": "",
+                                                            "phone": ""
+                                        }
+                },
+                "Users"         :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        },
+        "Appointment"       :   {
+            "0000-0000-1111" : {
+                                "_id"               :   "0000-0000-1111",
+                                "status"            :   "Scheduled",
+                                "User"              :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name_first"    :   "Erik",
+                                                            "name_last"     :   "Plachta"
+                                },
+                                "Business"          :   {
+                                                            "_id"           :   "0000-AAAA",
+                                                            "brand_name"    :   "Erik's Business Brand Name"
+                                },
+                                "Appointment_Type"  :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name"          :   "General",
+                                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                                },
+                                "Details"           :   {
+                                                            "subject"       : "Want to discuss X with You",
+                                                            "summary"       : "I want to talk about x and go over y to accomplish z",
+                                                            "date_time"          : "2022-04-13 10:00:00",
+                                                            "duration"      : "45 minutes",
+                                                            "timezone"      : "EST",
+                                                            "client"        : {
+                                                                                "name": "Mary",
+                                                                                "email": "mary@noemail.com",
+                                                                                "phone": "000-867-5309"
+                                                            }
+                                }
+            },
+            "0000-0000-1112" : {
+                                "_id"               :   "0000-0000-1112",
+                                "status"            :   "Scheduled",
+                                "User"              :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name_first"    :   "Erik",
+                                                            "name_last"     :   "Plachta"
+                                },
+                                "Business"          :   {
+                                                            "_id"           :   "0000-AAAA",
+                                                            "brand_name"    :   "Erik's Business Brand Name"
+                                },
+                                "Appointment_Type"  :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name"          :   "General",
+                                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                                },
+                                "Details"           :   {
+                                                            "subject"       : "Want to discuss X with You",
+                                                            "summary"       : "I want to talk about x and go over y to accomplish z",
+                                                            "date_time"          : "2022-04-10 14:00:00",
+                                                            "duration"      : "45 minutes",
+                                                            "timezone"      : "EST",
+                                                            "client"        : {
+                                                                                "name": "Christiana",
+                                                                                "email": "christiana@noemail.com",
+                                                                                "phone": "000-867-5309"
+                                                            }
+                                }
+}
+        },
         "Users"             :   ["0000-0000"]
     },
     "0000-BBBB" : {
@@ -90,8 +180,67 @@
                                         }
                                     }
         },
-        "Appointment_Type"  :   ["0000-0000"],
-        "Appointment"       :   ["0000-0000-1111"],
+        "Appointment_Type"  :   {
+            "0000-0000" : {
+                "_id"           :   "0000-0000",
+                "name"          :   "General",
+                "description"   :   "Schedule an appointment with ${brand_name}.",
+                "date_time"          :   "${date_time}",
+                "Details"        :   {
+                                        "subject"       : "",
+                                        "date"          : "",
+                                        "duration"      : "",
+                                        "time_Start"    : "",
+                                        "timezone"      : "",
+                                        "client"        : {
+                                                            "name": "",
+                                                            "email": "",
+                                                            "phone": ""
+                                        }
+                },
+                "Users"         :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        },
+        "Appointment"       :   {
+            "0000-0000-2222" : {
+                "_id"           :   "0000-0000-2222",
+                "status"            :   "Scheduled",
+                "User"              :   {
+                                            "_id"           :   "0000-1111",
+                                            "name_first"    :   "Christiana",
+                                            "name_last"     :   "Sullivan Morales"
+                },
+                "Business"          :   {
+                                             "_id"           :   "0000-BBBB",
+                                             "brand_name"    :   "Christian's Business Brand Name"
+                },
+                "Appointment_Type"  :   {
+                                            "_id"           :   "0000-0000",
+                                            "name"          :   "General",
+                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                },
+                "Details"           :   {
+                                            "subject"       : "Want to discuss X with You",
+                                            "date_time"          : 1649216132913,
+                                            "duration"      : "45 minutes",
+                                            "timezone"      : "EST",
+                                            "client"        : {
+                                                                "name": "Fake Client",
+                                                                "email": "my@noemail.com",
+                                                                "phone": "000-867-5309"
+                                            }
+                }
+            }
+        },
         "Users"             :   ["1111-1111"]
 
     },
@@ -138,8 +287,68 @@
                                         }
                                     }
         },
-        "Appointment_Type"  :   ["0000-0000"],
-        "Appointment"       :   ["0000-0000-1111"],
+        "Appointment_Type"  :   {
+            "0000-0000" : {
+                "_id"           :   "0000-0000",
+                "name"          :   "General",
+                "description"   :   "Schedule an appointment with ${brand_name}.",
+                "date_time"          :   "${date_time}",
+                "Details"        :   {
+                                        "subject"       : "",
+                                        "date"          : "",
+                                        "duration"      : "",
+                                        "time_Start"    : "",
+                                        "timezone"      : "",
+                                        "client"        : {
+                                                            "name": "",
+                                                            "email": "",
+                                                            "phone": ""
+                                        }
+                },
+                "Users"         :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        },
+        "Appointment"       :   {
+            "0000-0000-3333" : {
+                "_id"           :   "0000-0000-3333",
+                "status"            :   "Scheduled",
+                "User"              :   {
+                                            "_id"           :   "0000-2222",
+                                            "name_first"    :   "Mary",
+                                            "name_last"     :   "lawton"
+                },
+                "Business"          :   {
+                                            "_id"           :   "0000-CCCC",
+                                            "brand_name"    :   "Mary's Business Brand Name"
+                },
+                "Appointment_Type"  :   {
+                                            "_id"           :   "0000-0000",
+                                            "name"          :   "General",
+                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                },
+                "Details"           :   {
+                                            "subject"       : "Want to discuss X with You",
+                                            "summary"       : "I want to talk about x and go over y to accomplish z",
+                                            "date_time"          : 1649216132913,
+                                            "duration"      : "45 minutes",
+                                            "timezone"      : "EST",
+                                            "client"        : {
+                                                                "name": "Fake Client",
+                                                                "email": "my@noemail.com",
+                                                                "phone": "000-867-5309"
+                                            }
+                }
+            }
+        },
         "Users"             :   ["2222-2222"]
 
     }

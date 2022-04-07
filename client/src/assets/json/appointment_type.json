@@ -3,8 +3,7 @@
         "_id"           :   "0000-0000",
         "name"          :   "General",
         "description"   :   "Schedule an appointment with ${brand_name}.",
-        "date"          :   "${date_time}",
-        "utz"           :   "${utz}",
+        "date_time"          :   "${date_time}",
         "Details"        :   {
                                 "subject"       : "",
                                 "date"          : "",
