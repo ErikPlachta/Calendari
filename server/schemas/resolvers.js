@@ -34,6 +34,20 @@ const resolvers = {
                 .populate('appointment_types')
                 .populate('appointments')
         }
+    },
+    Mutation: {
+        // add new user
+        addUser: async (parent, args) => {
+            const user = await User.create(args);
+            return user;
+        },
+        // add new business
+        addBusiness: async (parent, args) => {
+            const business = await Business.create(args);
+            return business;
+        },
+        // add new appointment type to business
+        // add new appointment
     }
 };
 
