@@ -23,6 +23,7 @@ const BusinessSchema = new Schema(
             type: String,
             required: true,
             unique: true
+
         },
         // commenting these out until we know whether MVP or not
         // settings: {

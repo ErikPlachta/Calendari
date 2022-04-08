@@ -25,7 +25,6 @@ const typeDefs = gql`
         summary: String
     }
     type Appointment {
-        _id: ID
         user_id: String
         business_id: String
     }
