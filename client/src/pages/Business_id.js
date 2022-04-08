@@ -67,7 +67,16 @@ export default function Business_id() {
                   {appointment_types[appointment_type]['summary']}
                 </p>
                 <span>
-                  {appointment_types[appointment_type]['description']}    
+                  {appointment_types[appointment_type]['description']}
+                </span>
+                <span className="appointment_type_card_details">
+                {appointment_types[appointment_type]['Details']['subject']}     
+                  <ul>
+                    <li>{appointment_types[appointment_type]['Details']['date']}        </li>
+                    <li>{appointment_types[appointment_type]['Details']['duration']}    </li>
+                    <li>{appointment_types[appointment_type]['Details']['time_start']}  </li>
+                    <li>{appointment_types[appointment_type]['Details']['timezone']}    </li>
+                  </ul>
                 </span>
                 
                 <span>
