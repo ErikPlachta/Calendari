@@ -232,6 +232,7 @@ button {
 }
 
 .appointment_type_card_summary{
+  flex: 100%;
   /* text-align: center; */
   font-size: 1.1em;
   margin-bottom: 1rem;
@@ -239,6 +240,7 @@ button {
 }
 
 .appointment_type_card_description{
+  flex: 100%;
   text-align: justify;
   width: 100%;
   box-shadow: inset 0px 1px 1px 1px rgba(0,0,0,0.2),
