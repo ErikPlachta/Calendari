@@ -6,7 +6,7 @@ import TimePicker from 'react-time-picker';
 export default function Schedule() {
     const [value, onChange] = useState('9:00');
   return (
-    <section>
+    <section className="containerResults">
         <Calendar>Pick your appointment date</Calendar>
         <p>Please select your appointment time</p>
         <TimePicker onChange={onChange} value={value}></TimePicker>
