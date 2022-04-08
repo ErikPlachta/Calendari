@@ -10,6 +10,12 @@ export default function Schedule() {
         <Calendar>Pick your appointment date</Calendar>
         <p>Please select your appointment time</p>
         <TimePicker onChange={onChange} value={value}></TimePicker>
+        <br></br>
+        <label htmlFor="notes">Notes for Astronaut:</label>
+        <br></br>
+        <textarea name="notes" rows="4"/>
+        <br></br>
+        <button>Schedule Appointment</button>
     </section>
     
   )
