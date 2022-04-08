@@ -47,37 +47,6 @@ export default function Business_id() {
 
   return (
     <section className="page business">
-      
-      {/* Side Navigational Bar */}
-      <aside className='sidebar'>
-        <section>
-          <h2>{business.name}</h2>
-        </section>
-        {/* Business Menu */}
-        <ul>
-          {/* Default landing page for business */}
-          <li>Home</li>
-          {/* A summary of the business details overall */}
-          <li>Dashboard</li>
-          {/* Details on upcoming appointments */}
-          <li>Appointments</li>
-          {/* <li>Reporting</li> */}
-          {/* Used to configure options */}
-          <li>Settings
-            <ul>
-              {/* User account specific settings */}
-              <li>My Account</li>
-              <li>My Business
-                <ul>
-                  <li>Calendar</li>
-                  <li>Appointment Types</li>
-                  <li>Users</li>
-                </ul>
-              </li>
-            </ul>
-          </li>
-        </ul>
-      </aside>
 
       {/* Main content within Business Page */}
       <main className="container business">
