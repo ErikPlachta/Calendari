@@ -1,21 +1,3 @@
-/*
-- ### User
-    - Anyone that can sign into the app.
-    - Schema:
-        - emailEmailRequiredUnique
-            - password_salt - __Their unique password salt created at time of user creation__
-        - password_hash
-            - Their password after being salted
-        - Appointments
-            - Array
-                - Type __Internal / Google__
-                - Name
-                - DateTime - __availbiliy__
-        - business_id - __Association to business__
-        - account_id - __The state of their account__
-        - user_type_id - __Association to user type__
-*/
-
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
