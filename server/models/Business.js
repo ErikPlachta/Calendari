@@ -32,13 +32,13 @@ const BusinessSchema = new Schema(
         configuration: {
             type: Object
         },
-        Appointment_Types: [
+        appointment_types: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'AppointmentType'
+                ref: 'Appointment_Type'
             }
         ],
-        Appointments: [
+        appointments: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Appointment'

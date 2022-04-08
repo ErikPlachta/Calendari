@@ -22,11 +22,9 @@ const typeDefs = gql`
     }
     type AppointmentType {
         _id: ID
-        appointment_id: String
         business_id: String
-        user_id: String
+        users: [User]
         summary: String
-        appointment_date: String
         appointment_duration: String
     }
     type Appointment {
@@ -49,8 +47,8 @@ const typeDefs = gql`
     type Mutation {
         addUser(name_first: String!, name_last: String!, email: String!, username: String!, password: String!): User
         addBusiness(name: String!, brand_name: String!): Business
-        addApptType(business_id: ID!): Business
-        addAppt(business_id: ID!): Appointment
+        addApptType(business_id: ID!, summary: String!): AppointmentType
+        addAppt(business_id: ID!, user_id: ID!, appointment_name: String!): Appointment
     }
 `;
 
