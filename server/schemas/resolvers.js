@@ -1,4 +1,4 @@
-const { User, Business, Appointment, AppointmentType } = require('../models');
+const { User, Business, Appointment, Appointment_Type } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
@@ -47,7 +47,33 @@ const resolvers = {
             return business;
         },
         // add new appointment type to business
+        addApptType: async (parent, args) => {
+            const apptType = await Appointment_Type.create(args);
+            await Business.findByIdAndUpdate(
+                { _id: apptType.business_id },
+                { $push: { appointment_types: apptType._id } },
+                { new: true, runValidators: true }
+            );
+            
+            return apptType; 
+        },
         // add new appointment
+        addAppt: async (parent, args) => {
+            const appt = await Appointment.create(args);
+
+            await Business.findByIdAndUpdate(
+                { _id: appt.business_id },
+                { $push: { appointments: appt._id } },
+                { new: true, runValidators: true }
+            );
+
+            await User.findByIdAndUpdate(
+                { _id: appt.user_id },
+                { $push: { appointments: appt._id } },
+                { new: true, runValidators: true }
+            )
+            return appt;
+        }
     }
 };
 

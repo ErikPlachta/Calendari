@@ -10,7 +10,6 @@
             - Array
         - admin_user_id
 */
-
 const { Schema, model } = require("mongoose");
 
 const BusinessSchema = new Schema(
@@ -25,33 +24,27 @@ const BusinessSchema = new Schema(
             unique: true
 
         },
-        // commenting these out until we know whether MVP or not
-        // settings: {
-        //     //IS THIS MVP?
-        // },
-        // configuration: {
-        //     //MVP??
-        // },
-        Appointment_Types: [
+        users: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'AppointmentType'
+                ref: 'Users'
             }
         ],
-        Appointments: [
+        configuration: {
+            type: Object
+        },
+        appointment_types: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Appointment_Type'
+            }
+        ],
+        appointments: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Appointment'
             }
-        ],
-        // Users: [
-        //     {
-        //         type: Schema.Types.ObjectId,
-        //         ref: 'Users'
-        //     }
-        // ] 
-        // not sure if users is necessary under business?
-        // id: false -- not sure why this one was set to false?
+        ]
     }
 )
 
