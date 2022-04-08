@@ -90,6 +90,8 @@ export default function Business() {
         {/* Setup Days of Week, section. */}
         <section className="configure_DayOfWeek">
           <h3>It looks like your account needs to be setup!</h3>
+          <button>Login</button>
+          <button>Signup</button>
           
           <div className='configure_DayOfWeek'>
             <p>Please confirm the times and days you are available.</p>
