@@ -22,10 +22,13 @@ const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
+<<<<<<< HEAD
         // user_id: {
         //     type: String,
         //     //need to randomly generate integers here
         // }, id is automatically generated in MongoDB, I believe
+=======
+>>>>>>> ed68232f06cf870f18dbddf2987b186a2e9e471d
         name_first: {
             type: String,
             required: true,
@@ -39,6 +42,7 @@ const userSchema = new Schema(
         username: {
             type: String,
             required: true,
+            unique: true,
             trim: true
         },
         email: {

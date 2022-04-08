@@ -8,7 +8,7 @@ import Nav from './components/Nav';
 import Home from './pages/Home';
 
 import Business from './pages/Business';
-import Business_id from './pages/Business_id';
+import BusinessScheduler from './pages/BusinessScheduler';
 import Schedule from './pages/Schedule';
 
 function App() {
@@ -22,7 +22,7 @@ function App() {
         <hr />
         <hr />
         <h2>SCHEDULE CONCEPT</h2>
-        <Nav></Nav>
+        <Schedule></Schedule>
         <hr />
         <hr />
         <h2>BUSINESS DASHBOARD CONCEPT</h2>
@@ -30,7 +30,7 @@ function App() {
         <hr />
         <hr />
         <h2>BUSINESS SCHEDULER CONCEPT</h2>
-        <Business_id></Business_id>
+        <BusinessScheduler></BusinessScheduler>
         
         </main>
     </section>

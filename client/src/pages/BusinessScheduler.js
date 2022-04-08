@@ -20,7 +20,7 @@ const DB_Business =          require('../assets/json/business.json');
 const DB_Appointment =       require('../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 
-export default function Business_id() {
+export default function BusinessScheduler() {
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
