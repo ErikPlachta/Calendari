@@ -21,17 +21,16 @@ function App() {
       <main>
         <hr />
         <hr />
-        <h2>SCHEDULE CONCEPT</h2>
-        <Schedule></Schedule>
-        <hr />
-        <hr />
         <h2>BUSINESS DASHBOARD CONCEPT</h2>
         <Business></Business>
         <hr />
         <hr />
         <h2>BUSINESS SCHEDULER CONCEPT</h2>
         <BusinessScheduler></BusinessScheduler>
-        
+        <hr />
+        <hr />
+        <h2>SCHEDULE CONCEPT</h2>
+        <Schedule></Schedule>
         </main>
     </section>
   );
