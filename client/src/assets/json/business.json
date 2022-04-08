@@ -4,6 +4,27 @@
         "name"              :   "Erik's Business Name",
         "brand_name"        :   "Erik's Business Brand Name",
         "configuration"     :   {
+                                    "appointment_types"  : {
+                                        "0000-0000" : {
+                                            "_id"           :   "0000-0000",
+                                            "name"          :   "Starfleet Exam",
+                                            "summary"   :   "Schedule your StarFleet Exam.",
+                                            "description"   :   "Schedule your StarFleet Exam.",
+                                            "date_time"          :   "6 Hours",
+                                            "Details"        :   {
+                                                                    "subject"       : "",
+                                                                    "date"          : "",
+                                                                    "duration"      : "",
+                                                                    "time_Start"    : "",
+                                                                    "timezone"      : "",
+                                                                    "client"        : {
+                                                                                        "name": "",
+                                                                                        "email": "",
+                                                                                        "phone": ""
+                                                                    }
+                                            }
+                                        }
+                                    },
                                     "schedule"  : {
                                         "sunday": {
 

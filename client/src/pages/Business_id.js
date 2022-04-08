@@ -38,7 +38,7 @@ export default function Business_id() {
 
   //-- extract business from database based on JWT id
   const business = Businesses[business_id];
-
+  const appointment_types = business.configuration.appointment_types;
 
   //TODO:: 04/05/22 #EP || Build this out
   const approveTimes = dateTimes => {
@@ -53,7 +53,7 @@ export default function Business_id() {
         
         {/* Main Header Section on Business Page */}
         <header className="business">  
-          <p>Welcome, message. </p>
+          <p>Welcome, cadet. </p>
         </header>
 
 
@@ -75,56 +75,27 @@ export default function Business_id() {
 
          {/* Build appointment details here. */}
          <section className="containerResults scheduledAppointments">
-          <h3>Here are your schedule appointments</h3>
-          
-          <div className='scheduledAppointments'>
-            
-            {Object.keys(business.Appointment).map((appointment, index) => (
-              // <h4>{capitalizeFirstLetter(appointment)}</h4>
-              <section className="containerResults scheduledAppointment">
-                <div>
-                  <h4>
-                      Placeholder H4
-                  </h4>
-
-                    {/* on {dateFormat((appointments[appointment]['Details']['date_time']))}
-                    at {dateHourOfDay(appointments[appointment]['Details']['date_time'])}
-                    for {appointments[appointment]['Details']['durations']} */}
-                  
-                  {/* dateGetMonths,
-                  dateDayOfWeek,
-                  dateHourOfDay, */}
+            <form className='dayOfWeek'>
+                {Object.keys(appointment_types).map( (appointment_type, index) => (
                   <div>
-                    <h5>Appointment Details</h5>
-                    {/* <ul>
-                      <li>Type: {appointments[appointment]['Details']["type"]}</li>
-                      <li>Subject: {appointments[appointment]['Details']["subject"]}</li>
-                      <li>Summary: {appointments[appointment]['Details']["summary"]}</li>
-                      <li>Date & Time for Host: {dateTimeFullLocal(appointments[appointment]['Details']["date_time"])}</li>
-                      <li>Duration: {appointments[appointment]['Details']["duration"]}</li>
-                      <li>Appointment ID: {appointments[appointment]["_id"]}</li>
-                    </ul> */}
-                  </div>
-
-                  <div>
-                    <h5>Client Details</h5>
-                    {/* <ul>
-                      <li>Name: {appointments[appointment]['Details']['client']['name']}   </li>
-                      <li>Email: {appointments[appointment]['Details']['client']['email']}  </li>
-                      <li>Phone: {appointments[appointment]['Details']['client']['phone']}  </li>
-                      <li>Date & Time for Client: {dateTimeFull(appointments[appointment]['Details']['date_time'])}  </li>
-                      <li>Timezone: {appointments[appointment]['Details']['timezone']}  </li>
-                    </ul> */}
-                  </div>
+                    <h3>
+                      🧑🏼‍🚀 {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
+                    </h3>
+                    <p>
+                      {appointment_types[appointment_type]['summary']}
+                    </p>
+                    <span>
+                      {appointment_types[appointment_type]['_id']}
+                      {appointment_types[appointment_type]['_id']}
+                      
+                      {appointment_types[appointment_type]['description']}
+                      
+                    </span>
                 </div>
-                <div>
-                </div>
-              </section>
-            ))}
-            
-            
-          </div>
-
+                ))}
+                {/* submit button for times */}
+                <input type='button' value="Launch" onClick={approveTimes}></input>
+            </form>
         </section>
         
         
