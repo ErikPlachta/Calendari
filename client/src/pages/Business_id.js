@@ -57,8 +57,8 @@ export default function Business_id() {
         </header>
 
 
-        <section className="containerResults dashboard">
           {/* Dashboard is high-level summary  */}
+        {/* <section className="containerResults dashboard">
           <section className="containerResults">
               <h3>Dashboard</h3>
               <p>placeholder text for summary, here.</p>
@@ -70,7 +70,7 @@ export default function Business_id() {
                 <li>Canceled: </li>
               </ul>
             </section>
-        </section>
+        </section> */}
         
 
          {/* Build appointment details here. */}
