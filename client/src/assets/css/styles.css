@@ -116,7 +116,7 @@ a {
 
 /* Default button Styling */
 button {
-          
+        
   /* Buttons text color */
   --btn_tc_inactive: var(--c_05); /* button inactive text color */
   --btn_tc_active: var(--c_04); /* button active text color for hover and click */
@@ -125,6 +125,13 @@ button {
   --btn_bg_inactive: var(--c_05); /* button inactive text color */
   --btn_bg_active: var(--c_04); /* button active text color for hover and click */
 
+
+  border-radius: var(--br_primary);
+  width: fit-content;
+  height: 2rem;
+  
+  background-color: var(--btn_bg_inactive);
+  color: var(--btn_tc_inactive);
 }
   
 
@@ -179,6 +186,11 @@ button {
 
 }
 
+.business header{
+  width: 100%;
+  margin: 0 1rem;
+}
+
 .configure{
 
 }
@@ -199,7 +211,18 @@ button {
   APPOINTMENT PAGE SPECIFIC CLASSES
 */
 
+.appointment_type_card{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: justify;
+  /* padding: 1rem; */
+}
 
+.appointment_type_button{
+  float: right;
+
+}
 
 /*------------------------------------------------------------------------------
   HEADER, NAV, BRAND-NAME and LOGO 

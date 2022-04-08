@@ -55,42 +55,30 @@ export default function Business_id() {
           <p>{business.welcome}</p>
         </header>
 
-
-          {/* Dashboard is high-level summary  */}
-        {/* <section className="containerResults dashboard">
-          <section className="containerResults">
-              <h3>Dashboard</h3>
-              <p>placeholder text for summary, here.</p>
-
-              <h4>Appointments</h4>
-              <ul>
-                <li>Scheduled: </li>
-                <li>Completed: </li>
-                <li>Canceled: </li>
-              </ul>
-            </section>
-        </section> */}
-        
-
-         {/* Build appointment details here. */}
-         <section className="containerResults">
-            <form className='dayOfWeek'>
-                {Object.keys(appointment_types).map( (appointment_type, index) => (
-                  <div className="containerResults">
-                    <h3>
-                      {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
-                    </h3>
-                    <p>
-                      {appointment_types[appointment_type]['summary']}
-                    </p>
-                    <span>
-                      {appointment_types[appointment_type]['description']}    
-                    </span>
-                  </div>
-                ))}
-                {/* submit button for times */}
-                <input type='button' value="Launch" onClick={approveTimes}></input>
-            </form>
+        {/* container holding appointment types  */}
+        <section className="containerResults">
+          {Object.keys(appointment_types).map( (appointment_type, index) => (        
+            // <form>
+              <div className="containerResults appointment_type_card">
+                <h3>
+                  {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
+                </h3>
+                <p>
+                  {appointment_types[appointment_type]['summary']}
+                </p>
+                <span>
+                  {appointment_types[appointment_type]['description']}    
+                </span>
+                
+                <span>
+                  <button className="appointment_type_button" onClick={approveTimes}>
+                    Start Application
+                  </button>
+                </span>
+              </div>
+            // </form>
+          ))}
+                
         </section>
       </main>
     </section>
