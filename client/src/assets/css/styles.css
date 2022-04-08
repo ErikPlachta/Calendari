@@ -54,6 +54,13 @@
   --a_02: rgba(0 0 0 /.5);
 }
 
+/*------------------------------------------------------------------------------
+/* FONTS */
+@font-face {
+  font-family: 'Sunny Spells';
+  src: url('../font/SunnyspellsRegular.otf');
+  
+}
 
 /*------------------------------------------------------------------------------
   UNIVERSAL ELEMENTS
@@ -281,14 +288,57 @@ button {
 */
 
 /* SPA HEADER holds nav, brand-name and logo */
-header {
-
+.navHeader {
+  padding: 0 2rem; 
+  margin: 0;
 }
+
+.navHeader div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  
+}
+
+.brandNameSlogan{
+  display: flex;
+  flex-direction: column;
+  /* padding-left: .1rem; */
+  padding: 0;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+h2.brandName{
+  font-family: "Sunny Spells";
+  font-size: 5rem;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-top: auto;
+  font-weight: 100;
+  
+  /* font-variant-caps: all; */
+}
+
+.brandLogo{
+  margin: 1rem;
+  width: 50px;
+}
+
+
+
 
 /* NAVIGATION MENU */
-nav {
-
+nav ul{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  justify-content: space-between;
 }
+
 
 
 /*------------------------------------------------------------------------------
