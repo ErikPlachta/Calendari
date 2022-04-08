@@ -1,7 +1,12 @@
 import React from 'react'
+import Calendar from 'react-calendar';
+import 'react-calendar/dist/Calendar.css';
 
 export default function Schedule() {
   return (
-    <div>Schedule</div>
+    <section>
+        <Calendar>Pick your appointment date</Calendar>
+    </section>
+    
   )
 }
