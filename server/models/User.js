@@ -17,38 +17,39 @@
 */
 
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../../client/src/utils/dateFormat'); /*TRAFFIC CONE at this path, doesn't look right*/
+const dateFormat = require('../../client/src/utils/dateFormat'); /*THIS DOESNT SEEM LIKE RIGHT PATH, TRAFFIC CONE HERE*/
+const bcrypt = require('bcrypt');
 
-const UserSchema = new Schema(
+const userSchema = new Schema(
     {
-        user_id: {
-            type: String,
-            //FUNCITON THAT USES UUID IN MONGO OR FIND A WAY MONGO DOES IT FOR US
-        },
         name_first: {
             type: String,
-            require: true,
+            required: true,
             trim: true
         },
         name_last: {
             type: String,
-            require: true,
+            required: true,
             trim: true
         },
         username: {
             type: String,
             required: true,
+            unique: true,
             trim: true
         },
-        emailRequiredUnique: {
+        email: {
             type: String,
             required: true,
-            //GOOGLE MONGODB ENCRYPTION/REVISIT MODULES, FOCUS ON THIS LAST
+            unique: true,
+            match: [/.+@.+\..+/, 'Must match an email address!']
+            /*NEED HELP WITH THE SALTING PW*/
         },
-        password_hash: {
+        password: {
             type: String,
             required: true,
-            //GOOGLE MONGODB ENCRYPTION/REVISIT MODULES, DO THIS LAST
+            minLength: [6, 'Password must be at least 6 characters long!']
+            /*NEED HELP WITH THE SALTING PW*/
         },
         /*IS VERIFIED ACCOUNT MVP?? IF SO NEED HELP*/
         /*IS DATE CREATED MVP?*/
@@ -59,15 +60,37 @@ const UserSchema = new Schema(
         },
         /*IS DATE LOGIN MVP?*/
         /*IS USER CALENDAR MVP?*/
-        appointments: [{
-            type: Schema.type.ObjectId,
-            ref: 'Appointment'
-        }],
+        appointments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Appointment'
+            }
+        ],
+    },
+    // add virtuals
+    {
+        toJSON: {
+            virtuals: true
+        }
     }
 );
 
+// hash password before saving new user to db
+userSchema.pre('save', async function (next) {
+    if (this.isNew || this.isModified('password')) {
+        const saltRounds = 10;
+        this.password = await bcrypt.hash(this.password, saltRounds);
+    }
+
+    next();
+});
+
+// compare the incoming password with the hashed password
+userSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
+
 //GET TOTAL COUNT OF APPOINTMENTS ON RETRIEVAL after i build out the appointments model
 
-
-const User = model("User", UserSchema);
+const User = model("User", userSchema);
 module.exports = User;

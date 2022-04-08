@@ -4,11 +4,13 @@ const {Schema, model} = require("mongoose");
 const AppointmentSchema = new Schema(
     {
         user_id: {
-            type: String,
-            //randomly generate string REFERENCE USER MODEL
+            type: Schema.Types.ObjectId,
+            ref: 'User'
+            //randomly generate string
         },
         business_id: {
-            type: String,
+            type: Schema.Types.ObjectId,
+            ref: 'Business'
             //randomly generate string
         },
         appointment_details: {
@@ -26,25 +28,25 @@ const AppointmentSchema = new Schema(
             },
             //is universal time zone mvp?
         },
-        client: {
-            name: {
-                type: Schema.Type.name_first,
-                ref: 'User'
-            },
-            email: {
-                type: Schema.Type.email,
-                ref: 'User'
-            },
-            phone: {
-                type: Schema.Type.phone,
-                ref: 'User'
-            },
-            summary: {
-                type: Schema.Type.summary,
-                ref: 'User'
-            },
-            //is timezone mvp?
-        },
+        // client: {
+        //     name: {
+        //         type: Schema.Type.name_first,
+        //         ref: 'User'
+        //     },
+        //     email: {
+        //         type: Schema.Type.email,
+        //         ref: 'User'
+        //     },
+        //     phone: {
+        //         type: Schema.Type.phone,
+        //         ref: 'User'
+        //     },
+        //     summary: {
+        //         type: Schema.Type.summary,
+        //         ref: 'User'
+        //     },
+        //     //is timezone mvp?
+        // },
         appointment_status: {
             //Scheduled, Completed, Cancelled. MODEL ISN'T CONCERNED WITH POST, PUT, DELETE
         },

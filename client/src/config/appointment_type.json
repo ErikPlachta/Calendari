@@ -1,0 +1,25 @@
+{
+    "0000-0000" : {
+        "_id"           :   "0000-0000",
+        "name"          :   "General",
+        "description"   :   "Schedule an appointment with ${brand_name}.",
+        "date_time"          :   "${date_time}",
+        "Details"        :   {
+                                "summary"       : "",
+                                "subject"       : "",
+                                "date"          : "",
+                                "duration"      : "",
+                                "time_Start"    : "",
+                                "timezone"      : "",
+                                "client"        : {}
+        },
+        "Users"         :   {
+                                "summary"       : "",
+                                "User"          : []
+        },
+        "Appointments"  : {
+                                "summary"       : "",
+                                "Appointment"   : []
+        }
+    }
+}

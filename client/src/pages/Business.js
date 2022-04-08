@@ -1,5 +1,17 @@
 import React, { useState, useEffect } from 'react';
-const { capitalizeFirstLetter } = require('../utils/helpers');
+// import BusinessSchedule from './BusinessSchedule';
+
+const { 
+  capitalizeFirstLetter,
+  dateGetMonths,
+  dateFormat,
+  dateTimeFull,
+  dateDayOfWeek,
+  dateHourOfDay,
+  dateGetTimePassed,
+  dateTimeFullLocal
+} = require('../utils/helpers');
+
 
 //-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -14,10 +26,10 @@ export default function Business() {
   
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-  const [businesses, setBusinesses] = useState(DB_Business);
-  const [users, setUsers] = useState(DB_User);
-  const [appointments, setAppointments] = useState(DB_Appointment);
-  const [appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
+  const [Businesses, setBusinesses] = useState(DB_Business);
+  const [Users, setUsers] = useState(DB_User);
+  const [Appointments, setAppointments] = useState(DB_Appointment);
+  const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
   /*  1. VERIFY IF LOGGED IN    */
@@ -43,17 +55,20 @@ export default function Business() {
   //TODO:: 04/05/22 #EP || Testing basic integrity. Need to build out what these should actually do.
   
   //-- extract business from database based on JWT id
-  const business = businesses[business_id];
+  const business = Businesses[business_id];
   //-- extract schedule from extracted business
   const schedule = business.configuration.schedule;
   //-- extract all users from business //TODO:: 04/05/2022 #EP || Make this the logged in
-  const user     = users[user_id];
+  const user     = Users[user_id];
   
-  //TODO:: 04/05/22 #EP || Onboard Appointments
-  const appointment = appointments;
-  //TODO:: 04/05/22 #EP || Onboard Appointment_Types
-  const appointment_Type = appointment_Types;
+  const appointments = business.Appointment;
+  //TODO:: 04/06/2022 #EP || only return scheduled upcoming by default
+    
+  
 
+
+  //TODO:: 04/05/22 #EP || Onboard Appointment_Types
+  const appointment_Type = business.Appointment_Type;
 
 
   //----------------------------------------------------------------------------
@@ -64,69 +79,165 @@ export default function Business() {
     dateTimes.preventDefault();
   };
 
+
   //-- RETURN FUNCTION
   return (
-    <section>
+    <section className="page business">
       
       {/* Side Navigational Bar */}
-      <aside>
+      <aside className='sidebar'>
         <section>
-          <h3>
-
-          </h3>
+          <h2>{business.name}</h2>
         </section>
+        {/* Business Menu */}
+        <ul>
+          {/* Default landing page for business */}
+          <li>Home</li>
+          {/* A summary of the business details overall */}
+          <li>Dashboard</li>
+          {/* Details on upcoming appointments */}
+          <li>Appointments</li>
+          {/* <li>Reporting</li> */}
+          {/* Used to configure options */}
+          <li>Settings
+            <ul>
+              {/* User account specific settings */}
+              <li>My Account</li>
+              <li>My Business
+                <ul>
+                  <li>Calendar</li>
+                  <li>Appointment Types</li>
+                  <li>Users</li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+        </ul>
       </aside>
 
       {/* Main content within Business Page */}
-      <main>
+      <main className="container business">
         
         {/* Main Header Section on Business Page */}
-        <header>
-          <h2>{business.name}</h2>
+        <header className="business">  
           <p>Welcome, {user.name_first}. </p>
         </header>
+
+
+        <section className="containerResults dashboard">
+          {/* Dashboard is high-level summary  */}
+          <section className="containerResults">
+              <h3>Dashboard</h3>
+              <p>placeholder text for summary, here.</p>
+
+              <h4>Appointments</h4>
+              <ul>
+                <li>Scheduled: </li>
+                <li>Completed: </li>
+                <li>Canceled: </li>
+              </ul>
+            </section>
+        </section>
         
 
-        {/* Setup Days of Week, section. */}
-        <section className="configure_DayOfWeek">
-          <h3>It looks like your account needs to be setup!</h3>
-          <button>Login</button>
-          <button>Signup</button>
+         {/* Build appointment details here. */}
+         <section className="containerResults scheduledAppointments">
+          <h3>Here are your schedule appointments</h3>
           
-          <div className='configure_DayOfWeek'>
-            <p>Please confirm the times and days you are available.</p>
-            <form className='configure_DayOfWeek'>
-              {Object.keys(schedule).map( (dayOfWeek, index) => (
+          <div className='scheduledAppointments'>
+            
+            {Object.keys(business.Appointment).map((appointment, index) => (
+              // <h4>{capitalizeFirstLetter(appointment)}</h4>
+              <section className="containerResults scheduledAppointment">
                 <div>
+                  <h4>
+                  {appointments[appointment]["User"]["name_first"]} {appointments[appointment]["User"]["name_last"]} has
+                  a {appointments[appointment]["status"]}
+                  - a {appointments[appointment]['Appointment_Type']["name"]} Appointment
+                    with {appointments[appointment]['Details']['client']['name']} on
+                    - {dateTimeFull((appointments[appointment]['Details']['date_time']))}
+                  </h4>
+
+                    {/* on {dateFormat((appointments[appointment]['Details']['date_time']))}
+                    at {dateHourOfDay(appointments[appointment]['Details']['date_time'])}
+                    for {appointments[appointment]['Details']['durations']} */}
                   
-                  <h4>{capitalizeFirstLetter(dayOfWeek)}</h4>
-                    {/* Go through each day of week, present days with times and if verified */}
-                    {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
-                      <span>
-                        {(() => {
-                          switch (value) {
-                              case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                              case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                              case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
-                              // checked={checked ? 'checked' : ''}
-                              default         :   return "NULL";
-                            }
-                          })()}
-                        {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
-                      </span>
-                    ))}
+                  {/* dateGetMonths,
+                  dateDayOfWeek,
+                  dateHourOfDay, */}
+                  <div>
+                    <h5>Appointment Details</h5>
+                    <ul>
+                      <li>Type: {appointments[appointment]['Details']["type"]}</li>
+                      <li>Subject: {appointments[appointment]['Details']["subject"]}</li>
+                      <li>Summary: {appointments[appointment]['Details']["summary"]}</li>
+                      <li>Date & Time for Host: {dateTimeFullLocal(appointments[appointment]['Details']["date_time"])}</li>
+                      <li>Duration: {appointments[appointment]['Details']["duration"]}</li>
+                      <li>Appointment ID: {appointments[appointment]["_id"]}</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                    <h5>Client Details</h5>
+                    <ul>
+                    <li>Name: {appointments[appointment]['Details']['client']['name']}   </li>
+                    <li>Email: {appointments[appointment]['Details']['client']['email']}  </li>
+                    <li>Phone: {appointments[appointment]['Details']['client']['phone']}  </li>
+                    <li>Date & Time for Client: {dateTimeFull(appointments[appointment]['Details']['date_time'])}  </li>
+                    <li>Timezone: {appointments[appointment]['Details']['timezone']}  </li>
+                    </ul>
+                  </div>
                 </div>
-              ))}
-              {/* submit button for times */}
-              <input type='button' value="Approve Times" onClick={approveTimes}></input>
-            </form>
+                <div>
+                </div>
+              </section>
+            ))}
+            
             
           </div>
 
         </section>
+        
+        
+        <section className="containerResults dayOfWeek">
+            {/* Setup Days of Week, section. */}
+            <h3>It looks like your schedule needs to be setup!</h3>
+            
+            <div className='dayOfWeek'>
+                <p>Please confirm the days and times you are available for appointments.</p>
+                <form className='dayOfWeek'>
+                    {Object.keys(schedule).map( (dayOfWeek, index) => (
+                    <div>
+                        
+                        <h4>{capitalizeFirstLetter(dayOfWeek)}</h4>
+                        {/* Go through each day of week, present days with times and if verified */}
+                        {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
+                            <span>
+                            {(() => {
+                                switch (value) {
+                                    case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                                    case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
+                                    case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
+                                    // checked={checked ? 'checked' : ''}
+                                    default         :   return "NULL";
+                                }
+                                })()}
+                            {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
+                            </span>
+                        ))}
+                    </div>
+                    ))}
+                    {/* submit button for times */}
+                    <input type='button' value="Approve Times" onClick={approveTimes}></input>
+                </form>
+            </div>
+        </section>
+        
+        
 
       </main>
 
     </section>
   )
 }
+
