@@ -11,7 +11,7 @@
         - admin_user_id
 */
 
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const BusinessSchema = new Schema(
     {
@@ -21,25 +21,36 @@ const BusinessSchema = new Schema(
         },
         brand_name: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
-        settings: {
-        //IS THIS MVP?
-        },
-        configuration: {
-            //MVP??
-        },
-        Appointment_Type: [{
-            ref: 'Appointment_Type'
-        }],
-        Appointments: [{
-            ref: 'Appointment'
-        }],
-        Users: [{
-            ref: 'Users'
-        }],
-
-        id:false
+        // commenting these out until we know whether MVP or not
+        // settings: {
+        //     //IS THIS MVP?
+        // },
+        // configuration: {
+        //     //MVP??
+        // },
+        Appointment_Types: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'AppointmentType'
+            }
+        ],
+        Appointments: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Appointment'
+            }
+        ],
+        // Users: [
+        //     {
+        //         type: Schema.Types.ObjectId,
+        //         ref: 'Users'
+        //     }
+        // ] 
+        // not sure if users is necessary under business?
+        // id: false -- not sure why this one was set to false?
     }
 )
 
