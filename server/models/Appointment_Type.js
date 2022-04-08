@@ -42,6 +42,6 @@ const AppointmentTypeSchema = new Schema(
     }
 )
 
-const AppointmentType = model('AppointmentType', AppointmentTypeSchema);
+const Appointment_Type = model('Appointment_Type', AppointmentTypeSchema);
 
-module.exports = AppointmentType
+module.exports = Appointment_Type;
