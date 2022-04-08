@@ -98,6 +98,11 @@ body {
   background-color: var(--C04);
 }
 
+main{
+  /* adding this to prevent weird overflow of data issues */
+  width: 100%;
+  overflow: hidden;
+}
 
 /* Default Inline Code Styling */
 code {
@@ -114,6 +119,11 @@ a {
   text-decoration: none;
 }
 
+h1,h2,h3,h4,h5{
+  padding: 0;
+  margin: 0;
+}
+
 /* Default button Styling */
 button {
         
@@ -127,8 +137,8 @@ button {
 
 
   border-radius: var(--br_primary);
-  width: fit-content;
-  height: 2rem;
+  width: 8rem;
+  height: 3rem;
   
   background-color: var(--btn_bg_inactive);
   color: var(--btn_tc_inactive);
@@ -217,6 +227,7 @@ button {
   flex-wrap: wrap;
   justify-content: justify;
   line-height: 1.6;
+  /* position: relative; */
   /* padding: 1rem; */
 }
 
@@ -239,8 +250,8 @@ button {
 }
 
 .appointment_type_card_details{
-  margin-top: 1rem;  
-  padding-top: 1rem;
+  /* margin-top: 1rem;   */
+  padding-top: .5rem;
 }
 
 .appointment_type_card_details_subject {
@@ -254,6 +265,11 @@ button {
 
 .appointment_type_button{
   float: right;
+
+  /* to make button float on bottom right */
+  /* bottom: 1rem;
+  right: 1rem;
+  position: absolute; */
 
 }
 
