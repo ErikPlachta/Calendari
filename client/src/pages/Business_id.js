@@ -63,19 +63,21 @@ export default function Business_id() {
                 <h3>
                   {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
                 </h3>
-                <p>
+                <span className="appointment_type_card_summary">
                   {appointment_types[appointment_type]['summary']}
-                </p>
-                <span>
+                </span>
+                <span className="appointment_type_card_description">
                   {appointment_types[appointment_type]['description']}
                 </span>
                 <span className="appointment_type_card_details">
-                {appointment_types[appointment_type]['Details']['subject']}     
+                  <h4 className="appointment_type_card_details">
+                    {appointment_types[appointment_type]['Details']['subject']}     
+                  </h4>
                   <ul>
-                    <li>{appointment_types[appointment_type]['Details']['date']}        </li>
-                    <li>{appointment_types[appointment_type]['Details']['duration']}    </li>
-                    <li>{appointment_types[appointment_type]['Details']['time_start']}  </li>
-                    <li>{appointment_types[appointment_type]['Details']['timezone']}    </li>
+                    <li>Date:       {appointment_types[appointment_type]['Details']['date']}        </li>
+                    <li>Duration:   {appointment_types[appointment_type]['Details']['duration']}    </li>
+                    <li>Start Time: {appointment_types[appointment_type]['Details']['time_start']}  </li>
+                    <li>Timezone:   {appointment_types[appointment_type]['Details']['timezone']}    </li>
                   </ul>
                 </span>
                 

@@ -10,7 +10,7 @@
                                             "_id"           :   "0000-0000",
                                             "name"          :   "Federation Citizen - Starfleet Exam 🖖🏼",
                                             "summary"       :   "All Federation citizens, schedule your StarFleet Exam here.",
-                                            "description"   :   "The exam is designed to look for certain qualities a person displayed, including: integrity, intelligence, courage, imagination, and leadership qualities. Candidates are to expect the unexpected during this exam.",
+                                            "description"   :   "This exam is designed to look for certain qualities a person displayed, including: integrity, intelligence, courage, imagination, and leadership qualities. Candidates are to expect the unexpected during this exam.",
                                             "date_time"          :   "6 Hours",
                                             "Details"        :   {
                                                                     "subject"       : "Federation Citizen - Starfleet Exam",
@@ -29,7 +29,7 @@
                                             "_id"           :   "0000-0001",
                                             "name"          :   "Non-Federation Citizen - Starfleet Exam 🌎",
                                             "summary"       :   "For non-Federation citizens, eligibility is considered with a letter of reference from a Command Level Starfleet Officer on file.",
-                                            "description"   :   "The exam is designed to look for certain qualities a person displayed, including: integrity, intelligence, courage, imagination, and leadership qualities. Candidates are to expect the unexpected during this exam.",
+                                            "description"   :   "This exam is designed to look for certain qualities a person displayed, including: integrity, intelligence, courage, imagination, and leadership qualities. Candidates are to expect the unexpected during this exam.",
                                             "date_time"          :   "6 Hours",
                                             "Details"        :   {
                                                                     "subject"       : "Non-Federation Citizen - Starfleet Exam",
