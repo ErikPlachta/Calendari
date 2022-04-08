@@ -34,8 +34,8 @@
 
   /* BORDERS */
   /*TODO:: 04/05/2022 #EP || Define these colors */
-  --b_01: 1px solid var(--c_00); /* default border and font color */ 
-  --b_01_focus: 2px solid var(--c_00); /* secondary for more obvious accents hovered */
+  --b_10: 1px solid var(--c_10); /* default border and font color */ 
+  --b_10_focus: 2px solid var(--c_10); /* secondary for more obvious accents hovered */
   --b_02: 1px solid var(--c_02); /* secondary for more obvious accents */
   --b_02_focus: 1px solid var(--c_02); /* secondary for more obvious accents */
   --b_03: 1px solid var(--c_03); /* secondary for more obvious accents */
@@ -98,6 +98,11 @@ body {
   background-color: var(--C04);
 }
 
+main{
+  /* adding this to prevent weird overflow of data issues */
+  width: 100%;
+  overflow: hidden;
+}
 
 /* Default Inline Code Styling */
 code {
@@ -114,9 +119,14 @@ a {
   text-decoration: none;
 }
 
+h1,h2,h3,h4,h5{
+  padding: 0;
+  margin: 0;
+}
+
 /* Default button Styling */
 button {
-          
+        
   /* Buttons text color */
   --btn_tc_inactive: var(--c_05); /* button inactive text color */
   --btn_tc_active: var(--c_04); /* button active text color for hover and click */
@@ -125,6 +135,13 @@ button {
   --btn_bg_inactive: var(--c_05); /* button inactive text color */
   --btn_bg_active: var(--c_04); /* button active text color for hover and click */
 
+
+  border-radius: var(--br_primary);
+  width: 8rem;
+  height: 3rem;
+  
+  background-color: var(--btn_bg_inactive);
+  color: var(--btn_tc_inactive);
 }
   
 
@@ -168,6 +185,7 @@ button {
   border-radius: 25px;
   box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
               2px 2px 10px -3px rgba(0,0,0,0.1);
+  background-color: #fff;
 }
 
 
@@ -177,6 +195,11 @@ button {
 
 .business {
 
+}
+
+.business header{
+  width: 100%;
+  margin: 0 1rem;
 }
 
 .configure{
@@ -199,7 +222,59 @@ button {
   APPOINTMENT PAGE SPECIFIC CLASSES
 */
 
+.appointment_type_card{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: justify;
+  line-height: 1.6;
+  /* position: relative; */
+  /* padding: 1rem; */
+}
 
+.appointment_type_card_summary{
+  flex: 100%;
+  /* text-align: center; */
+  font-size: 1.1em;
+  margin-bottom: 1rem;
+
+}
+
+.appointment_type_card_description{
+  flex: 100%;
+  text-align: justify;
+  width: 100%;
+  box-shadow: inset 0px 1px 1px 1px rgba(0,0,0,0.2),
+              inset 2px 2px 10px -3px rgba(0,0,0,0.1);
+  border-radius: var(--br_primary);
+  padding: 1rem;
+  margin: auto;
+  line-height: 2;
+}
+
+.appointment_type_card_details{
+  /* margin-top: 1rem;   */
+  padding-top: .5rem;
+}
+
+.appointment_type_card_details_subject {
+  padding: 0;
+  margin:0;
+}
+
+.appointment_type_card_details ul {
+  
+}
+
+.appointment_type_button{
+  float: right;
+
+  /* to make button float on bottom right */
+  /* bottom: 1rem;
+  right: 1rem;
+  position: absolute; */
+
+}
 
 /*------------------------------------------------------------------------------
   HEADER, NAV, BRAND-NAME and LOGO 

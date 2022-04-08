@@ -65,12 +65,9 @@ export default function Business() {
   //TODO:: 04/06/2022 #EP || only return scheduled upcoming by default
     
   
-
-
   //TODO:: 04/05/22 #EP || Onboard Appointment_Types
   const appointment_Type = business.Appointment_Type;
-
-
+  
   //----------------------------------------------------------------------------
   //-- logic
 
