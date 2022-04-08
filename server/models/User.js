@@ -17,7 +17,6 @@
 */
 
 const { Schema, model } = require('mongoose');
-const dateFormat = require('../../client/src/utils/dateFormat'); /*THIS DOESNT SEEM LIKE RIGHT PATH, TRAFFIC CONE HERE*/
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
@@ -43,23 +42,16 @@ const userSchema = new Schema(
             required: true,
             unique: true,
             match: [/.+@.+\..+/, 'Must match an email address!']
-            /*NEED HELP WITH THE SALTING PW*/
         },
         password: {
             type: String,
             required: true,
             minLength: [6, 'Password must be at least 6 characters long!']
-            /*NEED HELP WITH THE SALTING PW*/
         },
-        /*IS VERIFIED ACCOUNT MVP?? IF SO NEED HELP*/
-        /*IS DATE CREATED MVP?*/
         date_created: {
             type: Date,
             default: Date.now,
-            get: createdAtVal => dateFormat(createdAtVal)
         },
-        /*IS DATE LOGIN MVP?*/
-        /*IS USER CALENDAR MVP?*/
         appointments: [
             {
                 type: Schema.Types.ObjectId,
@@ -90,7 +82,7 @@ userSchema.methods.isCorrectPassword = async function (password) {
     return bcrypt.compare(password, this.password);
 };
 
-//GET TOTAL COUNT OF APPOINTMENTS ON RETRIEVAL after i build out the appointments model
+//TODO: Get total # of appointments
 
 const User = model("User", userSchema);
 module.exports = User;
