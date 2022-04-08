@@ -20,8 +20,6 @@ const DB_Business =          require('../assets/json/business.json');
 const DB_Appointment =       require('../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 
-
-
 export default function Business_id() {
 
   //-- Onboarding connections to take data to verify integrity
@@ -53,7 +51,8 @@ export default function Business_id() {
         
         {/* Main Header Section on Business Page */}
         <header className="business">  
-          <p>Welcome, cadet. </p>
+        <h2>{business.name}</h2>
+          <p>{business.welcome}</p>
         </header>
 
 
@@ -74,37 +73,26 @@ export default function Business_id() {
         
 
          {/* Build appointment details here. */}
-         <section className="containerResults scheduledAppointments">
+         <section className="containerResults">
             <form className='dayOfWeek'>
                 {Object.keys(appointment_types).map( (appointment_type, index) => (
-                  <div>
+                  <div className="containerResults">
                     <h3>
-                      🧑🏼‍🚀 {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
+                      {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
                     </h3>
                     <p>
                       {appointment_types[appointment_type]['summary']}
                     </p>
                     <span>
-                      {appointment_types[appointment_type]['_id']}
-                      {appointment_types[appointment_type]['_id']}
-                      
-                      {appointment_types[appointment_type]['description']}
-                      
+                      {appointment_types[appointment_type]['description']}    
                     </span>
-                </div>
+                  </div>
                 ))}
                 {/* submit button for times */}
                 <input type='button' value="Launch" onClick={approveTimes}></input>
             </form>
         </section>
-        
-        
-        
-        
-        
-
       </main>
-
     </section>
     
   )
