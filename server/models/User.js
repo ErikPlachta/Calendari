@@ -1,36 +1,8 @@
-/*
-- ### User
-    - Anyone that can sign into the app.
-    - Schema:
-        - emailEmailRequiredUnique
-            - password_salt - __Their unique password salt created at time of user creation__
-        - password_hash
-            - Their password after being salted
-        - Appointments
-            - Array
-                - Type __Internal / Google__
-                - Name
-                - DateTime - __availbiliy__
-        - business_id - __Association to business__
-        - account_id - __The state of their account__
-        - user_type_id - __Association to user type__
-*/
-
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 const userSchema = new Schema(
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        // user_id: {
-        //     type: String,
-        //     //need to randomly generate integers here
-        // }, id is automatically generated in MongoDB, I believe
-=======
->>>>>>> ed68232f06cf870f18dbddf2987b186a2e9e471d
-=======
->>>>>>> fc6e955029cf3134d467b07db84263b408f08f09
         name_first: {
             type: String,
             required: true,
