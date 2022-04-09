@@ -8,7 +8,7 @@
   filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
   /* -webkit-transform: translateZ(0);
   transform: translateZ(0); */
-  animation: shake 20s;
+  
 }
 
 .brandLogo:hover {
@@ -16,7 +16,7 @@
       Start the shake animation 
       When the animation is finished, start again 
    */
-  animation: shake 1s, hover 20s;
+  animation: shake 1s, hover 10s;
   cursor: pointer;
   animation-iteration-count: infinite;
 }
@@ -28,13 +28,11 @@
 
 
 @keyframes hover {
-	50% {
-		transform: translateX(-10rem);
-	}
-
 	100% {
 		transform: translateX(-30rem);
 	}
+
+	
 }
 /* Used for shake on hover */
 @keyframes shake {
