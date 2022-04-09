@@ -9,6 +9,7 @@ const typeDefs = gql`
         username: String
         email: String
         date_created: String
+        business: Business
         appointments: [Appointment]
     }
     type Business {
