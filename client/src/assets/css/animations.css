@@ -4,10 +4,10 @@
 .brandLogo{
   margin: 1rem;
   width: 50px;
-  transition: ease-in-out 200ms;
+  /* transition: ease-in-out 200ms; */
   filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
-  -webkit-transform: translateZ(0);
-  transform: translateZ(0);
+  /* -webkit-transform: translateZ(0);
+  transform: translateZ(0); */
   animation: shake 20s;
 }
 
@@ -39,48 +39,48 @@
 /* Used for shake on hover */
 @keyframes shake {
   0% { 
-     -webkit-transform:  translate(1px, 1px);
-    transform: translate(1px, 1px); 
+     -webkit-transform:  translate(1px, 1px) rotate(-20deg);
+    transform: translate(1px, 1px) rotate(-20deg); 
   }
   10% { 
-     -webkit-transform:  translate(-1px, -1px) ;
-    transform: translate(-1px, -1px) ; 
+     -webkit-transform:  translate(-1px, -1px) rotate(-5deg);
+    transform: translate(-1px, -1px) rotate(-5deg); 
   }
   20% { 
-     -webkit-transform:  translate(-3px, -3px);
-    transform: translate(-3px, -3px); 
+     -webkit-transform:  translate(-3px, -3px) rotate(-10deg);
+    transform: translate(-3px, -3px) rotate(-10deg); 
   }
   30% { 
-     -webkit-transform:  translate(0px, 0px);
-    transform: translate(0px, 0px); 
+     -webkit-transform:  translate(0px, 0px) rotate(-5deg);
+    transform: translate(0px, 0px) rotate(-5deg); 
   }
   40% { 
-     -webkit-transform:  translate(1px, 1px);
-    transform: translate(1px, 1px); 
+     -webkit-transform:  translate(1px, 1px) rotate(-10deg);
+    transform: translate(1px, 1px) rotate(-10deg); 
   }
   50% { 
-     -webkit-transform:  translate(2px, 2px) ;
-    transform: translate(2px, 2px) ; 
+     -webkit-transform:  translate(2px, 2px) rotate(-20deg);
+    transform: translate(2px, 2px) rotate(-20deg); 
   }
   60% { 
-     -webkit-transform:  translate(3px, 3px);
-    transform: translate(3px, 3px); 
+     -webkit-transform:  translate(3px, 3px) rotate(-30deg);
+    transform: translate(3px, 3px) rotate(-30deg); 
   }
   70% { 
-     -webkit-transform:  translate(1px, 1px) ;
-    transform: translate(1px, 1px) ; 
+     -webkit-transform:  translate(1px, 1px) rotate(-40deg);
+    transform: translate(1px, 1px) rotate(-40deg);
   }
   80% { 
-     -webkit-transform:  translate(-1px, -1px);
-    transform: translate(-1px, -1px); 
+     -webkit-transform:  translate(-1px, -1px) rotate(-10deg);
+    transform: translate(-1px, -1px) rotate(-10deg); 
   }
   90% { 
-     -webkit-transform:  translate(1px, 2px);
-    transform: translate(1px, 2px); 
+     -webkit-transform:  translate(1px, 2px) rotate(-5deg);
+    transform: translate(1px, 2px) rotate(-5deg); 
   }
   100% { 
-     -webkit-transform:  translate(1px, -2px) ;
-    transform: translate(1px, -2px) ; 
+     -webkit-transform:  translate(1px, -2px) rotate(-10deg);
+    transform: translate(1px, -2px) rotate(-10deg); 
   }
 }
 
