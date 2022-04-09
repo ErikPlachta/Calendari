@@ -25,7 +25,7 @@ const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
 
-export default function Verify() {
+export default function Schedule() {
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here

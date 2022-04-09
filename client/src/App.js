@@ -24,6 +24,10 @@ function App() {
       {/* <Home></Home> */}
       {/* hard-coded business into default load for easy testing */}
       <main>
+      <hr />
+        <hr />
+        <h2>BUSINESS SCHEDULER CONCEPT</h2>
+        <BusinessScheduler />
         <hr />
         <hr />
         <Verify />
