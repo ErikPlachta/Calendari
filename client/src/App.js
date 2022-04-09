@@ -29,12 +29,6 @@ import './assets/css/animations.css';
 function App() {
 
   useEffect(() => {
-    //  if(user){
-    //     navigate('/dashboard')
-    //   }else{
-    //     navigate('/login')
-    //   }
-
     document.title = `Calendari`;
   },[]);
 
@@ -53,8 +47,9 @@ function App() {
         <Route path="/Home" element={< Home />} />
         
         {/* scheduler */}
-        {/* Expecting the business_id OR brand_name */}
-        <Route path="/s/:business_id_or_brand_name_or_appointment_id" element={ <Scheduler/> }
+        {/* Expecting the business_id OR brand_name, optional appointment_type_id to skip landing page */}
+        {/* <Route path="/s/:business_id_or_brand_name(/:appointment_type_id)" element={ <Scheduler/> } */}
+        <Route path="/s/:business_id_or_brand_name" element={ <Scheduler/> }
         />
 
         

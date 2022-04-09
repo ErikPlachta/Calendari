@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import BusinessScheduler from './pages/BusinessScheduler';
 import DateTime from './pages/DateTime';
 import Client from './pages/Client';
+import PageNotFound from '../../pages/PageNotFound';
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
@@ -36,12 +37,6 @@ const {
 const DB_Business = require('../../assets/json/business.json');
 
 
-
-
-
-
-
-
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Scheduler
 
@@ -51,7 +46,12 @@ const DB_Business = require('../../assets/json/business.json');
 */
 export default function Scheduler() {
 
-  //TODO:: 05/09/22 #EP || Replace fake data query with GraphQL
+  useEffect(() => {
+    document.title = `Calendari`;
+  },[]);
+
+
+  //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
   let business = {}; //-- The Specific Business response for the logged in user from API
   //TODO:: 04/09/22 #EP || Get this to work as a state 
@@ -62,12 +62,10 @@ export default function Scheduler() {
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
   //-- Extract URL Parameters
-  const params = useParams();
-  const business_id_or_brand_name_or_appointment_id = params.business_id_or_brand_name_or_appointment_id;
+  const {business_id_or_brand_name, appointment_type_id} = useParams();
 
   //-- used to ReRoute Navigation away if invalid details
-  const navigate = useNavigate();
-
+  // const navigate = useNavigate();
 
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS
@@ -89,11 +87,14 @@ export default function Scheduler() {
       4. If valid business info but invalid or no appointment_type_id
         - Loads default schedule
   */
-  
+
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
+    let business_id = "";
+
+
     // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name_or_appointment_id){
+    if(!business_id_or_brand_name){
       //-- Doesn't exist, re-route to homepage or 404 page 
       //-- this should not happen technically
     }
@@ -101,19 +102,18 @@ export default function Scheduler() {
     // 2. If  valid business_id or business_name extract just the business ID
       // -- grabs it and stores into const here
     //TODO:: 04/09/22 #EP | 
-    if(!Businesses[business_id_or_brand_name_or_appointment_id]){
-      console.log(false)
-      navigate('/')
-      return false;
+    if(!Businesses[business_id_or_brand_name]){
+      // navigate('/')
+      business_id = false
+      
     }
-    const business_id = business_id_or_brand_name_or_appointment_id;
+
+    if(Businesses[business_id_or_brand_name]){
     
-    business = Businesses[business_id];
-    
-    // console.log(Businesses[business_id]);
-    // set_appointment_types = business.configuration.appointment_types;
-    
-    
+      business = Businesses[business_id_or_brand_name];
+      business_id = business_id_or_brand_name;
+      //TODO:: Actually have this do a query and check appointment_type_id
+    }
     
     // 3. Does appointment_type_id exist and if yes for this business
     // if(appointment_type_id) {
@@ -192,8 +192,10 @@ export default function Scheduler() {
 
   //-- Browser Local Storage Checking
   //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-  const checkLocalStorage = () => {
+  const checkState = () => {
     //-- Looking at Local Storage to see if Client was scheduling an appointment and load if so. 
+
+    let response = true
 
     //1. See if Local Storage Contains data
 
@@ -201,27 +203,29 @@ export default function Scheduler() {
     // setStep(localStorageNumber);
 
     //3. if does not, just return false
-
+    if(!business_id){ 
+      response = false; 
+    }
     
-    return false;
+    return response;
   }
+
   
   //----------------------------------------------------------------------------
-  //-- RETURN STATEMENT
+  //-- RETURN STATEMENTS
+
+
+  
   return (
     <section className="page scheduler">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
       
-        { checkLocalStorage() 
-      
-              ? <StatusBar step={step} state={checkLocalStorage} maxSteps={maxSteps} formerStep={formerStep} /> 
-                && schedulerPages[step]
-                
-                
-              : (
-                <Loading />
-              );
+        { checkState()
+              ? <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} /> 
+                && schedulerPages[step]                
+              : <PageNotFound />
+              
         }
     </section>
   )
