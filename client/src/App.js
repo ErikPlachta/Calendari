@@ -42,18 +42,42 @@ function App() {
 
   return (
     <section>
-      <BrowserRouter>
-        <Nav bob1={bob1} />
-
-        <Routes>
-
-        </Routes>
-
-      </BrowserRouter>
+      <Nav bob1={bob1} />
+      <main>
+        <Home></Home>
+      </main>
     </section>
   );
 }
 
 export default App;
 
+/* verified working no routes version
+<section>
+  <Nav bob1={bob1} />
+  <main>
+    <Home></Home>
+    <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
+  </main>
+</section>
 
+*/
+
+/* ROUTE VERSION BACKUP
+<BrowserRouter>
+        <Nav />
+        <main>
+        <Routes>
+          <Route path="/" element={< Home />} />
+          <Route path="/Business" element={< Business />} />
+          <Route path="/BusinessScheduler" element={< BusinessScheduler />} />
+          <Route path="/Scheduler" 
+            element={
+                <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
+            }
+          />
+        </Routes>
+        </main>
+        <Footer />
+      </BrowserRouter>
+*/
