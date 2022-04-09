@@ -38,14 +38,13 @@ const typeDefs = gql`
         appointment_status: String
     }
     type Query {
-        users: [User]
+        user(username: String!): User
         businesses: [Business]
         appointments: [Appointment]
-        user(username: String!): User
         business(brand_name: String!): Business
     }
     type Mutation {
-        addUser(name_first: String!, name_last: String!, email: String!, username: String!, password: String!): User
+        addUser(name_first: String!, name_last: String!, email: String!, username: String!, password: String!, phone_number: String!, business: String!): User
         addBusiness(name: String!, brand_name: String!): Business
         addApptType(business_id: ID!, summary: String!): AppointmentType
         addAppt(business_id: ID!, user_id: ID!, appointment_name: String!): Appointment
