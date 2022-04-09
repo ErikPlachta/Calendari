@@ -9,13 +9,29 @@ import React from 'react'
     Used to view an existing appointment
 
 
-    props:  (business_id, appointment_id)
-      business_id:       Takes business_id to validate the appointment ID
-      appointment_id:   Take appointment ID, to validate with business_id
+    ### @ErikPlachta Concept Notes 👇🏼
 
-    LOGIC
-    
-      // if arguements not provided
+
+    #### Props `(business, appointment_id)`
+    `export default function Appointment(business_id, appointment_id)`
+
+    - `business`:       Takes business_id or business_name to validate the appointment ID
+    - appointment_id:   Take appointment ID, to validate with business_id
+
+
+    ---
+
+    #### Logic _concept_
+
+    1. **Take URL Params and run an API Call**
+        1. Check for business in database
+            1. business can be business_id or business_name 
+        2. Check for an appointment_id in database
+    2. **Evaluate Accordingly**
+
+    ```javascript
+
+    // if arguements not provided
       if(!business_id || !appointment_id){
         re-direct to page stating does not exist
       }
@@ -31,7 +47,9 @@ import React from 'react'
           - return page with appointment to either verify, cancel, or re-schedule
       }
       
-      else if() - route to business_id
+    //  if it got here somehow, re-route to app homepage
+
+```
     
 */
 
