@@ -36,7 +36,7 @@ export default function Client() {
   const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
-  //TODO:: 04/05/22 #EP || Add pull from JWT
+  //TODO:: 04/05/22 #EP || Add pull from JWT and/or url params
   const business_id = '0000-AAAA';
   const user_id     = '0000-0000';
 
