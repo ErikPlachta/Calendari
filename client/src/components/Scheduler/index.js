@@ -1,13 +1,21 @@
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react';
+import { Routes, Route, useParams, Navigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
+
+//------------------------------------------------------------------------------
 //-- PAGES
 import BusinessScheduler from './pages/BusinessScheduler';
 import DateTime from './pages/DateTime';
 import Client from './pages/Client';
 
+//------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
 
+//------------------------------------------------------------------------------
 //-- Helpers
 const { 
   capitalizeFirstLetter,
@@ -20,9 +28,18 @@ const {
   dateTimeFullLocal
 } = require('../../utils/helpers');
 
-//-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
+//------------------------------------------------------------------------------
+//-- ASSETS
+
+//-- Hardcoded data used to simulate the Database
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_Business = require('../../assets/json/business.json');
+
+
+
+
+
+
 
 
 //------------------------------------------------------------------------------
@@ -32,17 +49,35 @@ const DB_Business = require('../../assets/json/business.json');
     - business_id_or_name:    The business they're scheduling for
     - appointment_type_id:    The ID of the Appointment they selected
 */
-export default function Scheduler({business_id_or_name, appointment_type_id}) {
+export default function Scheduler() {
+
   //TODO:: 05/09/22 #EP || Replace fake data query with GraphQL
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
   let business = {}; //-- The Specific Business response for the logged in user from API
   //TODO:: 04/09/22 #EP || Get this to work as a state 
   // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
 
-  const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
+  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
   const [appointment_template, setAppointment_template] = useState({}); //-- when it's to be built, know what to do with it
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
+  //-- Extract URL Parameters
+  const params = useParams();
+  const business_id_or_brand_name_or_appointment_id = params.business_id_or_brand_name_or_appointment_id;
+
+  //-- used to ReRoute Navigation away if invalid details
+  const navigate = useNavigate();
+
+  useEffect(() => {
+      //  if(user){
+      //     navigate('/dashboard')
+      //   }else{
+      //     navigate('/login')
+      //   }
+  
+      document.title = `Calendari.day/s/`;
+    },[]);
+
 
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS
@@ -68,14 +103,21 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
     
     // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_name){
+    if(!business_id_or_brand_name_or_appointment_id){
       //-- Doesn't exist, re-route to homepage or 404 page 
+      //-- this should not happen technically
     }
     
     // 2. If  valid business_id or business_name extract just the business ID
       // -- grabs it and stores into const here
     //TODO:: 04/09/22 #EP | 
-    const business_id = business_id_or_name;
+    if(!Businesses[business_id_or_brand_name_or_appointment_id]){
+      console.log(false)
+      navigate('/')
+      return false;
+    }
+    const business_id = business_id_or_brand_name_or_appointment_id;
+    
     business = Businesses[business_id];
     
     // console.log(Businesses[business_id]);
@@ -84,11 +126,11 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     
     
     // 3. Does appointment_type_id exist and if yes for this business
-    if(appointment_type_id) {
+    // if(appointment_type_id) {
       //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
       // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
       //-- Otherwise ignore it and/or update screen with message
-    }
+    // }
 
     // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
     return business_id;
@@ -184,9 +226,10 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
       
       <div>
         {checkState
-          ? schedulerPages[step]
+          ? <h3>checkState Placeholder: FAILED: Has Local Storage or bad navigation</h3>
+          
           // TODO:: 04/09/22 #EP|| Add local storage logic
-          : <h3>checkState Placeholder: TRUE: Has Local Storage</h3>
+          : schedulerPages[step]
         }
         
       </div>

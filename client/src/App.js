@@ -1,10 +1,7 @@
 //------------------------------------------------------------------------------
 //-- MODULES
-
-import React from 'react';
-//-- url parameters
-//-- Routing for URL params
-import {  BrowserRouter, Route, Routes,useParams  } from 'react-router-dom';
+import React,{useEffect} from 'react';
+import {  BrowserRouter, Route, Routes, useParams  } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- PAGES
@@ -31,12 +28,21 @@ import './assets/css/animations.css';
 
 function App() {
 
-  // const { urlParams } = useParams();
-  // console.log(urlParams)
+  useEffect(() => {
+    //  if(user){
+    //     navigate('/dashboard')
+    //   }else{
+    //     navigate('/login')
+    //   }
+
+    document.title = `Calendari.day`;
+  },[]);
+
 
 
   //TODO:: 04/09/22 #EP || Temp hardcoded to verify params passing
-  const business_id_or_name = '0000-AAAA';
+  // const business_id_or_brand_name = '0000-AAAA';
+  const business_id_or_brand_name = 'OLD';
   const appointment_type_id = '0000-0000';  
 
   return (
@@ -45,11 +51,14 @@ function App() {
     <main>
       <Routes>
         <Route path="/" element={< Home />} />
-        <Route path="/s/:id" 
-          element={
-              <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
-          }
+        <Route path="/Home" element={< Home />} />
+        
+        {/* scheduler */}
+        {/* Expecting the business_id OR brand_name */}
+        <Route path="/s/:business_id_or_brand_name_or_appointment_id" element={ <Scheduler/> }
         />
+
+        
       </Routes>
     </main>
     <Footer />

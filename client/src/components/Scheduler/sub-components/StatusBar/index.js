@@ -1,4 +1,10 @@
+//-- MODULES
 import React from 'react'
+import { useParams } from "react-router-dom";
+
+
+
+//-- ASSETS
 import backArrow from '../../../../assets/svg/backward-front-gradient.svg';
 
 export default function StatusBar({step, state, maxSteps, formerStep}) {

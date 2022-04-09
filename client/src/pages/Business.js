@@ -1,6 +1,10 @@
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react';
 // import BusinessSchedule from './BusinessSchedule';
 
+//------------------------------------------------------------------------------
+//-- HELPERS
 const { 
   capitalizeFirstLetter,
   dateGetMonths,
@@ -13,7 +17,10 @@ const {
 } = require('../utils/helpers');
 
 
-//-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
+//------------------------------------------------------------------------------
+//-- ASSETS
+
+//-- Hardcoded data used to simulate the Database
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_User =              require('../assets/json/user.json');
 const DB_Business =          require('../assets/json/business.json');
@@ -21,7 +28,11 @@ const DB_Appointment =       require('../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 
 
-//-- Business Page to load for users that are logged in, otherwise redirect.
+//------------------------------------------------------------------------------
+/* EXPORT FUNCTION - Business
+  
+  Business Page to load for users that are logged in, otherwise redirect.
+*/
 export default function Business() {
   
   //-- Onboarding connections to take data to verify integrity
@@ -32,12 +43,14 @@ export default function Business() {
   const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
+  //------------------------------------------------------------------------------
   /*  1. VERIFY IF LOGGED IN    */
   
   //TODO:: 04/05/22 #EP || Add auth, for now assuming logged in
   const authCheck = true;
   
   
+  //------------------------------------------------------------------------------
   /*  2. IF LOGGED IN GET AUTH TOKEN THAT CONTAINS BUSINESS ID AND USER ID  */
   
   if(!authCheck){ 
@@ -45,6 +58,7 @@ export default function Business() {
   }
 
 
+  //------------------------------------------------------------------------------
   //TODO:: 04/05/22 #EP || Add pull from JWT
   const business_id = '0000-AAAA';
   const user_id     = '0000-0000';
