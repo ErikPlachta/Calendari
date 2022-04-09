@@ -2,11 +2,6 @@ const { Schema, model } = require("mongoose");
 
 const AppointmentTypeSchema = new Schema(
     {   
-        business_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Business'
-            //reference business model
-        },
         appt_type_name: {
             type: String,
         },
@@ -17,7 +12,7 @@ const AppointmentTypeSchema = new Schema(
         },
         appointment_duration: {
             type: String
-        },
+        }
     }
 )
 

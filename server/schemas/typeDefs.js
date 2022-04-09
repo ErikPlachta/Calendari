@@ -29,9 +29,9 @@ const typeDefs = gql`
         appointment_duration: String
     }
     type Appointment {
-        user_id: String
-        business_id: String
-        appointment_name: String
+        user_id: User
+        business_id: Business
+        appt_type_id: AppointmentType
         appointment_duration: String
         appointment_date: String
         appointment_time: String

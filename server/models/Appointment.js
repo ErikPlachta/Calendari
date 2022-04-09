@@ -10,11 +10,9 @@ const AppointmentSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Business'
         },
-        appointment_name: {
-            type: String
-        },
-        appointment_duration: {
-            type: String
+        appt_type_id: {
+            type: Schema.Types.ObjectId,
+            ref: 'Appointment_Type'
         },
         appointment_date: {
             type: Date
