@@ -1,7 +1,7 @@
 import React from 'react';
 
 //-- importing Router
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Router, Route, Routes } from 'react-router-dom';
 //-- CONTENT
 import calendarDynamic from './assets/svg/calender-dynamic-gradient.svg';
 import calendarIso from './assets/svg/calender-iso-gradient.svg';
@@ -28,36 +28,27 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+{/* <div className="containerResults">
+  <h2>Icons</h2>
+  <img src={calendarDynamic} width="50px"></img>
+  <img src={calendarFront} width="50px"></img>
+  <img src={calendarIso} width="50px"></img>
+</div> */}
 
 function App() {
   return (
     <section>
-      <Nav></Nav>
-    
-      {/* <Home></Home> */}
-      {/* hard-coded business into default load for easy testing */}
-      <main>
-        <hr />
-        <hr />
-        <div className="containerResults">
-          <h2>Icons</h2>
-          <img src={calendarDynamic} width="50px"></img>
-          <img src={calendarFront} width="50px"></img>
-          <img src={calendarIso} width="50px"></img>
-        </div>
-        <hr />
-        <hr />
-        <h2>BUSINESS DASHBOARD CONCEPT</h2>
-        <Business></Business>
-        <hr />
-        <hr />
-        <h2>BUSINESS SCHEDULER CONCEPT</h2>
-        <BusinessScheduler></BusinessScheduler>
-        <hr />
-        <hr />
-        <h2>SCHEDULE CONCEPT</h2>
-        <Schedule></Schedule>
+      <BrowserRouter>
+        <Nav />
+        <main>
+        <Routes>
+          <Route path="/" element={< Home />} />
+          <Route path="/Business" element={< Business />} />
+          <Route path="/BusinessScheduler" element={< BusinessScheduler />} />
+          <Route path="/Schedule" element={< Schedule />} />
+        </Routes>
         </main>
+      </BrowserRouter>
     </section>
   );
 }

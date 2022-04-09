@@ -23,7 +23,9 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "install": "^0.13.0",
+    "npm": "^8.6.0",
     "react-router": "^6.3.0",
-    "react-router-dom": "^6.3.0"
+    "react-router-dom": "^5.2.0"
   }
 }
