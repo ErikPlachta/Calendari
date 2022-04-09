@@ -20,7 +20,7 @@ const DB_Business =          require('../../../assets/json/business.json');
 const DB_Appointment =       require('../../../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../../../assets/json/appointment_type.json');
 
-export default function BusinessScheduler() {
+export default function BusinessScheduler({business_id}) {
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -31,8 +31,7 @@ export default function BusinessScheduler() {
 
 
   //TODO:: 04/05/22 #EP || Add pull from JWT
-  const business_id = '0000-AAAA';
-  const user_id     = '0000-0000';
+  business_id = '0000-AAAA';
 
   //-- extract business from database based on JWT id
   const business = Businesses[business_id];

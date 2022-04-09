@@ -19,7 +19,7 @@ import Scheduler from './components/Scheduler';
 function App() {
 
   //TODO:: 04/09/22 #EP || Temp hardcoded to verify params passing
-  const business_id = '0000-AAAA';
+  const business_id_or_name = '0000-AAAA';
   const appointment_type_id = '0000-0000';
 
   return (
@@ -36,7 +36,7 @@ function App() {
         <hr />
         <hr />
         <h2>Scheduler</h2>
-        <Scheduler business_id={business_id} appointment_type_id={appointment_type_id}  />
+        <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
 
         {/* <hr />
         <hr />
