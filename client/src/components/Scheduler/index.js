@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 //-- MODULES
 import React, { useState, useEffect } from 'react';
-import { Routes, Route, useParams, Navigate } from "react-router-dom";
+import { Redirect, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 
 
@@ -68,16 +68,6 @@ export default function Scheduler() {
   //-- used to ReRoute Navigation away if invalid details
   const navigate = useNavigate();
 
-  useEffect(() => {
-      //  if(user){
-      //     navigate('/dashboard')
-      //   }else{
-      //     navigate('/login')
-      //   }
-  
-      document.title = `Calendari.day/s/`;
-    },[]);
-
 
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS
@@ -101,7 +91,7 @@ export default function Scheduler() {
   */
   
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
-    
+
     // 1. If No business_id, no business_name or invalid values found, exit
     if(!business_id_or_brand_name_or_appointment_id){
       //-- Doesn't exist, re-route to homepage or 404 page 
@@ -135,9 +125,8 @@ export default function Scheduler() {
     // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
     return business_id;
   }
-  //-- RUN VALIDATION
-  const business_id = validateParams()
- 
+
+  const business_id = validateParams();
   
 
   //----------------------------------------------------------------------------
@@ -203,7 +192,7 @@ export default function Scheduler() {
 
   //-- Browser Local Storage Checking
   //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-  const checkState = () => {
+  const checkLocalStorage = () => {
     //-- Looking at Local Storage to see if Client was scheduling an appointment and load if so. 
 
     //1. See if Local Storage Contains data
@@ -221,18 +210,19 @@ export default function Scheduler() {
   //-- RETURN STATEMENT
   return (
     <section className="page scheduler">
-      {/* contains the step location, back arrow, and has awareness of if local storage or not */}
-      <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />
       
-      <div>
-        {checkState
-          ? <h3>checkState Placeholder: FAILED: Has Local Storage or bad navigation</h3>
-          
-          // TODO:: 04/09/22 #EP|| Add local storage logic
-          : schedulerPages[step]
+      {/* contains the step location, back arrow, and has awareness of if local storage or not */}
+      
+        { checkLocalStorage() 
+      
+              ? <StatusBar step={step} state={checkLocalStorage} maxSteps={maxSteps} formerStep={formerStep} /> 
+                && schedulerPages[step]
+                
+                
+              : (
+                <Loading />
+              );
         }
-        
-      </div>
     </section>
   )
 };

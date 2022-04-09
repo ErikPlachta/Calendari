@@ -35,15 +35,14 @@ function App() {
     //     navigate('/login')
     //   }
 
-    document.title = `Calendari.day`;
+    document.title = `Calendari`;
   },[]);
 
 
 
   //TODO:: 04/09/22 #EP || Temp hardcoded to verify params passing
   // const business_id_or_brand_name = '0000-AAAA';
-  const business_id_or_brand_name = 'OLD';
-  const appointment_type_id = '0000-0000';  
+  // const appointment_type_id = '0000-0000';  
 
   return (
     <BrowserRouter>
