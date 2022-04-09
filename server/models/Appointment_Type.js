@@ -7,12 +7,9 @@ const AppointmentTypeSchema = new Schema(
             ref: 'Business'
             //reference business model
         },
-        users: [
-            {
-                type: Schema.Types.ObjectId,
-                ref: 'User'
-            }
-        ],
+        appt_type_name: {
+            type: String,
+        },
         summary: {
             type: String,
             trim: true,
