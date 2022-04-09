@@ -316,8 +316,9 @@ button {
       Start the shake animation 
       When the animation is finished, start again 
    */
-  animation: shake 1s, hover 10s;
-  cursor: pointer;
+   /* cursor: pointer; */
+   
+   animation: shake 1s;
   animation-iteration-count: infinite;
 }
 
