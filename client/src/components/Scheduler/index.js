@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BusinessScheduler from './pages/BusinessScheduler';
-import ProgressBar from './sub-components/ProgressBar';
+import StatusBar from './sub-components/StatusBar';
 //-- SCHEDULER
 
 const { 
@@ -166,16 +166,11 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
   return (
     <section className="page scheduler">
-      <ProgressBar step="1" state={checkState}/>
+      <StatusBar step="1" state={checkState}/>
       
       <div>
         {checkState
-          ? [ schedulerPages[1]
-              // <div className="containerResults">
-              //   <h3>checkState Placeholder: FALSE: No Local Storage</h3>
-              // </div>,
-              // <BusinessScheduler></BusinessScheduler>
-            ]
+          ? schedulerPages[1]
           : <h3>checkState Placeholder: TRUE: Has giLocal Storage</h3>
         }
       </div>
