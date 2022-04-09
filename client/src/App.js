@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Business from './pages/Business';
 import BusinessScheduler from './pages/BusinessScheduler';
 import Schedule from './pages/Schedule';
+import Footer from './components/Footer';
 
 
 import { setContext } from '@apollo/client/link/context';
@@ -48,6 +49,7 @@ function App() {
           <Route path="/Schedule" element={< Schedule />} />
         </Routes>
         </main>
+        <Footer />
       </BrowserRouter>
     </section>
   );
