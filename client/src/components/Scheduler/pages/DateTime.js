@@ -3,7 +3,7 @@ import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import TimePicker from 'react-time-picker';
 
-export default function Schedule() {
+export default function DateTime() {
     const [value, onChange] = useState('9:00');
   return (
     <section className="containerResults">

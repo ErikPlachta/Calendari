@@ -1,7 +1,12 @@
 import React, { useState, useEffect } from 'react';
+
+//-- PAGES
 import BusinessScheduler from './pages/BusinessScheduler';
+import DateTime from './pages/DateTime';
+
+//-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
-//-- SCHEDULER
+
 
 const { 
   capitalizeFirstLetter,
@@ -55,9 +60,16 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
   //-- to hold business info and pass down if needed
   
-  const [step, setStep] = useState(1);
+  const [currentPage, setCurrentPage] = useState({}); /* holds current page element based on index */
+  const [step, setStep] = useState(1); /* sets default step to 1 */
+
+  //-- Values Pulled from API / GraphQL
   const [business, setBusiness] = useState({});
   const [appointment_types,set_appointment_types] = useState({});
+      
+
+  
+
 
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS
@@ -117,13 +129,11 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   /*
   */
 
-    
   //-- Move to the next step
   const nextStep = nextStepButton => {
     nextStepButton.preventDefault();
     setStep(step+1);
   };
-
 
 
   //-- INDEX of Each Page, which is a step of scheduler
@@ -134,6 +144,10 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     4: "API Reroute to root page Appointment with params business_id and appointment_id"
   };
 
+
+  const routeToPage = step =>{
+
+  }
   
   
   const createAppointment = async params => {
@@ -148,7 +162,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     // 3. Verify response
 
     // 4. Approve re-route or message to UI
-    setStep(5);
+    setStep(5); //-- 5 is finshed and out of here.
 
     // return response;
   }
@@ -169,12 +183,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
     return false;
   }
-
-  //-- extract business from database based on JWT id
-  // const business = Businesses[business_id];
-  // const appointment_types = business.configuration.appointment_types;
-
-
+  
 
 
   //----------------------------------------------------------------------------

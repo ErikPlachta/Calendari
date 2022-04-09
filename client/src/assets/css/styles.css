@@ -9,6 +9,7 @@
   --fade-purple-dark: rgb(167, 169, 208); /*#a7a9d0*/
   --fade-purple-light: rgb(230, 237, 241); /*#e6edf1*/
 
+  --theme-l-gp_0: rgb(245, 244, 255);
   --theme-l-gp_1: rgb(223, 216, 220); /* #dfd8dc; */
   --theme-l-gp_2: rgb(211, 211, 220); /*#d3d3dc;*/
 
@@ -251,15 +252,33 @@ button {
 .statusBar{
   bottom: 0;
   margin: auto;
-  padding: .5rem;
+  padding: 0 2rem;
   width: 100%;
   position: fixed;
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  /* justify-content: space-evenly; */
   align-items: center;
-  background-color: var(--theme-l-gp_2);
+  background-color: var(--theme-l-gp_0);
   color: var(--C10);
   opacity: 1;
+  /* font-size: .8rem; */
+}
+
+
+/* .progressBarLabel, */
+#progressBar{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 100%;
+  grid-gap: 1rem;
+}
+progress.progressBarStep{
+  flex: 80%;
+  margin: auto;
+  font-size: 1.5rem;
 }
 
 /* #progressBar{

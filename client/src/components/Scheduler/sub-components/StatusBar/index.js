@@ -4,16 +4,17 @@ export default function StatusBar({step, state}) {
   return (
     <section className="statusBar">
       <span className="" id='progressBar'>
-        <label htmlFor="progressBarStep"><b>Step{step}/5</b> </label>
-        <progress id="progressBarStep" value={step} max="5">{step}/5</progress>
+        <label className="progressBarLabel" htmlFor="progressBarStep"><b>Step {step}/5</b> </label>
+        {/* <label htmlFor="progressBarStep"></label> */}
+        <progress className="progressBarStep" value={step} max="5">{step}/5</progress>
       </span>
-      <span className="">
+      {/* <span className="">
         <b>Local Storage Session:</b> {state
           ? "False"
           : "True"
         }
         
-      </span>
+      </span> */}
     </section>
   )
 };
