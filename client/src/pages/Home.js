@@ -33,12 +33,49 @@ export default function Home() {
       <div id="futureDev">
       <h3>What Does the Future Hold for Calendari?</h3>
         <p>
-          We are always looking to improve our customers experience on the app. A few of our enhancements we are currently working on are:
+          We are always looking to improve our customers experience on the app. A few of our enhancements we are currently working outlined below:
         </p>
         <ul>
-          <li>Premium Version - This option allows the business the option to choose a theme for their website, schedule vacation time months in advance, users can schedule appointments months in advance, and 24/7 tech support.</li>
+          <li>Premium Version - This option allows the business the option to choose a theme for their website, schedule appointments 6+ months in advance, users can schedule appointments months in advance, and 24/7 tech support. Please see table below for more information.</li>
           <li>Theme selection - The business can customize the interface to fit their specific business. Whether it's a tattoo parlor, a scuba training facility, or a kids bounce house, we have you covered!</li>
         </ul>
+      </div>
+      <div id="freeVsPremium">
+      <h3>What's the Difference Between Free and Premium?</h3>
+        <div classname="tableContainer">
+          <table>
+            <thead>
+              <tr>
+                <th>Feature</th>
+                <th>Free</th>
+                <th>Premium</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Theme Selection</td>
+                <td> ❌ </td>
+                <td> ✔️ </td>
+              </tr>
+              <tr>
+                <td>6+ Month Scheduling</td>
+                <td> ❌ </td>
+                <td> ✔️ </td>
+              </tr>
+              <tr>
+                <td>24/7 tech Support</td>
+
+                <td> ❌ </td>
+                <td> ✔️ </td>
+              </tr>
+              <tr>
+                <td>Toggle Week Start Day</td>
+                <td> ❌ </td>
+                <td> ✔️ </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </section>
   )
