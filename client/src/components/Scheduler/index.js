@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import BusinessScheduler from './pages/BusinessScheduler';
 //-- SCHEDULER
 
 const { 
@@ -73,10 +74,17 @@ export default function Scheduler({business_id, appointment_type_id}) {
 
   return (
     <section className="page scheduler">
-      {checkState
-        ? <h3>checkState Placeholder: FALSE: Local Storage</h3>
-        : <h3>checkState Placeholder: TRUE: Local Storage</h3>
-      }
+      <div>
+        {checkState
+          ? [
+              <div className="containerResults">
+                <h3>checkState Placeholder: FALSE: No Local Storage</h3>
+              </div>,
+              <BusinessScheduler></BusinessScheduler>
+            ]
+          : <h3>checkState Placeholder: TRUE: Has giLocal Storage</h3>
+        }
+      </div>
     </section>
     
   )
