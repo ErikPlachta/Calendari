@@ -28,6 +28,7 @@ const typeDefs = gql`
         appointment_duration: String
     }
     type Appointment {
+        _id: ID
         ## appt_type: [AppointmentType]
         ## client: [User]
         appointment_date: String
