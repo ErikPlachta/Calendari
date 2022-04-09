@@ -2,10 +2,14 @@ const { Schema, model } = require("mongoose");
 
 const AppointmentSchema = new Schema(
     {
-        appt_type_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Appointment_Type'
-        },
+        // appt_type: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Appointment_Type'
+        // },
+        // client: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
         appointment_date: {
             type: String
         },

@@ -20,7 +20,7 @@ const resolvers = {
         business: async (parent, { brand_name }) => {
             return Business.findOne({ brand_name })
                 .select('-__v -password')
-                .populate('users')
+                .populate({ path: 'users', populate: 'appointments' })
                 .populate('appointment_types')
                 .populate('appointments')
         }

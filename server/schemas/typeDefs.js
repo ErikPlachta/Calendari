@@ -8,6 +8,7 @@ const typeDefs = gql`
         name_last: String
         username: String
         email: String
+        phone_number: String
         date_created: String
         appointments: [Appointment]
     }
@@ -27,7 +28,8 @@ const typeDefs = gql`
         appointment_duration: String
     }
     type Appointment {
-        appt_type_id: String
+        ## appt_type: [AppointmentType]
+        ## client: [User]
         appointment_date: String
         appointment_time: String
         appointment_status: String
@@ -56,6 +58,7 @@ const typeDefs = gql`
         addAppt(
             business_id: ID!, 
             user_id: ID!, 
+            appt_type_id: ID!
             appointment_date: String!, 
             appointment_time: String!, appointment_status: String!): Appointment
     }
