@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
+
 const { 
   capitalizeFirstLetter,
   dateGetMonths,
@@ -9,15 +10,15 @@ const {
   dateHourOfDay,
   dateGetTimePassed,
   dateTimeFullLocal
-} = require('../utils/helpers');
+} = require('../../../utils/helpers');
 
 
 //-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_User =              require('../assets/json/user.json');
-const DB_Business =          require('../assets/json/business.json');
-const DB_Appointment =       require('../assets/json/appointment.json');
-const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
+const DB_User =              require('../../../assets/json/user.json');
+const DB_Business =          require('../../../assets/json/business.json');
+const DB_Appointment =       require('../../../assets/json/appointment.json');
+const DB_Appointment_Type =  require('../../../assets/json/appointment_type.json');
 
 
 
@@ -25,7 +26,7 @@ const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
 
-export default function Schedule() {
+export default function Client() {
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here

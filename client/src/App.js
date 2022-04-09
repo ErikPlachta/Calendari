@@ -10,11 +10,13 @@ import './assets/css/animations.css';
 import React from 'react';
 import Nav from './components/Nav';
 import Home from './pages/Home';
-import Verify from './pages/Verify';
+
+//-- final page with appt details to confirm
+import Verify from './components/Scheduler/pages/Client';
 
 import Business from './pages/Business';
-import BusinessScheduler from './pages/BusinessScheduler';
-import Schedule from './pages/Schedule';
+import BusinessScheduler from './components/Scheduler/pages/BusinessScheduler';
+import Scheduler from './pages/Scheduler';
 
 function App() {
   return (
@@ -30,7 +32,8 @@ function App() {
         <BusinessScheduler />
         <hr />
         <hr />
-        <Verify />
+        <h2>Scheduler</h2>
+        <Scheduler />
 
         {/* <hr />
         <hr />

@@ -1,10 +1,5 @@
 import React from 'react'
 
-
-
-//------------------------------------------------------------------------------
-//-- EXPORT FUNCTION
-
 /* 
     Used to view an existing appointment
 
@@ -15,8 +10,8 @@ import React from 'react'
     #### Props `(business, appointment_id)`
     `export default function Appointment(business_id, appointment_id)`
 
-    - `business`:       Takes business_id or business_name to validate the appointment ID
-    - appointment_id:   Take appointment ID, to validate with business_id
+    - business:       Takes business_id or business_name to validate the appointment ID
+    - appointment:   Take appointment ID, to validate with business_id
 
 
     ---
@@ -53,8 +48,16 @@ import React from 'react'
     
 */
 
-export default function Appointment(business_id, appointment_id) {
+//------------------------------------------------------------------------------
+//-- EXPORT FUNCTION
+
+export default function Appointment(business, appointment) {
+  //-- Can be the busines_id or the business_name
+  const business_Id_Name = business;
+  //-- The ID of the specific appointment for the business above.
+  const appointment_id = appointment;
+
   return (
-    <div>Appointment</div>
+    <div>TODO:: ADD CONTENT</div>
   )
 }
