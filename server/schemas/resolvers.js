@@ -20,6 +20,7 @@ const resolvers = {
         business: async (parent, { brand_name }) => {
             return Business.findOne({ brand_name })
                 .select('-__v -password')
+                .populate('users')
                 .populate('appointment_types')
                 .populate('appointments')
         }
@@ -32,10 +33,10 @@ const resolvers = {
             // add new user to business' list of clients
             await Business.findByIdAndUpdate(
                 { _id: args.business_id },
-                { $addToSet: { clients: user._id } },
+                { $push: { users: user._id } },
                 { new: true, runValidators: true }
             );
-            console.log(user._id)
+            console.log(user)
             return user;
         },
         // add new business
