@@ -12,15 +12,14 @@ import Nav from './components/Nav';
 import Home from './pages/Home';
 
 //-- final page with appt details to confirm
-import Verify from './components/Scheduler/pages/Client';
 
 import Scheduler from './components/Scheduler';
 
 function App() {
 
-  //TODO:: 04/09/22 #EP || Temp hardcoded to verify pararm passing
+  //TODO:: 04/09/22 #EP || Temp hardcoded to verify params passing
   const business_id = '0000-AAAA';
-  const user_id     = '0000-0000';
+  const appointment_id     = '0000-0000';
 
   return (
     <section>
@@ -36,7 +35,7 @@ function App() {
         <hr />
         <hr />
         <h2>Scheduler</h2>
-        <Scheduler business={business_id}  />
+        <Scheduler businessArg={business_id} appointmentArg={appointment_id}  />
 
         {/* <hr />
         <hr />

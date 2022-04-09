@@ -32,7 +32,10 @@ const DB_Appointment_Type =  require('../../assets/json/appointment_type.json');
 
 */
 
-export default function index(business_ID, appointment_ID) {
+export default function Scheduler({businessArg, appointmentArg}) {
+  const business_id = businessArg;
+  const appointment_id = appointmentArg;
+  
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -42,9 +45,9 @@ export default function index(business_ID, appointment_ID) {
   const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
-  //TODO:: 04/05/22 #EP || Add pull from JWT
-  const business_id = '0000-AAAA';
-  const user_id     = '0000-0000';
+  // //TODO:: 04/05/22 #EP || Add pull from JWT
+  // const business_id = '0000-AAAA';
+  // const appointment_id     = '0000-0000';
 
   //-- extract business from database based on JWT id
   const business = Businesses[business_id];
@@ -107,6 +110,6 @@ export default function index(business_ID, appointment_ID) {
     </section>
     
   )
-}
+};
 
  
