@@ -3,8 +3,7 @@
 import calendarDynamic from './assets/svg/calender-dynamic-gradient.svg';
 import calendarIso from './assets/svg/calender-iso-gradient.svg';
 import calendarFront from './assets/svg/calender-front-gradient.svg';
-import './assets/css/styles.css';
-import './assets/css/animations.css';
+
 
 
 import React from 'react';
