@@ -38,7 +38,44 @@ export default function Scheduler({business_id, appointment_type_id}) {
   //TODO:: 04/09/22 #EP || appointment_type_id - Concept: if defined, goes straight to appt type
   
   
+  //----------------------------------------------------------------------------
+  //-- PLACEHOLDER CONTENT
   
+  
+  //-- Onboarding connections to take data to verify integrity
+  //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
+  const [Businesses, setBusinesses] = useState(DB_Business);
+  const [Users, setUsers] = useState(DB_User);
+  const [Appointments, setAppointments] = useState(DB_Appointment);
+  const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
+  
+
+  //----------------------------------------------------------------------------
+  //-- Component Functions
+  
+  //-- Each Page represents a STEP of the scheduling process
+  const schedulerPages = {
+    0: <BusinessScheduler></BusinessScheduler>,
+    1: "Date Time Timezone",
+    2: "Client Information and Verify",
+    3: "API Reroute to root page Appointment with params business_id and appointment_id"
+  };
+  
+  const createAppointment = async params => {
+    //-- When client information verified and submitted, update database with appointment data
+
+    // 1. Validate data
+
+    // 2. Submit to database
+
+    // 3. Verify response
+
+    // 4. Approve re-route or message to UI
+  }
+
+
+  
+  //-- Browser Local Storage Checking
   const checkState = () => {
     //-- Looking at Local Storage to see if Client was scheduling an appointment and load if so. 
     
@@ -55,12 +92,6 @@ export default function Scheduler({business_id, appointment_type_id}) {
   }
 
   
-  //-- Onboarding connections to take data to verify integrity
-  //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-  const [Businesses, setBusinesses] = useState(DB_Business);
-  const [Users, setUsers] = useState(DB_User);
-  const [Appointments, setAppointments] = useState(DB_Appointment);
-  const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
 
   //-- extract business from database based on JWT id
