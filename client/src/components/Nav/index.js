@@ -2,11 +2,21 @@ import React, { useEffect } from 'react';
 import {capitalizeFirstLetter} from '../../utils/helpers';
 
 export default function Nav(props) {
-    const {} = props;
+    const { bob1 } = props;
 
     return (
-        <header> 
-            <h2 alt="appointment scheduler">Appointment Scheduler</h2>
+        <header className="navHeader"> 
+            <div>
+                
+                <img className="brandLogo" alt="Bob" src={bob1} width="50px"></img>
+                
+                <span className="brandNameSlogan">
+                    <h2 className="brandName" alt="appointment scheduler">
+                        Calendari
+                    </h2>
+                    <span>Your schedule -- untangled</span>
+                </span>
+            </div>
             <nav>
                 <ul>
                     <li>
