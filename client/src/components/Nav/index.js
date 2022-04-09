@@ -7,7 +7,9 @@ export default function Nav(props) {
     return (
         <header className="navHeader"> 
             <div>
-                <img className="brandLogo" src={bob1} width="50px"></img>
+                
+                <img className="brandLogo" alt="Bob" src={bob1} width="50px"></img>
+                
                 <span className="brandNameSlogan">
                     <h2 className="brandName" alt="appointment scheduler">
                         Calendari
