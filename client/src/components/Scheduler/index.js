@@ -133,8 +133,11 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   const nextStep = nextStepButton => {
     nextStepButton.preventDefault();
     setStep(step+1);
-    setCurrentPage(schedulerPages["1"])
-    console.log(currentPage)
+  };
+
+  const formerStep = formerStepButton => {
+    formerStepButton.preventDefault();
+    setStep(step-1);
   };
 
 
@@ -191,7 +194,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
   return (
     <section className="page scheduler">
-      <StatusBar step={step} state={checkState}/>
+      <StatusBar step={step} state={checkState} formerStep={formerStep} />
       
       <div>
         {checkState

@@ -266,8 +266,31 @@ button {
   /* font-size: .8rem; */
 }
 
+.progressBarBackArrow img{
+  margin-right: 1rem;
+  width: 30px;
+  /* filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.4)); */
+  transition: ease-in-out 200ms;
+}
 
-/* .progressBarLabel, */
+.progressBarBackArrow img:hover {
+  filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.4)) brightness(105%);
+  cursor: pointer;
+  /* width: 40px; */
+}
+
+.progressBarBackArrow img:active {
+  animation: shake;
+  animation-duration: 1s;
+}
+
+.progressBarBackArrow img,
+.progressBarLabel {
+  margin: auto;
+  vertical-align: center;
+  height: 100%;
+}
+
 #progressBar{
   width: 100%;
   display: flex;
