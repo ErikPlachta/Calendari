@@ -9,7 +9,6 @@ const typeDefs = gql`
         username: String
         email: String
         date_created: String
-        business: Business
         appointments: [Appointment]
     }
     type Business {
@@ -23,16 +22,12 @@ const typeDefs = gql`
     }
     type AppointmentType {
         _id: ID
-        business_id: String
         appt_type_name: String
         summary: String
         appointment_duration: String
     }
     type Appointment {
-        user_id: User
-        business_id: Business
-        appt_type_id: AppointmentType
-        appointment_duration: String
+        appt_type_id: String
         appointment_date: String
         appointment_time: String
         appointment_status: String
@@ -46,7 +41,7 @@ const typeDefs = gql`
         addUser(name_first: String!, name_last: String!, email: String!, username: String!, password: String!, phone_number: String!, business_id: ID!): User
         addBusiness(name: String!, brand_name: String!): Business
         addApptType(business_id: ID!, appt_type_name: String!, summary: String!): AppointmentType
-        addAppt(business_id: ID!, user_id: ID!, appointment_name: String!): Appointment
+        addAppt(business_id: ID!, user_id: ID!, appointment_date: String, appointment_time: String,appointment_status: String!): Appointment
     }
 `;
 

@@ -15,7 +15,7 @@ const BusinessSchema = new Schema(
         clients: [
             {
                 type: Schema.Types.ObjectId,
-                ref: 'Users'
+                ref: 'User'
             }
         ],
         configuration: {

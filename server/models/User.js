@@ -38,10 +38,6 @@ const userSchema = new Schema(
             type: Date,
             default: Date.now,
         },
-        business: {
-            type: Schema.Types.ObjectId,
-            ref: 'Business'
-        },
         appointments: [
             {
                 type: Schema.Types.ObjectId,
