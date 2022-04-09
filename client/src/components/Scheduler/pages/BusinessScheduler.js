@@ -22,23 +22,9 @@ const DB_Appointment_Type =  require('../../../assets/json/appointment_type.json
 
 
 //------------------------------------------------------------------------------
-//-- EXPORT FUNCTION
-
-export default function BusinessScheduler({business_id, nextStep}) {
-
-
-  //----------------------------------------------------------------------------
-  //----------------------------------------------------------------------------
-  //-- PLACEHOLDER CONTENT
+//-- EXPORT FUNCTION - BusinessScheduler
+export default function BusinessScheduler({business, business_id, nextStep}) {
   
-
-  //-- Onboarding connections to take data to verify integrity
-  //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-  const [Businesses, setBusinesses] = useState(DB_Business);
-  const [Users, setUsers] = useState(DB_User);
-  const [Appointments, setAppointments] = useState(DB_Appointment);
-  const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
-
 
   //TODO:: 04/05/22 #EP || Add pull from JWT
   // business_id = '0000-AAAA';
@@ -48,7 +34,8 @@ export default function BusinessScheduler({business_id, nextStep}) {
   //----------------------------------------------------------------------------
 
   //-- extract business from database based on JWT id
-  const business = Businesses[business_id];
+  // const business = Businesses[business_id];
+  // const business = businessobj;
   const appointment_types = business.configuration.appointment_types;
 
   //TODO:: 04/05/22 #EP || When selecting appointment type, move to next steps

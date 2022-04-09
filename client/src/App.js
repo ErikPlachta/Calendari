@@ -9,6 +9,7 @@ import './assets/css/animations.css';
 
 
 import React from 'react';
+import { useParams } from 'react-router-dom'
 import Nav from './components/Nav';
 import Home from './pages/Home';
 
@@ -18,9 +19,15 @@ import Scheduler from './components/Scheduler';
 
 function App() {
 
+  const { urlParams } = useParams();
+  // console.log(urlParams)
+
+
   //TODO:: 04/09/22 #EP || Temp hardcoded to verify params passing
   const business_id_or_name = '0000-AAAA';
   const appointment_type_id = '0000-0000';
+
+  
 
   return (
     <section>
