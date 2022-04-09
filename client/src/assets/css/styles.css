@@ -298,7 +298,31 @@ button {
 .navHeader div{
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: center; 
+}
+
+.brandLogo{
+  margin: 1rem;
+  width: 50px;
+  /* transition: ease-in-out 200ms; */
+  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  /* -webkit-transform: translateZ(0);
+  transform: translateZ(0); */
+  
+}
+
+.brandLogo:hover {
+  /* 
+      Start the shake animation 
+      When the animation is finished, start again 
+   */
+  animation: shake 1s, hover 10s;
+  cursor: pointer;
+  animation-iteration-count: infinite;
+}
+
+
+.brandLogo:hover::after {
   
 }
 
