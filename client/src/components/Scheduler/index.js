@@ -60,7 +60,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
   //-- to hold business info and pass down if needed
   
-  const [currentPage, setCurrentPage] = useState({}); /* holds current page element based on index */
+  const [currentPage, setCurrentPage] = useState(); /* holds current page element based on index */
   const [step, setStep] = useState(1); /* sets default step to 1 */
 
   //-- Values Pulled from API / GraphQL
@@ -133,21 +133,20 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   const nextStep = nextStepButton => {
     nextStepButton.preventDefault();
     setStep(step+1);
+    setCurrentPage(schedulerPages["1"])
+    console.log(currentPage)
   };
 
 
   //-- INDEX of Each Page, which is a step of scheduler
   const schedulerPages = {
     1: <BusinessScheduler business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
-    2: "Date Time Timezone",
+    2: <DateTime/>,
     3: "Client Information and Verify",
     4: "API Reroute to root page Appointment with params business_id and appointment_id"
   };
 
 
-  const routeToPage = step =>{
-
-  }
   
   
   const createAppointment = async params => {
@@ -181,6 +180,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
     //3. if does not, just return false
 
+    
     return false;
   }
   
@@ -195,9 +195,11 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
       
       <div>
         {checkState
-          ? schedulerPages[1]
-          : <h3>checkState Placeholder: TRUE: Has giLocal Storage</h3>
+          ? schedulerPages[step]
+          // TODO:: 04/09/22 #EP|| Add local storage logic
+          : <h3>checkState Placeholder: TRUE: Has Local Storage</h3>
         }
+        
       </div>
     </section>
   )
