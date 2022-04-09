@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import BusinessScheduler from './pages/BusinessScheduler';
+import ProgressBar from './sub-components/ProgressBar';
 //-- SCHEDULER
 
 const { 
@@ -52,6 +53,9 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
 
+  //-- to hold business info and pass down if needed
+  const [business, setBusiness] = useState({});
+  const [appointment_types,set_appointment_types] = useState({});
 
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS
@@ -86,6 +90,10 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
       // -- grabs it and stores into const here
     //TODO:: 04/09/22 #EP | 
     const business_id_TEMP = business_id_or_name;
+    // setBusiness(Businesses[business_id_TEMP]);
+    // console.log(Businesses[business_id_TEMP]);
+    // set_appointment_types = business.configuration.appointment_types;
+    
     
     
     // 3. Does appointment_type_id exist and if yes for this business
@@ -95,21 +103,21 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     }
 
     // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
-    return business_id_or_name
+    return business_id_TEMP;
   }
   
-  //-- If business_id or name requested is valid, this const is defined and app continues.
-      //-- if were invalid wouldn't get to this point
+  //-- RUN VALIDATION
   const business_id = validateParams();
 
-
+  //-- IF INVALID PARAMS NOTHING BELOW HERE HAPPENS.
+  
   //----------------------------------------------------------------------------
   /*
   */
 
 
 
-  //-- INDEX of Each Page represents a STEP of the scheduling process
+  //-- INDEX of Each Page, which is a step of scheduler
   const schedulerPages = {
     1: <BusinessScheduler business_id={business_id}></BusinessScheduler>,
     2: "Date Time Timezone",
@@ -147,16 +155,9 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     return false;
   }
 
-
-
-
-  
-
-
-
   //-- extract business from database based on JWT id
-  const business = Businesses[business_id];
-  const appointment_types = business.configuration.appointment_types;
+  // const business = Businesses[business_id];
+  // const appointment_types = business.configuration.appointment_types;
 
   
   const approveTimes = dateTimes => {
@@ -165,13 +166,15 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
   return (
     <section className="page scheduler">
+      <ProgressBar step="1" state={checkState}/>
+      
       <div>
         {checkState
-          ? [
-              <div className="containerResults">
-                <h3>checkState Placeholder: FALSE: No Local Storage</h3>
-              </div>,
-              <BusinessScheduler></BusinessScheduler>
+          ? [ schedulerPages[1]
+              // <div className="containerResults">
+              //   <h3>checkState Placeholder: FALSE: No Local Storage</h3>
+              // </div>,
+              // <BusinessScheduler></BusinessScheduler>
             ]
           : <h3>checkState Placeholder: TRUE: Has giLocal Storage</h3>
         }
