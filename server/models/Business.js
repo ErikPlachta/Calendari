@@ -12,7 +12,7 @@ const BusinessSchema = new Schema(
             unique: true
 
         },
-        users: [
+        clients: [
             {
                 type: Schema.Types.ObjectId,
                 ref: 'Users'

@@ -16,7 +16,7 @@ const typeDefs = gql`
         _id: ID
         name: String
         brand_name: String
-        users: [User]
+        clients: [User]
         configuration: String
         appointment_types: [AppointmentType]
         appointments: [Appointment]
@@ -39,9 +39,8 @@ const typeDefs = gql`
     }
     type Query {
         user(username: String!): User
-        businesses: [Business]
-        appointments: [Appointment]
         business(brand_name: String!): Business
+        allBusinesses: [Business]
     }
     type Mutation {
         addUser(name_first: String!, name_last: String!, email: String!, username: String!, password: String!, phone_number: String!, business: String!): User
