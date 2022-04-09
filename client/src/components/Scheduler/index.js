@@ -54,6 +54,8 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   //----------------------------------------------------------------------------
 
   //-- to hold business info and pass down if needed
+  
+  const [step, setStep] = useState(1);
   const [business, setBusiness] = useState({});
   const [appointment_types,set_appointment_types] = useState({});
 
@@ -115,11 +117,18 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   /*
   */
 
+    
+  //-- Move to the next step
+  const nextStep = nextStepButton => {
+    nextStepButton.preventDefault();
+    setStep(step+1);
+  };
+
 
 
   //-- INDEX of Each Page, which is a step of scheduler
   const schedulerPages = {
-    1: <BusinessScheduler business_id={business_id}></BusinessScheduler>,
+    1: <BusinessScheduler business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
     2: "Date Time Timezone",
     3: "Client Information and Verify",
     4: "API Reroute to root page Appointment with params business_id and appointment_id"
@@ -130,6 +139,8 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   const createAppointment = async params => {
     //-- When client information verified and submitted, update database with appointment data
 
+    
+
     // 1. Validate data
 
     // 2. Submit to database
@@ -137,6 +148,9 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     // 3. Verify response
 
     // 4. Approve re-route or message to UI
+    setStep(5);
+
+    // return response;
   }
 
   //-- Browser Local Storage Checking
@@ -146,9 +160,10 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     
     //TODO:: 04/09/22 #EP || Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there
 
-    //1. See if Local Storage contains data
+    //1. See if Local Storage Contains data
 
-    //2. If it does, return it
+    //2. If it does, return to that state
+    // setStep(localStorageNumber);
 
     //3. if does not, just return false
 
@@ -159,14 +174,15 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   // const business = Businesses[business_id];
   // const appointment_types = business.configuration.appointment_types;
 
-  
-  const approveTimes = dateTimes => {
-    dateTimes.preventDefault();
-  };
+
+
+
+  //----------------------------------------------------------------------------
+  //-- RETURN JSX ELEMENT
 
   return (
     <section className="page scheduler">
-      <StatusBar step="1" state={checkState}/>
+      <StatusBar step={step} state={checkState}/>
       
       <div>
         {checkState

@@ -20,7 +20,17 @@ const DB_Business =          require('../../../assets/json/business.json');
 const DB_Appointment =       require('../../../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../../../assets/json/appointment_type.json');
 
-export default function BusinessScheduler({business_id}) {
+
+//------------------------------------------------------------------------------
+//-- EXPORT FUNCTION
+
+export default function BusinessScheduler({business_id, nextStep}) {
+
+
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
+  //-- PLACEHOLDER CONTENT
+  
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -31,7 +41,11 @@ export default function BusinessScheduler({business_id}) {
 
 
   //TODO:: 04/05/22 #EP || Add pull from JWT
-  business_id = '0000-AAAA';
+  // business_id = '0000-AAAA';
+
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
 
   //-- extract business from database based on JWT id
   const business = Businesses[business_id];
@@ -42,6 +56,8 @@ export default function BusinessScheduler({business_id}) {
     selectedAppointment.preventDefault();
   };
 
+  //----------------------------------------------------------------------------
+  //-- RETURN JSX ELEMENT
   return (
     <section className="page business">
 
@@ -81,7 +97,7 @@ export default function BusinessScheduler({business_id}) {
                 </span>
                 
                 <span>
-                  <button className="appointment_type_button" onClick={startScheduling}>
+                  <button className="appointment_type_button" onClick={nextStep}>
                     Start Application
                   </button>
                 </span>

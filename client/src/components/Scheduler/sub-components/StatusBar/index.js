@@ -2,13 +2,10 @@ import React from 'react'
 
 export default function StatusBar({step, state}) {
   return (
-    <section className="StatusBar containerResults">
+    <section className="statusBar">
       <span className="" id='progressBar'>
-        <label for="progressBarStep">Progress: </label>
+        <label htmlFor="progressBarStep"><b>Step{step}/5</b> </label>
         <progress id="progressBarStep" value={step} max="5">{step}/5</progress>
-      </span>
-      <span className="">
-        <b>Step</b> {step}
       </span>
       <span className="">
         <b>Local Storage Session:</b> {state
