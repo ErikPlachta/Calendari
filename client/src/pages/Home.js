@@ -1,9 +1,9 @@
-/*
-  Main homepage
-*/
+import React from 'react';
+import Auth from '../utils/auth';
 
 
-import React from 'react'
+//-- check to see if logged in
+const loggedIn = Auth.loggedIn();
 
 export default function Home() {
   return (
