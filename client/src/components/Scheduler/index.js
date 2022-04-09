@@ -54,9 +54,25 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
 
   //----------------------------------------------------------------------------
-  //-- Component Functions
+  /* VALIDATING PARAMS
 
-  //-- If valid or invalid props / params
+    validateParams
+      Looking to see if valid params are provided.
+
+      1. If empty business info
+        - Re-routes
+      
+        2. Check if valid business info provided
+        - If exists in database, load
+        - If not, re-routes
+
+      3. If valid business info AND provided appointment_type_id info
+        - If business has that appointment_type_id skip the select appointment type
+        - Otherwise ignore or show messages
+      
+      4. If valid business info but invalid or no appointment_type_id
+        - Loads default schedule
+  */
   const validateParams = () => {
     //-- Determine which params are sent in and route or re-route accordingly.
 
@@ -77,15 +93,9 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
       //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
       //-- Otherwise ignore it and/or update screen with message
     }
-    
-    // 4. return the business_id value and assume to load Page 1 on schedulerPages index
+
+    // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
     return business_id_or_name
-    
-    //2. if Business_id exists
-    //TODO:: 04/09/22 #EP || appointment_type_id - Concept: if defined, goes straight to appt type
-
-  
-
   }
   
   //-- If business_id or name requested is valid, this const is defined and app continues.
@@ -93,11 +103,9 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   const business_id = validateParams();
 
 
-  
-
-  
-
-
+  //----------------------------------------------------------------------------
+  /*
+  */
 
 
 
