@@ -7,11 +7,9 @@ import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg'
 import './assets/css/styles.css';
 import './assets/css/animations.css';
 
-
 import React from 'react';
 import Nav from './components/Nav';
 import Home from './pages/Home';
-
 import Business from './pages/Business';
 import BusinessScheduler from './pages/BusinessScheduler';
 import Schedule from './pages/Schedule';
@@ -21,7 +19,7 @@ function App() {
     <section>
       <Nav bob1={bob1}></Nav>
     
-      {/* <Home></Home> */}
+      <Home></Home>
       {/* hard-coded business into default load for easy testing */}
       <main>
         <hr />
