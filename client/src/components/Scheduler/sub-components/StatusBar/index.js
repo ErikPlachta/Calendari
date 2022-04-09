@@ -1,7 +1,7 @@
 import React from 'react'
 import backArrow from '../../../../assets/svg/backward-front-gradient.svg';
 
-export default function StatusBar({step, state, formerStep}) {
+export default function StatusBar({step, state, maxSteps, formerStep}) {
   return (
     <section className="statusBar">
       <span className="" id='progressBar'>
@@ -16,9 +16,9 @@ export default function StatusBar({step, state, formerStep}) {
         }
         
         <label className="progressBarLabel" htmlFor="progressBarStep">
-          Step {step}/5
+          Step {step}/{maxSteps}
         </label>
-        <progress className="progressBarStep" value={step} max="5">{step}/5</progress>
+        <progress className="progressBarStep" value={step} max={maxSteps}>{step}/{maxSteps}</progress>
       </span>
       {/* <span className="">
         <b>Local Storage Session:</b> {state

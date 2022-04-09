@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 //-- PAGES
 import BusinessScheduler from './pages/BusinessScheduler';
 import DateTime from './pages/DateTime';
+import Client from './pages/Client';
 
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
@@ -144,13 +145,14 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
   //-- INDEX of Each Page, which is a step of scheduler
   const schedulerPages = {
     1: <BusinessScheduler business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
-    2: <DateTime/>,
+    2: <DateTime nextStep={nextStep}/>,
     3: "Client Information and Verify",
     4: "API Reroute to root page Appointment with params business_id and appointment_id"
   };
 
-
-  
+  //-- Get the number of keys in the pages
+  const maxSteps = Object.keys(schedulerPages).length;
+  console.log(maxSteps)
   
   const createAppointment = async params => {
     //-- When client information verified and submitted, update database with appointment data
@@ -164,7 +166,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
     // 3. Verify response
 
     // 4. Approve re-route or message to UI
-    setStep(5); //-- 5 is finshed and out of here.
+    setStep(maxSteps); //-- 5 is finshed and out of here.
 
     // return response;
   }
@@ -194,7 +196,7 @@ export default function Scheduler({business_id_or_name, appointment_type_id}) {
 
   return (
     <section className="page scheduler">
-      <StatusBar step={step} state={checkState} formerStep={formerStep} />
+      <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />
       
       <div>
         {checkState

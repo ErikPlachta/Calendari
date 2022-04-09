@@ -1,11 +1,15 @@
+import { now } from 'moment';
 import React, { useState, useEffect } from 'react';
 import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
 import TimePicker from 'react-time-picker';
 
 
-export default function DateTime() {
-    const [value, onChange] = useState('9:00');
+export default function DateTime({nextStep}) {
+  const [value, onChange] = useState('9:00');
+
+
+
   return (
     <section className="containerResults">
         <Calendar>Pick your appointment date</Calendar>
@@ -16,7 +20,7 @@ export default function DateTime() {
         <br></br>
         <textarea name="notes" rows="4"/>
         <br></br>
-        <button>Schedule Appointment</button>
+        <button onClick={nextStep}>Schedule Appointment</button>
     </section>
     
   )
