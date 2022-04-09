@@ -1,15 +1,16 @@
-// import logo from './logo.svg';
+import React from 'react';
 
+//-- importing Router
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//-- CONTENT
 import calendarDynamic from './assets/svg/calender-dynamic-gradient.svg';
 import calendarIso from './assets/svg/calender-iso-gradient.svg';
 import calendarFront from './assets/svg/calender-front-gradient.svg';
 
 
-
-import React from 'react';
+//-- PAGES
 import Nav from './components/Nav';
 import Home from './pages/Home';
-
 import Business from './pages/Business';
 import BusinessScheduler from './pages/BusinessScheduler';
 import Schedule from './pages/Schedule';
