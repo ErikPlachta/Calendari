@@ -3,9 +3,8 @@
 
 import React from 'react';
 //-- url parameters
-// import { useParams } from 'react-router-dom';
 //-- Routing for URL params
-import {  BrowserRouter, Router, Route, Routes  } from 'react-router-dom';
+import {  BrowserRouter, Route, Routes,useParams  } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- PAGES
@@ -41,12 +40,20 @@ function App() {
   const appointment_type_id = '0000-0000';  
 
   return (
-    <section>
-      <Nav bob1={bob1} />
-      <main>
-        <Home></Home>
-      </main>
-    </section>
+    <BrowserRouter>
+    <Nav bob1={bob1} />
+    <main>
+      <Routes>
+        <Route path="/" element={< Home />} />
+        <Route path="/s/:id" 
+          element={
+              <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
+          }
+        />
+      </Routes>
+    </main>
+    <Footer />
+  </BrowserRouter>
   );
 }
 
@@ -64,20 +71,19 @@ export default App;
 */
 
 /* ROUTE VERSION BACKUP
-<BrowserRouter>
-        <Nav />
-        <main>
-        <Routes>
-          <Route path="/" element={< Home />} />
-          <Route path="/Business" element={< Business />} />
-          <Route path="/BusinessScheduler" element={< BusinessScheduler />} />
-          <Route path="/Scheduler" 
-            element={
-                <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
-            }
-          />
-        </Routes>
-        </main>
-        <Footer />
-      </BrowserRouter>
+  <BrowserRouter>
+    <main>
+      <Routes>
+        <Route path="/" element={< Home />} />
+        <Route path="/Business" element={< Business />} />
+        <Route path="/BusinessScheduler" element={< BusinessScheduler />} />
+        <Route path="/Scheduler" 
+          element={
+              <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
+          }
+        />
+      </Routes>
+    </main>
+    <Footer />
+  </BrowserRouter>
 */
