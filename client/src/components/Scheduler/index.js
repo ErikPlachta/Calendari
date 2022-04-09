@@ -73,8 +73,6 @@ export default function Scheduler({business_id, appointment_type_id}) {
     // 4. Approve re-route or message to UI
   }
 
-
-  
   //-- Browser Local Storage Checking
   const checkState = () => {
     //-- Looking at Local Storage to see if Client was scheduling an appointment and load if so. 
