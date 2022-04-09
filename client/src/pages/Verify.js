@@ -64,7 +64,7 @@ export default function Verify() {
         <section className="containerResults">
           {Object.keys(appointment_types).map( (appointment_type, index) => (        
             // <form>
-              <div className="containerResults appointment_type_card">
+              <div className="containerResults appointment_type_card" key={appointment_types[appointment_type]['_id']} id="appointment_types[appointment_type]['_id']">
                 <h3>
                   {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
                 </h3>
