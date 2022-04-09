@@ -10,6 +10,7 @@ import './assets/css/animations.css';
 import React from 'react';
 import Nav from './components/Nav';
 import Home from './pages/Home';
+import Verify from './pages/Verify';
 
 import Business from './pages/Business';
 import BusinessScheduler from './pages/BusinessScheduler';
@@ -24,6 +25,10 @@ function App() {
       {/* hard-coded business into default load for easy testing */}
       <main>
         <hr />
+        <hr />
+        <Verify />
+
+        {/* <hr />
         <hr />
         <div className="containerResults">
           <h2>Icons</h2>
@@ -42,7 +47,7 @@ function App() {
         <hr />
         <hr />
         <h2>SCHEDULE CONCEPT</h2>
-        <Schedule></Schedule>
+        <Schedule></Schedule> */}
         </main>
     </section>
   );

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-// import BusinessSchedule from './BusinessSchedule';
 
 const { 
   capitalizeFirstLetter,
@@ -20,7 +19,13 @@ const DB_Business =          require('../assets/json/business.json');
 const DB_Appointment =       require('../assets/json/appointment.json');
 const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
 
-export default function BusinessScheduler() {
+
+
+
+//------------------------------------------------------------------------------
+//-- EXPORT FUNCTION
+
+export default function Verify() {
 
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
@@ -38,19 +43,19 @@ export default function BusinessScheduler() {
   const business = Businesses[business_id];
   const appointment_types = business.configuration.appointment_types;
 
-  //TODO:: 04/05/22 #EP || When selecting appointment type, move to next steps
-  const startScheduling = selectedAppointment => {
-    selectedAppointment.preventDefault();
+  
+  const approveTimes = dateTimes => {
+    dateTimes.preventDefault();
   };
 
   return (
-    <section className="page business">
+    <section className="page verify">
 
       {/* Main content within Business Page */}
-      <main className="container business">
+      <main className="container verify">
         
         {/* Main Header Section on Business Page */}
-        <header className="business">  
+        <header className="verify">  
         <h2>{business.name}</h2>
           <p>{business.welcome}</p>
         </header>
@@ -82,7 +87,7 @@ export default function BusinessScheduler() {
                 </span>
                 
                 <span>
-                  <button className="appointment_type_button" onClick={startScheduling}>
+                  <button className="appointment_type_button" onClick={approveTimes}>
                     Start Application
                   </button>
                 </span>
