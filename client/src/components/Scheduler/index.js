@@ -32,11 +32,28 @@ const DB_Appointment_Type =  require('../../assets/json/appointment_type.json');
 
 */
 
-export default function Scheduler({businessArg, appointmentArg}) {
-  const business_id = businessArg;
-  const appointment_id = appointmentArg;
+export default function Scheduler({business_id, appointment_type_id}) {
   
+  //TODO:: 04/09/22 #EP || appointment_type_id - Concept: if defined, goes straight to appt type
+  
+  
+  
+  const checkState = () => {
+    //-- Looking at Local Storage to see if Client was scheduling an appointment and load if so. 
+    
+    
+    //TODO:: 04/09/22 #EP || Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there
 
+    //1. See if Local Storage contains data
+
+    //2. If it does, return it
+
+    //3. if does not, just return false
+
+    return false;
+  }
+
+  
   //-- Onboarding connections to take data to verify integrity
   //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
   const [Businesses, setBusinesses] = useState(DB_Business);
@@ -44,10 +61,6 @@ export default function Scheduler({businessArg, appointmentArg}) {
   const [Appointments, setAppointments] = useState(DB_Appointment);
   const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
 
-
-  // //TODO:: 04/05/22 #EP || Add pull from JWT
-  // const business_id = '0000-AAAA';
-  // const appointment_id     = '0000-0000';
 
   //-- extract business from database based on JWT id
   const business = Businesses[business_id];
@@ -59,54 +72,11 @@ export default function Scheduler({businessArg, appointmentArg}) {
   };
 
   return (
-    <section className="page verify">
-
-      {/* Main content within Business Page */}
-      <main className="container verify">
-        
-        {/* Main Header Section on Business Page */}
-        <header className="verify">  
-        <h2>{business.name}</h2>
-          <p>{business.welcome}</p>
-        </header>
-
-        {/* container holding appointment types  */}
-        <section className="containerResults">
-          {Object.keys(appointment_types).map( (appointment_type, index) => (        
-            // <form>
-              <div className="containerResults appointment_type_card" key={appointment_types[appointment_type]['_id']} id="appointment_types[appointment_type]['_id']">
-                <h3>
-                  {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
-                </h3>
-                <span className="appointment_type_card_summary">
-                  {appointment_types[appointment_type]['summary']}
-                </span>
-                <span className="appointment_type_card_description">
-                  {appointment_types[appointment_type]['description']}
-                </span>
-                <span className="appointment_type_card_details">
-                  <h4 className="appointment_type_card_details">
-                    {appointment_types[appointment_type]['Details']['subject']}     
-                  </h4>
-                  <ul>
-                    <li>Date:       {appointment_types[appointment_type]['Details']['date']}        </li>
-                    <li>Duration:   {appointment_types[appointment_type]['Details']['duration']}    </li>
-                    <li>Start Time: {appointment_types[appointment_type]['Details']['time_start']}  </li>
-                    <li>Timezone:   {appointment_types[appointment_type]['Details']['timezone']}    </li>
-                  </ul>
-                </span>
-                
-                <span>
-                  <button className="appointment_type_button" onClick={approveTimes}>
-                    Start Application
-                  </button>
-                </span>
-              </div>
-            // </form>
-          ))}
-                
-        </section>
-      </main>
+    <section className="page scheduler">
+      {checkState
+        ? <h3>checkState Placeholder: FALSE: Local Storage</h3>
+        : <h3>checkState Placeholder: TRUE: Local Storage</h3>
+      }
     </section>
     
   )
