@@ -30,6 +30,10 @@ const userSchema = new Schema(
             required: true,
             minLength: [6, 'Password must be at least 6 characters long!']
         },
+        phone_number: {
+            type: String,
+            required: true,
+        },
         date_created: {
             type: Date,
             default: Date.now,
