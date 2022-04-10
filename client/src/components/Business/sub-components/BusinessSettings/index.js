@@ -9,28 +9,27 @@ import PageNotFound from '../../../../pages/PageNotFound';
 /* EXPORT FUNCTION - User
   //TODO:: 04/10/22 #EP || Update this
 */
-export default function User(userData) {
+export default function BusinessSettings(businessData) {
 
-  const [users, setUsers] = useState([]) //-- all users
   
   //TODO 04/10/22 #EP || Update with the logged in users data by grabbing ID from JWT and then build page with this
-  const [user, setUser] = useState({ //-- the logged in user
-    _id           : '',
-    name_first    : '',
-    name_last     : '',
-    email         : '',
-    date_created  : '',
-    date_login    : '',
-    business_id   : ''
+  const [business, setBusiness] = useState({ //-- the logged in user
+    // _id           : '',
+    // name_first    : '',
+    // name_last     : '',
+    // email         : '',
+    // date_created  : '',
+    // date_login    : '',
+    // business_id   : ''
   })
 
   
-  const validateParams = async (userData) => {  //-- Determine which params are sent in and update state accordingly
+  const validateParams = async (businessData) => {  //-- Determine which params are sent in and update state accordingly
     // console.log(appointmentData)
     
     //-- Grab ALL user data for business to store here
-    if(userData){ 
-      setUsers({...userData.userData})
+    if(businessData){ 
+      setBusiness({...businessData.businessData})
     };
 
     //TODO:: 04/10/22 #EP || Add the logged-in users data to update the user state.
@@ -41,7 +40,7 @@ export default function User(userData) {
 
   //-- Runs to set variables
   useEffect( () => {
-    validateParams(userData)
+    validateParams(businessData)
   },[]);
 
 
@@ -58,14 +57,16 @@ export default function User(userData) {
     //2. If it does, return to that state
     // setStep(localStorageNumber);
 
+    console.log(business)
+
     //3. if does not, just return false
-    if(!users){ 
+    if(!business){ 
       response = false; 
-      console.log("//-- No UserData provided...")
+      console.log("//-- No businessData provided...")
     }
 
     //TODO:: 04/10/22 #EP || Enable this once pulling from JWT
-    // if(!user._id){
+    // if(!business._id){
     //   response = false; 
     //   console.log("//-- No specific user id verified...")
     // }
@@ -76,7 +77,7 @@ export default function User(userData) {
 
   //-- listen for changes in user values, auto-update state
   const handleChange = (event) => {
-    setUser({ ...user, [event.target.name]: event.target.value,  });
+    setBusiness({ ...business, [event.target.name]: event.target.value, });
   };
 
   const updateUser = (event) => {
@@ -97,26 +98,26 @@ export default function User(userData) {
                   case true:  return (
                     <div className="page containerResults">
                       <h3>
-                        {user._id 
-                            ? `for ${user.name_first}'s` 
+                        {business._id 
+                            ? `${business.name} `
                             : <span>Empty User Value: <code>name_first</code></span>
                         }
-                        User Settings
+                        - Business Settings
                       </h3>
                       {/* TODO:: 04/10/22 #EP || Map logged in user, fille in data below */}
 
                       <div className="page businessUserStats">
                         <span>
                           Account Created:  { 
-                                  user.date_created 
-                                    ? user.date_created
+                                  business.date_created 
+                                    ? business.date_created
                                     : <span>Empty User Value: <code>created_date</code> </span>
                           }
                         </span>
                         <span>
                           Last Login:  { 
-                                  user.date_login
-                                    ? user.date_login
+                                  business.date_login
+                                    ? business.date_login
                                     : <span>Empty User Value: <code>created_date</code> </span>
                           }
                         </span>
@@ -125,52 +126,47 @@ export default function User(userData) {
                       </div>
                       
                       {/* for user to update their settings */}
-                      <form id="clientContactForm" className="page" onSubmit={updateUser}>
-                        {/* User First Name */}
+                      <form id="businessSettingsForm" className="page" onSubmit={updateUser}>
+                        
+                        {/* Name of the Business */}
                         <span className="form-element">
-                          <label htmlFor="user-name_first">First Name</label>
+                          <label htmlFor="business-name">Business Name</label>
                           <input
-                            name='name_first'
-                            id="user-name_first"
+                            name='name'
+                            id="business-name"
                             type='text'
-                            placeholder="Enter your first name"
+                            placeholder="Enter your Business Name"
                             required
-                            autoComplete='given-name'
                             onChange={handleChange}
-                            value={user.name_first}
+                            value={business.name}
                           />
                         </span>
 
-                        {/* User Last Name */}
+                        {/* Brand Name of the Business - used for URL */}
                         <span className="form-element">
-                          <label htmlFor="user-name_last">Last Name</label>
+                          <label htmlFor="business-brand_name">Business Brand Name</label>
                           <input
-                            name='name_last'
-                            id="user-name_last"
+                            name='brand_name'
+                            id="business-brand_name"
                             type='text'
-                            placeholder="Enter your last name"
+                            placeholder="Enter your Business Brand Name"
                             required
-                            autoComplete='family-name'
                             onChange={handleChange}
-                            value={user.name_last}
+                            value={business.brand_name}
                           />
                         </span>
 
-                        {/* User Email */}
-                        <span className="form-element">
-                          <label htmlFor="user-email">Email</label>
-                          <input
-                            name='email'
-                            id="user-email"
-                            type='email'
-                            placeholder="your@email.com"
-                            required
-                            autoComplete="email"
-                            onChange={handleChange}
-                            value={user.name_last}
-                          />
-                        </span>
-
+                        {/* Business Welcome Message */}
+                        <textarea
+                          name='message'
+                          type="textarea"
+                          rows='10'
+                          placeholder="I'm reaching out because..."
+                          required
+                          value={business.welcome}
+                          onChange={handleChange}
+                        ></textarea>
+                       
                         <input
                           type="submit"
                           className="button"

@@ -7,9 +7,9 @@ import { Redirect, useParams } from "react-router-dom";
 import PageNotFound from '../../pages/PageNotFound';
 import Aside from './sub-components/Aside';
 import Dashboard from './sub-components/Dashboard';
-import User from './sub-components/User'; //- the actual user settings page
+import UserSettings from './sub-components/UserSettings'; //- the actual user settings page
+import BusinessSettings from './sub-components/BusinessSettings'; //-- The business settings
 
-// import Settings from './sub-components/Settings'; //-- The business settings
 // import Aside from './sub-components/Dashboard'; //-- High Level data about business and user
 // import Appointments from './sub-components/Appointments'; //-- Appointment Management
 
@@ -209,11 +209,9 @@ export default function Business() {
   const businessPages = { 
     // 1 : "", 
     1 : <Dashboard appointmentDetails={business.businessData.Appointment} />,
-    2: <User userData={business.userData} />
-    // 1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
-    // 2: <DateTime nextStep={nextStep}/>,
-    // 3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
-    // 4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
+    2 : <UserSettings userData={business.userData} />,
+    3 : <BusinessSettings businessData={business.businessData} />
+    // 4: <Appointments appointmentData={business.Appointments} />
   };
 
   //----------------------------------------------------------------------------
@@ -239,7 +237,7 @@ export default function Business() {
 
                       {/* Main Content Area in Business Page */}
                       <section className="businessMain">
-                        {businessPages[2]}
+                        {businessPages[3]}
                       </section>
                     </section>
                   );
