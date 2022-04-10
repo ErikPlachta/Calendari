@@ -51,7 +51,10 @@ function App() {
         {/* Expecting the business_id OR brand_name, optional appointment_type_id to skip landing page */}
         {/* <Route path="/s/:business_id_or_brand_name(/:appointment_type_id)" element={ <Scheduler/> } */}
         <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
+        <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
+        <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
         <Route path='/a/:appointment_id' element={<Appointment/>}/>
+        <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
 
         
       </Routes>
