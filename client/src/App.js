@@ -1,49 +1,61 @@
-// import logo from './logo.svg';
+//------------------------------------------------------------------------------
+//-- MODULES
+import React,{useEffect} from 'react';
+import {  BrowserRouter, Route, Routes, useParams  } from 'react-router-dom';
 
+//------------------------------------------------------------------------------
+//-- PAGES
+import Nav from './components/Nav';
+import Home from './pages/Home';
+import Scheduler from './components/Scheduler';
+import Footer from './components/Footer'
+import Appointment from './pages/Appointment';
+
+// import { setContext } from '@apollo/client/link/context';
+
+//------------------------------------------------------------------------------
+//-- ASSETS
+
+//-- icons
 import calendarDynamic from './assets/svg/calender-dynamic-gradient.svg';
 import calendarIso from './assets/svg/calender-iso-gradient.svg';
 import calendarFront from './assets/svg/calender-front-gradient.svg';
 import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg'
+
+//-- STYLESHEET
+//TODO:: 05/09/22 #EP || Move stylesheet to root
 import './assets/css/styles.css';
 import './assets/css/animations.css';
 
-import React from 'react';
-import Nav from './components/Nav';
-import Home from './pages/Home';
-import Business from './pages/Business';
-import BusinessScheduler from './pages/BusinessScheduler';
-import Schedule from './pages/Schedule';
 
 function App() {
+
+  useEffect(() => {
+    document.title = `Calendari`;
+  },[]);
+
   return (
-    <section>
-      <Nav bob1={bob1}></Nav>
-    
-      <Home></Home>
-      {/* hard-coded business into default load for easy testing */}
-      <main>
-        <hr />
-        <hr />
-        <div className="containerResults">
-          <h2>Icons</h2>
-          <img src={calendarDynamic} width="50px"></img>
-          <img src={calendarFront} width="50px"></img>
-          <img src={calendarIso} width="50px"></img>
-        </div>
-        <hr />
-        <hr />
-        <h2>BUSINESS DASHBOARD CONCEPT</h2>
-        <Business></Business>
-        <hr />
-        <hr />
-        <h2>BUSINESS SCHEDULER CONCEPT</h2>
-        <BusinessScheduler></BusinessScheduler>
-        <hr />
-        <hr />
-        <h2>SCHEDULE CONCEPT</h2>
-        <Schedule></Schedule>
-        </main>
-    </section>
+
+    <BrowserRouter>
+    <Nav bob1={bob1} />
+    <main>
+      <Routes>
+        <Route path="/" element={< Home />} />
+        <Route path="/Home" element={< Home />} />
+        
+        {/* scheduler */}
+        {/* Expecting the business_id OR brand_name, optional appointment_type_id to skip landing page */}
+        {/* <Route path="/s/:business_id_or_brand_name(/:appointment_type_id)" element={ <Scheduler/> } */}
+        <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
+        <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
+        <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
+        <Route path='/a/:appointment_id' element={<Appointment/>}/>
+        <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
+
+      </Routes>
+    </main>
+    <Footer />
+  </BrowserRouter>
   );
 }
 

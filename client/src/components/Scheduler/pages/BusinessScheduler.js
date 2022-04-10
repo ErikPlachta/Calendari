@@ -10,39 +10,41 @@ const {
   dateHourOfDay,
   dateGetTimePassed,
   dateTimeFullLocal
-} = require('../utils/helpers');
+} = require('../../../utils/helpers');
 
 
 //-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_User =              require('../assets/json/user.json');
-const DB_Business =          require('../assets/json/business.json');
-const DB_Appointment =       require('../assets/json/appointment.json');
-const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
+const DB_User =              require('../../../assets/json/user.json');
+const DB_Business =          require('../../../assets/json/business.json');
+const DB_Appointment =       require('../../../assets/json/appointment.json');
+const DB_Appointment_Type =  require('../../../assets/json/appointment_type.json');
 
-export default function BusinessScheduler() {
 
-  //-- Onboarding connections to take data to verify integrity
-  //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-  const [Businesses, setBusinesses] = useState(DB_Business);
-  const [Users, setUsers] = useState(DB_User);
-  const [Appointments, setAppointments] = useState(DB_Appointment);
-  const [Appointment_Types, setAppointment_Types] = useState(DB_Appointment_Type);
-
+//------------------------------------------------------------------------------
+//-- EXPORT FUNCTION - BusinessScheduler
+export default function BusinessScheduler({business, business_id, nextStep}) {
+  
 
   //TODO:: 04/05/22 #EP || Add pull from JWT
-  const business_id = '0000-AAAA';
-  const user_id     = '0000-0000';
+  // business_id = '0000-AAAA';
+
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
 
   //-- extract business from database based on JWT id
-  const business = Businesses[business_id];
+  // const business = Businesses[business_id];
+  // const business = businessobj;
   const appointment_types = business.configuration.appointment_types;
 
-  //TODO:: 04/05/22 #EP || Build this out
-  const approveTimes = dateTimes => {
-    dateTimes.preventDefault();
+  //TODO:: 04/05/22 #EP || When selecting appointment type, move to next steps
+  const startScheduling = selectedAppointment => {
+    selectedAppointment.preventDefault();
   };
 
+  //----------------------------------------------------------------------------
+  //-- RETURN JSX ELEMENT
   return (
     <section className="page business">
 
@@ -59,7 +61,7 @@ export default function BusinessScheduler() {
         <section className="containerResults">
           {Object.keys(appointment_types).map( (appointment_type, index) => (        
             // <form>
-              <div className="containerResults appointment_type_card">
+            <div className="containerResults appointment_type_card" key={appointment_types[appointment_type]['_id']}>
                 <h3>
                   {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
                 </h3>
@@ -82,7 +84,11 @@ export default function BusinessScheduler() {
                 </span>
                 
                 <span>
-                  <button className="appointment_type_button" onClick={approveTimes}>
+                  <button 
+                    className="appointment_type_button" 
+                    id={appointment_types[appointment_type]['_id']}
+                    onClick={nextStep}
+                  >
                     Start Application
                   </button>
                 </span>
