@@ -99,7 +99,7 @@ const resolvers = {
             await Appointment_Type.findOneAndDelete(
                 { _id: args._id}
             )
-            return 'Appointment Type has been deleted'
+            return;
         }
     }
 };
