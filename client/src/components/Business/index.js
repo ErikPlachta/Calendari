@@ -208,9 +208,9 @@ export default function Business() {
   //-- Index used for on-click of what to render //TODO:: 04/10/22 #EP || Make a state
   const businessPages = { 
     // 1 : "", 
-    1 : <Dashboard appointmentDetails={business.businessData.Appointment} />,
-    2 : <UserSettings userData={business.userData} />,
-    3 : <BusinessSettings businessData={business.businessData} />
+    // 0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
+    1 : <UserSettings userData={business.userData} />,
+    2 : <BusinessSettings businessData={business.businessData} />
     // 4: <Appointments appointmentData={business.Appointments} />
   };
 
@@ -232,7 +232,8 @@ export default function Business() {
                       
                       {/* Aside bar within the business page */}
                       <section className="businessAside">
-                        <Aside businessName={business.businessData.name} userName={business.userData.name} />
+                        {/* <Aside businessName={business.businessData.name} userName={business.userData.name} /> */}
+                        <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />
                       </section>
 
                       {/* Main Content Area in Business Page */}

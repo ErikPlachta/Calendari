@@ -108,20 +108,21 @@ export default function UserSettings(userData) {
                       <div className="page businessUserStats">
                         <span>
                           Account Created:  { 
+                                  //TODO:: 04/10/22 #EP || Add formatting w helpers
                                   user.date_created 
                                     ? user.date_created
                                     : <span>Empty User Value: <code>created_date</code> </span>
                           }
                         </span>
+                        {/* Date of last login */}
                         <span>
                           Last Login:  { 
+                                  //TODO:: 04/10/22 #EP || Add formatting w helpers
                                   user.date_login
                                     ? user.date_login
                                     : <span>Empty User Value: <code>created_date</code> </span>
                           }
                         </span>
-                        
-
                       </div>
                       
                       {/* for user to update their settings */}

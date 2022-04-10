@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 
 
 
-export default function Dashboard({appointmentDetails}) {
+export default function Dashboard({appointmentDetails, businessName, userName}) {
   
   const [appointments, setAppointments] = useState({
     appointments: {},
@@ -47,16 +47,23 @@ export default function Dashboard({appointmentDetails}) {
   return (
     <section className="containerResults dashboard">
       {/* Dashboard is high-level summary  */}
-      
-          <h3>Dashboard</h3>
-          <p>placeholder text for summary, here.</p>
+      <header className="business">  
+        <h2>{businessName}</h2>
+        <p>
+          Welcome, {userName ?userName :"NO_USER_NAME"}! 
+        </p>
+      </header>
+      <div>
+        <h3>Dashboard</h3>
+        <p>placeholder text for summary, here.</p>
 
-          <h4>Appointments</h4>
-          <ul>
-            <li>Scheduled: {appointments.stats.scheduled} </li>
-            <li>Completed: {appointments.stats.completed} </li>
-            <li>Canceled:  {appointments.stats.canceled}  </li>
-          </ul>
+        <h4>Appointments</h4>
+        <ul>
+          <li>Scheduled: {appointments.stats.scheduled} </li>
+          <li>Completed: {appointments.stats.completed} </li>
+          <li>Canceled:  {appointments.stats.canceled}  </li>
+        </ul>
+      </div>
     </section>
   )
 }
