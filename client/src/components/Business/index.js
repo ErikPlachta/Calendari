@@ -79,10 +79,6 @@ export default function Business() {
 
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( false );
-  
-  //-- TODO:: not hard-coded like this
-  // let business = {}; //-- The Specific Business response for the logged in user from API
-  
 
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS
@@ -166,6 +162,7 @@ export default function Business() {
     validateParams();
     document.title = `Calendari - BUSINESS_NAME_PLACEHOLDER`;
     
+    
     // console.log(`//-- Business Component: Received Payload:`);
     // console.log(business)
   },[]);
@@ -182,17 +179,13 @@ export default function Business() {
 //----------------------------------------------------------------------------
   /* Page Location and Logic
   */
-  
-  
-  //-- Index used for on-click of what to render //TODO:: 04/10/22 #EP || Make a state
-  const businessPages = { 
-    // 1 : "", 
-    // 0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
+  //-- This is an INDEX of available sub-components that can be rendered
+  //TODO:: 04/10/22 #EP || How to make this a state? ( when I try it doesn't function properly )
+  const businessPages = {
     1 : <UserSettings userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
-    3 : <Appointments appointmentData={business.appointmentData} />
+    3 : <Appointments appointmentData={business.appointmentData} />,
   };
-
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
@@ -214,11 +207,11 @@ export default function Business() {
               {/* Main Content Area in Business Page */}
               <section className="businessMain">
                 <h4>page 1</h4>
-                {businessPages[1]}
+                {businessPages["1"]}
                 <h4>page 2</h4>
-                {businessPages[2]}
+                {businessPages["2"]}
                 <h4>page 3</h4>
-                {businessPages[3]}
+                {(businessPages["3"])}
               </section>
             </section>
           );
