@@ -13,7 +13,7 @@ export default function BusinessSettings(businessData) {
 
   
   //TODO 04/10/22 #EP || Update with the logged in users data by grabbing ID from JWT and then build page with this
-  const [business, setBusiness] = useState({ //-- the logged in user
+  const [business, setBusiness] = useState({ //-- the logged in users business
     // _id           : '',
     // name_first    : '',
     // name_last     : '',
@@ -23,17 +23,23 @@ export default function BusinessSettings(businessData) {
     // business_id   : ''
   })
 
+  const [state, setState] = useState( false );
+
   
   const validateParams = async (businessData) => {  //-- Determine which params are sent in and update state accordingly
     // console.log(appointmentData)
-    
+    let validRequest = false;
+
     //-- Grab ALL user data for business to store here
     if(businessData){ 
       setBusiness({...businessData.businessData})
     };
 
     //TODO:: 04/10/22 #EP || Add the logged-in users data to update the user state.
-
+    validRequest = true;
+    
+    //04/10/22 #EP || Assuming valid load attempt, setting state of load as true
+    setState(validRequest)
     
   }
 
@@ -42,36 +48,6 @@ export default function BusinessSettings(businessData) {
   useEffect( () => {
     validateParams(businessData)
   },[]);
-
-
-
-  //-- checking to see if things were updated properly and in a place to run
-  const state = () => {
-    //TODO:: 04/10/22 #EP || Convert to an actual useState function
-    // const [state, setState] = useState({
-
-    let response = true
-
-    //1. See if Local Storage Contains data
-
-    //2. If it does, return to that state
-    // setStep(localStorageNumber);
-
-    //3. if does not, just return false
-    if(!business){ 
-      response = false; 
-      console.log("//-- No businessData provided...")
-    }
-
-    //TODO:: 04/10/22 #EP || Enable this once pulling from JWT
-    // if(!business._id){
-    //   response = false; 
-    //   console.log("//-- No specific user id verified...")
-    // }
-    
-    return response;
-  };
-
 
   //-- listen for changes in user values, auto-update state
   const handleChange = (event) => {
@@ -92,7 +68,7 @@ export default function BusinessSettings(businessData) {
               && schedulerPages[step]
               : <PageNotFound /> */}
               {(() => {
-                switch(state()) {    
+                switch(state) {    
                   case true:  return (
                     <div className="page containerResults">
                       <h3>
