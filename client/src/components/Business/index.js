@@ -5,6 +5,7 @@ import { Redirect, useParams } from "react-router-dom";
 //------------------------------------------------------------------------------
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
+import Aside from './sub-components/aside';
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -184,12 +185,13 @@ export default function Business() {
               {(() => {
                 switch(checkState()) {    
                   case true:  return (
-                  <section>
-                      <h2>{business.name}</h2>
-                      <h4>Welcome Message, USER_NAME_HERE_PLACEHOLDER</h4>
+                    <section className="page business">
+                     <Aside businessName={business.businessData.name} userName={business.userData.name} />
                         
-                  </section>);
+                    </section>
+                  );
                   case false: return <PageNotFound />;
+                  //TODO::04/10/22 #EP | Add loading
                   default:    return <PageNotFound />;
                 }
             })()}

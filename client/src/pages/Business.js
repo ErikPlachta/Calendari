@@ -130,9 +130,7 @@ export default function Business() {
       <main className="container business">
         
         {/* Main Header Section on Business Page */}
-        <header className="business">  
-          <p>Welcome, {user.name_first}. </p>
-        </header>
+        
 
 
         <section className="containerResults dashboard">
