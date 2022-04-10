@@ -7,10 +7,24 @@ import { Redirect, useParams } from "react-router-dom";
 import PageNotFound from '../../pages/PageNotFound';
 
 //------------------------------------------------------------------------------
+//-- HELPERS
+const { 
+  capitalizeFirstLetter,
+  dateGetMonths,
+  dateFormat,
+  dateTimeFull,
+  dateDayOfWeek,
+  dateHourOfDay,
+  dateGetTimePassed,
+  dateTimeFullLocal
+} = require('../../utils/helpers');
+
+//------------------------------------------------------------------------------
 //-- ASSETS
 
 //-- Hardcoded data used to simulate the Database
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
+const DB_User =     require('../../assets/json/user.json');
 const DB_Business = require('../../assets/json/business.json');
 
 //------------------------------------------------------------------------------
@@ -24,6 +38,20 @@ const DB_Business = require('../../assets/json/business.json');
 */
 export default function Business() {
 
+  //------------------------------------------------------------------------------
+  /*  1. VERIFY IF LOGGED IN    */
+  //TODO:: 04/05/22 #EP || Add auth, for now assuming logged in
+  const authCheck = true;
+
+
+  //------------------------------------------------------------------------------
+  /*  2. IF LOGGED IN GET AUTH TOKEN THAT CONTAINS BUSINESS ID AND USER ID  */
+  if(!authCheck){ 
+    console.log("Reload page placeholder");
+  }
+
+  //------------------------------------------------------------------------------
+  /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
   useEffect(() => {
     document.title = `Calendari - BUSINESS_NAME_PLACEHOLDER`;
   },[]);
@@ -32,8 +60,21 @@ export default function Business() {
 
   
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
-  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
-  let business = {}; //-- The Specific Business response for the logged in user from API
+  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
+  const [Users, setUsers] = useState(DB_User); 
+  const user_id     = '0000-0000';
+  const user     = Users[user_id];
+
+  //-- Business Page State
+  const [business, setBusiness] = useState({
+    // "config"        : {}, //-- placeholder for templates //TODO:: 04/10/22 #EP || Add these in Phase3
+    "userData"      : "",
+    "businessData"  : "",
+  })
+  
+  
+  //-- TODO:: not hard-coded like this
+  // let business = {}; //-- The Specific Business response for the logged in user from API
   
 
     //----------------------------------------------------------------------------
@@ -57,45 +98,46 @@ export default function Business() {
         - Loads default schedule
   */
 
-    const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
+    
+  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
-      let business_id = "";
-  
-  
-      // 1. If No business_id, no business_name or invalid values found, exit
-      if(!business_id_or_brand_name){
-        //-- Doesn't exist, re-route to homepage or 404 page 
-        //-- this should not happen technically
-      }
-      
-      // 2. If  valid business_id or business_name extract just the business ID
-        // -- grabs it and stores into const here
-      //TODO:: 04/09/22 #EP | 
-      if(!Businesses[business_id_or_brand_name]){
-        // navigate('/')
-        business_id = false
-        
-      }
-  
-      if(Businesses[business_id_or_brand_name]){
-      
-        business = Businesses[business_id_or_brand_name];
-        business_id = business_id_or_brand_name;
-        //TODO:: Actually have this do a query and check appointment_type_id
-      }
-      
-      // 3. Does appointment_type_id exist and if yes for this business
-      // if(appointment_type_id) {
-        //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
-        // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
-        //-- Otherwise ignore it and/or update screen with message
-      // }
-  
-      // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
-      return business_id;
+    let business_id = "";
+
+
+    // 1. If No business_id, no business_name or invalid values found, exit
+    if(!business_id_or_brand_name){
+      //-- Doesn't exist, re-route to homepage or 404 page 
+      //-- this should not happen technically
     }
+    
+    // 2. If  valid business_id or business_name extract just the business ID
+      // -- grabs it and stores into const here
+    //TODO:: 04/09/22 #EP | 
+    if(!Businesses[business_id_or_brand_name]){
+      // navigate('/')
+      business_id = false
+      
+    }
+
+    //-- if the param received matches, update the state with the business info
+    if(Businesses[business_id_or_brand_name]){
+    
+      setBusiness({...business, businessData: Businesses[business_id_or_brand_name]});
+      business_id = business_id_or_brand_name;
+      
+    }
+    
+   
+
+    // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
+    return business_id;
+  }
+   
+  useEffect(() => {
+    validateParams();
+  },[]);
   
-    const business_id = validateParams();
+    
 
    //----------------------------------------------------------------------------
   /* Browser Local Storage AND CURRENT STATE CHECKING State checking
@@ -120,8 +162,9 @@ export default function Business() {
     // setStep(localStorageNumber);
 
     //3. if does not, just return false
-    if(!business_id){ 
+    if(!business['businessData']['_id']){ 
       response = false; 
+      console.log(business)
     }
     
     return response;
@@ -143,7 +186,7 @@ export default function Business() {
                   case true:  return (
                   <section>
                       <h2>{business.name}</h2>
-                      <h3>Welcome Message, here</h3>
+                      <h4>Welcome Message, USER_NAME_HERE_PLACEHOLDER</h4>
                         
                   </section>);
                   case false: return <PageNotFound />;

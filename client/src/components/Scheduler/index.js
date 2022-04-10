@@ -54,6 +54,12 @@ export default function Scheduler() {
 
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
+  
+  const [scheduler, setScheduler] = useState({
+    "clientData"      : "",
+    "businessData"  : "",
+  })
+
   let business = {}; //-- The Specific Business response for the logged in user from API
   //TODO:: 04/09/22 #EP || Get this to work as a state 
   // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
@@ -94,7 +100,7 @@ export default function Scheduler() {
 
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
-    let business_id = "";
+    let validRequest = null;
 
 
     // 1. If No business_id, no business_name or invalid values found, exit
@@ -108,18 +114,20 @@ export default function Scheduler() {
     //TODO:: 04/09/22 #EP | 
     if(!Businesses[business_id_or_brand_name]){
       // navigate('/')
-      business_id = false
+      validRequest = false
       
     }
 
+    //-- if the business ID or brand_name IS in the database
     if(Businesses[business_id_or_brand_name]){
-    
-      business = Businesses[business_id_or_brand_name];
-      business_id = business_id_or_brand_name;
-      //TODO:: Actually have this do a query and check appointment_type_id
+      //-- 1. Update Scheduler state
+      setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
+      //-- 2. Confirm it's a valid request
+      validRequest = true;
     }
     
     // 3. Does appointment_type_id exist and if yes for this business
+      //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
     // if(appointment_type_id) {
       //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
       // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
@@ -127,10 +135,14 @@ export default function Scheduler() {
     // }
 
     // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
-    return business_id;
+    return validRequest;
   }
 
-  const business_id = validateParams();
+    
+  useEffect(() => {
+    const validRequest = validateParams();
+    console.log(`validRequest: ${validRequest}`)
+  },[]);
   
 
   //----------------------------------------------------------------------------
@@ -189,7 +201,7 @@ export default function Scheduler() {
 
   //-- INDEX of Each Page, which is a step of scheduler
   const schedulerPages = {
-    1: <BusinessScheduler business={business} business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
+    1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
     2: <DateTime nextStep={nextStep}/>,
     3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
     4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
@@ -225,8 +237,9 @@ export default function Scheduler() {
     // setStep(localStorageNumber);
 
     //3. if does not, just return false
-    if(!business_id){ 
+    if(!scheduler.businessData._id){ 
       response = false; 
+      console.log(scheduler)
     }
     
     return response;
