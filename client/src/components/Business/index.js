@@ -5,7 +5,11 @@ import { Redirect, useParams } from "react-router-dom";
 //------------------------------------------------------------------------------
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
-import Aside from './sub-components/aside';
+import Aside from './sub-components/Aside';
+// import Aside from './sub-components/Dashboard';
+// import Aside from './sub-components/Appointment';
+// import Aside from './sub-components/User';
+// import Aside from './sub-components/Account';
 
 //------------------------------------------------------------------------------
 //-- HELPERS
