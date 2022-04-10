@@ -61,7 +61,7 @@ export default function BusinessScheduler({business, business_id, nextStep}) {
         <section className="containerResults">
           {Object.keys(appointment_types).map( (appointment_type, index) => (        
             // <form>
-            <div className="containerResults appointment_type_card" key={appointment_types[appointment_type]['_id']} id="appointment_types[appointment_type]['_id']">
+            <div className="containerResults appointment_type_card" key={appointment_types[appointment_type]['_id']}>
                 <h3>
                   {capitalizeFirstLetter(appointment_types[appointment_type]['name'])}
                 </h3>
@@ -84,7 +84,11 @@ export default function BusinessScheduler({business, business_id, nextStep}) {
                 </span>
                 
                 <span>
-                  <button className="appointment_type_button" onClick={nextStep}>
+                  <button 
+                    className="appointment_type_button" 
+                    id={appointment_types[appointment_type]['_id']}
+                    onClick={nextStep}
+                  >
                     Start Application
                   </button>
                 </span>

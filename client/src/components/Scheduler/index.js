@@ -58,7 +58,7 @@ export default function Scheduler() {
   // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
-  const [appointment_template, setAppointment_template] = useState({}); //-- when it's to be built, know what to do with it
+  const [appointment_template, setAppointment_template] = useState(); //-- when it's to be built, know what to do with it
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
   //-- Extract URL Parameters
@@ -141,32 +141,7 @@ export default function Scheduler() {
 
   */
 
-  //-- Move to the next step
-  const nextStep = nextStepButton => {
-    nextStepButton.preventDefault();
-    setStep(step+1);
-  };
-
-  const formerStep = formerStepButton => {
-    formerStepButton.preventDefault();
-    setStep(step-1);
-  };
-
-
-  //-- INDEX of Each Page, which is a step of scheduler
-  const schedulerPages = {
-    1: <BusinessScheduler business={business} business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
-    2: <DateTime nextStep={nextStep}/>,
-    3: <Client nextStep={nextStep} appointment_template={appointment_template}/>,
-    4: "<div>API Reroute to root page Appointment with params business_id and appointment_id</div>"
-  };
-
-  //-- Get the number of keys in the pages
-  const [maxSteps, setMaxSteps] = useState(
-    Object.keys(schedulerPages).length
-  );
-
-  
+   //-- Client Input Template and Submitting Request  
   //-- When Appointment is Verified, Submit it to API, and if success move to verification page
   //TODO:: 04/09/22 #EP || Build logic for API call of submission
   const createAppointment = async params => {
@@ -184,16 +159,64 @@ export default function Scheduler() {
     // return response;
   }
 
+  //-- Move to the next step
+  const nextStep = nextStepButton => {
+    nextStepButton.preventDefault();
+    
+    //-- set the template state variable state
+    setAppointment_template(nextStepButton.target.id);
+    
+    // console.log(nextStepButton.target.id)
+    // console.log(appointment_template)
+    
+    const nextStepButton_id = nextStepButton.target.id;
+    
+    if(nextStepButton_id){
+      createAppointment()
+    }
+    
+    setStep(step+1);
+
+  };
+
+  const formerStep = formerStepButton => {
+    formerStepButton.preventDefault();
+    setStep(step-1);
+  };
+
+
+
+
+
+  //-- INDEX of Each Page, which is a step of scheduler
+  const schedulerPages = {
+    1: <BusinessScheduler business={business} business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
+    2: <DateTime nextStep={nextStep}/>,
+    3: <Client nextStep={nextStep} appointment_template={appointment_template}/>,
+    4: "<div>API Reroute to root page Appointment with params business_id and appointment_id</div>"
+  };
+
+  //-- Get the number of keys in the pages
+  const [maxSteps, setMaxSteps] = useState(
+    Object.keys(schedulerPages).length
+  );
+
   //----------------------------------------------------------------------------
   /* Browser Local Storage State checking
-
     - Should it load anything from local-storage vs default
   */
 
+    //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
+
   //-- Browser Local Storage Checking
-  //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
+
+
+  //----------------------------------------------------------------------------
+  /* Verify Request Integrity
+  */
+
+  //-- Verifying if requests are made properly or not
   const checkState = () => {
-    //-- Looking at Local Storage to see if Client was scheduling an appointment and load if so. 
 
     let response = true
 
@@ -209,7 +232,8 @@ export default function Scheduler() {
     
     return response;
   }
-
+  
+  // 
   
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
@@ -225,15 +249,13 @@ export default function Scheduler() {
               {(() => {
                 switch(checkState()) {    
                   case true:  return ([
-                                schedulerPages[step],
-                                <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />
+                        schedulerPages[step],
+                        <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />
                   ]);
                   case false: return <PageNotFound />;
                   default:    return <PageNotFound />;
                 }
-            })()
-              
-        }
+            })()}
     </section>
   )
 };
