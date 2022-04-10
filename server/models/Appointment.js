@@ -2,25 +2,19 @@ const { Schema, model } = require("mongoose");
 
 const AppointmentSchema = new Schema(
     {
-        user_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'User'
-        },
-        business_id: {
-            type: Schema.Types.ObjectId,
-            ref: 'Business'
-        },
-        appointment_name: {
-            type: String
-        },
-        appointment_duration: {
-            type: String
-        },
+        // appt_type: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'Appointment_Type'
+        // },
+        // client: {
+        //     type: Schema.Types.ObjectId,
+        //     ref: 'User'
+        // },
         appointment_date: {
-            type: Date
+            type: String
         },
         appointment_time: {
-            type: Date
+            type: String
         },
         appointment_status: {
             type: String,
