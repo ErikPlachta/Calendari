@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import {useNavigate} from 'react-router';
 
 export default function Aside({businessName, userName}) {
 
@@ -17,16 +16,7 @@ export default function Aside({businessName, userName}) {
       {/* Business Menu */}
       <ul>
         {/* Default landing page for business */}
-        <li>
-        <li>
-          <useNavigate 
-            to={"/bn"}
-            state={{from: Aside}}
-          >
-              Business Homepage
-          </useNavigate>
-        </li>
-        </li>
+        <li>My Business</li>
         {/* A summary of the business details overall */}
         <li>Dashboard</li>
         {/* Details on upcoming appointments */}

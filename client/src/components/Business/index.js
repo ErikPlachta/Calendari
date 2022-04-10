@@ -6,6 +6,7 @@ import { Redirect, useParams } from "react-router-dom";
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
 import Aside from './sub-components/Aside';
+import Dashboard from './sub-components/Dashboard';
 
 // import Settings from './sub-components/Settings'; //-- The business settings
 // import Aside from './sub-components/Dashboard'; //-- High Level data about business and user
@@ -107,7 +108,7 @@ export default function Business() {
   */
 
     
-  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
+  const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
     let business_id = "";
 
@@ -139,8 +140,9 @@ export default function Business() {
     return business_id;
   }
    
-  useEffect(() => {
+  useEffect( () => {
     validateParams();
+    console.log(business);
   },[]);
 
    //----------------------------------------------------------------------------
@@ -181,7 +183,8 @@ export default function Business() {
   
   //-- Index used for on-click of what to render //TODO:: 04/10/22 #EP || Make a state
   const businessPages = { 
-    1 : <Aside />,
+    // 1 : "", 
+    1 : <Dashboard appointmentDetails={business.businessData.Appointment} />,
     // 1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
     // 2: <DateTime nextStep={nextStep}/>,
     // 3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
