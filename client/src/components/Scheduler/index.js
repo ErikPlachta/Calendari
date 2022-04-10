@@ -213,18 +213,25 @@ export default function Scheduler() {
   
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
-
-
-  
   return (
     <section className="page scheduler">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
       
-        { checkState()
+        {/* { checkState()
               ? <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} /> 
-                && schedulerPages[step]                
-              : <PageNotFound />
+              && schedulerPages[step]
+              : <PageNotFound /> */}
+              {(() => {
+                switch(checkState()) {    
+                  case true:  return ([
+                                schedulerPages[step],
+                                <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />
+                  ]);
+                  case false: return <PageNotFound />;
+                  default:    return <PageNotFound />;
+                }
+            })()
               
         }
     </section>
