@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react';
+import {useNavigate} from 'react-router';
 
 export default function Aside({businessName, userName}) {
 
-  
-  
-
-  console.log(businessName, userName)
   return (
       <aside className='sidebar'>
         {/* Side Navigational Bar */}
@@ -20,7 +17,16 @@ export default function Aside({businessName, userName}) {
       {/* Business Menu */}
       <ul>
         {/* Default landing page for business */}
-        <li>Home</li>
+        <li>
+        <li>
+          <useNavigate 
+            to={"/bn"}
+            state={{from: Aside}}
+          >
+              Business Homepage
+          </useNavigate>
+        </li>
+        </li>
         {/* A summary of the business details overall */}
         <li>Dashboard</li>
         {/* Details on upcoming appointments */}
@@ -28,8 +34,8 @@ export default function Aside({businessName, userName}) {
         {/* <li>Reporting</li> */}
         {/* Used to configure options */}
         <li>Settings
-          <ul>
-            {/* User account specific settings */}
+          {/* nav choices -hidden for now */}
+          {/* <ul>
             <li>My Account</li>
             <li>My Business
               <ul>
@@ -38,7 +44,7 @@ export default function Aside({businessName, userName}) {
                 <li>Users</li>
               </ul>
             </li>
-          </ul>
+          </ul> */}
         </li>
       </ul>
     </aside>

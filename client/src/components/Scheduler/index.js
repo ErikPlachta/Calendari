@@ -200,6 +200,8 @@ export default function Scheduler() {
   };
 
   //-- INDEX of Each Page, which is a step of scheduler
+  // const [schedulerPages,setSchedulerPages] = useState({
+  //TODO:: 04/10/22 #EP || Make a state
   const schedulerPages = {
     1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
     2: <DateTime nextStep={nextStep}/>,

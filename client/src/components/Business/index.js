@@ -6,10 +6,11 @@ import { Redirect, useParams } from "react-router-dom";
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
 import Aside from './sub-components/Aside';
-// import Aside from './sub-components/Dashboard';
-// import Aside from './sub-components/Appointment';
-// import Aside from './sub-components/User';
-// import Aside from './sub-components/Account';
+
+// import Settings from './sub-components/Settings'; //-- The business settings
+// import Aside from './sub-components/Dashboard'; //-- High Level data about business and user
+// import User from './sub-components/User'; //- the actual user settings page
+// import Appointments from './sub-components/Appointments'; //-- Appointment Management
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -42,6 +43,8 @@ const DB_Business = require('../../assets/json/business.json');
     
 */
 export default function Business() {
+
+  const [menuSelection, setMenuSelection] = useState(1);  //-- The current page
 
   //------------------------------------------------------------------------------
   /*  1. VERIFY IF LOGGED IN    */
@@ -131,8 +134,6 @@ export default function Business() {
       business_id = business_id_or_brand_name;
       
     }
-    
-   
 
     // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
     return business_id;
@@ -141,8 +142,6 @@ export default function Business() {
   useEffect(() => {
     validateParams();
   },[]);
-  
-    
 
    //----------------------------------------------------------------------------
   /* Browser Local Storage AND CURRENT STATE CHECKING State checking
@@ -175,6 +174,20 @@ export default function Business() {
     return response;
   }
 
+//----------------------------------------------------------------------------
+  /* Page Location and Logic
+  */
+  
+  
+  //-- Index used for on-click of what to render //TODO:: 04/10/22 #EP || Make a state
+  const businessPages = { 
+    1 : <Aside />,
+    // 1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
+    // 2: <DateTime nextStep={nextStep}/>,
+    // 3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
+    // 4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
+  };
+
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
@@ -190,8 +203,16 @@ export default function Business() {
                 switch(checkState()) {    
                   case true:  return (
                     <section className="page business">
-                     <Aside businessName={business.businessData.name} userName={business.userData.name} />
-                        
+                      
+                      {/* Aside bar within the business page */}
+                      <section className="businessAside">
+                        <Aside businessName={business.businessData.name} userName={business.userData.name} />
+                      </section>
+
+                      {/* Main Content Area in Business Page */}
+                      <section className="businessMain">
+                        {businessPages[menuSelection]}
+                      </section>
                     </section>
                   );
                   case false: return <PageNotFound />;
