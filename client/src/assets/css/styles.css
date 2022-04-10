@@ -21,6 +21,13 @@
   --theme_light-pink: #ffa0fd;
   --theme_darker-pink: rgb(233, 82, 222); /*#e952de;*/
 
+
+  --lighter-purple: #6200b3;
+  --darker-purple: #3b0086;
+  --plum: #290628;
+  --light-pink: #ffa0fd;
+  --darker-pink: #e952de;
+
   /* BASIC COLOR SCHEMA PLACEHOLDER */
   /*TODO:: 04/05/2022 #EP || Define this color schema */
   --C00: #fcfdff;
@@ -322,6 +329,8 @@ progress[value]{
   vertical-align: center;  
 } */
 
+/*----------------------------------------------------------------------------*/
+/* CLIENT CONTACT FORM */
 
 /* #clientContactForm, */
 .clientContact,
@@ -349,7 +358,8 @@ progress[value]{
   height: 2rem;
 }
 
-
+/*----------------------------------------------------------------------------*/
+/* APPOINTMENT TYPE CARDS */
 
 .appointment_type_card{
   display: flex;
