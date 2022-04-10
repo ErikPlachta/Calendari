@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Redirect, useParams } from "react-router-dom";
 
 /* 
     Used to view an existing appointment
@@ -51,13 +52,13 @@ import React from 'react'
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
 
-export default function Appointment(business, appointment) {
+export default function Appointment({appointment_confirmation_id}) {
   //-- Can be the busines_id or the business_name
-  const business_Id_Name = business;
-  //-- The ID of the specific appointment for the business above.
-  const appointment_id = appointment;
+  const { appointment_id } = useParams();
 
   return (
-    <div>TODO:: ADD CONTENT</div>
+    <section>
+      <h1>Appointment Confirmation ID: {appointment_id}{appointment_confirmation_id} </h1>
+    </section>
   )
 }

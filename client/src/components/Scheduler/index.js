@@ -11,6 +11,7 @@ import BusinessScheduler from './pages/BusinessScheduler';
 import DateTime from './pages/DateTime';
 import Client from './pages/Client';
 import PageNotFound from '../../pages/PageNotFound';
+import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
@@ -58,11 +59,14 @@ export default function Scheduler() {
   // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
-  const [appointment_template, setAppointment_template] = useState(); //-- when it's to be built, know what to do with it
+  const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
+  const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
+  // let appointment_confirmation_id = ""; //-- placeholder
   //-- Extract URL Parameters
   const {business_id_or_brand_name, appointment_type_id} = useParams();
+
 
   //-- used to ReRoute Navigation away if invalid details
   // const navigate = useNavigate();
@@ -148,11 +152,8 @@ export default function Scheduler() {
     //-- When client information verified and submitted, update database with appointment data
 
     // 1. Validate data
-
     // 2. Submit to database
-
     // 3. Verify response
-
     // 4. Approve re-route or message to UI
     setStep(maxSteps); //-- 5 is finshed and out of here.
 
@@ -171,12 +172,13 @@ export default function Scheduler() {
     
     const nextStepButton_id = nextStepButton.target.id;
     
-    if(nextStepButton_id){
+    if(nextStepButton_id === "contact-submit"){
+      setAppointment_confirmation_id(nextStepButton_id);
       createAppointment()
     }
-    
-    setStep(step+1);
-
+    else {
+      setStep(step+1);
+    }
   };
 
   const formerStep = formerStepButton => {
@@ -184,16 +186,12 @@ export default function Scheduler() {
     setStep(step-1);
   };
 
-
-
-
-
   //-- INDEX of Each Page, which is a step of scheduler
   const schedulerPages = {
     1: <BusinessScheduler business={business} business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
     2: <DateTime nextStep={nextStep}/>,
     3: <Client nextStep={nextStep} appointment_template={appointment_template}/>,
-    4: "<div>API Reroute to root page Appointment with params business_id and appointment_id</div>"
+    4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
   };
 
   //-- Get the number of keys in the pages
