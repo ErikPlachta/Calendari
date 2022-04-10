@@ -2,6 +2,8 @@
 //-- MODULES
 import React, { useEffect, useState } from 'react';
 
+
+
 export default function Dashboard({appointmentDetails}) {
   
   const [appointments, setAppointments] = useState({
@@ -45,7 +47,7 @@ export default function Dashboard({appointmentDetails}) {
   return (
     <section className="containerResults dashboard">
       {/* Dashboard is high-level summary  */}
-      <section className="containerResults">
+      
           <h3>Dashboard</h3>
           <p>placeholder text for summary, here.</p>
 
@@ -55,7 +57,6 @@ export default function Dashboard({appointmentDetails}) {
             <li>Completed: {appointments.stats.completed} </li>
             <li>Canceled:  {appointments.stats.canceled}  </li>
           </ul>
-        </section>
     </section>
   )
 }

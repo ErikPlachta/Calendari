@@ -7,10 +7,10 @@ import { Redirect, useParams } from "react-router-dom";
 import PageNotFound from '../../pages/PageNotFound';
 import Aside from './sub-components/Aside';
 import Dashboard from './sub-components/Dashboard';
+import User from './sub-components/User'; //- the actual user settings page
 
 // import Settings from './sub-components/Settings'; //-- The business settings
 // import Aside from './sub-components/Dashboard'; //-- High Level data about business and user
-// import User from './sub-components/User'; //- the actual user settings page
 // import Appointments from './sub-components/Appointments'; //-- Appointment Management
 
 //------------------------------------------------------------------------------
@@ -71,8 +71,8 @@ export default function Business() {
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
   const [Users, setUsers] = useState(DB_User); 
-  const user_id     = '0000-0000';
-  const user     = Users[user_id];
+  // const user_id     = '0000-0000';
+  // const user     = Users[user_id];
 
   //-- Business Page State
   const [business, setBusiness] = useState({
@@ -86,8 +86,8 @@ export default function Business() {
   // let business = {}; //-- The Specific Business response for the logged in user from API
   
 
-    //----------------------------------------------------------------------------
-    /* VALIDATING PARAMS
+  //----------------------------------------------------------------------------
+  /* VALIDATING PARAMS
 
     validateParams
       Looking to see if valid params are provided.
@@ -106,43 +106,65 @@ export default function Business() {
       4. If valid business info but invalid or no appointment_type_id
         - Loads default schedule
   */
-
-    
   const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
-
-    let business_id = "";
+    
+    let validRequest = null;  //-- is a valid request to Business component was made, true.
 
 
     // 1. If No business_id, no business_name or invalid values found, exit
     if(!business_id_or_brand_name){
       //-- Doesn't exist, re-route to homepage or 404 page 
       //-- this should not happen technically
+      validRequest = false;
     }
     
     // 2. If  valid business_id or business_name extract just the business ID
       // -- grabs it and stores into const here
     //TODO:: 04/09/22 #EP | 
-    if(!Businesses[business_id_or_brand_name]){
+    else if(!Businesses[business_id_or_brand_name]){
       // navigate('/')
-      business_id = false
+      validRequest = false
       
     }
 
     //-- if the param received matches, update the state with the business info
-    if(Businesses[business_id_or_brand_name]){
-    
-      setBusiness({...business, businessData: Businesses[business_id_or_brand_name]});
-      business_id = business_id_or_brand_name;
+    else if(Businesses[business_id_or_brand_name]){
+
+      const businessData = Businesses[business_id_or_brand_name];
       
-    }
+      //TODO:: 04/10/22 #EP || Need to simplify this massively.
+      const businessUsersRaw = Businesses[business_id_or_brand_name].Users;
+      const businessUsers = () =>{
+        return Businesses[business_id_or_brand_name].Users.map( user => {
+          // console.log("//-- User: ")
+          // console.log(Users[user])
+          return Users[user];
+        })
+      };
+      const usersClean = businessUsers();
+      
+      setBusiness({
+        ...business,
+        "businessData": businessData,
+        "businessUsers" :  businessUsersRaw,
+        //TODO:: 04/10/22 #EP || Know the Specific User here, or use JWT for that?
+        "userData"    : usersClean
+      });
+
+      validRequest = true;
+      
+    };
+    
 
     // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
-    return business_id;
+    return validRequest;
   }
    
   useEffect( () => {
     validateParams();
-    console.log(business);
+    
+    console.log(`//-- Business Component: Received Payload:`);
+    console.log(business)
   },[]);
 
    //----------------------------------------------------------------------------
@@ -158,7 +180,9 @@ export default function Business() {
   /* Verify Request Integrity
   */
   //-- Verifying if requests are made properly or not
-  const checkState = () => {
+  const state = () => {
+    //TODO:: 04/10/22 #EP || Convert to an actual useState function
+    // const [state, setState] = useState({
 
     let response = true
 
@@ -170,11 +194,11 @@ export default function Business() {
     //3. if does not, just return false
     if(!business['businessData']['_id']){ 
       response = false; 
-      console.log(business)
+      console.log("//-- Business Component: no business id found...")
     }
     
     return response;
-  }
+  };
 
 //----------------------------------------------------------------------------
   /* Page Location and Logic
@@ -185,6 +209,7 @@ export default function Business() {
   const businessPages = { 
     // 1 : "", 
     1 : <Dashboard appointmentDetails={business.businessData.Appointment} />,
+    2: <User userData={business.userData} />
     // 1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
     // 2: <DateTime nextStep={nextStep}/>,
     // 3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
@@ -198,12 +223,12 @@ export default function Business() {
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
       
-        {/* { checkState()
-              ? <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} /> 
+        {/* { state()
+              ? <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} /> 
               && schedulerPages[step]
               : <PageNotFound /> */}
               {(() => {
-                switch(checkState()) {    
+                switch(state()) {    
                   case true:  return (
                     <section className="page business">
                       
@@ -214,7 +239,7 @@ export default function Business() {
 
                       {/* Main Content Area in Business Page */}
                       <section className="businessMain">
-                        {businessPages[menuSelection]}
+                        {businessPages[2]}
                       </section>
                     </section>
                   );
