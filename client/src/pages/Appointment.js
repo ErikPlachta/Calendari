@@ -61,13 +61,13 @@ export default function Appointment({appointment_confirmation_id}) {
       <h1>Thanks for Scheduling your Appointment! Please see details below:</h1>
       <ul>
         <li>
-          We will see you on {appointment_date} at {appointment_time}.
+          We will see you on DATE{appointment_date} at TIME{appointment_time}.
         </li>
         <li>
           Confirmation ID: {appointment_id}{appointment_confirmation_id}
         </li>
         <li>
-          Questions? Concerns? Cancellations? Please email us at email@noemail.com with your confirmation number and questions.
+          Questions? Concerns? Cancellations? Please email us at email@noemail.com.
         </li>
       </ul>
     </section>
