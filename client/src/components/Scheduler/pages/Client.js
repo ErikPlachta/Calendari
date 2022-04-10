@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import ReCAPTCHA from "react-google-recaptcha";
 
 const { 
   capitalizeFirstLetter,
@@ -21,10 +21,13 @@ const {
 //-- EXPORT FUNCTION
 
 export default function Client({nextStep, appointment_template}) {
+
+  //-- reference variable for the captcha result response code
+  const recaptchaRef = React.createRef();
   
   const [formDetails, setFormDetails] = useState({
     from_name: '',
-    to_name: 'Erik Plachta',
+    to_name: 'Calendari',
     from_phone: '',
     message: '',
     reply_to: '',
@@ -95,15 +98,12 @@ export default function Client({nextStep, appointment_template}) {
                     </span>
                     
                     {/* PHONE NUMBER */}
-                    <span>
-                      <label htmlFor='contact-phone'>Phone</label>
-                      <input typeof='phone' id='contact-phone'></input>
-                    </span>
+                    
                     <span className="form-element">
-                      <label htmlFor="phone">Phone Number</label>
+                      <label htmlFor="contact-phone">Phone Number</label>
                       <input
                         name="phone"
-                        id="phone"
+                        id="contact-phone"
                         type="tel"
                         aria-label="Please enter your phone number"
                         placeholder="ex. (111)-111-1111"
@@ -114,9 +114,18 @@ export default function Client({nextStep, appointment_template}) {
                     </span>
                     
                     {/* EMAIL ADDRESS */}
-                    <span>
-                      <label htmlFor='contact-email'>Email</label>
-                      <input typeof='email' id='contact-email'></input>
+                    <span className="form-element">
+                      <label htmlFor="contact-email">Email Address</label>
+                      <input
+                        name="reply_to"
+                        id="contact-email"
+                        type="email"
+                        placeholder='your@email.com'
+                        required
+                        autoComplete="email"
+                        onChange={handleChange}
+                        value={formDetails.reply_to}
+                      />
                     </span>
 
                     {/* DESCRIPTION */}
@@ -125,12 +134,19 @@ export default function Client({nextStep, appointment_template}) {
                       <textarea  id='contact-email' rows="10" />
                     </span>
 
+                    {/* RECAPTCHA */}
+                    <span className="form-element" id='recaptcha'>
+                      {/* Captcha*/}
+                      <ReCAPTCHA
+                        ref={recaptchaRef}
+                        sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+                        onChange={e => (formDetails['g-recaptcha-response']=e)}
+                      />
+                    </span>
+
                     {/* SUBMIT BUTTON */}
-                    <span>
-                      <label htmlFor='contact-submit'></label>
-                      <button onClick={nextStep} id='contact-submit'>
-                        Create my Appointment  
-                      </button>
+                    <span className="form-element"> 
+                      <input type="submit" className="button" id="contact-submit" value="Submit" />
                     </span>
 
                   </div>

@@ -23,6 +23,7 @@
     "concurrently": "^5.1.0"
   },
   "dependencies": {
+    "react-google-recaptcha": "^2.1.0",
     "react-router": "^6.3.0"
   }
 }
