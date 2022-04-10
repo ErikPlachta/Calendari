@@ -20,7 +20,7 @@ const {
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
 
-export default function Client({nextStep, appointment_template}) {
+export default function Client({nextStep, createAppointment, appointment_template}) {
 
   //-- reference variable for the captcha result response code
   const recaptchaRef = React.createRef();
@@ -79,11 +79,11 @@ export default function Client({nextStep, appointment_template}) {
     return null;
   }
 
-  console.log(appointment_template)
+  // console.log(appointment_template)
   return (
     <section className="page clientContact">
       <h3>Enter your Contact Information</h3>
-      <form id="clientContactForm" className="containerResults">
+      <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
@@ -92,9 +92,18 @@ export default function Client({nextStep, appointment_template}) {
                   <div className="clientContactForm">
                     
                     {/* CLIENT NAME */}
-                    <span>
-                      <label htmlFor='contact-name'>Your Name</label>
-                      <input typeof='text' id="contact-name" defaultValue="Your name here"></input>
+                    <span className="form-element">
+                      <label htmlFor="client-name">Your Name</label>
+                      <input
+                        name='from_name'
+                        id="client-name"
+                        type='text'
+                        placeholder='Full Name'
+                        required
+                        autoComplete='given-name'
+                        onChange={handleChange}
+                        value={formDetails.client_name}
+                      />
                     </span>
                     
                     {/* PHONE NUMBER */}

@@ -162,12 +162,13 @@ export default function Scheduler() {
 
   //-- Move to the next step
   const nextStep = nextStepButton => {
-    nextStepButton.preventDefault();
+    // nextStepButton.preventDefault();
     
     //-- set the template state variable state
     setAppointment_template(nextStepButton.target.id);
     
     // console.log(nextStepButton.target.id)
+    console.log(nextStepButton.target)
     // console.log(appointment_template)
     
     const nextStepButton_id = nextStepButton.target.id;
@@ -190,7 +191,7 @@ export default function Scheduler() {
   const schedulerPages = {
     1: <BusinessScheduler business={business} business_id={business_id} nextStep={nextStep}></BusinessScheduler>,
     2: <DateTime nextStep={nextStep}/>,
-    3: <Client nextStep={nextStep} appointment_template={appointment_template}/>,
+    3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
     4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
   };
 
