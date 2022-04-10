@@ -27,19 +27,15 @@ import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg'
 import './assets/css/styles.css';
 import './assets/css/animations.css';
 
+
 function App() {
 
   useEffect(() => {
     document.title = `Calendari`;
   },[]);
 
-
-
-  //TODO:: 04/09/22 #EP || Temp hardcoded to verify params passing
-  // const business_id_or_brand_name = '0000-AAAA';
-  // const appointment_type_id = '0000-0000';  
-
   return (
+
     <BrowserRouter>
     <Nav bob1={bob1} />
     <main>
@@ -56,7 +52,6 @@ function App() {
         <Route path='/a/:appointment_id' element={<Appointment/>}/>
         <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
 
-        
       </Routes>
     </main>
     <Footer />
@@ -65,32 +60,3 @@ function App() {
 }
 
 export default App;
-
-/* verified working no routes version
-<section>
-  <Nav bob1={bob1} />
-  <main>
-    <Home></Home>
-    <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
-  </main>
-</section>
-
-*/
-
-/* ROUTE VERSION BACKUP
-  <BrowserRouter>
-    <main>
-      <Routes>
-        <Route path="/" element={< Home />} />
-        <Route path="/Business" element={< Business />} />
-        <Route path="/BusinessScheduler" element={< BusinessScheduler />} />
-        <Route path="/Scheduler" 
-          element={
-              <Scheduler business_id_or_name={business_id_or_name} appointment_type_id={appointment_type_id}  />
-          }
-        />
-      </Routes>
-    </main>
-    <Footer />
-  </BrowserRouter>
-*/
