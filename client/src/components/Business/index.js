@@ -9,9 +9,7 @@ import Aside from './sub-components/Aside';
 import Dashboard from './sub-components/Dashboard';
 import UserSettings from './sub-components/UserSettings'; //- the actual user settings page
 import BusinessSettings from './sub-components/BusinessSettings'; //-- The business settings
-
-// import Aside from './sub-components/Dashboard'; //-- High Level data about business and user
-// import Appointments from './sub-components/Appointments'; //-- Appointment Management
+import Appointments from './sub-components/Appointments'; //-- Appointment Management
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -61,9 +59,6 @@ export default function Business() {
 
   //------------------------------------------------------------------------------
   /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
-  useEffect(() => {
-    document.title = `Calendari - BUSINESS_NAME_PLACEHOLDER`;
-  },[]);
 
   const {business_id_or_brand_name, appointment_type_id} = useParams();
 
@@ -77,10 +72,13 @@ export default function Business() {
   //-- Business Page State
   const [business, setBusiness] = useState({
     // "config"        : {}, //-- placeholder for templates //TODO:: 04/10/22 #EP || Add these in Phase3
-    "userData"      : "",
-    "businessData"  : "",
+    "userData"        : "",
+    "businessData"    : "",
+    "appointmentData" : ""
   })
-  
+
+  //-- Verifying if requests are made properly or not
+  const [state, setState] = useState( false );
   
   //-- TODO:: not hard-coded like this
   // let business = {}; //-- The Specific Business response for the logged in user from API
@@ -143,16 +141,20 @@ export default function Business() {
       };
       const usersClean = businessUsers();
       
+      const appointmentData = businessData.Appointment;
+
       setBusiness({
         ...business,
+        "appointmentData" : appointmentData,
         "businessData": businessData,
-        "businessUsers" :  businessUsersRaw,
+        "businessUsers" :  businessUsersRaw, 
         //TODO:: 04/10/22 #EP || Know the Specific User here, or use JWT for that?
-        "userData"    : usersClean
+        "userData"    : usersClean,
       });
 
       validRequest = true;
-      
+      //04/10/22 #EP || Assuming valid load attempt, setting state of load as true
+      setState(validRequest)
     };
     
 
@@ -162,9 +164,10 @@ export default function Business() {
    
   useEffect( () => {
     validateParams();
+    document.title = `Calendari - BUSINESS_NAME_PLACEHOLDER`;
     
-    console.log(`//-- Business Component: Received Payload:`);
-    console.log(business)
+    // console.log(`//-- Business Component: Received Payload:`);
+    // console.log(business)
   },[]);
 
    //----------------------------------------------------------------------------
@@ -176,30 +179,6 @@ export default function Business() {
 
   //-- Browser Local Storage Checking
 
-  //-------------------------
-  /* Verify Request Integrity
-  */
-  //-- Verifying if requests are made properly or not
-  const state = () => {
-    //TODO:: 04/10/22 #EP || Convert to an actual useState function
-    // const [state, setState] = useState({
-
-    let response = true
-
-    //1. See if Local Storage Contains data
-
-    //2. If it does, return to that state
-    // setStep(localStorageNumber);
-
-    //3. if does not, just return false
-    if(!business['businessData']['_id']){ 
-      response = false; 
-      console.log("//-- Business Component: no business id found...")
-    }
-    
-    return response;
-  };
-
 //----------------------------------------------------------------------------
   /* Page Location and Logic
   */
@@ -210,8 +189,8 @@ export default function Business() {
     // 1 : "", 
     // 0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
     1 : <UserSettings userData={business.userData} />,
-    2 : <BusinessSettings businessData={business.businessData} />
-    // 4: <Appointments appointmentData={business.Appointments} />
+    2 : <BusinessSettings businessData={business.businessData} />,
+    3 : <Appointments appointmentData={business.appointmentData} />
   };
 
   //----------------------------------------------------------------------------
@@ -219,34 +198,35 @@ export default function Business() {
   return (
     <section className="page scheduler">
       
-      {/* contains the step location, back arrow, and has awareness of if local storage or not */}
-      
-        {/* { state()
-              ? <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} /> 
-              && schedulerPages[step]
-              : <PageNotFound /> */}
-              {(() => {
-                switch(state()) {    
-                  case true:  return (
-                    <section className="page business">
-                      
-                      {/* Aside bar within the business page */}
-                      <section className="businessAside">
-                        {/* <Aside businessName={business.businessData.name} userName={business.userData.name} /> */}
-                        <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />
-                      </section>
+      {/* contains the step location, back arrow, and has awareness of if local storage or not */}  
+      {(() => {
+        switch(state) {    
+          case true:  return (
+            <section className="page business">
+              
+              {/* Aside bar within the business page */}
+              <section className="businessAside">
+                <Aside businessName={business.businessData.name} userName={business.userData.name} />
+              </section>
+              
+              <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />
 
-                      {/* Main Content Area in Business Page */}
-                      <section className="businessMain">
-                        {businessPages[3]}
-                      </section>
-                    </section>
-                  );
-                  case false: return <PageNotFound />;
-                  //TODO::04/10/22 #EP | Add loading
-                  default:    return <PageNotFound />;
-                }
-            })()}
+              {/* Main Content Area in Business Page */}
+              <section className="businessMain">
+                <h4>page 1</h4>
+                {businessPages[1]}
+                <h4>page 2</h4>
+                {businessPages[2]}
+                <h4>page 3</h4>
+                {businessPages[3]}
+              </section>
+            </section>
+          );
+          case false: return <PageNotFound />;
+          //TODO::04/10/22 #EP | Add loading
+          default:    return <PageNotFound />;
+        }
+    })()}
     </section>
   )
 }

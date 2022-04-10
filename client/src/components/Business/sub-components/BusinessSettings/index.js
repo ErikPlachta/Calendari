@@ -57,8 +57,6 @@ export default function BusinessSettings(businessData) {
     //2. If it does, return to that state
     // setStep(localStorageNumber);
 
-    console.log(business)
-
     //3. if does not, just return false
     if(!business){ 
       response = false; 
