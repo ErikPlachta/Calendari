@@ -11,6 +11,7 @@ import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
 import Appointment from './pages/Appointment';
 import Business from "./pages/Business"
+import BusinessNew from "./components/Business"
 
 // import { setContext } from '@apollo/client/link/context';
 
@@ -47,6 +48,8 @@ function App() {
         {/* scheduler */}
         {/* Expecting the business_id OR brand_name, optional appointment_type_id to skip landing page */}
         {/* <Route path="/s/:business_id_or_brand_name(/:appointment_type_id)" element={ <Scheduler/> } */}
+        <Route path="/bn" element={<BusinessNew/>} />
+        <Route path="/bn/:business_id_or_brand_name" element={<BusinessNew/>} />
         <Route path="/b/"   element={<Business/>}/>
         <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
         <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>

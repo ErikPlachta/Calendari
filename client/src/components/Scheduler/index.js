@@ -41,7 +41,7 @@ const DB_Business = require('../../assets/json/business.json');
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Scheduler
 
-  props: (business_id_or_name, appointment_type_id)
+  URL PARAMS: (business_id_or_name, appointment_type_id)
     - business_id_or_name:    The business they're scheduling for
     - appointment_type_id:    The ID of the Appointment they selected
 */
