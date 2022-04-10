@@ -1,47 +1,54 @@
 import { gql } from '@apollo/client';
 
-// query all users
-export const QUERY_USERS = gql`
-    query Users {
-        users {
+// query all businesses
+export const QUERY_BUSINESSES = gql`
+    query AllBusinesses {
+        allBusinesses {
             _id
-            name_first
-            name_last
-            username
-            email
-            date_created
-            appointments {
-                user_id
-                business_id
-            }
+            name
+            brand_name
         }
     }
 `;
 
-// query all businesses
-export const QUERY_BUSINESSES = gql`
-    query Businesses {
-        businesses {
+// query users and respective appointments by business
+export const QUERY_USER_APPTS = gql`
+    query Business($brandName: String!) {
+        business(brand_name: $brandName) {
             _id
             name
             brand_name
-            configuration
             users {
+                _id
                 name_first
                 name_last
                 email
+                phone_number
                 appointments {
-                    appointment_name
+                    _id
+                    appointment_date
+                    appointment_time
                     appointment_status
                 }
             }
+        }
+    }
+`;
+// query just appointments by business
+export const QUERY_APPTS = gql`
+    query Business($brandName: String!) {
+        business(brand_name: $brandName) {
+            _id
+            name
+            brand_name
             appointment_types {
+                _id
+                appt_type_name
                 summary
                 appointment_duration
             }
             appointments {
-                appointment_name
-                appointment_duration
+                _id
                 appointment_date
                 appointment_time
                 appointment_status
@@ -49,20 +56,23 @@ export const QUERY_BUSINESSES = gql`
         }
     }
 `;
-
-// query all appointments
-export const QUERY_APPOINTMENTS = gql`
-    query Appointments {
-        appointments {
-            user_id
-            business_id
-            appointment_name
-            appointment_duration
-            appointment_date
-            appointment_time
-            appointment_status
+// query single user
+export const QUERY_USER = gql`
+    query User($username: String!) {
+        user(username: $username) {
+            _id
+            name_first
+            name_last
+            username
+            email
+            phone_number
+            date_created
+            appointments {
+                _id
+                appointment_date
+                appointment_time
+                appointment_status
+            }
         }
     }
 `;
-// query user by username
-
