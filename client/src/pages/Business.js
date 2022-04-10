@@ -135,11 +135,9 @@ export default function Business() {
         </header>
 
 
-        <section className="containerResults dashboard">
+        <section className="containerResults dashboard"> 
           {/* Dashboard is high-level summary  */}
-          <section className="containerResults">
               <h3>Dashboard</h3>
-              <p>placeholder text for summary, here.</p>
 
               <h4>Appointments</h4>
               <ul>
@@ -147,13 +145,12 @@ export default function Business() {
                 <li>Completed: </li>
                 <li>Canceled: </li>
               </ul>
-            </section>
         </section>
         
 
          {/* Build appointment details here. */}
          <section className="containerResults scheduledAppointments">
-          <h3>Here are your schedule appointments</h3>
+          <h3>Here are your scheduled appointments</h3>
           
           <div className='scheduledAppointments'>
             
@@ -209,7 +206,7 @@ export default function Business() {
 
         </section>
         
-        
+        {/* THIS SHOULD BE FUTURE DEVELOPMENT */}
         <section className="containerResults dayOfWeek">
             {/* Setup Days of Week, section. */}
             <h3>It looks like your schedule needs to be setup!</h3>
