@@ -138,12 +138,10 @@ export default function Business() {
         <section className="containerResults dashboard"> 
           {/* Dashboard is high-level summary  */}
               <h3>Dashboard</h3>
-
-              <h4>Appointments</h4>
               <ul>
-                <li>Scheduled: </li>
-                <li>Completed: </li>
-                <li>Canceled: </li>
+                <li>Scheduled Appointments: </li>
+                <li>Completed Appointments: </li>
+                <li>Canceled Appointments: </li>
               </ul>
         </section>
         
