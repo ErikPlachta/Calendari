@@ -1,0 +1,48 @@
+import { gql } from '@apollo/client';
+
+// create new business
+export const ADD_BUSINESS = gql`
+    mutation AddBusiness($name: String!, $brandName: String!) {
+        addBusiness(name: $name, brand_name: $brandName) {
+            _id
+            name
+            brand_name
+        }
+    }
+`;
+// create new user
+export const ADD_USER = gql`
+    mutation AddUser($nameFirst: String!, $nameLast: String!, $email: String!, $username: String!, $password: String!, $phoneNumber: String!, $businessId: ID!) {
+        addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId) {
+            _id
+            name_first
+            name_last
+            username
+            email
+            date_created
+            phone_number
+        }
+    }
+`;
+// create new appointment type
+export const ADD_APPT_TYPE = gql`
+    mutation AddApptType($businessId: ID!, $apptTypeName: String!, $summary: String!) {
+            addApptType(business_id: $businessId, appt_type_name: $apptTypeName, summary: $summary) {
+                _id
+                appt_type_name
+                summary
+                appointment_duration
+        }
+    }
+`;
+// create new appointment
+export const ADD_APPT = gql`
+    mutation AddAppt($businessId: ID!, $userId: ID!, $appointmentStatus: String!, $appointmentTime: String!, $appointmentDate: String!, $apptTypeId: ID!) {
+        addAppt(business_id: $businessId, user_id: $userId, appointment_status: $appointmentStatus, appointment_date: $appointmentDate, appointment_time: $appointmentTime, appt_type_id: $apptTypeId) {
+            _id
+            appointment_date
+            appointment_time
+            appointment_status
+        }
+    }
+`;
