@@ -247,10 +247,12 @@ export default function Scheduler() {
               : <PageNotFound /> */}
               {(() => {
                 switch(checkState()) {    
-                  case true:  return ([
-                        schedulerPages[step],
-                        <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />
-                  ]);
+                  case true:  return (
+                    <section>
+                        {schedulerPages[step]}
+                        (<StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />)
+                    </section>
+                  );
                   case false: return <PageNotFound />;
                   default:    return <PageNotFound />;
                 }

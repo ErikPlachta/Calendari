@@ -140,10 +140,12 @@ export default function Business() {
               : <PageNotFound /> */}
               {(() => {
                 switch(checkState()) {    
-                  case true:  return ([
-                    <h2>{business.name}</h2>
+                  case true:  return (
+                  <section>
+                      <h2>{business.name}</h2>
+                      <h3>Welcome Message, here</h3>
                         
-                  ]);
+                  </section>);
                   case false: return <PageNotFound />;
                   default:    return <PageNotFound />;
                 }
