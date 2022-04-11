@@ -66,13 +66,17 @@ function App() {
         <Routes>
           <Route path="/" element={< Home />} />
           <Route path="/Home" element={< Home />} />
+
           <Route path="/Login" element={< Login />} />
           <Route path="/signup" element={< Signup />} />
-          <Route path="/b/:business_id_or_brand_name" element={<Business/>} />
-          <Route path="/business" element={<Business/>} />
-          <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
-          <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
+
+          <Route path="/b/:business_id_or_brand_name"         element={<Business/>} />
+          <Route path="/business/:business_id_or_brand_name"  element={<Business/>} />
+
+          <Route path="/s/:business_id_or_brand_name"           element={<Scheduler/>}/>
+          <Route path="/schedule/:business_id_or_brand_name"    element={<Scheduler/>}/>
           <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
+
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
         </Routes>

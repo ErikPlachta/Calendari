@@ -66,6 +66,8 @@ export default function Scheduler() {
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
   const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
+  
+  
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
   const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
@@ -104,16 +106,17 @@ export default function Scheduler() {
 
     let validRequest = null;
 
-
     // 1. If No business_id, no business_name or invalid values found, exit
     if(!business_id_or_brand_name){
       //-- Doesn't exist, re-route to homepage or 404 page 
       //-- this should not happen technically
+      //TODO:: 04/11/22 #EP || Add this
+      validRequest = false
     }
     
     // 2. If  valid business_id or business_name extract just the business ID
       // -- grabs it and stores into const here
-    //TODO:: 04/09/22 #EP | 
+    //TODO:: 04/09/22 #EP | Connect to GraphQL Results
     if(!Businesses[business_id_or_brand_name]){
       // navigate('/')
       validRequest = false
@@ -121,27 +124,28 @@ export default function Scheduler() {
     }
 
     //-- if the business ID or brand_name IS in the database
+    //TODO:: 04/09/22 #EP | Connect to GraphQL Results
     if(Businesses[business_id_or_brand_name]){
       //-- 1. Update Scheduler state
       setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
       //-- 2. Confirm it's a valid request
       validRequest = true;
+      //-- 3. Set Scheduler state to true so page loads
       setState(validRequest);
     }
     
-    // 3. Does appointment_type_id exist and if yes for this business
+    // 4. Does appointment_type_id exist and if yes for this business
       //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
-    // if(appointment_type_id) {
-      //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
-      // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
-      //-- Otherwise ignore it and/or update screen with message
-    // }
-
-    // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
-    return validRequest;
-  }
+      // if(appointment_type_id) {
+        //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
+        // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
+        //-- Otherwise ignore it and/or update screen with message
+      // }
 
     
+    return validRequest;
+  }
+  
   useEffect(() => {
     const validRequest = validateParams();
     console.log(`validRequest: ${validRequest}`)
@@ -190,8 +194,9 @@ export default function Scheduler() {
     
     if(nextStepButton_id === "contact-submit"){
       setAppointment_confirmation_id(nextStepButton_id);
-      createAppointment()
+      createAppointment();
     }
+
     else {
       setStep(step+1);
     }
@@ -238,7 +243,11 @@ export default function Scheduler() {
           switch(state) {    
             case true:  return (
               <section>
+                  
+                  {/* The current step / page in the scheduler */}
                   {schedulerPages[step]}
+                  
+                  {/* The bottom status bar */}
                   (<StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />)
               </section>
             );

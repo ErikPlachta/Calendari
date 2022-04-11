@@ -12,15 +12,6 @@ const {
   dateTimeFullLocal
 } = require('../../../utils/helpers');
 
-
-//-- HARDCODED DATA USED TO SIMULATE DATA CALLS FROM DATABASE
-//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_User =              require('../../../assets/json/user.json');
-const DB_Business =          require('../../../assets/json/business.json');
-const DB_Appointment =       require('../../../assets/json/appointment.json');
-const DB_Appointment_Type =  require('../../../assets/json/appointment_type.json');
-
-
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION - BusinessScheduler
 export default function BusinessScheduler({business, business_id, nextStep}) {
@@ -33,15 +24,8 @@ export default function BusinessScheduler({business, business_id, nextStep}) {
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
 
-  //-- extract business from database based on JWT id
-  // const business = Businesses[business_id];
-  // const business = businessobj;
+  //TODO:: 04/05/22 #EP || Add extract from JWT - business from database based on JWT id
   const appointment_types = business.configuration.appointment_types;
-
-  //TODO:: 04/05/22 #EP || When selecting appointment type, move to next steps
-  const startScheduling = selectedAppointment => {
-    selectedAppointment.preventDefault();
-  };
 
   //----------------------------------------------------------------------------
   //-- RETURN JSX ELEMENT

@@ -28,7 +28,8 @@ const {
   dateDayOfWeek,
   dateHourOfDay,
   dateGetTimePassed,
-  dateTimeFullLocal
+  dateTimeFullLocal,
+  validateEmail
 } = require('../../utils/helpers');
 
 //------------------------------------------------------------------------------
@@ -38,8 +39,6 @@ const {
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_User =     require('../../assets/json/user.json');
 const DB_Business = require('../../assets/json/business.json');
-
-
 
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Business
@@ -58,7 +57,6 @@ export default function Business() {
   /*  1. VERIFY IF LOGGED IN    */
   //TODO:: 04/05/22 #EP || Add auth, for now assuming logged in
   const authCheck = true;
-
 
   //------------------------------------------------------------------------------
   /*  2. IF LOGGED IN GET AUTH TOKEN THAT CONTAINS BUSINESS ID AND USER ID  */
@@ -207,14 +205,17 @@ export default function Business() {
   //-- This is an INDEX of available sub-components that can be rendered
   //TODO:: 04/10/22 #EP || How to make this a state? ( when I try it doesn't function properly )
   const businessPages = {
-    1 : <UserSettings userData={business.userData} />,
+    1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
-    3 : <Appointments appointmentData={business.appointmentData} />,
+    3 : <Appointments     appointmentData={business.appointmentData} />,
+    // 4: <AppointmentTypes appointmentTypeData={business.appointmentTypeData} />,
   };
+
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
+
   return (
-    <section className="page scheduler">
+    <section className="page business">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}  
       {(() => {
