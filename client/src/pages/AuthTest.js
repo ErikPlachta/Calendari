@@ -14,39 +14,34 @@ export default function AuthTest() {
     //-- the logged-in user
     const [user, setUser] = useState("");
     const [login, { error }] = useMutation(LOGIN_USER);
+    const [formData, setFormData] = useState({
+        email: "eriks@email.com",
+        password: "password"
+    });
 
+    //TODO:: 04/11/22 #EP || Add to login
     const handleFormSubmit = async (event) => {
+        //TODO:: 04/11/22 #EP || uncomment this
         // event.preventDefault();
-
-        const userPayload = {
-            username: "erikplachta", 
-            email: "erik@noemail.com"
-            
-        };
-    
         try {
           const { data } = await login({
-            variables: { ...userPayload },
+            variables: { ...formData },
           });
-    
-          console.log(data)
           Auth.login(data.login.token);
         }
-        
         catch (e) {
-            
+            //TODO:: 04/11/22 #EP || Add UI msg here instead
             console.log(`Error: ${e}`);
+            console.error(`${e}`);
         }
     
       };
 
     useEffect(() => {
        
+        //-- for login page, force simulating a submit
         handleFormSubmit()
         
-        // console.log(userPayload)
-        // setUser( auth.login());
-        // console.log(Auth.AuthService.getToken())
         console.log(Auth.isLoggedIn())
     }, []);
 

@@ -1,9 +1,11 @@
 const faker = require('faker'); /* https://fakerjs.dev/api/ */
 
+const bcrypt = require('bcrypt');
+
 const db = require('../config/connection');
 const { User, Business, Appointment, Appointment_Type } = require('../models');
 
-seedExplicitData()
+// seedExplicitData()
 
 function seedExplicitData(){
     db.once('open', async () => {
