@@ -9,6 +9,8 @@ import { setContext } from '@apollo/client/link/context';
 //------------------------------------------------------------------------------
 //-- PAGES
 import Nav from './components/Nav';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
@@ -57,23 +59,25 @@ function App() {
   },[]);
 
   return (
-    <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Nav bob1={bob1} />
-        <main>
-          <Routes>
-            <Route path="/" element={< Home />} />
-            <Route path="/Home" element={< Home />} />
-            <Route path="/b/:business_id_or_brand_name" element={<Business/>} />
-            <Route path="/business" element={<Business/>} />
-            <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
-            <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
-            <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
-            <Route path='/a/:appointment_id' element={<Appointment/>}/>
-            <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
-          </Routes>
-        </main>
-      <Footer />
+  <ApolloProvider client={client}>
+    <BrowserRouter>
+      <Nav bob1={bob1} />
+      <main>
+        <Routes>
+          <Route path="/" element={< Home />} />
+          <Route path="/Home" element={< Home />} />
+          <Route path="/Login" element={< Login />} />
+          <Route path="/signup" element={< Signup />} />
+          <Route path="/b/:business_id_or_brand_name" element={<Business/>} />
+          <Route path="/business" element={<Business/>} />
+          <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
+          <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
+          <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
+          <Route path='/a/:appointment_id' element={<Appointment/>}/>
+          <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
+        </Routes>
+      </main>
+      <Footer bob1={bob1}/>
     </BrowserRouter>
   </ApolloProvider>
   );

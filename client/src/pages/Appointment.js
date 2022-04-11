@@ -54,11 +54,22 @@ import { Redirect, useParams } from "react-router-dom";
 
 export default function Appointment({appointment_confirmation_id}) {
   //-- Can be the busines_id or the business_name
-  const { appointment_id } = useParams();
+  const { appointment_id, appointment_date, appointment_time} = useParams();
 
   return (
-    <section>
-      <h1>Appointment Confirmation ID: {appointment_id}{appointment_confirmation_id} </h1>
+    <section class="containerResults">
+      <h1>Thanks for Scheduling your Appointment! Please see details below:</h1>
+      <ul>
+        <li>
+          We will see you on DATE{appointment_date} at TIME{appointment_time}.
+        </li>
+        <li>
+          Confirmation ID: {appointment_id}{appointment_confirmation_id}
+        </li>
+        <li>
+          Questions? Concerns? Cancellations? Please email us at email@noemail.com.
+        </li>
+      </ul>
     </section>
   )
 }

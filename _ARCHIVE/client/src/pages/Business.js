@@ -133,25 +133,20 @@ export default function Business() {
         
 
 
-        <section className="containerResults dashboard">
+        <section className="containerResults dashboard"> 
           {/* Dashboard is high-level summary  */}
-          <section className="containerResults">
               <h3>Dashboard</h3>
-              <p>placeholder text for summary, here.</p>
-
-              <h4>Appointments</h4>
               <ul>
-                <li>Scheduled: </li>
-                <li>Completed: </li>
-                <li>Canceled: </li>
+                <li>Scheduled Appointments: </li>
+                <li>Completed Appointments: </li>
+                <li>Canceled Appointments: </li>
               </ul>
-            </section>
         </section>
         
 
          {/* Build appointment details here. */}
          <section className="containerResults scheduledAppointments">
-          <h3>Here are your schedule appointments</h3>
+          <h3>Here are your scheduled appointments</h3>
           
           <div className='scheduledAppointments'>
             
@@ -201,51 +196,10 @@ export default function Business() {
                 </div>
               </section>
             ))}
-            
-            
-          </div>
 
-        </section>
-        
-        
-        <section className="containerResults dayOfWeek">
-            {/* Setup Days of Week, section. */}
-            <h3>It looks like your schedule needs to be setup!</h3>
-            
-            <div className='dayOfWeek'>
-                <p>Please confirm the days and times you are available for appointments.</p>
-                <form className='dayOfWeek'>
-                    {Object.keys(schedule).map( (dayOfWeek, index) => (
-                    <div>
-                        
-                        <h4>{capitalizeFirstLetter(dayOfWeek)}</h4>
-                        {/* Go through each day of week, present days with times and if verified */}
-                        {Object.keys(schedule[dayOfWeek]).map((value, index) => ( 
-                            <span>
-                            {(() => {
-                                switch (value) {
-                                    case 'start'    :   return  <input type='time' id={(`${dayOfWeek}_start`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                                    case 'end'      :   return  <input type='time' id={(`${dayOfWeek}_end`)} defaultValue={schedule[dayOfWeek][value]}></input>;
-                                    case 'verified' :   return  <input type="checkbox" id={(`${dayOfWeek}_verified`)} />;
-                                    // checked={checked ? 'checked' : ''}
-                                    default         :   return "NULL";
-                                }
-                                })()}
-                            {/* { (`${schedule[dayOfWeek][time]} -`)  || schedule[dayOfWeek][time] } */}
-                            </span>
-                        ))}
-                    </div>
-                    ))}
-                    {/* submit button for times */}
-                    <input type='button' value="Approve Times" onClick={approveTimes}></input>
-                </form>
             </div>
         </section>
-        
-        
-
       </main>
-
     </section>
   )
 }
