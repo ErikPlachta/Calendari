@@ -1,4 +1,3 @@
-
 @import url("./animations.css");
 /*------------------------------------------------------------------------------
   ROOT VARIABLES
@@ -178,7 +177,7 @@ button {
 
 
 
-/*wave code for homepage and wherever else we can implement*/
+/*WAVE CODE AND GENERAL BODY CODE*/
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
 body {
@@ -191,11 +190,51 @@ h1 {
   letter-spacing: 2px;
   font-size:48px;
 }
+
+h3 {
+  color: var(--plum);
+}
+
 p {
   font-family: 'Lato', sans-serif;
   letter-spacing: 1px;
-  font-size:14px;
+  font-size:16px;
   color: var(--plum);
+}
+
+li {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+  font-size: 14px;
+}
+
+table {
+ width: 60%;
+ border-collapse: collapse;
+}
+
+th {
+  height: 30px;
+  text-align: center;
+  font-weight:bold;
+  padding: 10px;
+  border: 2px solid var(--plum);
+  color:#e952de;
+  background-color: var(--plum);
+}
+
+tr, td {
+  height:20px;
+  text-align: center;
+  padding: 10px;
+  border: 2px solid var(--plum);
+}
+
+.tableContainer {
+  margin-left:auto;
+  margin-right: auto;
+  padding: 20px;
+  margin: 20px;
 }
 
 .slogan {
