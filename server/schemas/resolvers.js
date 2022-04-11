@@ -6,8 +6,7 @@ const resolvers = {
         // find all businesses
         allBusinesses: async () => {
             return Business.find()
-                .select('-__v -password')
-                .populate({ path: 'users', populate: 'appointments' })
+                .select('-__v')
                 .populate('appointment_types')
                 .populate('appointments')
         },
