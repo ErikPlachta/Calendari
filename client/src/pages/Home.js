@@ -5,7 +5,7 @@ export default function Home() {
   const {capitalizeFirstLetter} = require('../utils/helpers');
 
   return (
-    <section class="homeBackground">
+    <section>
       <div id="wavecontainer">
         <div id="calendariSlogan" class="slogan">
             <h1 class="inner-header flex">Your Schedule: Untangled</h1>

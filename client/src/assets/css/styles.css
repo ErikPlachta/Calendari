@@ -126,7 +126,7 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--C04);
+  background-color: var(--darker-purple);
 }
 
 main{
@@ -588,6 +588,7 @@ progress[value]{
 .navHeader {
   padding: 0 2rem; 
   margin: 0;
+  background-color: white;
 }
 
 .navHeader div{
