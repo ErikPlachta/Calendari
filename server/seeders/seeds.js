@@ -90,7 +90,8 @@ function seedExplicitData(){
                                         "client"        : {
                                                             "name": "",
                                                             "email": "",
-                                                            "phone": ""
+                                                            "phone": "",
+                                                            "note" : ""
                                         }
                 }
             },
@@ -109,7 +110,8 @@ function seedExplicitData(){
                                         "client"        : {
                                                             "name": "",
                                                             "email": "",
-                                                            "phone": ""
+                                                            "phone": "",
+                                                            "note" : ""
                                         }
                 }
             }
@@ -129,11 +131,6 @@ function seedExplicitData(){
                 {
                     "_id"               :   "0000-0000-1111",
                     "status"            :   "Scheduled",
-                    "User"              :   {
-                                                "_id"           :   "0000-0000",
-                                                "name_first"    :   "Kathryn",
-                                                "name_last"     :   "Janeway"
-                    },
                     "Business"          :   {
                                                 "business_id"           :   "0000-AAAA",
                     },
@@ -151,18 +148,14 @@ function seedExplicitData(){
                                                 "client"        : {
                                                                     "name": "Mary",
                                                                     "email": "mary@noemail.com",
-                                                                    "phone": "000-867-5309"
+                                                                    "phone": "000-867-5309",
+                                                                    "note" : "a fake note"
                                                 }
                     }
                 },
                 {
                     "_id"               :   "0000-0000-1112",
                     "status"            :   "Scheduled",
-                    "User"              :   {
-                                                "_id"           :   "0000-0000",
-                                                "name_first"    :   "Benjamin",
-                                                "name_last"     :   "Sisko"
-                    },
                     "Business"          :   {
                                             "business_id"           :   "0000-AAAA",
                     },
@@ -271,16 +264,17 @@ function seedExplicitData(){
         console.log("##-- Starting relational data...")
 
         console.log("##-- All Users to business.. ")
+        
         const allUsers = await User.find();
         const allBusinesses = await Business.find();
-        // console.log(allUsers)
+        console.log(allUsers)
 
         for (let i = 0; i < allUsers.length; i += 1) {
-            const user_id = allUsers[i].user_id
+            
             const _id = allUsers[i]._id
             
             await Business.updateOne(
-                { business_id: "0000-AAAA" },
+                { _id: allBusinesses[0]._id },
                 { $addToSet: {
                     Users: _id
                 }}
