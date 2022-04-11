@@ -40,6 +40,10 @@ const typeDefs = gql`
         user(username: String!): User
         business(brand_name: String!): Business
     }
+    type Auth {
+        token: ID!
+        user: User
+    }
     type Mutation {
         addUser(
             name_first: String!, 
@@ -50,6 +54,10 @@ const typeDefs = gql`
             phone_number: String!, 
             business_id: ID!
         ): User
+        login(
+            email: String!,
+            password: String!
+        ): Auth
         addBusiness(
             name: String!, 
             brand_name: String!
