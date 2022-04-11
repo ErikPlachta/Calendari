@@ -14,7 +14,7 @@ const {
   dateHourOfDay,
   dateGetTimePassed,
   dateTimeFullLocal
-} = require('../utils/helpers');
+} = require('../../../../client/src/utils/helpers');
 
 
 //------------------------------------------------------------------------------
@@ -22,10 +22,10 @@ const {
 
 //-- Hardcoded data used to simulate the Database
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_User =              require('../assets/json/user.json');
-const DB_Business =          require('../assets/json/business.json');
-const DB_Appointment =       require('../assets/json/appointment.json');
-const DB_Appointment_Type =  require('../assets/json/appointment_type.json');
+const DB_User =              require('../../../../client/src/assets/json/user.json');
+const DB_Business =          require('../../../../client/src/assets/json/business.json');
+const DB_Appointment =       require('../../../../client/src/assets/json/appointment.json');
+const DB_Appointment_Type =  require('../../../../client/src/assets/json/appointment_type.json');
 
 
 //------------------------------------------------------------------------------
@@ -130,9 +130,7 @@ export default function Business() {
       <main className="container business">
         
         {/* Main Header Section on Business Page */}
-        <header className="business">  
-          <p>Welcome, {user.name_first}. </p>
-        </header>
+        
 
 
         <section className="containerResults dashboard"> 
