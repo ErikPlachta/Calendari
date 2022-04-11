@@ -193,8 +193,6 @@ function seedExplicitData(){
         console.table(appointmentData)
 
 
-
-
         //--            BUSINESS
 
         const businessData = [
@@ -244,14 +242,14 @@ function seedExplicitData(){
                                     }
                 },
                 "Users"     :   [
-                                        "0000-0000",
-                                        "1111-1111",
-                                        "2222-2222"
+                                        // "0000-0000",
+                                        // "1111-1111",
+                                        // "2222-2222"
                 ],
                 "Appointments"  : [
-                                        "0000-0000-1111",
-                                        "0000-0000-2222",
-                                        "0000-0000-3333"   
+                                        // "0000-0000-1111",
+                                        // "0000-0000-2222",
+                                        // "0000-0000-3333"   
                 ]
             }
         ]
@@ -267,6 +265,35 @@ function seedExplicitData(){
         // await Business.updateOne({ _id: userId }, { $addToSet: { Users: userId } });
         // const Users = createdUser[createdUsers.length-1];
         // createdUsers.pop(); /* remove the last user from array after assigning it to business*/
+
+
+        // await Business.updateOne({ _id: userId }, { $addToSet: { Users: userId } });
+        console.log("##-- Starting relational data...")
+
+        console.log("##-- All Users to business.. ")
+        const allUsers = await User.find();
+        const allBusinesses = await Business.find();
+        // console.log(allUsers)
+
+        for (let i = 0; i < allUsers.length; i += 1) {
+            const user_id = allUsers[i].user_id
+            const _id = allUsers[i]._id
+            
+            await Business.updateOne(
+                { business_id: "0000-AAAA" },
+                { $addToSet: {
+                    Users: _id
+                }}
+        
+            );
+            // console.log(allUsers[i])
+
+        }
+
+
+
+
+
 
 
         console.log('//-- Explicit relational seeding for StarFleet is completed');
@@ -471,7 +498,7 @@ function seedRandomData(){
         //-- Add created users to database
         const createdBusinesses = await Business.collection.insertMany(businessData);
 
-        console.log("##-- Created Businesses complete.")
+        console.log("##-- Created Businesses complete...")
         console.table(businessData)
         
 
