@@ -51,12 +51,12 @@ function App() {
         <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
         <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
         <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
-        <Route path='/a/:appointment_id' element={<Appointment/>}/>
-        <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
+        <Route path="/a/:appointment_id" element={<Appointment/>}/>
+        <Route path="/appointment/:appointment_id" element={<Appointment/>}/>
 
       </Routes>
     </main>
-    <Footer />
+    <Footer bob1={bob1}/>
   </BrowserRouter>
   );
 }
