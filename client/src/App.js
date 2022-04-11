@@ -77,7 +77,6 @@ function App() {
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
         </Routes>
       </main>
-      <section>
         <br></br>
         <br></br>
         <br></br>
@@ -85,7 +84,6 @@ function App() {
         <br></br>
         <br></br>
         <br></br>
-      </section>
       <Footer bob1={bob1}/>
     </BrowserRouter>
   </ApolloProvider>

@@ -5,7 +5,7 @@ export default function Home() {
   const {capitalizeFirstLetter} = require('../utils/helpers');
 
   return (
-    <section>
+    <section class="homeBackground">
       <div id="wavecontainer">
         <div id="calendariSlogan" class="slogan">
             <h1 class="inner-header flex">Your Schedule: Untangled</h1>
@@ -28,7 +28,7 @@ export default function Home() {
           <p>By Erik, Christiana and Mary Margaret</p>
         </div>
       </div>
-      <div id="whatIsThis">
+      <div id="whatIsThis" class="homeInformation">
         <h3>What is Calendari?</h3>
         <p>
           Calendari is a scheduling app for your business. It gives business owners the
@@ -38,7 +38,10 @@ export default function Home() {
           plans to customize the look of the website!
         </p>
       </div>
-      <div id="whyIsThisDifferent">
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id="whyIsThisDifferent" class="homeInformation">
       <h3>Why is Calendari Different from Other Scheduling Apps?</h3>
         <p>
           Calendari differs from other scheduling apps because of it's easy, clean interface
@@ -49,7 +52,10 @@ export default function Home() {
            the current scheduling apps on the market, check them out below!
         </p>
       </div>
-      <div id="futureDev">
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id="futureDev" class="homeInformation">
       <h3>What Does the Future Hold for Calendari?</h3>
         <p>
           We are always looking to improve our customers experience on the app. A few of our enhancements we are currently working outlined below:
@@ -60,7 +66,10 @@ export default function Home() {
           <li>Schedule Selection - Allows the busines owner the option to select their hours of operation per day instead of the same hours every day.</li>
         </ul>
       </div>
-      <div id="freeVsPremium">
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id="freeVsPremium" class="homeInformation">
       <h3>What's the Difference Between Free and Premium?</h3>
       <br></br>
         <div classname="tableContainer">
