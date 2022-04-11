@@ -14,7 +14,8 @@ export default function Login() {
   //-- Form data goes here when submit to make the login attempt
   const [user, setUser] = useState({
     "email"     : "",
-    "password"  : ""
+    "password"  : "",
+    "submitAttempts" : 0
   });
   //-- When login pressed, attempt to login 
   const [login, { error }] = useMutation(LOGIN_USER);
@@ -22,13 +23,18 @@ export default function Login() {
   // update state based on form input changes
   const handleChange = (event) => {
     const { name, value } = event.target;
+    
     setUser({
       ...user,
       [name]: value,
     });
     
-    //-- blank out error if there was one
-    document.getElementById("login-form-message").innerText="";
+    //-- If a username, password are in form and tried to submit, run this otherwise don't.
+    if(user.email && user.password && user.submitAttempts>0 ){
+      //-- blank out error if there was one
+      document.getElementById("login-form-message").classList.add('fade-out');
+      document.getElementById("login-form-message").style.opacity="0";
+    }
     
   };
 
@@ -36,6 +42,8 @@ export default function Login() {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
 
+    //-- count every attempt
+    setUser({...user, submitAttempts: user.submitAttempts+1});
     //-- Attempt to login with Auth
     try {
       const { data } = await login({
@@ -58,9 +66,11 @@ export default function Login() {
   const errorPopup = (e) => {
     // console.log(e)
     if ((e.toString()).includes('Incorrect credentials')) {
-      console.log("incorrect creds")
-      document.getElementById("login-form-message")
-        .innerText="Invalid Credentials, please try again."
+      
+      //-- Message for Incorrect Creds
+      document.getElementById("login-form-message").style.opacity="1";
+      document.getElementById("login-form-message").classList.remove('fade-out');
+      document.getElementById("login-form-message").classList.add('fade-in');
     } 
     
     else {
@@ -88,7 +98,7 @@ export default function Login() {
           //-- if NOT logged in, prompt login screen
           case false:    return (
             <div className="login-form containerResults">
-              <h2 alt="please login">Please login to continue</h2>
+              <h2 alt="please login">Get Logged In</h2>
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
                 <input
@@ -110,7 +120,7 @@ export default function Login() {
                     name="password"
                     type="password"
                     id="password"
-                    minlength="8"
+                    minlength="6"
                     autoComplete='current-password'
                     value={user.password}
                     onChange={handleChange}
@@ -123,9 +133,14 @@ export default function Login() {
                   id="login-form"
                 />
               </form>
+              <p id="login-form-signup-message" style={{opacity: "1"}}>
+                <a href='/signup'>Don't have an account yet? Get Signed Up, here!</a>
+              </p>
 
               {/* Used to notify if login event failure */}
-              <span id="login-form-message"></span>
+              <h5 id="login-form-message" style={{opacity: "0"}}>
+                Invalid Credentials, please try again
+              </h5>
             </div>
           )
 
