@@ -9,7 +9,7 @@ export default function Footer(props) {
         <img alt="Bob" src={bob1} width="50px"></img>
       </div>
       <div class="footerElements">
-        <p>Copyright of Mary Margaret Lawton, Erik Platcha, and Christiana Sullivan Morales</p> 
+        <p>Copyright of Mary Margaret Lawton, Erik Plachta, and Christiana Sullivan Morales</p> 
       </div>
     </footer>
 
