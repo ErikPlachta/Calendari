@@ -20,10 +20,10 @@ export default function Nav(props) {
             <nav>
                 <ul>
                     <li>
-                        <a href="#signup" alt="signup">Signup</a>
+                        <a href="/signup" alt="signup">Signup</a>
                     </li>
                     <li>
-                        <a href="#login" alt="login">Login</a>
+                        <a href="/login" alt="login">Login</a>
                     </li>
                 </ul>
             </nav>
