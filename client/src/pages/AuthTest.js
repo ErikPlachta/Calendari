@@ -29,6 +29,7 @@ export default function AuthTest() {
           });
           Auth.login(data.login.token);
         }
+        
         catch (e) {
             //TODO:: 04/11/22 #EP || Add UI msg here instead
             console.log(`Error: ${e}`);
@@ -38,15 +39,13 @@ export default function AuthTest() {
       };
 
     useEffect(() => {
-       
-        //-- for login page, force simulating a submit
-        handleFormSubmit()
         
         console.log(Auth.isLoggedIn())
     }, []);
 
 
     if(!Auth.isLoggedIn()){
+
         return (
             <div>
                 <h2>AuthTest</h2>
