@@ -6,7 +6,8 @@ const resolvers = {
         // find all businesses
         allBusinesses: async () => {
             return Business.find()
-                .select('-__v')
+                .select('-__v -password')
+                .populate({ path: 'users', populate: 'appointments' })
                 .populate('appointment_types')
                 .populate('appointments')
         },
@@ -19,6 +20,10 @@ const resolvers = {
         // find business by brand name
         business: async (parent, { brand_name }) => {
             return Business.findOne({ brand_name })
+                //TODO:: 04/10/22 #EP | Inline Notes of Change Requests
+                /* 
+                   - add by brand_name or by business_id
+                */
                 .select('-__v -password')
                 .populate({ path: 'users', populate: 'appointments' })
                 .populate('appointment_types')

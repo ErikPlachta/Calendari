@@ -11,6 +11,13 @@ export const QUERY_BUSINESSES = gql`
     }
 `;
 
+
+//TODO:: 04/10/22 #EP || Inline notes of change requests
+/*
+    - Add configuration as it's required 
+    - Rename to QUERY_BUSINESS
+ */
+
 // query users and respective appointments by business
 export const QUERY_USER_APPTS = gql`
     query Business($brandName: String!) {

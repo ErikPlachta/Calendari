@@ -1,15 +1,22 @@
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react';
-import { Redirect, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
+import { useQuery, useMutation } from '@apollo/client';
+// import  { QUERY_USER_APPTS } from '../../utils/queries';
+import  { QUERY_BUSINESSES } from '../../utils/queries';
 
 //------------------------------------------------------------------------------
 //-- PAGES
+
 import PageNotFound from '../../pages/PageNotFound';
 import Aside from './sub-components/Aside';
 import Dashboard from './sub-components/Dashboard';
 import UserSettings from './sub-components/UserSettings'; //- the actual user settings page
 import BusinessSettings from './sub-components/BusinessSettings'; //-- The business settings
 import Appointments from './sub-components/Appointments'; //-- Appointment Management
+
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -31,6 +38,8 @@ const {
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_User =     require('../../assets/json/user.json');
 const DB_Business = require('../../assets/json/business.json');
+
+
 
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Business
@@ -62,7 +71,13 @@ export default function Business() {
 
   const {business_id_or_brand_name, appointment_type_id} = useParams();
 
-  
+  //-- Database Query
+  const { loading, data } = useQuery( QUERY_BUSINESSES );
+  // const { loading, data } = useQuery(QUERY_USER_APPTS, {
+  //   variables: {brandName: business_id_or_brand_name} 
+  // });
+
+
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
   const [Users, setUsers] = useState(DB_User); 
@@ -167,14 +182,24 @@ export default function Business() {
     // console.log(business)
   },[]);
 
+  if(loading){
+    console.log("//-- Still Loading")
+    // return <Navigate to="/b/test" />;
+  }
+
+  if(!loading){
+    console.log("//-- done loading")
+    console.log(data);
+  }
+
+
    //----------------------------------------------------------------------------
   /* Browser Local Storage AND CURRENT STATE CHECKING State checking
     - Should it load anything from local-storage vs default
-  */
 
     //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-
-  //-- Browser Local Storage Checking
+    //-- Browser Local Storage Checking
+  */
 
 //----------------------------------------------------------------------------
   /* Page Location and Logic
@@ -216,8 +241,8 @@ export default function Business() {
             </section>
           );
           case false: return <PageNotFound />;
-          //TODO::04/10/22 #EP | Add loading
-          default:    return <PageNotFound />;
+          //TODO::04/10/22 #EP | Add loading element
+          default:    return "Loading...";
         }
     })()}
     </section>

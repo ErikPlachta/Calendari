@@ -70,7 +70,8 @@ db.once('open', async () => {
                                 "name": "",
                                 "email": "",
                                 "phone": ""
-            }
+            },
+            "configuration" : {}
         };
         // const Appointments = {};
         // const Users = {};
