@@ -73,7 +73,7 @@ function App() {
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
         </Routes>
       </main>
-      <Footer />
+      <Footer bob1={bob1}/>
     </BrowserRouter>
   </ApolloProvider>
   );
