@@ -27,7 +27,7 @@ export default function AuthTest() {
           const { data } = await login({
             variables: { ...formData },
           });
-          Auth.login(data.login.token);
+          Auth.login(data.login.token,"test");
         }
         
         catch (e) {

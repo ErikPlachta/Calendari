@@ -29,6 +29,7 @@ export default function Nav({ bob1 }) {
                     {Auth.isLoggedIn() 
                         //-- If logged in, show this
                         ? (<>
+                            <li> <a href="/">Calendari</a> </li>
                             <li><Link to="/business">My Business</Link></li>
                             <li> <Link to="/business">My Scheduler</Link></li>
                             <li><a href="/" onClick={logout}> Logout </a> </li>

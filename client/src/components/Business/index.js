@@ -218,6 +218,7 @@ export default function Business() {
     <section className="page business">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}  
+      
       {(() => {
         switch(state) {    
           case true:  return (
