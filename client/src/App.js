@@ -9,6 +9,8 @@ import { setContext } from '@apollo/client/link/context';
 //------------------------------------------------------------------------------
 //-- PAGES
 import Nav from './components/Nav';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
@@ -64,6 +66,8 @@ function App() {
         <Routes>
           <Route path="/" element={< Home />} />
           <Route path="/Home" element={< Home />} />
+          <Route path="/Login" element={< Login />} />
+          <Route path="/signup" element={< Signup />} />
           <Route path="/b/:business_id_or_brand_name" element={<Business/>} />
           <Route path="/business" element={<Business/>} />
           <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
