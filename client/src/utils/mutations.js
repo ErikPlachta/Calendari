@@ -24,6 +24,18 @@ export const ADD_USER = gql`
         }
     }
 `;
+//-- Login existing user
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+      }
+    }
+  }
+`;
 // create new appointment type
 export const ADD_APPT_TYPE = gql`
     mutation AddApptType($businessId: ID!, $apptTypeName: String!, $summary: String!) {

@@ -1,13 +1,16 @@
 import decode from 'jwt-decode';
 
+
+
 class AuthService {
+  
+  //-- Get token if user has one
   getCurrentUser() {
     return decode(this.getToken());
   }
 
-  
+  // Checks if there is a saved token and it's still valid
   isLoggedIn() {
-    // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
@@ -44,8 +47,8 @@ class AuthService {
   }
 }
 
+export default new AuthService();
 
-
-export function auth(){
-  return new AuthService()
-}
+// export function auth(){
+//   return new AuthService()
+// }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
-import {auth} from "../utils/authServices"
+import Auth from "../utils/authServices"
+
 
 export default function AuthTest() {
 
@@ -9,11 +10,31 @@ export default function AuthTest() {
 
 
     useEffect(() => {
-        setUser( auth.getCurrentUser());
+        const userPayload = ["erikplachta", "erik@noemail.com", "fakeid123"]
+        
+        // console.log(userPayload)
+        // setUser( auth.login());
+        // console.log(Auth.AuthService.getToken())
+        console.log(Auth.isLoggedIn())
     }, []);
 
 
+    if(!Auth.isLoggedIn()){
+        return (
+            <div>
+                <h2>AuthTest</h2>
+                User NOT logged in.
+            </div>
+        )
+    }
+    
+
+
   return (
-    <div>AuthTest</div>
+    <div>
+        <h2>AuthTest</h2>
+        {user}
+
+    </div>
   )
 }
