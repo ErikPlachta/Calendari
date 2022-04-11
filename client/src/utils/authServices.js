@@ -1,11 +1,12 @@
 import decode from 'jwt-decode';
 
 class AuthService {
-  getProfile() {
+  getCurrentUser() {
     return decode(this.getToken());
   }
 
-  loggedIn() {
+  
+  isLoggedIn() {
     // Checks if there is a saved token and it's still valid
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
@@ -43,4 +44,8 @@ class AuthService {
   }
 }
 
-export default new AuthService();
+
+
+export function auth(){
+  return new AuthService()
+}
