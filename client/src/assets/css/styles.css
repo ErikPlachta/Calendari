@@ -355,10 +355,7 @@ tr, td {
 .container{
   flex: 5 60%;
   /* width: 100%; */
-  
   /* min-width: 80%; */
-  
-  
 }
 
 /* Used for ALL business configuration menus ?  */
@@ -382,8 +379,26 @@ tr, td {
   background-color: white;
 }
 
-.homeBackground {
-  background-color: var(--darker-purple);
+.pinkh2 {
+    font-family: 'Lato', sans-serif;
+    font-weight:bolder;
+    letter-spacing: 2px;
+    color: var(--darker-pink);
+    text-align: center;
+    margin-top:40px;
+    margin-bottom:20px;
+}
+
+.signupInformation {
+  flex: 100%;
+  width: auto;
+  height: auto;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  padding: 50px 150px 50px 150px;
+  margin: 0px 400px 0px 400px;
+  line-height: 2;
+  background-color: white;
 }
 
 /*------------------------------------------------------------------------------

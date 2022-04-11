@@ -26,22 +26,25 @@ export default function Signup(props) {
 
   return (
     <section> 
-      <h2 alt="please sign up">Please sign up to continue</h2>
-      <div>
-        <label htmlFor="email">Email:</label>
-        {/* <input type="text" name="email" defaultValue={email} onBlur={errorPopup}/> */}
-        <input type="text" name="email" defaultValue="{email}" onBlur={errorPopup}/>
+      <h2 alt="please sign up" class="pinkh2">Please sign up to continue</h2>
+      <div class="signupInformation">
+        <div>
+          <label htmlFor="email">Email:</label>
+          {/* <input type="text" name="email" defaultValue={email} onBlur={errorPopup}/> */}
+          <input type="text" name="email" defaultValue="{email}" onBlur={errorPopup}/>
+        </div>
+        <div>
+            <label htmlFor="password">Password:</label>
+            <input type="password" name="password" defaultValue="{password}"  onBlur={errorPopup}/>
+        </div>
+        <div>
+          <button type="submit">Sign Up</button>
+        </div>
+        <div>
+          {/* <li><Link to={"/Login"} state={{from: Signup}}>Already have an account? Please Log in to continue</Link></li> */}
+        </div>
       </div>
-      <div>
-          <label htmlFor="password">Password:</label>
-          <input type="password" name="password" defaultValue="{password}"  onBlur={errorPopup}/>
-      </div>
-      <div>
-        <button type="submit">Sign Up</button>
-      </div>
-      <div>
-        {/* <li><Link to={"/Login"} state={{from: Signup}}>Already have an account? Please Log in to continue</Link></li> */}
-      </div>
+
     </section>
   )
 }
