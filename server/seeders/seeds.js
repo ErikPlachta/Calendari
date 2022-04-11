@@ -15,6 +15,8 @@ function seedExplicitData(){
         await Appointment_Type.deleteMany({});
     
 
+        //--            USER
+
         //-- seeder for StarFleet Users
         const userData = [
             {
@@ -67,6 +69,10 @@ function seedExplicitData(){
         console.log("##-- Created Users complete.")
         console.table(userData)
 
+
+        
+        //--            APPOINTMENT_TYPE
+
         //-- seeder for StarFleet Appointments
         const appointmentTypeData = [
             {
@@ -117,6 +123,8 @@ function seedExplicitData(){
         console.table(appointmentTypeData)
 
 
+        //--            APPOINTMENT
+
         const appointmentData = [
                 {
                     "_id"               :   "0000-0000-1111",
@@ -127,8 +135,7 @@ function seedExplicitData(){
                                                 "name_last"     :   "Janeway"
                     },
                     "Business"          :   {
-                                                "_id"           :   "0000-AAAA",
-                                                "brand_name"    :   "Erik's Business Brand Name"
+                                                "business_id"           :   "0000-AAAA",
                     },
                     "Appointment_Type"  :   {
                                                 "_id"           :   "0000-0000",
@@ -157,8 +164,7 @@ function seedExplicitData(){
                                                 "name_last"     :   "Sisko"
                     },
                     "Business"          :   {
-                                                "_id"           :   "0000-AAAA",
-                                                "brand_name"    :   "Erik's Business Brand Name"
+                                            "business_id"           :   "0000-AAAA",
                     },
                     "Appointment_Type"  :   {
                                                 "_id"           :   "0000-0000",
@@ -180,6 +186,16 @@ function seedExplicitData(){
                     }
         ]
 
+        //-- Add created appointment_type to database
+        const createdAppointmentData = await Appointment.collection.insertMany(appointmentData);
+
+        console.log("##-- Created Appointment Data complete.")
+        console.table(appointmentData)
+
+
+
+
+        //--            BUSINESS
 
         const businessData = [
             {
