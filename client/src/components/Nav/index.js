@@ -20,6 +20,12 @@ export default function Nav(props) {
             <nav>
                 <ul>
                     <li>
+                        <a href="/s/0000-AAAA" alt="scheduler">Scheduler/0000-AAAA</a>
+                    </li>
+                    <li>
+                        <a href="/b/0000-AAAA" alt="business">business/0000-AAAA</a>
+                    </li>
+                    <li>
                         <a href="/signup" alt="signup">Signup</a>
                     </li>
                     <li>
