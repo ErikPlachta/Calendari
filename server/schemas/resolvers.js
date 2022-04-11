@@ -79,6 +79,31 @@ const resolvers = {
                 { new: true, runValidators: true }
             )
             return appt;
+        },
+        // update user email or phone number
+        updateUser: async (parent, args) => {
+            const user = await User.findByIdAndUpdate(
+                { _id: args._id },
+                args,
+                { new: true, runValidators: true }
+            )
+            return user;
+        },
+        // update Appointment details
+        updateAppt: async (parent, args) => {
+            const appt = await Appointment.findByIdAndUpdate(
+                { _id: args._id },
+                args,
+                { new: true, runValidators: true }
+            )
+            return appt;
+        },
+        // delete Appointment Type 
+        delApptType: async (parent, args) => {
+            await Appointment_Type.findOneAndDelete(
+                { _id: args._id}
+            )
+            return;
         }
     }
 };

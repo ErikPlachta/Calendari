@@ -46,3 +46,35 @@ export const ADD_APPT = gql`
         }
     }
 `;
+// update user info
+export const UPDATE_USER = gql`
+    mutation UpdateUser($id: ID!, $phoneNumber: String, $email: String) {
+        updateUser(_id: $id, phone_number: $phoneNumber, email: $email ) {
+            _id
+            name_first
+            name_last
+            username
+            email
+            phone_number
+        }
+    }
+`;
+// update appointment info
+export const UPDATE_APPT = gql`
+    mutation UpdateAppt($id: ID!, $appointmentStatus: String, $appointmentTime: String, $appointmentDate: String) {
+        updateAppt(_id: $id, appointment_status: $appointmentStatus, appointment_time: $appointmentTime, appointment_date: $appointmentDate) {
+        _id
+        appointment_date
+        appointment_time
+        appointment_status
+        }
+    }
+`;
+// delete appointment type
+export const DEL_APPT_TYPE = gql`
+    mutation DelApptType($id: ID!) {
+        delApptType(_id: $id) {
+            _id
+        }
+    }
+`;
