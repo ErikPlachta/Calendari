@@ -3,7 +3,7 @@ const faker = require('faker'); /* https://fakerjs.dev/api/ */
 const db = require('../config/connection');
 const { User, Business, Appointment, Appointment_Type } = require('../models');
 
-
+seedExplicitData()
 
 function seedExplicitData(){
     db.once('open', async () => {
@@ -18,10 +18,11 @@ function seedExplicitData(){
         //-- seeder for StarFleet Users
         const userData = [
             {
-                "_id"           :   "0000-0000",
+                "user_id"       :   "0000-0000",
                 "name_first"    :   "Erik",
                 "name_Last"     :   "Plachta",
                 "username"      :   "Erik",
+                "email"         :   "erik@noemail.com",
                 "password_has"  :   "abcdefg-heres-my-password-don't-hack-me",
                 "date_created"  :   "1649213599934",
                 "date_login"    :   "1649213599934",
@@ -31,10 +32,11 @@ function seedExplicitData(){
                 "business_id"   :   "0000-AAAA"
             },
             {
-                "_id"           :   "1111-1111",
+                "user_id"       :   "1111-1111",
                 "name_first"    :   "Christiana",
                 "name_Last"     :   "Sullivan Morales",
                 "username"      :   "Christiana",
+                "email"         :   "christiana@noemail.com",
                 "password_has"  :   "abcdefg-heres-my-password-don't-hack-me",
                 "date_created"  :   "1649213599934",
                 "date_login"    :   "1649213599934",
@@ -44,10 +46,11 @@ function seedExplicitData(){
                 "business_id"   :   "0000-AAAA"
             },
             {
-                "_id"           :   "2222-2222",
+                "user_id"       :   "2222-2222",
                 "name_first"    :   "Mary",
                 "name_Last"     :   "Lawton",
                 "username"      :   "Mary",
+                "email"         :   "mary@noemail.com",
                 "password_has"  :   "abcdefg-heres-my-password-don't-hack-me",
                 "date_created"  :   "1649213599934",
                 "date_login"    :   "1649213599934",
@@ -61,7 +64,8 @@ function seedExplicitData(){
 
         //-- Add created users to database
         const createdUsers = await User.collection.insertMany(userData);
-
+        console.log("##-- Created Users complete.")
+        console.table(userData)
 
         //-- seeder for StarFleet Appointments
         const appointmentTypeData = [
@@ -104,13 +108,158 @@ function seedExplicitData(){
                 }
             }
         ]
-         
 
+        //-- Add created appointment_type to database
+        const createdAppointmentType = await Appointment_Type.collection.insertMany(appointmentTypeData);
+
+
+        console.log("##-- Created Appointment_Type complete.")
+        console.table(appointmentTypeData)
+
+
+        const appointmentData = [
+                {
+                    "_id"               :   "0000-0000-1111",
+                    "status"            :   "Scheduled",
+                    "User"              :   {
+                                                "_id"           :   "0000-0000",
+                                                "name_first"    :   "Kathryn",
+                                                "name_last"     :   "Janeway"
+                    },
+                    "Business"          :   {
+                                                "_id"           :   "0000-AAAA",
+                                                "brand_name"    :   "Erik's Business Brand Name"
+                    },
+                    "Appointment_Type"  :   {
+                                                "_id"           :   "0000-0000",
+                                                "name"          :   "General",
+                                                "description"   :   "Schedule an appointment with ${brand_name}."
+                    },
+                    "Details"           :   {
+                                                "subject"       : "Want to discuss X with You",
+                                                "summary"       : "I want to talk about x and go over y to accomplish z",
+                                                "date_time"          : "2022-04-13 10:00:00",
+                                                "duration"      : "45 minutes",
+                                                "timezone"      : "EST",
+                                                "client"        : {
+                                                                    "name": "Mary",
+                                                                    "email": "mary@noemail.com",
+                                                                    "phone": "000-867-5309"
+                                                }
+                    }
+                },
+                {
+                    "_id"               :   "0000-0000-1112",
+                    "status"            :   "Scheduled",
+                    "User"              :   {
+                                                "_id"           :   "0000-0000",
+                                                "name_first"    :   "Benjamin",
+                                                "name_last"     :   "Sisko"
+                    },
+                    "Business"          :   {
+                                                "_id"           :   "0000-AAAA",
+                                                "brand_name"    :   "Erik's Business Brand Name"
+                    },
+                    "Appointment_Type"  :   {
+                                                "_id"           :   "0000-0000",
+                                                "name"          :   "General",
+                                                "description"   :   "Schedule an appointment with ${brand_name}."
+                    },
+                    "Details"           :   {
+                                                "subject"       : "Want to discuss X with You",
+                                                "summary"       : "I want to talk about x and go over y to accomplish z",
+                                                "date_time"          : "2022-04-10 14:00:00",
+                                                "duration"      : "45 minutes",
+                                                "timezone"      : "EST",
+                                                "client"        : {
+                                                                    "name": "Christiana",
+                                                                    "email": "christiana@noemail.com",
+                                                                    "phone": "000-867-5309"
+                                                }
+                    }
+                    }
+        ]
+
+
+        const businessData = [
+            {
+                "business_id"       :   "0000-AAAA",
+                "name"              :   "Starfleet Academy",
+                "welcome"           :   "Welcome the the Starfleet Academy Online Scheduler.",
+                "brand_name"        :   "starfleet-academy",
+                "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+        
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+                },
+                "Users"     :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        ]
+         
+        //-- Add created users to database
+        const createdBusinesses = await Business.collection.insertMany(businessData);
+
+        console.log("##-- Created Businesses complete.")
+        console.table(businessData)
+        
+
+        //TODO:: 04/06/2022 #EP || Add relationships. ( basic concept below for future. )
+        // await Business.updateOne({ _id: userId }, { $addToSet: { Users: userId } });
+        // const Users = createdUser[createdUsers.length-1];
+        // createdUsers.pop(); /* remove the last user from array after assigning it to business*/
+
+
+        console.log('//-- Explicit relational seeding for StarFleet is completed');
+        process.exit(0);
     });
 };
 
 
-function seedUniqueData(){
+function seedRandomData(){
 
     //-- Make db connection, delete ALL content, and build clean seed data.
     db.once('open', async () => {
