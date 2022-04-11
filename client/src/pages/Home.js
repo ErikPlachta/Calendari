@@ -63,6 +63,7 @@ export default function Home() {
       </div>
       <div id="freeVsPremium">
       <h3>What's the Difference Between Free and Premium?</h3>
+      <br></br>
         <div classname="tableContainer">
           <table align="center">
             <thead>
@@ -85,7 +86,6 @@ export default function Home() {
               </tr>
               <tr>
                 <td>24/7 tech Support</td>
-
                 <td> ❌ </td>
                 <td> ✔️ </td>
               </tr>
