@@ -18,7 +18,7 @@ export const QUERY_BUSINESSES = gql`
     - Rename to QUERY_BUSINESS
  */
 
-// query users and respective appointments by business
+// query users and respecti-ve appointments by business
 export const QUERY_USER_APPTS = gql`
     query Business($brandName: String!) {
         business(brand_name: $brandName) {

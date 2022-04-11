@@ -73,6 +73,8 @@ export default function Scheduler() {
   //-- Extract URL Parameters
   const {business_id_or_brand_name, appointment_type_id} = useParams();
 
+  //-- Verifying if requests are made properly or not
+  const [state, setState] = useState( false );
 
   //-- used to ReRoute Navigation away if invalid details
   // const navigate = useNavigate();
@@ -124,6 +126,7 @@ export default function Scheduler() {
       setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
       //-- 2. Confirm it's a valid request
       validRequest = true;
+      setState(validRequest);
     }
     
     // 3. Does appointment_type_id exist and if yes for this business
@@ -216,36 +219,12 @@ export default function Scheduler() {
 
   //----------------------------------------------------------------------------
   /* Browser Local Storage State checking
-    - Should it load anything from local-storage vs default
+  - Should it load anything from local-storage vs default
+  
+      //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
+  
+      //-- Browser Local Storage Checking
   */
-
-    //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-
-  //-- Browser Local Storage Checking
-
-
-  //----------------------------------------------------------------------------
-  /* Verify Request Integrity
-  */
-
-  //-- Verifying if requests are made properly or not
-  const checkState = () => {
-
-    let response = true
-
-    //1. See if Local Storage Contains data
-
-    //2. If it does, return to that state
-    // setStep(localStorageNumber);
-
-    //3. if does not, just return false
-    if(!scheduler.businessData._id){ 
-      response = false; 
-      console.log(scheduler)
-    }
-    
-    return response;
-  }
   
   // 
   
@@ -255,23 +234,19 @@ export default function Scheduler() {
     <section className="page scheduler">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
-      
-        {/* { checkState()
-              ? <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} /> 
-              && schedulerPages[step]
-              : <PageNotFound /> */}
-              {(() => {
-                switch(checkState()) {    
-                  case true:  return (
-                    <section>
-                        {schedulerPages[step]}
-                        (<StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />)
-                    </section>
-                  );
-                  case false: return <PageNotFound />;
-                  default:    return <PageNotFound />;
-                }
-            })()}
+        {(() => {
+          switch(state) {    
+            case true:  return (
+              <section>
+                  {schedulerPages[step]}
+                  (<StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />)
+              </section>
+            );
+            case false: return <PageNotFound />;
+            //TODO:: 04/10/22 #EP || Add component for loading
+            default:    return "Loading...";
+          }
+        })()}
     </section>
   )
 };

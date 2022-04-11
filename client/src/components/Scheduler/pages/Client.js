@@ -167,7 +167,6 @@ export default function Client({nextStep, createAppointment, appointment_templat
         
         
       */}
-        abc
       </form>
     </section>
     
