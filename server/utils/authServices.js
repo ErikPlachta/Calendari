@@ -1,18 +1,15 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-//TODO:: 04/11/22 #EP || Update this with proper secret
-// const secret = 'mysecretsshhhhh';
 const secret = process.env.AUTH_SECRET;
 const expiration = '2h';
 
 module.exports = {
   authMiddleware: function({ req }) {
     // allows token to be sent via req.body, req.query, or headers
-    let token = req.body.token || req.query.token || req.headers.authorization;
+    const token = req.body.token || req.query.token || req.headers.authorization;
 
-    // ["Bearer", "<tokenvalue>"]
-    if (req.headers.authorization) {
+    if (req.headers.authorization) {     // ["Bearer", "<tokenvalue>"]
       token = token
         .split(' ')
         .pop()
@@ -33,10 +30,11 @@ module.exports = {
     return req;
   },
 
+  //-- This is used when attempting to login. 
+    // If Username and Password match database, sign a JWT token auth and return
   signToken: function({ username, email, _id }) {
     const payload = { username, email, _id };
-    console.log("Attempting to signToken")
-
+    // console.log("Attempting to signToken")
     return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
   }
 };
