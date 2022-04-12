@@ -11,13 +11,7 @@ const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const app = express();
-// const PORT = process.env.PORT || 3001;
-server.listen({ port: process.env.PORT || 3001 }).then(({ url }) => {
-  console.log(`
-    🚀  Server is ready at ${url}
-    📭  Query at https://studio.apollographql.com/dev
-  `);
-});
+const PORT = process.env.PORT || 3001 ;
 
 
 const startServer = async () => {
@@ -34,8 +28,12 @@ const startServer = async () => {
   // integrate our Apollo server with the Express application as middleware
   server.applyMiddleware({ app });
 
+
   // log where we can go to test our GQL API
-  console.log(`Server started. GraphQL middleware setup at http://localhost:${port}${server.graphqlPath}`);
+  console.log(`
+    Server started. 
+    GraphQL middleware setup at http://localhost:${PORT}${server.graphqlPath}`
+  );
 };
 
 // Initialize the Apollo server
@@ -50,9 +48,9 @@ app.use(express.json());
 //-- SETUP TO RUN FOR DEPLOYMENT SPECIFICALLY
 
 const path = require("path"); // Accessing the path module
-// Step 1:
+//-- route outside of server
 app.use(express.static(path.resolve(__dirname, "../client/build")));
-// Step 2:
+//-- point to build file
 app.get("*", function (request, response) {
   response.sendFile(path.resolve(__dirname, '../client/build', "index.html"));
 });
@@ -65,6 +63,6 @@ app.get("*", function (request, response) {
 
 console.log("Starting connection to database...")
 db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${port}`));
+  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
 });
 console.log("SUCCESS: connection to database!")
