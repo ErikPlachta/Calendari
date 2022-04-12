@@ -6,20 +6,25 @@ import { Navigate, useParams } from "react-router-dom";
 //-- JWT Auth
 import Auth from "../../utils/authServices"
 
-import { useQuery, useMutation } from '@apollo/client';
-// import  { QUERY_USER_APPTS } from '../../utils/queries';
-import  { QUERY_BUSINESSES } from '../../utils/queries';
 
 //------------------------------------------------------------------------------
 //-- PAGES
-
-import PageNotFound from '../../pages/PageNotFound';
 import Aside from './sub-components/Aside';
 import Dashboard from './sub-components/Dashboard';
 import UserSettings from './sub-components/UserSettings'; //- the actual user settings page
 import BusinessSettings from './sub-components/BusinessSettings'; //-- The business settings
 import Appointments from './sub-components/Appointments'; //-- Appointment Management
 
+//------------------------------------------------------------------------------
+//-- ASSETS
+import { useQuery, useMutation } from '@apollo/client';
+import  { QUERY_BUSINESSES } from '../../utils/queries';
+// import  { QUERY_USER_APPTS } from '../../utils/queries';
+
+//-- Hardcoded data used to simulate the Database
+//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
+const DB_User =     require('../../assets/json/user.json');
+const DB_Business = require('../../assets/json/business.json');
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -36,22 +41,7 @@ const {
 } = require('../../utils/helpers');
 
 //------------------------------------------------------------------------------
-//-- ASSETS
-
-//-- Hardcoded data used to simulate the Database
-//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_User =     require('../../assets/json/user.json');
-const DB_Business = require('../../assets/json/business.json');
-
-//------------------------------------------------------------------------------
-/* EXPORT FUNCTION - Business
-
-  //TODO:: 04/10/22 #EP || Update this
-  PROPS: (user_id)
-  URL PARAMS: (business_id_or_name)
-    - business_id_or_name:    The business they're scheduling for
-    
-*/
+/* EXPORT FUNCTION - Business URL PARAMS: (business_id_or_name) The business they're signing in with. */
 export default function Business() {
 
   const [menuSelection, setMenuSelection] = useState(1);  //-- The current page
@@ -97,30 +87,11 @@ export default function Business() {
   const [state, setState] = useState( false );
 
   //----------------------------------------------------------------------------
-  /* VALIDATING PARAMS
+  /* VALIDATING PARAMS - Is user signed in, is business from query in database */
 
-    validateParams
-      Looking to see if valid params are provided.
-
-      1. If empty business info
-        - Re-routes
-      
-        2. Check if valid business info provided
-        - If exists in database, load
-        - If not, re-routes
-
-      3. If valid business info AND provided appointment_type_id info
-        - If business has that appointment_type_id skip the select appointment type
-        - Otherwise ignore or show messages
-      
-      4. If valid business info but invalid or no appointment_type_id
-        - Loads default schedule
-  */
   const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
     
     let validRequest = null;  //-- is a valid request to Business component was made, true.
-
-
 
     //1. if NOT logged in, state false
     if(!Auth.isLoggedIn()){
@@ -129,38 +100,26 @@ export default function Business() {
     }
 
     // 2. If No business_id, no business_name or invalid values found, exit
-    else if(!business_id_or_brand_name){
-      //-- Doesn't exist, re-route to homepage or 404 page 
-      //-- this should not happen technically
-      validRequest = false;
-    }
+    else if(!business_id_or_brand_name){ validRequest = false; }
     
     // 3. If  valid business_id or business_name extract just the business ID
-    //TODO:: 04/09/22 #EP || connect to GQL
-    else if(!Businesses[business_id_or_brand_name]){
-      // navigate('/')
-      validRequest = false 
-    }
+    else if(!Businesses[business_id_or_brand_name]){ validRequest = false }
     
     // 4. If the param received matches, and If Logged in, load content
     else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){
 
-      const businessData = Businesses[business_id_or_brand_name];
-      
       //TODO:: 04/10/22 #EP || Need to simplify this massively.
+      const businessData = Businesses[business_id_or_brand_name];
       const businessUsersRaw = Businesses[business_id_or_brand_name].Users;
       const businessUsers = () =>{
         return Businesses[business_id_or_brand_name].Users.map( user => {
-          // console.log("//-- User: ")
-          // console.log(Users[user])
           return Users[user];
         })
       };
       const usersClean = businessUsers();
-      
       const appointmentData = businessData.Appointment;
-
-      setBusiness({
+      
+      setBusiness({ //-- update Business Page state from query data
         ...business,
         "appointmentData" : appointmentData,
         "businessData": businessData,
@@ -169,49 +128,31 @@ export default function Business() {
         "userData"    : usersClean,
       });
 
-      validRequest = true;
-      //04/10/22 #EP || Assuming valid load attempt, setting state of load as true
-      setState(validRequest)
+      validRequest = true; //-- was a valid request and completed
+      setState(validRequest); //-- Update overall Business Page state as TRUE to allow content to load
     };
 
-    // 5.  Otherwise exit
+    // 5.  Return this value
     return validRequest;
   }
    
+  //----------------------------------------------------------------------------
+  //-- Runs once, validates load state or directs the exit
+
   useEffect( () => {
-    validateParams();
-    document.title = `Calendari - BUSINESS_NAME_PLACEHOLDER`;
+    const validRequest = validateParams();
     
+    //-- IF valid request is TRUE, update title with business name. 
+    if(validRequest){ document.title = `Calendari - ${business.businessData.name}`};
     
-    // console.log(`//-- Business Component: Received Payload:`);
-    // console.log(business)
+    //-- IF NOTE valid request is TRUE, update title with Invalid Request
+    if(!validRequest){ document.title = `Calendari - Invalid Request`};
   },[]);
 
 
-  if(loading){
-    // console.log("//-- Still Loading")
-    // return <Navigate to="/b/test" />;
-  }
-  if(!loading){
-    // console.log("//-- done loading")
-    // console.log(data);
-  }
-
-
-   //----------------------------------------------------------------------------
-  /* Browser Local Storage AND CURRENT STATE CHECKING State checking
-    - Should it load anything from local-storage vs default
-
-    //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-    //-- Browser Local Storage Checking
-  */
-
-//----------------------------------------------------------------------------
-  /* Page Location and Logic
-  */
-  //-- This is an INDEX of available sub-components that can be rendered
-  //TODO:: 04/10/22 #EP || How to make this a useState obj? ( when I try it doesn't function properly )
-  const businessPages = {
+  //----------------------------------------------------------------------------
+  /* Page Location and Logic */
+  const businessPages = { //-- This is an INDEX of available sub-components that can be rendered
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
     3 : <Appointments     appointmentData={business.appointmentData} />,
@@ -219,27 +160,32 @@ export default function Business() {
   };
 
   //----------------------------------------------------------------------------
-  //-- RETURN STATEMENTS
+  /* TODO:: 04/09/22 #EP || Browser Local Storage AND CURRENT STATE CHECKING State checking */
 
+  //----------------------------------------------------------------------------
+  //-- RETURN STATEMENTS
   return (
     <section className="page business">
-      
-      {/* contains the step location, back arrow, and has awareness of if local storage or not */}  
-      
+    
+      {/* This switch checks the state to determine if loading, bad request, or good request. If good, loads content. */}
       {(() => {
         switch(state) {    
+          
+          //-- Returns here if user is logged in and successful database request
           case true:  return (
             <section className="page business">
               
               {/* Aside bar within the business page */}
               <section className="businessAside">
+                {/* TODO:: 04/10/22 #EP || Hide or stylize */}
                 <Aside businessName={business.businessData.name} userName={business.userData.name} />
               </section>
               
               <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />
 
               {/* Main Content Area in Business Page */}
-              <section className="businessMain">
+              <section className="businessMain"> 
+              {/* TODO:: 04/10/22 #EP || Need to not load ALL at once */}
                 <h4>page 1</h4>
                 {businessPages["1"]}
                 <h4>page 2</h4>
@@ -249,6 +195,7 @@ export default function Business() {
               </section>
             </section>
           );
+
           //-- if NOT loading, return loading, otherwise not logged in
           case false: return loading ? "Loading..." : <Navigate replace to="/login" />
           //TODO::04/10/22 #EP | Add loading element

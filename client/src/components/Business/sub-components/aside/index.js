@@ -15,15 +15,12 @@ export default function Aside({businessName, userName}) {
       
       {/* Business Menu */}
       <ul>
-        {/* Default landing page for business */}
-        <li>My Business</li>
-        {/* A summary of the business details overall */}
-        <li>Dashboard</li>
-        {/* Details on upcoming appointments */}
-        <li>Appointments</li>
-        {/* <li>Reporting</li> */}
-        {/* Used to configure options */}
-        <li>Settings
+        
+        <li>My Business</li> {/* Default landing page for business */}
+        <li>Dashboard</li> {/* A summary of the business details overall */}
+        <li>Appointments</li>  {/* Details on upcoming appointments */}
+        <li>Settings</li> {/* Used to configure options */}
+
           {/* nav choices -hidden for now */}
           {/* <ul>
             <li>My Account</li>
@@ -35,7 +32,7 @@ export default function Aside({businessName, userName}) {
               </ul>
             </li>
           </ul> */}
-        </li>
+          {/* <li>Reporting</li> */}
       </ul>
     </aside>
   )
