@@ -45,29 +45,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-
-
-//-- if in development mode, use graphql local pathing
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-  console.log('//-- server in development');
-  //-- SETUP TO RUN FOR DEPLOYMENT SPECIFICALLY
-  const path = require("path"); // Accessing the path module
-  //-- route outside of server
-  app.use(express.static(path.resolve(__dirname, "../client/build")));
-  //-- point to build file
-  app.get("*", function (request, response) {
-    response.sendFile(path.resolve(__dirname, '../client/build', "index.html"));
-  });
-  
-} ;
-
-//-- if in production mode, used by heroku so needs to update accordingly
-if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production'){
-  console.log('//-- server in production')
-  
-} ;
-
-
+//-- SETUP TO RUN FOR DEPLOYMENT SPECIFICALLY
+const path = require("path"); // Accessing the path module
+//-- route outside of server
+app.use(express.static(path.resolve(__dirname, "../client/build")));
+//-- point to build file
+app.get("*", function (request, response) {
+  response.sendFile(path.resolve(__dirname, '../client/build', "index.html"));
+});
 
 
 // if we're in production, serve client/build as static assets
