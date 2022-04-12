@@ -14,7 +14,6 @@ export default function Nav(props) {
                     <h2 className="brandName" alt="appointment scheduler">
                         Calendari
                     </h2>
-                    <span>Your schedule -- untangled</span>
                 </span>
             </div>
             <nav>
