@@ -727,6 +727,19 @@ progress[value]{
   background-color: white;
 }
 
+.navHeader a {
+  color: var(--plum);
+  font-weight: bold;
+}
+
+.navHeader a:hover {
+  color: var(--darker-pink)
+}
+
+.navheader a:visited {
+  color: var(--plum);
+}
+
 .navHeader div{
   display: flex;
   flex-direction: row;
