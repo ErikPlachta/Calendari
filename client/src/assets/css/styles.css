@@ -305,7 +305,7 @@ button {
 }
 
 /* the aside in the Business Page */
-.sidebar{
+.businessSidebar{
   /* border: 1px solid orangered; */
   flex: 1 20%;
   float: left;
@@ -316,8 +316,8 @@ button {
 }
 
 /* the UL in the Aside in the Business Page */
-.sidebarList,
-.sidebarList li
+.businessSidebarList,
+.businessSidebarList li
 {
   margin-top: .1rem;
   padding-left: 0; /* gets rid of spacing on the side normally on a list */
@@ -332,7 +332,7 @@ button {
 }
 
 /* The little + symbol on the aside after the text */
-.sidebarList li::after
+.businessSidebarList li::after
 {
   content: '\002B';
   float: right;
@@ -342,14 +342,14 @@ button {
 }
 
 /* When hovering the LI in the aside, effects */
-.sidebarList li:hover
+.sidebarbusinessSidebarListList li:hover
 {
   cursor: pointer;
   border-top: .5px solid var(--darker-purple);
   border-bottom: 2px solid var(--darker-purple);
   transform: scale(1.05);
 }
-.sidebarList li:hover::after{
+.businessSidebarList li:hover::after{
   color: var(--darker-purple);
   font-weight:900;
   transform: rotate(-90deg) translateY(-20px);
@@ -373,14 +373,23 @@ button {
   /* min-width: 80%; */
 }
 
+
+.containerResults {
+  background-color: var(--darker-pink);
+}
+
 /* Used for ALL business configuration menus ?  */
+.businessContainerResults,
 .containerResults {
   margin: 2rem;
   padding: 2rem;
   border-radius: 25px;
   box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
               2px 2px 10px -3px rgba(0,0,0,0.1);
-  background-color: var(--darker-pink);
+}
+
+.businessContainerResults{
+  background-color: var(--C00);
 }
 
 
@@ -429,8 +438,7 @@ table {
    text-align:center;
    vertical-align: middle;
    background: linear-gradient(180deg, var(--darker-purple) 0%, var(--lighter-purple) 30%, var(--darker-pink) 70%, var(--light-pink) 100%);
-   color:white;
-   height: 250px;
+   color:white;   
   padding-top:0;
  }
  
@@ -689,6 +697,7 @@ progress[value]{
 /*----------------------------------------------------------------------------*/
 /* APPOINTMENT TYPE CARDS */
 
+.businessDashboard,
 .appointment_type_card{
   display: flex;
   flex-direction: column;

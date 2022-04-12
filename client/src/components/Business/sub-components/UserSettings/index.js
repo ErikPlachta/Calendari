@@ -95,7 +95,7 @@ export default function UserSettings(userData) {
               {(() => {
                 switch(state()) {    
                   case true:  return (
-                    <div className="containerResults">
+                    <div className="businessContainerResults">
                       <h3>
                         {user._id 
                             ? `for ${user.name_first}'s` 

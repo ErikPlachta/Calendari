@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 export default function Aside({setPage, businessName, userName}) {
 
   return (
-      <aside className='sidebar'>
+      <aside className='businessSidebar'>
         {/* Side Navigational Bar */}
                         
       <header className="business">  
@@ -14,7 +14,7 @@ export default function Aside({setPage, businessName, userName}) {
       </header>
       
       {/* Business Menu */}
-      <ul className='sidebarList'>
+      <ul className='businessSidebarList'>
         
         <li id='aside-dashboard'  onClick={setPage}>Dashboard</li> {/* A summary of the business details overall */}
         <li id='aside-my-settings' onClick={setPage}>My Settings</li> {/* Used to configure options */}

@@ -13,7 +13,7 @@ import Appointment from '../../pages/Appointment'; //-- confirmation page
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
-import BusinessScheduler from './sub-components/BusinessScheduler';
+import AppointmentTypes from './sub-components/AppointmentTypes';
 import DateTime from './sub-components/DateTime';
 import Client from './sub-components/Client';
 
@@ -59,7 +59,7 @@ export default function Scheduler() {
   //TODO:: 04/09/22 #EP || Get this to work as a state 
   // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
 
-  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
+  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on AppointmentTypes page
   const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
   
   
@@ -148,7 +148,7 @@ export default function Scheduler() {
   }
   
   const schedulerPages = { //-- INDEX of Each Page, which is a step of scheduler
-    1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
+    1: <AppointmentTypes business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></AppointmentTypes>,
     2: <DateTime nextStep={nextStep}/>,
     3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
     4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />

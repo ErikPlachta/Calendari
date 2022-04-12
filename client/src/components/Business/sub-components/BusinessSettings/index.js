@@ -70,7 +70,7 @@ export default function BusinessSettings(businessData) {
               {(() => {
                 switch(state) {    
                   case true:  return (
-                    <div className="containerResults">
+                    <div className="businessContainerResults">
                       <h3>
                         {business._id 
                             ? `${business.name} `

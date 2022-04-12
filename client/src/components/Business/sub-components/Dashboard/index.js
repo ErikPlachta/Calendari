@@ -45,15 +45,9 @@ export default function Dashboard({appointmentDetails, businessName, userName}) 
 
 
   return (
-    <section className="containerResults dashboard">
+    <section className="businessContainerResults">
       {/* Dashboard is high-level summary  */}
-      <header className="business">  
-        <h2>{businessName}</h2>
-        <p>
-          Welcome, {userName ?userName :"NO_USER_NAME"}! 
-        </p>
-      </header>
-      <div>
+      <div id="businessDashboard">
         <h3>Dashboard</h3>
         <p>placeholder text for summary, here.</p>
 

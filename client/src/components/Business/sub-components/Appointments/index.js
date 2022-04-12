@@ -71,11 +71,12 @@ const {
     <section className="scheduledAppointments">
           <h3>Here are your schedule appointments</h3>
           
+          
           <div className='scheduledAppointments'>
             
             {Object.keys(appointments).map((appointment, index) => (
               // <h4>{capitalizeFirstLetter(appointment)}</h4>
-              <section className="containerResults scheduledAppointment" key={appointments[appointment]["_id"]}>
+              <section className="businessContainerResults scheduledAppointment" key={appointments[appointment]["_id"]}>
                 <div>
                   <h4>
                   {appointments[appointment]["User"]["name_first"]} {appointments[appointment]["User"]["name_last"]} has

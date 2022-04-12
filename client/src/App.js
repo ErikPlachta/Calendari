@@ -88,7 +88,7 @@ function App() {
           {/* push Page Not Found if bad route */}
           <Route path='*' element={ <PageNotFound />} ></Route>
         </Routes>
-      </main>
+      </main>{}
         <br></br>
         <br></br>
         <br></br>

@@ -14,7 +14,7 @@ const {
 
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION - BusinessScheduler
-export default function BusinessScheduler({business, business_id, nextStep}) {
+export default function AppointmentType({business, business_id, nextStep}) {
   
 
   //TODO:: 04/05/22 #EP || Add pull from JWT
