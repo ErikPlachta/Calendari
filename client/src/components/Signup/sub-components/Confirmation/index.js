@@ -12,15 +12,9 @@ const {
   dateTimeFullLocal
 } = require('../../../../utils/helpers');
 
-
-
-
-
-
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
-
-export default function Client({nextStep, createAppointment, appointment_template}) {
+export default function Confirmtion({nextStep}) {
 
   //-- reference variable for the captcha result response code
   const recaptchaRef = React.createRef();
@@ -37,7 +31,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
 
   //-- event listner on input
   const handleChange = (event) => {
-    setFormDetails({ ...formDetails, [event.target.name]: event.target.value,  });
+    setFormDetails({ ...formDetails, [event.target.name]: event.target.value, });
   };
 
   //-- phone validation
@@ -81,67 +75,19 @@ export default function Client({nextStep, createAppointment, appointment_templat
 
   // console.log(appointment_template)
   return (
-    <section className="page clientContact">
-      <h3>Enter your Contact Information</h3>
-      <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
-        {/* {appointment_template} */}
+    <section className="page signupConfirmation">
+      <h3>Please Review the Following Information</h3>
+      <p>Review the following information and then click Create Account to finalize your account setup.</p>
+      
+      {/* SUBMISSION FORM */}
+      <form id="confirmation-submit" className="containerResults" onSubmit={nextStep}>
         {(() => {
           switch("appointment_template"){
             // case "appointment_template": return "appointment_template";
             default: return (
                   <div className="clientContactForm">
                     
-                    {/* CLIENT NAME */}
-                    <span className="form-element">
-                      <label htmlFor="client-name">Your Name</label>
-                      <input
-                        name='from_name'
-                        id="client-name"
-                        type='text'
-                        placeholder='Full Name'
-                        required
-                        autoComplete='given-name'
-                        onChange={handleChange}
-                        value={formDetails.client_name}
-                      />
-                    </span>
-                    
-                    {/* PHONE NUMBER */}
-                    
-                    <span className="form-element">
-                      <label htmlFor="contact-phone">Phone Number</label>
-                      <input
-                        name="phone"
-                        id="contact-phone"
-                        type="tel"
-                        aria-label="Please enter your phone number"
-                        placeholder="ex. (111)-111-1111"
-                        autoComplete='tel'
-                        onKeyUp={onKeyUpPhone}
-                        // value={toSend.from_phone} //-- not needed, defined above in cleanup function.
-                      />
-                    </span>
-                    
-                    {/* EMAIL ADDRESS */}
-                    <span className="form-element">
-                      <label htmlFor="contact-email">Email Address</label>
-                      <input
-                        name="reply_to"
-                        id="contact-email"
-                        type="email"
-                        placeholder='your@email.com'
-                        required
-                        autoComplete="email"
-                        onChange={handleChange}
-                        value={formDetails.reply_to}
-                      />
-                    </span>
-
-                    {/* DESCRIPTION */}
-                    <span>
-                      <label htmlFor='contact-description'>Description</label>
-                      <textarea  id='contact-description' rows="10" />
-                    </span>
+                    <h4>TODO:: Add details from previous forms here</h4>
 
                     {/* RECAPTCHA */}
                     <span className="form-element" id='recaptcha'>
@@ -155,7 +101,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 
-                      <input type="submit" className="button" id="contact-submit" value="Submit" />
+                      <input type="submit" className="button" id="confirmation-submit" value="Create my Account!" />
                     </span>
 
                   </div>

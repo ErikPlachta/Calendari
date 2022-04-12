@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
 
 const { 
   capitalizeFirstLetter,
@@ -12,21 +11,16 @@ const {
   dateTimeFullLocal
 } = require('../../../../utils/helpers');
 
-
-
-
-
-
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
-
-export default function Client({nextStep, createAppointment, appointment_template}) {
+export default function Business({nextStep}) {
 
   //-- reference variable for the captcha result response code
   const recaptchaRef = React.createRef();
   
-  const [formDetails, setFormDetails] = useState({
-    from_name: '',
+  const [businessDetails, setBusinessDetails] = useState({
+    business_name: '',
+    business_brand_name: '',
     to_name: 'Calendari',
     from_phone: '',
     message: '',
@@ -37,7 +31,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
 
   //-- event listner on input
   const handleChange = (event) => {
-    setFormDetails({ ...formDetails, [event.target.name]: event.target.value,  });
+    setBusinessDetails({ ...businessDetails, [event.target.name]: event.target.value,  });
   };
 
   //-- phone validation
@@ -70,19 +64,22 @@ export default function Client({nextStep, createAppointment, appointment_templat
     var borderWidth =  (isError)? "3px" : "1px"; 
     input.style.borderColor = color;
     input.style.borderWidth = borderWidth;
-   
-    
+     
     //-- update ui input
     event.target.value = formattedPhone;
     //-- update data to send
-    formDetails.from_phone = formattedPhone;
+    businessDetails.from_phone = formattedPhone;
     return null;
   }
 
   // console.log(appointment_template)
   return (
-    <section className="page clientContact">
-      <h3>Enter your Contact Information</h3>
+    <section className="page signupBusiness">
+      <h3>Tell us about your Business</h3>
+      <p>
+        In this section you'll define your business details, some of which are
+        displayed on your public scheduler link.
+      </p>
       <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
@@ -91,71 +88,60 @@ export default function Client({nextStep, createAppointment, appointment_templat
             default: return (
                   <div className="clientContactForm">
                     
-                    {/* CLIENT NAME */}
+                    {/* BUSINESS NAME */}
                     <span className="form-element">
-                      <label htmlFor="client-name">Your Name</label>
+                      <label htmlFor="business-name">Business Name</label>
                       <input
-                        name='from_name'
-                        id="client-name"
+                        name='business_name'
+                        id="business-name"
                         type='text'
-                        placeholder='Full Name'
-                        required
-                        autoComplete='given-name'
+                        placeholder='Enter your business name'
+                        // required
                         onChange={handleChange}
-                        value={formDetails.client_name}
+                        value={businessDetails.client_name}
                       />
                     </span>
                     
-                    {/* PHONE NUMBER */}
-                    
+                    {/* BRAND_NAME */}
                     <span className="form-element">
-                      <label htmlFor="contact-phone">Phone Number</label>
+                      <label htmlFor="business-brand-name">Your URL Name</label>
                       <input
-                        name="phone"
-                        id="contact-phone"
+                        name='business_name'
+                        id="business-name"
+                        type='text'
+                        placeholder='Enter your business name'
+                        // required
+                        onChange={handleChange}
+                        value={businessDetails.client_name}
+                      />
+                      <span>
+                        https://calendari.day/s/{businessDetails.business_brand_name}
+                      </span>
+                    </span>
+                    
+                    {/* BUSINESS PHONE NUMBER */}
+                    <span className="form-element">
+                      <label htmlFor="business-phone">Business Phone Number</label>
+                      <input
+                        name="business_phone"
+                        id="business-phone"
                         type="tel"
-                        aria-label="Please enter your phone number"
+                        aria-label="Please enter a valid phone number"
                         placeholder="ex. (111)-111-1111"
                         autoComplete='tel'
                         onKeyUp={onKeyUpPhone}
-                        // value={toSend.from_phone} //-- not needed, defined above in cleanup function.
-                      />
-                    </span>
-                    
-                    {/* EMAIL ADDRESS */}
-                    <span className="form-element">
-                      <label htmlFor="contact-email">Email Address</label>
-                      <input
-                        name="reply_to"
-                        id="contact-email"
-                        type="email"
-                        placeholder='your@email.com'
-                        required
-                        autoComplete="email"
-                        onChange={handleChange}
-                        value={formDetails.reply_to}
                       />
                     </span>
 
-                    {/* DESCRIPTION */}
+                    {/* Welcome Message */}
                     <span>
-                      <label htmlFor='contact-description'>Description</label>
-                      <textarea  id='contact-description' rows="10" />
-                    </span>
-
-                    {/* RECAPTCHA */}
-                    <span className="form-element" id='recaptcha'>
-                      {/* Captcha*/}
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                        onChange={e => (formDetails['g-recaptcha-response']=e)}
-                      />
+                      <label htmlFor='business-welcome'>Welcome Message</label>
+                      <textarea  id='business-welcome' rows="10" />
                     </span>
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 
-                      <input type="submit" className="button" id="contact-submit" value="Submit" />
+                      <input type="submit" className="button" id="contact-submit" value="Next" />
                     </span>
 
                   </div>

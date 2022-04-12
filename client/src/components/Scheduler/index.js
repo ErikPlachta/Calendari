@@ -117,7 +117,7 @@ export default function Scheduler() {
   /* Page Location and Logic */
 
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
-    // nextStepButton.preventDefault();
+    nextStepButton.preventDefault();
     
     setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button

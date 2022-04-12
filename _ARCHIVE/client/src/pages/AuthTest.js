@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 
 //-- for business page
-import Auth from "../client/src/utils/authServices"
+import Auth from "../../../../client/src/utils/authServices"
 
 
 //-- for login page
 import { useMutation } from '@apollo/client';
-import { LOGIN_USER } from '../client/src/utils/mutations';
+import { LOGIN_USER } from '../../../../client/src/utils/mutations';
 
 
 export default function AuthTest() {

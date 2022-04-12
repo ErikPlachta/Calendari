@@ -3,15 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
-
 //------------------------------------------------------------------------------
 //-- PAGES
+import PageNotFound from '../../pages/PageNotFound';
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
 import Client from './sub-components/Client';
+import Business from './sub-components/Business';
+import Confirmation from './sub-components/Confirmation';
 
 //------------------------------------------------------------------------------
 //-- Helpers
@@ -33,7 +34,6 @@ const {
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_Business = require('../../assets/json/business.json');
 
-
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Scheduler
 
@@ -47,22 +47,14 @@ export default function Scheduler() {
     document.title = `Calendari - Signup`;
   },[]);
 
-
-  //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
-  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
-  
-  const [scheduler, setScheduler] = useState({
-    "clientData"      : "",
-    "businessData"  : "",
+  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query - if business name is unique checking  
+  const [newAccount, setNewAccount] = useState({ //-- the user form payload
+    "userData"      : "",   //-- the users data
+    "businessData"  : "",   //-- the business data for the client
   })
-
-  let business = {}; //-- The Specific Business response for the logged in user from API
-  //TODO:: 04/09/22 #EP || Get this to work as a state 
-  // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
   const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
-  
   
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
@@ -103,11 +95,11 @@ export default function Scheduler() {
   /* Page Location and Logic */
 
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
-    // nextStepButton.preventDefault();
+    nextStepButton.preventDefault();
     
-    setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
-    if(nextStepButton_id === "contact-submit"){ //-- if the contact-submit ( final button ) do API call
+    console.log(nextStepButton_id)
+    if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
       setAppointment_confirmation_id(nextStepButton_id);
       //TODO:: 04/10/22 #EP || Get form data here
       createAppointment(appointment_confirmation_id);
@@ -134,7 +126,9 @@ export default function Scheduler() {
   }
   
   const signupPages = { //-- INDEX of Each Page, which is a step of scheduler
-    1: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
+    1: <Business nextStep={nextStep} />,
+    2: <Client nextStep={nextStep} />,
+    3: <Confirmation nextStep={nextStep} />
   };
 
   const [maxSteps, setMaxSteps] = useState( //-- Get the number of keys in the pages ( needs to be down here to function )
@@ -153,17 +147,12 @@ export default function Scheduler() {
           switch(state) {    
             case true:  return (
               <section>
-                  
-                  {/* The current step / page in the scheduler */}
-                  {signupPages[step]}
-                  
-                  {/* The bottom status bar */}
-                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
+                  {signupPages[step]} {/* The current step / page in the scheduler */}
+                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} /> {/* The bottom status bar */}
               </section>
             );
-            case false: return "<PageNotFound />";
-            //TODO:: 04/10/22 #EP || Add component for loading
-            default:    return "Loading...";
+            case false: return <PageNotFound />; //-- Shouldn't happen put here just in case, maybe server error
+            default:    return "Loading..."; //TODO:: 04/10/22 #EP || Add component for loading
           }
         })()}
     </section>

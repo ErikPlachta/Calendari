@@ -10,7 +10,6 @@ import { setContext } from '@apollo/client/link/context';
 //-- PAGES
 import Nav from './components/Nav';
 import Login from './pages/Login';
-// import Signup from './pages/Signup';
 import Signup from './components/Signup';
 import Home from './pages/Home';
 import Scheduler from './components/Scheduler';

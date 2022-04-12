@@ -1,6 +1,6 @@
 import React from 'react';
 // import {Link} from 'react-router'
-import { emailValidate } from '../utils/helpers';
+import { emailValidate } from '../../../../client/src/utils/helpers';
 // import {capitalizeFirstLetter} from '../../utils/helpers';
 // import Login from "../Login";
 
