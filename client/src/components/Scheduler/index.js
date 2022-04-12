@@ -12,10 +12,10 @@ import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
-import StatusBar from './sub-components/StatusBar';
-import AppointmentTypes from './sub-components/AppointmentTypes';
-import DateTime from './sub-components/DateTime';
-import Client from './sub-components/Client';
+import StatusBar from './components/StatusBar';
+import AppointmentTypes from './components/AppointmentTypes';
+import DateTime from './components/DateTime';
+import Client from './components/Client';
 
 //------------------------------------------------------------------------------
 //-- Helpers
