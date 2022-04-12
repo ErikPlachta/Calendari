@@ -1,7 +1,12 @@
 import React from 'react'
 
 export default function PageNotFound() {
+
   return (
-    <h2>404 - Page Not Found</h2>
+    <main>
+          <div classname="errorPageElements">
+            <h2>404 - Page Not Found</h2>
+          </div>
+    </main> 
   )
 }

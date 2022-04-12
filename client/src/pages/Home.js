@@ -2,7 +2,6 @@
 import React from 'react'
 
 export default function Home() {
-  const {capitalizeFirstLetter} = require('../utils/helpers');
 
   return (
     <section>
