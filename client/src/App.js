@@ -13,6 +13,7 @@ import Home from './pages/Home';
 import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
 import Appointment from './pages/Appointment';
+import Business from "./components/Business"
 
 //------------------------------------------------------------------------------
 //-- ASSETS
@@ -63,19 +64,18 @@ function App() {
         <Routes>
           <Route path="/" element={< Home />} />
           <Route path="/Home" element={< Home />} />
-          {/* scheduler */}
-          {/* Expecting the business_id OR brand_name, optional appointment_type_id to skip landing page */}
-          {/* <Route path="/s/:business_id_or_brand_name(/:appointment_type_id)" element={ <Scheduler/> } */}
+          <Route path="/b/:business_id_or_brand_name" element={<Business/>} />
+          <Route path="/business" element={<Business/>} />
           <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
           <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
           <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
         </Routes>
-      </ApolloProvider>
-    </main>
-    <Footer />
-  </BrowserRouter>
+      </main>
+      <Footer />
+    </BrowserRouter>
+  </ApolloProvider>
   );
 }
 
