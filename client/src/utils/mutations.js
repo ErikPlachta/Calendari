@@ -25,6 +25,7 @@ export const ADD_USER = gql`
     }
 `;
 //-- Login existing user
+//TODO:: 04/11/22 #EP || Add business_id
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -32,6 +33,7 @@ export const LOGIN_USER = gql`
       user {
         _id
         username
+        date_created
       }
     }
   }

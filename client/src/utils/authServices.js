@@ -47,14 +47,23 @@ class AuthService {
     // Saves user token to localStorage
     // localStorage.setItem('id_token', idToken);
 
+    //-- extracting JWT token
     const idToken       = dataLogin.token ? dataLogin.token : "NaN";
-    const _id           = dataLogin._id ? dataLogin._id : "NaN";
-    const business_id   = dataLogin.business_id ? dataLogin.business_id : "NaN";
+
+    //-- deconstructing to simplify below
+    const user = dataLogin.user;
+    //-- extracting values for local storage
+    const _id           = user._id ? user._id : "NaN";
+    const username      = user.username  ? user.username  : "NaN";
+    const date_created  = user.date_created  ? user.date_created  : "NaN";
+    const business_id   = user.business_id ? user.business_id : "NaN";
 
     const jwtData = {
-      "id_token"    :  idToken,
-      "_id"         : _id,
-      "business_id" : business_id
+      "id_token"      :  idToken,
+      "_id"           : _id,
+      "name"          : username,
+      "date_created"  : date_created,
+      "business_id"   : business_id
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
