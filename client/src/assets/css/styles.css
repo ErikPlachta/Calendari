@@ -375,7 +375,7 @@ table {
    background: linear-gradient(180deg, var(--darker-purple) 0%, var(--lighter-purple) 30%, var(--darker-pink) 70%, var(--light-pink) 100%);
    color:white;
    height: 250px;
- 
+  padding-top:0;
  }
  
  #sloganForHero {
