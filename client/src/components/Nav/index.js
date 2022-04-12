@@ -19,7 +19,6 @@ export default function Nav({ bob1 }) {
                     <h2 className="brandName" alt="appointment scheduler">
                         Calendari
                     </h2>
-                    <span>Your schedule -- untangled</span>
                 </span>
             </div>
             {/* NAVIGATION */}
