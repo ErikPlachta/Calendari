@@ -356,6 +356,16 @@ button {
   /* transform: translateX(-30px); */
 }
 
+.businessMain{
+  flex: 60%;
+  margin: auto;
+}
+
+.scheduledAppointments{
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+}
 
 .container{
   flex: 5 60%;

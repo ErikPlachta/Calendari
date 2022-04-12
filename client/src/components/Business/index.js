@@ -162,6 +162,26 @@ export default function Business() {
     // 4: <AppointmentTypes appointmentTypeData={business.appointmentTypeData} />,
   };
 
+  const setPage = setPageButton => { //-- load based on selection
+    const menuChoice = setPageButton.target.id;
+    if(menuChoice === "aside-dashboard"){
+      setMenuSelectLocation(0)
+    }
+
+    else if(menuChoice === "aside-my-settings"){
+      setMenuSelectLocation(1)
+    }
+    // 2 my-business
+    else if(menuChoice === "aside-my-business"){
+      setMenuSelectLocation(2)
+    }
+    // 3 my-Appointments
+    else if(menuChoice === "aside-my-appointments"){
+      setMenuSelectLocation(3)
+    }
+  };
+  
+
   //----------------------------------------------------------------------------
   /* TODO:: 04/09/22 #EP || Browser Local Storage AND CURRENT STATE CHECKING State checking */
 
@@ -181,7 +201,7 @@ export default function Business() {
               {/* Aside bar within the business page */}
               <section className="businessAside">
                 {/* TODO:: 04/10/22 #EP || Hide or stylize */}
-                <Aside businessName={business.businessData.name} userName={business.userData.name} />
+                <Aside setPage={setPage} businessName={business.businessData.name} userName={business.userData.name} />
               </section>
               {/* Main Content Area in Business Page */}
               <section className="businessMain"> 
