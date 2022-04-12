@@ -380,7 +380,7 @@ button {
   border-radius: 25px;
   box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
               2px 2px 10px -3px rgba(0,0,0,0.1);
-  background-color: #fff;
+  background-color: var(--darker-pink);
 }
 
 
@@ -518,6 +518,14 @@ table {
   margin: 0 1rem;
 }
 
+.business header h2 {
+  color: var(--darker-pink);
+}
+
+.business header p {
+  color: var(--light-pink);
+}
+
 .signupBusiness h3{
   padding-top:15px;
   color: var(--darker-pink)
@@ -644,6 +652,11 @@ progress[value]{
   vertical-align: center;  
 } */
 
+
+
+
+
+
 /*----------------------------------------------------------------------------*/
 /* CLIENT CONTACT FORM */
 
@@ -682,6 +695,7 @@ progress[value]{
   flex-wrap: wrap;
   justify-content: justify;
   line-height: 1.6;
+  background-color: white;
   /* position: relative; */
   /* padding: 1rem; */
 }
