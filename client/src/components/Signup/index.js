@@ -7,14 +7,10 @@ import { useNavigate } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- PAGES
-import PageNotFound from '../../pages/PageNotFound';
-import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
-import BusinessScheduler from './sub-components/BusinessScheduler';
-import DateTime from './sub-components/DateTime';
 import Client from './sub-components/Client';
 
 //------------------------------------------------------------------------------
@@ -46,6 +42,11 @@ const DB_Business = require('../../assets/json/business.json');
     - appointment_type_id:    The ID of the Appointment they selected
 */
 export default function Scheduler() {
+
+  useEffect(() => {
+    document.title = `Calendari - Signup`;
+  },[]);
+
 
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
@@ -81,24 +82,9 @@ export default function Scheduler() {
 
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
-    let validRequest = null;
-    // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){ validRequest = false }
+    let validRequest = true;
+    setState(validRequest)
     
-    // 2. If  valid business_id or business_name extract just the business ID
-    else if(!Businesses[business_id_or_brand_name]){ validRequest = false }
-
-    // 3. if the business ID or brand_name IS in the database, Load  Scheduler
-    else if(Businesses[business_id_or_brand_name]){
-      //-- 1. Update Scheduler state
-      setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
-      //-- 2. Confirm it's a valid request
-      validRequest = true;
-      //-- 3. Set Scheduler state to true so page loads
-      setState(validRequest);
-    }
-
-    // 4. Does appointment_type_id exist and if yes for this business //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
 
     return validRequest; //-- return results to update the title-bar accordingly
   }
@@ -106,7 +92,7 @@ export default function Scheduler() {
   useEffect(() => {
     const validRequest = validateParams();
      //-- IF valid request is TRUE, update title with business name. 
-    if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
+    if(validRequest){ document.title = `Calendari - Signup`};
     
     //-- IF NOTE valid request is TRUE, update title with Invalid Request
     if(!validRequest){ document.title = `Calendari - Invalid Request`};
@@ -147,15 +133,12 @@ export default function Scheduler() {
     // return response;
   }
   
-  const schedulerPages = { //-- INDEX of Each Page, which is a step of scheduler
-    1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
-    2: <DateTime nextStep={nextStep}/>,
-    3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
-    4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
+  const signupPages = { //-- INDEX of Each Page, which is a step of scheduler
+    1: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
   };
 
   const [maxSteps, setMaxSteps] = useState( //-- Get the number of keys in the pages ( needs to be down here to function )
-    Object.keys(schedulerPages).length
+    Object.keys(signupPages).length
   );
 
   //----------------------------------------------------------------------------
@@ -163,7 +146,7 @@ export default function Scheduler() {
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
-    <section className="page scheduler">
+    <section className="page signup">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
         {(() => {
@@ -172,13 +155,13 @@ export default function Scheduler() {
               <section>
                   
                   {/* The current step / page in the scheduler */}
-                  {schedulerPages[step]}
+                  {signupPages[step]}
                   
                   {/* The bottom status bar */}
                   <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
               </section>
             );
-            case false: return <PageNotFound />;
+            case false: return "<PageNotFound />";
             //TODO:: 04/10/22 #EP || Add component for loading
             default:    return "Loading...";
           }

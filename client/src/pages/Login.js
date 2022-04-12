@@ -1,3 +1,4 @@
+//-- IMPORTS
 import React, { useState, useEffect } from 'react'
 // import {Link} from 'react-router'
 import { Redirect, Navigate } from 'react-router-dom';
@@ -5,8 +6,11 @@ import { emailValidate } from '../utils/helpers';
 // import {capitalizeFirstLetter} from '../../utils/helpers';
 // import Signup from "../Signup";
 
-//-- JWT LOGIN AUTH LOGIC
+//-- JWT LOGIN & AUTH 
 import Auth from "../utils/authServices"
+import ReCAPTCHA from "react-google-recaptcha";
+
+
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
@@ -16,11 +20,13 @@ export default function Login() {
   const [user, setUser] = useState({
     "email"     : "",
     "password"  : "",
-    "submitAttempts" : 0
+    "submitAttempts" : 0,
+    'g-recaptcha-response': '',
   });
   //-- When login pressed, attempt to login 
   const [login, { error }] = useMutation(LOGIN_USER);
 
+  const recaptchaRef = React.createRef();
 
   //-- Update state based on user input
   const handleChange = (event) => {
@@ -136,6 +142,15 @@ export default function Login() {
                   id="login-form"
                 />
               </form>
+              {/* RECAPTCHA */}
+              <span className="form-element" id='recaptcha'>
+                {/* Captcha*/}
+                <ReCAPTCHA
+                  ref={recaptchaRef}
+                  sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
+                  onChange={e => (user['g-recaptcha-response']=e)}
+                />
+              </span>
               <p id="login-form-signup-message" style={{opacity: "1"}}>
                 <a href='/signup'>Don't have an account yet? Get Signed Up, here!</a>
               </p>
@@ -144,6 +159,7 @@ export default function Login() {
               <h5 id="login-form-message" style={{opacity: "0"}}>
                 Invalid Credentials, please try again
               </h5>
+              
             </div>
           )
 
