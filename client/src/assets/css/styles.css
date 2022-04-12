@@ -155,31 +155,6 @@ h1,h2,h3,h4,h5{
   margin: 0;
 }
 
-/* Default button Styling */
-button {
-        
-  /* Buttons text color */
-  --btn_tc_inactive: var(--c_05); /* button inactive text color */
-  --btn_tc_active: var(--c_04); /* button active text color for hover and click */
-
-  /* Buttons background color */
-  --btn_bg_inactive: var(--c_05); /* button inactive text color */
-  --btn_bg_active: var(--c_04); /* button active text color for hover and click */
-
-
-  border-radius: var(--br_primary);
-  width: 8rem;
-  height: 3rem;
-  
-  background-color: var(--btn_bg_inactive);
-  color: var(--btn_tc_inactive);
-}
-
-
-
-/*WAVE CODE AND GENERAL BODY CODE*/
-@import url(//fonts.googleapis.com/css?family=Lato:300:400);
-
 body {
   margin:0;
 }
@@ -208,58 +183,31 @@ li {
   font-size: 14px;
 }
 
-table {
- width: 60%;
- border-collapse: collapse;
+
+/* Default button Styling */
+button {
+        
+  /* Buttons text color */
+  --btn_tc_inactive: var(--c_05); /* button inactive text color */
+  --btn_tc_active: var(--c_04); /* button active text color for hover and click */
+
+  /* Buttons background color */
+  --btn_bg_inactive: var(--c_05); /* button inactive text color */
+  --btn_bg_active: var(--c_04); /* button active text color for hover and click */
+
+
+  border-radius: var(--br_primary);
+  width: 8rem;
+  height: 3rem;
+  
+  background-color: var(--btn_bg_inactive);
+  color: var(--btn_tc_inactive);
 }
 
-th {
-  height: 30px;
-  text-align: center;
-  font-weight:bold;
-  padding: 10px;
-  border: 2px solid var(--plum);
-  color:#e952de;
-  background-color: var(--plum);
-}
 
-tr, td {
-  height:20px;
-  text-align: center;
-  padding: 10px;
-  border: 2px solid var(--plum);
-}
 
-.tableContainer {
-  margin-left:auto;
-  margin-right: auto;
-  padding: 20px;
-  margin: 20px;
-}
-
-.slogan {
-  text-align:center;
-  vertical-align: middle;
-  background: linear-gradient(60deg, var(--darker-purple) 0%, var(--lighter-purple) 35%, var(--darker-pink) 70%, var(--light-pink) 100%);
-  color:white;
-  height: 250px;
-
-}
-
-#sloganForHero {
-  z-index:99999;
-  color: white;
-  font-size: 3rem;
-  font-weight: 400;
-}
-
-.logo {
-  width:50px;
-  fill:white;
-  padding-right:15px;
-  display:inline-block;
-  vertical-align: middle;
-}
+/*-------------------------------------------WAVE---------------------------*/
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
 
 .inner-header {
   font-family: 'Lato', sans-serif;
@@ -379,6 +327,8 @@ tr, td {
   background-color: #fff;
 }
 
+
+/* --------------------------HOME--------------------------------------- */
 .homeInformation {
   flex: 100%;
   width: 70%;
@@ -390,27 +340,93 @@ tr, td {
   background-color: white;
 }
 
+table {
+  width: 60%;
+  border-collapse: collapse;
+ }
+ 
+ th {
+   height: 30px;
+   text-align: center;
+   font-weight:bold;
+   padding: 10px;
+   border: 2px solid var(--plum);
+   color:#e952de;
+   background-color: var(--plum);
+ }
+ 
+ tr, td {
+   height:20px;
+   text-align: center;
+   padding: 10px;
+   border: 2px solid var(--plum);
+ }
+ 
+ .tableContainer {
+   margin-left:auto;
+   margin-right: auto;
+   padding: 20px;
+   margin: 20px;
+ }
+ 
+ .slogan {
+   text-align:center;
+   vertical-align: middle;
+   background: linear-gradient(60deg, var(--darker-purple) 0%, var(--lighter-purple) 35%, var(--darker-pink) 70%, var(--light-pink) 100%);
+   color:white;
+   height: 250px;
+ 
+ }
+ 
+ #sloganForHero {
+   z-index:99999;
+   color: white;
+   font-size: 3rem;
+   font-weight: 400;
+ }
+
+
+
+
+/* ------------------------SIGNUP----------------------------- */
 .pinkh2 {
-    font-family: 'Lato', sans-serif;
-    font-weight:bolder;
-    letter-spacing: 2px;
-    color: var(--darker-pink);
-    text-align: center;
-    margin-top:40px;
-    margin-bottom:20px;
+  font-family: 'Lato', sans-serif;
+  font-weight:bolder;
+  letter-spacing: 2px;
+  color: var(--darker-pink);
+  text-align: center;
+  margin-top:40px;
+  margin-bottom:20px;
 }
 
 .signupInformation {
   flex: 100%;
-  width: auto;
+  width: 40%;
   height: auto;
   box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
   border-radius: var(--br_primary);
-  padding: 50px 150px 50px 150px;
-  margin: 0px 400px 0px 400px;
+  padding-left:220px;
+  padding-top:30px;
+  padding-bottom:50px;
+  margin: auto;
   line-height: 2;
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }
+
+.signupInformation input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+}
+
+.signupInformation button {
+  
+}
+
+
 
 /*------------------------------------------------------------------------------
   BUSINESS PAGE SPECIFIC CLASSES
