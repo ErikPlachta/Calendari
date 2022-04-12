@@ -50,7 +50,7 @@ export default function Nav({ bob1 }) {
             </nav>
             
             {/*TODO:: 04/11/22 #EP|| Remove once done testing  */}
-            <div style={{display: "flex", width: "100%", flexDirection: "row", justifyContent:"space-evenly", border: "1px solid black" }}>
+            <div style={{position: "fixed", top:"15%", display: "flex", margin: "auto", flexDirection: "row", justifyContent:"space-evenly", border: "1px solid black" }}>
                 <h5>Placeholder Links for Testing 👉🏼</h5>
                 <a href="/s/0000-AAAA" alt="scheduler">schedule/0000-AAAA</a>
                 <a href="/b/0000-AAAA" alt="business">business/0000-AAAA</a>
