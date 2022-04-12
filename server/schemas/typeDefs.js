@@ -40,6 +40,10 @@ const typeDefs = gql`
         user(username: String!): User
         business(brand_name: String!): Business
     }
+    type Auth {
+        token: ID!
+        user: User
+    }
     type Mutation {
         addUser(
             name_first: String!, 
@@ -48,20 +52,40 @@ const typeDefs = gql`
             username: String!, 
             password: String!, 
             phone_number: String!, 
-            business_id: ID!): User
+            business_id: ID!
+        ): User
+        login(
+            email: String!,
+            password: String!
+        ): Auth
         addBusiness(
             name: String!, 
-            brand_name: String!): Business
+            brand_name: String!
+        ): Business
         addApptType(
             business_id: ID!, 
             appt_type_name: String!, 
-            summary: String!): AppointmentType
+            summary: String!
+        ): AppointmentType
         addAppt(
             business_id: ID!, 
             user_id: ID!, 
             appt_type_id: ID!
             appointment_date: String!, 
-            appointment_time: String!, appointment_status: String!): Appointment
+            appointment_time: String!, appointment_status: String!
+        ): Appointment
+        updateUser(
+            _id: ID!
+            email: String,
+            phone_number: String
+        ): User
+        updateAppt(
+            _id: ID!
+            appointment_date: String
+            appointment_time: String
+            appointment_status: String
+        ): Appointment
+        delApptType(_id: ID!): Business     
     }
 `;
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 
-export default function Aside({businessName, userName}) {
+export default function Aside({setPage, businessName, userName}) {
 
   return (
       <aside className='sidebar'>
@@ -14,16 +14,13 @@ export default function Aside({businessName, userName}) {
       </header>
       
       {/* Business Menu */}
-      <ul>
-        {/* Default landing page for business */}
-        <li>My Business</li>
-        {/* A summary of the business details overall */}
-        <li>Dashboard</li>
-        {/* Details on upcoming appointments */}
-        <li>Appointments</li>
-        {/* <li>Reporting</li> */}
-        {/* Used to configure options */}
-        <li>Settings
+      <ul className='sidebarList'>
+        
+        <li id='aside-dashboard'  onClick={setPage}>Dashboard</li> {/* A summary of the business details overall */}
+        <li id='aside-my-settings' onClick={setPage}>My Settings</li> {/* Used to configure options */}
+        <li id='aside-my-business' onClick={setPage}>My Business</li> {/* Default landing page for business */}
+        <li id='aside-my-appointments' onClick={setPage}>My Appointments</li>  {/* Details on upcoming appointments */}
+
           {/* nav choices -hidden for now */}
           {/* <ul>
             <li>My Account</li>
@@ -35,7 +32,7 @@ export default function Aside({businessName, userName}) {
               </ul>
             </li>
           </ul> */}
-        </li>
+          {/* <li>Reporting</li> */}
       </ul>
     </aside>
   )

@@ -60,7 +60,7 @@ export default function BusinessSettings(businessData) {
   }
 
   return (
-    <section className="page businessUser">  
+    <section className="businessUser">  
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
       
         {/* { state()
@@ -70,7 +70,7 @@ export default function BusinessSettings(businessData) {
               {(() => {
                 switch(state) {    
                   case true:  return (
-                    <div className="page containerResults">
+                    <div className="containerResults">
                       <h3>
                         {business._id 
                             ? `${business.name} `
@@ -80,7 +80,7 @@ export default function BusinessSettings(businessData) {
                       </h3>
                       {/* TODO:: 04/10/22 #EP || Map logged in user, fille in data below */}
 
-                      <div className="page businessUserStats">
+                      <div className="businessUserStats">
                         <span>
                           Account Created:  { 
                                   business.date_created 
@@ -100,7 +100,7 @@ export default function BusinessSettings(businessData) {
                       </div>
                       
                       {/* for user to update their settings */}
-                      <form id="businessSettingsForm" className="page" onSubmit={updateUser}>
+                      <form id="businessSettingsForm" className="clientContactForm" onSubmit={updateUser}>
                         
                         {/* Name of the Business */}
                         <span className="form-element">

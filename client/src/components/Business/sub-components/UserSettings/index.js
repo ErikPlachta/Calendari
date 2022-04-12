@@ -85,7 +85,7 @@ export default function UserSettings(userData) {
   }
 
   return (
-    <section className="page businessUser">  
+    <section className="businessUser">  
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
       
         {/* { state()
@@ -95,7 +95,7 @@ export default function UserSettings(userData) {
               {(() => {
                 switch(state()) {    
                   case true:  return (
-                    <div className="page containerResults">
+                    <div className="containerResults">
                       <h3>
                         {user._id 
                             ? `for ${user.name_first}'s` 
@@ -105,7 +105,7 @@ export default function UserSettings(userData) {
                       </h3>
                       {/* TODO:: 04/10/22 #EP || Map logged in user, fille in data below */}
 
-                      <div className="page businessUserStats">
+                      <div className="businessUserStats">
                         <span>
                           Account Created:  { 
                                   //TODO:: 04/10/22 #EP || Add formatting w helpers
@@ -126,7 +126,7 @@ export default function UserSettings(userData) {
                       </div>
                       
                       {/* for user to update their settings */}
-                      <form id="userSettingsForm" className="page" onSubmit={updateUser}>
+                      <form id="userSettingsForm" className="clientContactForm" onSubmit={updateUser}>
                         {/* User First Name */}
                         <span className="form-element">
                           <label htmlFor="user-name_first">First Name</label>

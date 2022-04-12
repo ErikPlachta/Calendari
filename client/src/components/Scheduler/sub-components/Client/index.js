@@ -10,7 +10,7 @@ const {
   dateHourOfDay,
   dateGetTimePassed,
   dateTimeFullLocal
-} = require('../../../utils/helpers');
+} = require('../../../../utils/helpers');
 
 
 
@@ -140,7 +140,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
                     {/* DESCRIPTION */}
                     <span>
                       <label htmlFor='contact-description'>Description</label>
-                      <textarea  id='contact-email' rows="10" />
+                      <textarea  id='contact-description' rows="10" />
                     </span>
 
                     {/* RECAPTCHA */}
@@ -159,15 +159,13 @@ export default function Client({nextStep, createAppointment, appointment_templat
                     </span>
 
                   </div>
-            );
-          }
+            )}
         })()}
       {/* 
       {Object.keys(appointment_types).map( (appointment_type, index) => (        
         
         
       */}
-        abc
       </form>
     </section>
     

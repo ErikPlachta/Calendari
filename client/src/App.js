@@ -10,12 +10,12 @@ import { setContext } from '@apollo/client/link/context';
 //-- PAGES
 import Nav from './components/Nav';
 import Login from './pages/Login';
-import Signup from './pages/Signup';
+import Signup from './components/Signup';
 import Home from './pages/Home';
 import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
 import Appointment from './pages/Appointment';
-import Business from "./components/Business"
+import Business from "./components/Business";
 
 //------------------------------------------------------------------------------
 //-- ASSETS
@@ -30,6 +30,7 @@ import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg'
 //TODO:: 05/09/22 #EP || Move stylesheet to root
 import './assets/css/styles.css';
 import './assets/css/animations.css';
+import PageNotFound from './pages/PageNotFound';
 
 
 const httpLink = createHttpLink({
@@ -64,17 +65,28 @@ function App() {
       <Nav bob1={bob1} />
       <main>
         <Routes>
+
           <Route path="/" element={< Home />} />
           <Route path="/Home" element={< Home />} />
+
           <Route path="/Login" element={< Login />} />
           <Route path="/signup" element={< Signup />} />
-          <Route path="/b/:business_id_or_brand_name" element={<Business/>} />
-          <Route path="/business" element={<Business/>} />
-          <Route path="/s/:business_id_or_brand_name"   element={<Scheduler/>}/>
-          <Route path="/schedule/:business_id_or_brand_name"   element={<Scheduler/>}/>
+
+          <Route path="/b/:business_id_or_brand_name"         element={<Business/>} />
+          <Route path="/business/:business_id_or_brand_name"  element={<Business/>} />
+          
+          <Route path="/b/:business_id_or_brand_name/:menuSelect"         element={<Business/>} />
+          <Route path="/business/:business_id_or_brand_name:/menuSelect"  element={<Business/>} />
+
+          <Route path="/s/:business_id_or_brand_name"           element={<Scheduler/>}/>
+          <Route path="/schedule/:business_id_or_brand_name"    element={<Scheduler/>}/>
           <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
+
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
+
+          {/* push Page Not Found if bad route */}
+          <Route path='*' element={ <PageNotFound />} ></Route>
         </Routes>
       </main>
         <br></br>

@@ -24,6 +24,20 @@ export const ADD_USER = gql`
         }
     }
 `;
+//-- Login existing user
+//TODO:: 04/11/22 #EP || Add business_id
+export const LOGIN_USER = gql`
+  mutation login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      user {
+        _id
+        username
+        date_created
+      }
+    }
+  }
+`;
 // create new appointment type
 export const ADD_APPT_TYPE = gql`
     mutation AddApptType($businessId: ID!, $apptTypeName: String!, $summary: String!) {
@@ -43,6 +57,38 @@ export const ADD_APPT = gql`
             appointment_date
             appointment_time
             appointment_status
+        }
+    }
+`;
+// update user info
+export const UPDATE_USER = gql`
+    mutation UpdateUser($id: ID!, $phoneNumber: String, $email: String) {
+        updateUser(_id: $id, phone_number: $phoneNumber, email: $email ) {
+            _id
+            name_first
+            name_last
+            username
+            email
+            phone_number
+        }
+    }
+`;
+// update appointment info
+export const UPDATE_APPT = gql`
+    mutation UpdateAppt($id: ID!, $appointmentStatus: String, $appointmentTime: String, $appointmentDate: String) {
+        updateAppt(_id: $id, appointment_status: $appointmentStatus, appointment_time: $appointmentTime, appointment_date: $appointmentDate) {
+        _id
+        appointment_date
+        appointment_time
+        appointment_status
+        }
+    }
+`;
+// delete appointment type
+export const DEL_APPT_TYPE = gql`
+    mutation DelApptType($id: ID!) {
+        delApptType(_id: $id) {
+            _id
         }
     }
 `;

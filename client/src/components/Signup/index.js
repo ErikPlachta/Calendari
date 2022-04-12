@@ -3,19 +3,16 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
-
-
 //------------------------------------------------------------------------------
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
-import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
-import BusinessScheduler from './sub-components/BusinessScheduler';
-import DateTime from './sub-components/DateTime';
 import Client from './sub-components/Client';
+import Business from './sub-components/Business';
+import Confirmation from './sub-components/Confirmation';
 
 //------------------------------------------------------------------------------
 //-- Helpers
@@ -37,7 +34,6 @@ const {
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_Business = require('../../assets/json/business.json');
 
-
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Scheduler
 
@@ -47,21 +43,18 @@ const DB_Business = require('../../assets/json/business.json');
 */
 export default function Scheduler() {
 
-  //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
-  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
-  
-  const [scheduler, setScheduler] = useState({
-    "clientData"      : "",
-    "businessData"  : "",
-  })
+  useEffect(() => {
+    document.title = `Calendari - Signup`;
+  },[]);
 
-  let business = {}; //-- The Specific Business response for the logged in user from API
-  //TODO:: 04/09/22 #EP || Get this to work as a state 
-  // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
+  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query - if business name is unique checking  
+  const [newAccount, setNewAccount] = useState({ //-- the user form payload
+    "userData"      : "",   //-- the users data
+    "businessData"  : "",   //-- the business data for the client
+  })
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
   const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
-  
   
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
@@ -81,24 +74,9 @@ export default function Scheduler() {
 
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
-    let validRequest = null;
-    // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){ validRequest = false }
+    let validRequest = true;
+    setState(validRequest)
     
-    // 2. If  valid business_id or business_name extract just the business ID
-    else if(!Businesses[business_id_or_brand_name]){ validRequest = false }
-
-    // 3. if the business ID or brand_name IS in the database, Load  Scheduler
-    else if(Businesses[business_id_or_brand_name]){
-      //-- 1. Update Scheduler state
-      setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
-      //-- 2. Confirm it's a valid request
-      validRequest = true;
-      //-- 3. Set Scheduler state to true so page loads
-      setState(validRequest);
-    }
-
-    // 4. Does appointment_type_id exist and if yes for this business //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
 
     return validRequest; //-- return results to update the title-bar accordingly
   }
@@ -106,7 +84,7 @@ export default function Scheduler() {
   useEffect(() => {
     const validRequest = validateParams();
      //-- IF valid request is TRUE, update title with business name. 
-    if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
+    if(validRequest){ document.title = `Calendari - Signup`};
     
     //-- IF NOTE valid request is TRUE, update title with Invalid Request
     if(!validRequest){ document.title = `Calendari - Invalid Request`};
@@ -119,9 +97,9 @@ export default function Scheduler() {
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
     nextStepButton.preventDefault();
     
-    setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
-    if(nextStepButton_id === "contact-submit"){ //-- if the contact-submit ( final button ) do API call
+    console.log(nextStepButton_id)
+    if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
       setAppointment_confirmation_id(nextStepButton_id);
       //TODO:: 04/10/22 #EP || Get form data here
       createAppointment(appointment_confirmation_id);
@@ -147,15 +125,14 @@ export default function Scheduler() {
     // return response;
   }
   
-  const schedulerPages = { //-- INDEX of Each Page, which is a step of scheduler
-    1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
-    2: <DateTime nextStep={nextStep}/>,
-    3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
-    4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
+  const signupPages = { //-- INDEX of Each Page, which is a step of scheduler
+    1: <Business nextStep={nextStep} />,
+    2: <Client nextStep={nextStep} />,
+    3: <Confirmation nextStep={nextStep} />
   };
 
   const [maxSteps, setMaxSteps] = useState( //-- Get the number of keys in the pages ( needs to be down here to function )
-    Object.keys(schedulerPages).length
+    Object.keys(signupPages).length
   );
 
   //----------------------------------------------------------------------------
@@ -163,24 +140,19 @@ export default function Scheduler() {
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
-    <section className="page scheduler">
+    <section className="page signup">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
         {(() => {
           switch(state) {    
             case true:  return (
               <section>
-                  
-                  {/* The current step / page in the scheduler */}
-                  {schedulerPages[step]}
-                  
-                  {/* The bottom status bar */}
-                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
+                  {signupPages[step]} {/* The current step / page in the scheduler */}
+                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} /> {/* The bottom status bar */}
               </section>
             );
-            case false: return <PageNotFound />;
-            //TODO:: 04/10/22 #EP || Add component for loading
-            default:    return "Loading...";
+            case false: return <PageNotFound />; //-- Shouldn't happen put here just in case, maybe server error
+            default:    return "Loading..."; //TODO:: 04/10/22 #EP || Add component for loading
           }
         })()}
     </section>

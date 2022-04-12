@@ -68,7 +68,7 @@ const {
   // };
 
   return (   
-    <section className="containerResults scheduledAppointments">
+    <section className="scheduledAppointments">
           <h3>Here are your schedule appointments</h3>
           
           <div className='scheduledAppointments'>
