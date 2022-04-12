@@ -7,15 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- PAGES
-import BusinessScheduler from './pages/BusinessScheduler';
-import DateTime from './pages/DateTime';
-import Client from './pages/Client';
 import PageNotFound from '../../pages/PageNotFound';
 import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import StatusBar from './sub-components/StatusBar';
+import BusinessScheduler from './sub-components/BusinessScheduler';
+import DateTime from './sub-components/DateTime';
+import Client from './sub-components/Client';
 
 //------------------------------------------------------------------------------
 //-- Helpers
@@ -82,49 +82,18 @@ export default function Scheduler() {
   // const navigate = useNavigate();
 
   //----------------------------------------------------------------------------
-  /* VALIDATING PARAMS
-
-    validateParams
-      Looking to see if valid params are provided.
-
-      1. If empty business info
-        - Re-routes
-      
-        2. Check if valid business info provided
-        - If exists in database, load
-        - If not, re-routes
-
-      3. If valid business info AND provided appointment_type_id info
-        - If business has that appointment_type_id skip the select appointment type
-        - Otherwise ignore or show messages
-      
-      4. If valid business info but invalid or no appointment_type_id
-        - Loads default schedule
-  */
+  /* VALIDATING PARAMS  */
 
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
     let validRequest = null;
-
     // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){
-      //-- Doesn't exist, re-route to homepage or 404 page 
-      //-- this should not happen technically
-      //TODO:: 04/11/22 #EP || Add this
-      validRequest = false
-    }
+    if(!business_id_or_brand_name){ validRequest = false };
     
     // 2. If  valid business_id or business_name extract just the business ID
-      // -- grabs it and stores into const here
-    //TODO:: 04/09/22 #EP | Connect to GraphQL Results
-    if(!Businesses[business_id_or_brand_name]){
-      // navigate('/')
-      validRequest = false
-      
-    }
+    if(!Businesses[business_id_or_brand_name]){ validRequest = false };
 
-    //-- if the business ID or brand_name IS in the database
-    //TODO:: 04/09/22 #EP | Connect to GraphQL Results
+    // 3. if the business ID or brand_name IS in the database, Load  Scheduler
     if(Businesses[business_id_or_brand_name]){
       //-- 1. Update Scheduler state
       setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
@@ -133,40 +102,27 @@ export default function Scheduler() {
       //-- 3. Set Scheduler state to true so page loads
       setState(validRequest);
     }
-    
-    // 4. Does appointment_type_id exist and if yes for this business
-      //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
-      // if(appointment_type_id) {
-        //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
-        // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
-        //-- Otherwise ignore it and/or update screen with message
-      // }
 
-    
+    // 4. Does appointment_type_id exist and if yes for this business //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
+
     return validRequest;
   }
   
   useEffect(() => {
     const validRequest = validateParams();
-    console.log(`validRequest: ${validRequest}`)
+     //-- IF valid request is TRUE, update title with business name. 
+    if(validRequest){ document.title = `Calendari - ${business.businessData.name} Scheduler`};
+    
+    //-- IF NOTE valid request is TRUE, update title with Invalid Request
+    if(!validRequest){ document.title = `Calendari - Invalid Request`};
   },[]);
   
 
   //----------------------------------------------------------------------------
-  /* Page Location and Logic
+  /* Page Location and Logic */
 
-   - next and former step button onClick events
-      nextStep
-      formerStep
-
-    - schedulerPages
-      the index of what pages it needs to go to
-
-  */
-
-   //-- Client Input Template and Submitting Request  
-  //-- When Appointment is Verified, Submit it to API, and if success move to verification page
-  //TODO:: 04/09/22 #EP || Build logic for API call of submission
+  //-- Client Input Template and Submitting Request //-- When Appointment is Verified, Submit it to API, and if success move to verification page
+  // TODO - API REQUEST
   const createAppointment = async params => {
     //-- When client information verified and submitted, update database with appointment data
 
@@ -174,43 +130,30 @@ export default function Scheduler() {
     // 2. Submit to database
     // 3. Verify response
     // 4. Approve re-route or message to UI
-    setStep(maxSteps); //-- 5 is finshed and out of here.
-
     // return response;
   }
 
-  //-- Move to the next step
-  const nextStep = nextStepButton => {
+  const nextStep = nextStepButton => { //-- Move to the next step until LAST step
     // nextStepButton.preventDefault();
     
-    //-- set the template state variable state
-    setAppointment_template(nextStepButton.target.id);
-    
-    // console.log(nextStepButton.target.id)
-    console.log(nextStepButton.target)
-    // console.log(appointment_template)
-    
-    const nextStepButton_id = nextStepButton.target.id;
-    
-    if(nextStepButton_id === "contact-submit"){
+    setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
+    const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
+    if(nextStepButton_id === "contact-submit"){ //-- if the contact-submit ( final button ) do API call
       setAppointment_confirmation_id(nextStepButton_id);
-      createAppointment();
+      //TODO:: 04/10/22 #EP || Get form data here
+      createAppointment(appointment_confirmation_id);
     }
-
     else {
       setStep(step+1);
     }
   };
-
-  const formerStep = formerStepButton => {
+  
+  const formerStep = formerStepButton => { //-- Go back a step
     formerStepButton.preventDefault();
     setStep(step-1);
   };
 
-  //-- INDEX of Each Page, which is a step of scheduler
-  // const [schedulerPages,setSchedulerPages] = useState({
-  //TODO:: 04/10/22 #EP || Make a state
-  const schedulerPages = {
+  const schedulerPages = { //-- INDEX of Each Page, which is a step of scheduler
     1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
     2: <DateTime nextStep={nextStep}/>,
     3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
@@ -223,15 +166,7 @@ export default function Scheduler() {
   );
 
   //----------------------------------------------------------------------------
-  /* Browser Local Storage State checking
-  - Should it load anything from local-storage vs default
-  
-      //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-  
-      //-- Browser Local Storage Checking
-  */
-  
-  // 
+  /* Browser Local Storage State checking - Should it load anything from local-storage vs default */
   
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS

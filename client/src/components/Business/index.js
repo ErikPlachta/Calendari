@@ -6,7 +6,6 @@ import { Navigate, useParams } from "react-router-dom";
 //-- JWT Auth
 import Auth from "../../utils/authServices"
 
-
 //------------------------------------------------------------------------------
 //-- PAGES
 import Aside from './sub-components/Aside';
