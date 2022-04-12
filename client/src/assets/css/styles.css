@@ -478,7 +478,7 @@ table {
   box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
   border-radius: var(--br_primary);
   padding: 70px;
-  margin: auto;
+  margin: 30px auto auto auto;
   line-height: 2;
   background-color: white;
   display: flex;
@@ -763,7 +763,7 @@ progress[value]{
 
 /* SPA HEADER holds nav, brand-name and logo */
 .navHeader {
-  padding: 0 2rem; 
+  padding: 0 2rem 0.001rem 0; 
   margin: 0;
   background-color: white;
 }
@@ -882,6 +882,17 @@ footer {
   align-items: center;
 }
 
+
+/*------------------------------------------404 error-----------------*/
+
+.errorPageElements {
+
+}
+
+.errorPageElements h2{
+  
+  color: red;
+}
 
 /*------------------------------------------------------------------------------
   MEDIA TYPES
