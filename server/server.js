@@ -29,6 +29,7 @@ const startServer = async () => {
 
   // log where we can go to test our GQL API
   console.log(`Server started. GraphQL middleware setup at http://localhost:${PORT}${server.graphqlPath}`);
+  console.log(`heroku config:set GQLPORT=${PORT}`)
 };
 
 // Initialize the Apollo server
