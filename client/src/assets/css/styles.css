@@ -372,7 +372,7 @@ table {
  .slogan {
    text-align:center;
    vertical-align: middle;
-   background: linear-gradient(60deg, var(--darker-purple) 0%, var(--lighter-purple) 35%, var(--darker-pink) 70%, var(--light-pink) 100%);
+   background: linear-gradient(180deg, var(--darker-purple) 0%, var(--lighter-purple) 30%, var(--darker-pink) 70%, var(--light-pink) 100%);
    color:white;
    height: 250px;
  
