@@ -34,6 +34,7 @@ export default function Login() {
       //-- blank out error if there was one
       document.getElementById("login-form-message").classList.add('fade-out');
       document.getElementById("login-form-message").style.opacity="0";
+      document.getElementById("login-form-message").classList.remove('fade-in');
     }
     
   };
@@ -81,7 +82,9 @@ export default function Login() {
   //-- Run once at load to verify if logged in already. If yes, re-routes
   useEffect(() => {
         
-    console.log(Auth.isLoggedIn())
+    if(Auth.isLoggedIn()){
+      
+    }
   }, []);
 
   return (
@@ -90,7 +93,7 @@ export default function Login() {
 
       {(() => {
         //TODO:: 04/11/22 #EP || switch to not have !
-        switch(!Auth.isLoggedIn()) {    
+        switch(Auth.isLoggedIn()) {    
           
           //-- if already logged in, route to busienss page
           case true:   return "Already Logged In Placeholder (TODO:: 04/11/22 #EP || Route to Business page)"

@@ -63,11 +63,13 @@
     animation-name: FadeIn;
     animation-duration: 200ms;
     transition-timing-function: linear;
+    
   }
   .fade-out {
     animation-name: FadeOut;
-    animation-duration: 400ms;
+    animation-duration: 1000ms;
     transition-timing-function: linear;
+    opacity: 0;
   }
   
   .fade-in-out {
