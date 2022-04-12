@@ -17,8 +17,6 @@ import Footer from './components/Footer'
 import Appointment from './pages/Appointment';
 import Business from "./components/Business";
 
-import AuthTest from "./pages/AuthTest";
-
 //------------------------------------------------------------------------------
 //-- ASSETS
 
@@ -66,8 +64,6 @@ function App() {
       <Nav bob1={bob1} />
       <main>
         <Routes>
-
-          <Route path='/at' element={< AuthTest />} />
 
           <Route path="/" element={< Home />} />
           <Route path="/Home" element={< Home />} />
