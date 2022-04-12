@@ -243,7 +243,16 @@ tr, td {
   background: linear-gradient(60deg, var(--darker-purple) 0%, var(--lighter-purple) 35%, var(--darker-pink) 70%, var(--light-pink) 100%);
   color:white;
   height: 250px;
+
 }
+
+#sloganForHero {
+  z-index:99999;
+  color: white;
+  font-size: 3rem;
+  font-weight: 400;
+}
+
 .logo {
   width:50px;
   fill:white;
@@ -273,7 +282,7 @@ tr, td {
   margin-bottom:-7px; /*Fix for safari gap*/
   min-height:100px;
   max-height:150px;
-  
+  margin-top:3rem;
 }
 
 .content {
@@ -695,13 +704,14 @@ footer {
   bottom: 0;
   width:100%;
   padding: 10px; 
-  margin: 0px;
+  margin: auto;
   display: flex;
-  justify-content: center; 
+  justify-content: space-around; 
 }
 
 .footerElements {
-  display: inline-block;
+  display: flex;
+  flex-direction: row;
   margin: auto;
 }
 
