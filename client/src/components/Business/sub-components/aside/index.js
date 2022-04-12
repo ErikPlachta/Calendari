@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 export default function Aside({setPage, businessName, userName}) {
 
   return (
-      <aside className='businessSidebar'>
+    <aside className='businessSidebar'>
         {/* Side Navigational Bar */}
                         
       <header className="business">  

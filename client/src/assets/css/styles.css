@@ -131,6 +131,7 @@ body {
 
 main{
   /* adding this to prevent weird overflow of data issues */
+  
   width: 100%;
   overflow: hidden;
 }
@@ -342,7 +343,7 @@ button {
 }
 
 /* When hovering the LI in the aside, effects */
-.sidebarbusinessSidebarListList li:hover
+.businessSidebarList li:hover
 {
   cursor: pointer;
   border-top: .5px solid var(--darker-purple);
@@ -358,6 +359,7 @@ button {
 
 .businessMain{
   flex: 60%;
+  padding: 0;
   margin: auto;
 }
 
@@ -388,6 +390,7 @@ button {
               2px 2px 10px -3px rgba(0,0,0,0.1);
 }
 
+.businessSidebarList,
 .businessContainerResults{
   background-color: var(--C00);
 }
@@ -526,7 +529,8 @@ table {
   margin: 0 1rem;
 }
 
-.business header h2 {
+.business header h2,
+.business header h3 {
   color: var(--darker-pink);
 }
 

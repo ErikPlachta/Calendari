@@ -210,7 +210,7 @@ export default function Business() {
               </section>
               {/* Main Content Area in Business Page */}
               <section className="businessMain"> 
-              {businessPages[menuSelectLocation]}
+                {businessPages[menuSelectLocation]}
               </section>
             </section>
           );

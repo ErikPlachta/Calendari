@@ -69,7 +69,9 @@ const {
 
   return (   
     <section className="scheduledAppointments">
+        <header className="business">
           <h3>Here are your schedule appointments</h3>
+        </header>
           
           
           <div className='scheduledAppointments'>
