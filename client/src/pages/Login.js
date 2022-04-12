@@ -99,12 +99,11 @@ export default function Login() {
           
           //-- if NOT logged in, prompt login screen
           case false:    return (
-            <div className="login-form containerResults">
+            <div className="signupInformation">
               <h2 alt="please login">Get Logged In</h2>
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
                 <input
-                    className="form-input"
                     placeholder="Your email"
                     name="email"
                     type="email"
@@ -114,10 +113,9 @@ export default function Login() {
                     value={user.email}
                     onChange={handleChange}
                 />
-                
+                <br></br>
                 {/* USER PASSWORD */}
                 <input
-                    className="form-input"
                     placeholder="********"
                     name="password"
                     type="password"
@@ -127,13 +125,9 @@ export default function Login() {
                     value={user.password}
                     onChange={handleChange}
                 />
-                
+                <br></br>
                 {/* SUBMIT BUTTON */}
-                <input
-                  type="submit"
-                  value="Login"
-                  id="login-form"
-                />
+                <button>Login</button>
               </form>
               {/* RECAPTCHA */}
               <span className="form-element" id='recaptcha'>

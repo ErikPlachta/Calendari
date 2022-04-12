@@ -188,12 +188,12 @@ li {
 button {
         
   /* Buttons text color */
-  --btn_tc_inactive: var(--c_05); /* button inactive text color */
-  --btn_tc_active: var(--c_04); /* button active text color for hover and click */
+  --btn_tc_inactive: var(--plum); /* button inactive text color */
+  --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
 
   /* Buttons background color */
-  --btn_bg_inactive: var(--c_05); /* button inactive text color */
-  --btn_bg_active: var(--c_04); /* button active text color for hover and click */
+  --btn_bg_inactive: var(--light-pink); /* button inactive text color */
+  --btn_bg_active: var(--plum); /* button active text color for hover and click */
 
 
   border-radius: var(--br_primary);
@@ -466,14 +466,13 @@ table {
   height: auto;
   box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
   border-radius: var(--br_primary);
-  padding-left:220px;
-  padding-top:30px;
-  padding-bottom:50px;
+  padding: 70px;
   margin: auto;
   line-height: 2;
   background-color: white;
   display: flex;
   flex-direction: column;
+  align-items: center;
 }
 
 .signupInformation input {
@@ -481,10 +480,25 @@ table {
   border-right-style: hidden;
   border-left-style: hidden;
   border-bottom-style:groove;
+  padding-bottom: 5px;
 }
 
 .signupInformation button {
+    /* Buttons text color */
+    --btn_tc_inactive: var(--plum); /* button inactive text color */
+    --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
   
+    /* Buttons background color */
+    --btn_bg_inactive: var(--darker-pink); /* button inactive text color */
+    --btn_bg_active: var(--plum); /* button active text color for hover and click */
+  
+    border-radius: var(--br_primary);
+    width: 6rem;
+    height: 2rem;
+    
+    background-color: var(--btn_bg_inactive);
+    color: var(--btn_tc_inactive);
+    margin: 10px;
 }
 
 
