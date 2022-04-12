@@ -9,10 +9,10 @@ import PageNotFound from '../../pages/PageNotFound';
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
-import StatusBar from './sub-components/StatusBar';
-import Client from './sub-components/Client';
-import Business from './sub-components/Business';
-import Confirmation from './sub-components/Confirmation';
+import StatusBar from './components/StatusBar';
+import Client from './components/Client';
+import Business from './components/Business';
+import Confirmation from './components/Confirmation';
 
 //------------------------------------------------------------------------------
 //-- Helpers
@@ -41,7 +41,7 @@ const DB_Business = require('../../assets/json/business.json');
     - business_id_or_name:    The business they're scheduling for
     - appointment_type_id:    The ID of the Appointment they selected
 */
-export default function Scheduler() {
+export default function Signup() {
 
   useEffect(() => {
     document.title = `Calendari - Signup`;
