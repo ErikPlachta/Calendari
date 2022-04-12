@@ -37,9 +37,9 @@ export default function Nav({ bob1 }) {
                         </>)
                         //-- If not logged in, show this
                         : (<>
-                            <li> <a href="#whatIsThis">Calendari</a> </li>
-                            <li> <a href="#whyIsThisDifferent">About</a> </li>
-                            <li> <a href="#freeVsPremium">Features</a> </li>
+                            <li> <a href="/#whatIsThis">Calendari</a> </li>
+                            <li> <a href="/#whyIsThisDifferent">About</a> </li>
+                            <li> <a href="/#freeVsPremium">Features</a> </li>
                             <li> <Link to="/login">Login</Link> </li>
                             <li> <Link to="/signup">Signup</Link> </li>
                         </>)
