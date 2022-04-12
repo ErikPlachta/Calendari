@@ -5,7 +5,7 @@ export default function PageNotFound() {
   return (
     <main>
           <div class="signupInformation">
-            <img alt="Bob" src={bob_static} width="80px"></img>
+            <img alt="Bob" src={bob_static} width="180px"></img>
             <h2>404 - Page Not Found</h2>
           </div>
     </main> 
