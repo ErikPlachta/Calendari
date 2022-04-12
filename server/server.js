@@ -11,7 +11,14 @@ const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+// const PORT = process.env.PORT || 3001;
+server.listen({ port: process.env.PORT || 3001 }).then(({ url }) => {
+  console.log(`
+    🚀  Server is ready at ${url}
+    📭  Query at https://studio.apollographql.com/dev
+  `);
+});
+
 
 const startServer = async () => {
   // create a new Apollo server and pass in our schema data
@@ -28,8 +35,7 @@ const startServer = async () => {
   server.applyMiddleware({ app });
 
   // log where we can go to test our GQL API
-  console.log(`Server started. GraphQL middleware setup at http://localhost:${PORT}${server.graphqlPath}`);
-  console.log(`heroku config:set GQLPORT=${PORT}`)
+  console.log(`Server started. GraphQL middleware setup at http://localhost:${port}${server.graphqlPath}`);
 };
 
 // Initialize the Apollo server
@@ -59,6 +65,6 @@ app.get("*", function (request, response) {
 
 console.log("Starting connection to database...")
 db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${port}`));
 });
 console.log("SUCCESS: connection to database!")
