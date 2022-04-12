@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 // import {Link} from 'react-router'
+import { Redirect, Navigate } from 'react-router-dom';
 import { emailValidate } from '../utils/helpers';
 // import {capitalizeFirstLetter} from '../../utils/helpers';
 // import Signup from "../Signup";
@@ -20,14 +21,17 @@ export default function Login() {
   //-- When login pressed, attempt to login 
   const [login, { error }] = useMutation(LOGIN_USER);
 
-  // update state based on form input changes
+
+  //-- Update state based on user input
   const handleChange = (event) => {
     const { name, value } = event.target;
+    
     
     setUser({
       ...user,
       [name]: value,
     });
+    
     
     //-- If a username, password are in form and tried to submit, run this otherwise don't.
     if(user.email && user.password && user.submitAttempts>0 ){
@@ -36,7 +40,6 @@ export default function Login() {
       document.getElementById("login-form-message").style.opacity="0";
       document.getElementById("login-form-message").classList.remove('fade-in');
     }
-    
   };
 
   //-- Take data from email/password, attempt to login with mutation
@@ -50,7 +53,7 @@ export default function Login() {
       const { data } = await login({
         variables: { ...user },
       });
-      Auth.login(data.login.token);
+      Auth.login(data.login);
     }
     
     //-- Otherwise failure so update UI somehow
@@ -64,26 +67,22 @@ export default function Login() {
   };
 
   //TODO:: 04/11/22 #EP || Onboard error message to UI
-  const errorPopup = (e) => {
-    // console.log(e)
-    if ((e.toString()).includes('Incorrect credentials')) {
+  const errorPopup = (error) => {
+    if ((error.toString()).includes('Incorrect credentials')) {
       
       //-- Message for Incorrect Creds
       document.getElementById("login-form-message").style.opacity="1";
       document.getElementById("login-form-message").classList.remove('fade-out');
       document.getElementById("login-form-message").classList.add('fade-in');
-    } 
-    
-    else {
-      
-    }
+    };
   }
 
   //-- Run once at load to verify if logged in already. If yes, re-routes
   useEffect(() => {
         
     if(Auth.isLoggedIn()){
-      
+      console.log("already logged in, redirecting to business page...")
+      return (<Navigate replace to="/Business" />);
     }
   }, []);
 
@@ -96,7 +95,8 @@ export default function Login() {
         switch(Auth.isLoggedIn()) {    
           
           //-- if already logged in, route to busienss page
-          case true:   return "Already Logged In Placeholder (TODO:: 04/11/22 #EP || Route to Business page)"
+          case true:   return <Navigate replace to="/Business" />
+          // "Already Logged In Placeholder (TODO:: 04/11/22 #EP || Route to Business page)"
           
           //-- if NOT logged in, prompt login screen
           case false:    return (
@@ -110,7 +110,7 @@ export default function Login() {
                     name="email"
                     type="email"
                     id="email"
-                    minlength="8"
+                    minLength="8"
                     autoComplete='email'
                     value={user.email}
                     onChange={handleChange}

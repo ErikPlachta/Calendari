@@ -36,25 +36,25 @@ class AuthService {
       let idToken = jwtDataJSON.id_token;
       return idToken;
     }
-
     //-- If does not, just return false
     catch {
-      console.log("//-- Client/authServices: getToken() catch error")
       return false;
     }
-
     // return localStorage.getItem('id_token');
   }
 
-  login(idToken,data) {
+  login(dataLogin) {
     // Saves user token to localStorage
-    localStorage.setItem('id_token', idToken);
-    
-    console.log("login data",data)
+    // localStorage.setItem('id_token', idToken);
+
+    const idToken       = dataLogin.token ? dataLogin.token : "NaN";
+    const _id           = dataLogin._id ? dataLogin._id : "NaN";
+    const business_id   = dataLogin.business_id ? dataLogin.business_id : "NaN";
 
     const jwtData = {
-      "id_token"  :  idToken,
-      "data"  :   JSON.stringify(data)
+      "id_token"    :  idToken,
+      "_id"         : _id,
+      "business_id" : business_id
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
@@ -64,9 +64,9 @@ class AuthService {
   logout() {
     // Clear user token and profile data from localStorage
     // axios.defaults.headers.common["Authorization"] = null;
-    
     localStorage.removeItem('calendari');
-    localStorage.removeItem('id_token');
+    
+    // localStorage.removeItem('id_token');
     // this will reload the page and reset the state of the application
     window.location.assign('/');
   }
