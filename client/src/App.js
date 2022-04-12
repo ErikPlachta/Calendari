@@ -24,7 +24,10 @@ import Business from "./components/Business";
 import calendarDynamic from './assets/svg/calender-dynamic-gradient.svg';
 import calendarIso from './assets/svg/calender-iso-gradient.svg';
 import calendarFront from './assets/svg/calender-front-gradient.svg';
-import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg'
+import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg';
+// import bob_wave_single from './assets/svg/bob_wave_single.svg';
+// import bob_wave_15s from './assets/svg/bob_wave_15s.svg';
+import bob_static from './assets/svg/bob_static.svg';
 
 //-- STYLESHEET
 //TODO:: 05/09/22 #EP || Move stylesheet to root
@@ -77,7 +80,7 @@ function App() {
   return (
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <Nav bob1={bob1} />
+      <Nav bob_static={bob_static} />
       <main>
         <Routes>
 
@@ -111,7 +114,7 @@ function App() {
         <br></br>
         <br></br>
         <br></br>
-      <Footer bob1={bob1}/>
+      <Footer bob_static={bob_static}/>
     </BrowserRouter>
   </ApolloProvider>
   );
