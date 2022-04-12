@@ -8,11 +8,11 @@ import Auth from "../../utils/authServices";
 
 //------------------------------------------------------------------------------
 //-- PAGES
-import Aside from './sub-components/Aside';
-import Dashboard from './sub-components/Dashboard';
-import UserSettings from './sub-components/UserSettings'; //- the actual user settings page
-import BusinessSettings from './sub-components/BusinessSettings'; //-- The business settings
-import Appointments from './sub-components/Appointments'; //-- Appointment Management
+import Aside from './components/Aside';
+import Dashboard from './components/Dashboard';
+import UserSettings from './components/UserSettings'; //- the actual user settings page
+import BusinessSettings from './components/BusinessSettings'; //-- The business settings
+import Appointments from './components/Appointments'; //-- Appointment Management
 
 //------------------------------------------------------------------------------
 //-- ASSETS
