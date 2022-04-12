@@ -791,7 +791,7 @@ progress[value]{
   margin: 1rem;
   width: 50px;
   /* transition: ease-in-out 200ms; */
-  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  /* filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4)); */
   /* -webkit-transform: translateZ(0);
   transform: translateZ(0); */
   

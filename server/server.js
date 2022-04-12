@@ -46,7 +46,6 @@ app.use(express.json());
 
 
 //-- SETUP TO RUN FOR DEPLOYMENT SPECIFICALLY
-
 const path = require("path"); // Accessing the path module
 //-- route outside of server
 app.use(express.static(path.resolve(__dirname, "../client/build")));

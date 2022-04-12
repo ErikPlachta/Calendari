@@ -3,7 +3,7 @@ import {capitalizeFirstLetter} from '../../utils/helpers';
 import Auth from '../../utils/authServices';
 import { Link } from 'react-router-dom';
 
-export default function Nav({ bob1 }) {
+export default function Nav({ bob_static }) {
     
 
     const logout = event => {
@@ -14,7 +14,7 @@ export default function Nav({ bob1 }) {
     return (
         <header className="navHeader"> 
             <div>  
-                <img className="brandLogo" alt="Bob" src={bob1} width="50px"></img>
+                <img className="brandLogo" alt="Bob" src={bob_static} width="50px"></img>
                 <span className="brandNameSlogan">
                     <h2 className="brandName" alt="appointment scheduler">
                         Calendari
