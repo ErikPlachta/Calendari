@@ -183,7 +183,7 @@ export default function Scheduler() {
                   {schedulerPages[step]}
                   
                   {/* The bottom status bar */}
-                  (<StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />)
+                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
               </section>
             );
             case false: return <PageNotFound />;
