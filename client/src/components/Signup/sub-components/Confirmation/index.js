@@ -87,7 +87,7 @@ export default function Confirmtion({nextStep}) {
             default: return (
                   <div className="clientContactForm">
                     
-                    <h4>TODO:: Add details from previous forms here</h4>
+                    <h4>TODO:: Add details from previous forms here and add Create Account Functionality</h4>
 
                     {/* RECAPTCHA */}
                     <span className="form-element" id='recaptcha'>

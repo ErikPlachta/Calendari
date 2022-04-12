@@ -80,7 +80,7 @@ export default function Business({nextStep}) {
         In this section you'll define your business details, some of which are
         displayed on your public scheduler link.
       </p>
-      <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
+      <form id="clientContactForm" className="homeInformation" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){

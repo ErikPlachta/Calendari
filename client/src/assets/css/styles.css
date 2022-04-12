@@ -294,7 +294,7 @@ button {
 .page {
   width: 100%;
   /* border: 1px solid red; */
-  background-color: var(--C01);
+  background-color: var(--darker-purple);
 
   display: flex;
   flex-direction: column;
@@ -502,6 +502,37 @@ table {
 .business header{
   width: 100%;
   margin: 0 1rem;
+}
+
+.signupBusiness h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupBusiness p {
+  color: white;
+}
+
+.signupBusiness textarea {
+  font-family: 'Lato', sans-serif;
+}
+
+.signupUser h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupUser p {
+  color: white;
+}
+
+.signupConfirmation h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupConfirmation p {
+  color: white;
 }
 
 .configure{
