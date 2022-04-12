@@ -304,12 +304,58 @@ button {
   
 }
 
+/* the aside in the Business Page */
 .sidebar{
   /* border: 1px solid orangered; */
   flex: 1 20%;
   float: left;
-  max-width: 20%;
+  padding-top: 2rem;
+  padding-left: 0;
+  border-right: 1px solid var(--a_01);
+  height: 100%;
 }
+
+/* the UL in the Aside in the Business Page */
+.sidebarList,
+.sidebarList li
+{
+  margin-top: .1rem;
+  padding-left: 0; /* gets rid of spacing on the side normally on a list */
+  list-style: none; /* hide bullets */
+  line-height: 2;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: ease-in-out 200ms;
+  border-bottom: 1px solid transparent;
+  overflow: hidden;
+}
+
+/* The little + symbol on the aside after the text */
+.sidebarList li::after
+{
+  content: '\002B';
+  float: right;
+  margin-right: 1rem;
+  transition: ease-in-out 100ms;
+  font-weight: 500;
+}
+
+/* When hovering the LI in the aside, effects */
+.sidebarList li:hover
+{
+  cursor: pointer;
+  border-top: .5px solid var(--darker-purple);
+  border-bottom: 2px solid var(--darker-purple);
+  transform: scale(1.05);
+}
+.sidebarList li:hover::after{
+  color: var(--darker-purple);
+  font-weight:900;
+  transform: rotate(-90deg) translateY(-20px);
+  /* transform: translateX(-30px); */
+}
+
 
 .container{
   flex: 5 60%;
@@ -438,7 +484,9 @@ table {
 */
 
 .business {
-
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-shrink: auto;
 }
 
 .business header{

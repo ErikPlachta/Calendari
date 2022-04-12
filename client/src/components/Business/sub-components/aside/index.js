@@ -14,12 +14,12 @@ export default function Aside({businessName, userName}) {
       </header>
       
       {/* Business Menu */}
-      <ul>
+      <ul className='sidebarList'>
         
-        <li>My Business</li> {/* Default landing page for business */}
+        <li>My Settings</li> {/* Used to configure options */}
+        <li>Business</li> {/* Default landing page for business */}
         <li>Dashboard</li> {/* A summary of the business details overall */}
-        <li>Appointments</li>  {/* Details on upcoming appointments */}
-        <li>Settings</li> {/* Used to configure options */}
+        <li>My Appointments</li>  {/* Details on upcoming appointments */}
 
           {/* nav choices -hidden for now */}
           {/* <ul>

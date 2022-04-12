@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { Navigate, useParams } from "react-router-dom";
 
 //-- JWT Auth
-import Auth from "../../utils/authServices"
+import Auth from "../../utils/authServices";
 
 //------------------------------------------------------------------------------
 //-- PAGES
@@ -42,25 +42,14 @@ const {
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Business URL PARAMS: (business_id_or_name) The business they're signing in with. */
 export default function Business() {
+  //----------------------------------------------------------------------------
+  /*  1. menu location awareness  - by default just the dashboard  */
+  const [menuSelectLocation, setMenuSelectLocation] = useState(0);  //-- The current page
 
-  const [menuSelection, setMenuSelection] = useState(1);  //-- The current page
-
-  //------------------------------------------------------------------------------
-  /*  1. VERIFY IF LOGGED IN    */
-  //TODO:: 04/05/22 #EP || Add auth, for now assuming logged in
-  const authCheck = true;
-
-  //------------------------------------------------------------------------------
-  /*  2. IF LOGGED IN GET AUTH TOKEN THAT CONTAINS BUSINESS ID AND USER ID  */
-  if(!authCheck){ 
-    console.log("Reload page placeholder");
-  }
-
-  //------------------------------------------------------------------------------
-  /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
-
-  const {business_id_or_brand_name, appointment_type_id} = useParams();
-
+  //----------------------------------------------------------------------------
+  /*  2. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
+  //-- business brand_name, business_id , and also option for specific menu
+  const {business_id_or_brand_name, menuSelect} = useParams();
   //-- Database Query
   const { loading, data } = useQuery( QUERY_BUSINESSES );
   // const { loading, data } = useQuery(QUERY_USER_APPTS, {
@@ -98,14 +87,9 @@ export default function Business() {
       setState(validRequest)
     }
 
-    // 2. If No business_id, no business_name or invalid values found, exit
-    else if(!business_id_or_brand_name){ validRequest = false; }
-    
-    // 3. If  valid business_id or business_name extract just the business ID
-    else if(!Businesses[business_id_or_brand_name]){ validRequest = false }
-    
-    // 4. If the param received matches, and If Logged in, load content
-    else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){
+    else if(!business_id_or_brand_name){ validRequest = false; } // 2. If No business_id, no business_name or invalid values found, exit
+    else if(!Businesses[business_id_or_brand_name]){ validRequest = false } // 3. If  valid business_id or business_name extract just the business ID
+    else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){ // 4. If the param received matches, and If Logged in, load content
 
       //TODO:: 04/10/22 #EP || Need to simplify this massively.
       const businessData = Businesses[business_id_or_brand_name];
@@ -126,6 +110,25 @@ export default function Business() {
         //TODO:: 04/10/22 #EP || Know the Specific User here, or use JWT for that?
         "userData"    : usersClean,
       });
+
+
+      //-- IF a sub-page was requested in route, see if it should route to it
+      if(menuSelect){
+        //-- force to lowercase
+        const menuSelectLowercase = menuSelect.toLowerCase();
+        // 1 my-settings
+        if(menuSelectLowercase === "1" || menuSelectLowercase === "my-settings"){
+          setMenuSelectLocation(1)
+        }
+        // 2 my-business
+        else if(menuSelectLowercase === "2" || menuSelectLowercase === "my-business"){
+          setMenuSelectLocation(2)
+        }
+        // 3 my-Appointments
+        else if(menuSelectLowercase === "3" || menuSelectLowercase === "my-apppointments"){
+          setMenuSelectLocation(3)
+        }
+      }
 
       validRequest = true; //-- was a valid request and completed
       setState(validRequest); //-- Update overall Business Page state as TRUE to allow content to load
@@ -152,6 +155,7 @@ export default function Business() {
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
   const businessPages = { //-- This is an INDEX of available sub-components that can be rendered
+    0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
     3 : <Appointments     appointmentData={business.appointmentData} />,
@@ -179,18 +183,9 @@ export default function Business() {
                 {/* TODO:: 04/10/22 #EP || Hide or stylize */}
                 <Aside businessName={business.businessData.name} userName={business.userData.name} />
               </section>
-              
-              <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />
-
               {/* Main Content Area in Business Page */}
               <section className="businessMain"> 
-              {/* TODO:: 04/10/22 #EP || Need to not load ALL at once */}
-                <h4>page 1</h4>
-                {businessPages["1"]}
-                <h4>page 2</h4>
-                {businessPages["2"]}
-                <h4>page 3</h4>
-                {(businessPages["3"])}
+              {businessPages[menuSelectLocation]}
               </section>
             </section>
           );

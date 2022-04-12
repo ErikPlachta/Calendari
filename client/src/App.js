@@ -30,6 +30,7 @@ import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg'
 //TODO:: 05/09/22 #EP || Move stylesheet to root
 import './assets/css/styles.css';
 import './assets/css/animations.css';
+import PageNotFound from './pages/PageNotFound';
 
 
 const httpLink = createHttpLink({
@@ -73,6 +74,9 @@ function App() {
 
           <Route path="/b/:business_id_or_brand_name"         element={<Business/>} />
           <Route path="/business/:business_id_or_brand_name"  element={<Business/>} />
+          
+          <Route path="/b/:business_id_or_brand_name/:menuSelect"         element={<Business/>} />
+          <Route path="/business/:business_id_or_brand_name:/menuSelect"  element={<Business/>} />
 
           <Route path="/s/:business_id_or_brand_name"           element={<Scheduler/>}/>
           <Route path="/schedule/:business_id_or_brand_name"    element={<Scheduler/>}/>
@@ -80,6 +84,9 @@ function App() {
 
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
+
+          {/* push Page Not Found if bad route */}
+          <Route path='*' element={ <PageNotFound />} ></Route>
         </Routes>
       </main>
         <br></br>

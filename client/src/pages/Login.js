@@ -32,12 +32,10 @@ export default function Login() {
   const handleChange = (event) => {
     const { name, value } = event.target;
     
-    
-    setUser({
+    setUser({ //-- update useState value
       ...user,
       [name]: value,
     });
-    
     
     //-- If a username, password are in form and tried to submit, run this otherwise don't.
     if(user.email && user.password && user.submitAttempts>0 ){
@@ -61,13 +59,8 @@ export default function Login() {
       });
       Auth.login(data.login);
     }
-    
-    //-- Otherwise failure so update UI somehow
-    catch (e) {
-      //TODO:: 04/11/22 #EP || Add UI msg here instead
-      // console.log(`Error: ${e}`);
-      // console.error(`${e}`);
-      errorPopup(e)
+    catch (error) {//-- Otherwise failure so update UI somehow
+      errorPopup(error)
     }
 
   };
