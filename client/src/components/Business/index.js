@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import { Navigate, useParams } from "react-router-dom";
 
+//-- JWT Auth
+import Auth from "../../utils/authServices"
+
 import { useQuery, useMutation } from '@apollo/client';
 // import  { QUERY_USER_APPTS } from '../../utils/queries';
 import  { QUERY_BUSINESSES } from '../../utils/queries';
@@ -118,24 +121,29 @@ export default function Business() {
     let validRequest = null;  //-- is a valid request to Business component was made, true.
 
 
-    // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){
+
+    //1. if NOT logged in, state false
+    if(!Auth.isLoggedIn()){
+      validRequest = false;
+      setState(validRequest)
+    }
+
+    // 2. If No business_id, no business_name or invalid values found, exit
+    else if(!business_id_or_brand_name){
       //-- Doesn't exist, re-route to homepage or 404 page 
       //-- this should not happen technically
       validRequest = false;
     }
     
-    // 2. If  valid business_id or business_name extract just the business ID
-      // -- grabs it and stores into const here
-    //TODO:: 04/09/22 #EP | 
+    // 3. If  valid business_id or business_name extract just the business ID
+    //TODO:: 04/09/22 #EP || connect to GQL
     else if(!Businesses[business_id_or_brand_name]){
       // navigate('/')
-      validRequest = false
-      
+      validRequest = false 
     }
-
-    //-- if the param received matches, update the state with the business info
-    else if(Businesses[business_id_or_brand_name]){
+    
+    // 4. If the param received matches, and If Logged in, load content
+    else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){
 
       const businessData = Businesses[business_id_or_brand_name];
       
@@ -165,9 +173,8 @@ export default function Business() {
       //04/10/22 #EP || Assuming valid load attempt, setting state of load as true
       setState(validRequest)
     };
-    
 
-    // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
+    // 5.  Otherwise exit
     return validRequest;
   }
    
@@ -180,14 +187,14 @@ export default function Business() {
     // console.log(business)
   },[]);
 
+
   if(loading){
-    console.log("//-- Still Loading")
+    // console.log("//-- Still Loading")
     // return <Navigate to="/b/test" />;
   }
-
   if(!loading){
-    console.log("//-- done loading")
-    console.log(data);
+    // console.log("//-- done loading")
+    // console.log(data);
   }
 
 
@@ -203,7 +210,7 @@ export default function Business() {
   /* Page Location and Logic
   */
   //-- This is an INDEX of available sub-components that can be rendered
-  //TODO:: 04/10/22 #EP || How to make this a state? ( when I try it doesn't function properly )
+  //TODO:: 04/10/22 #EP || How to make this a useState obj? ( when I try it doesn't function properly )
   const businessPages = {
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
@@ -242,7 +249,8 @@ export default function Business() {
               </section>
             </section>
           );
-          case false: return <PageNotFound />;
+          //-- if NOT loading, return loading, otherwise not logged in
+          case false: return loading ? "Loading..." : <Navigate replace to="/login" />
           //TODO::04/10/22 #EP | Add loading element
           default:    return "Loading...";
         }
