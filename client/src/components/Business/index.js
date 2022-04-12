@@ -116,8 +116,13 @@ export default function Business() {
       if(menuSelect){
         //-- force to lowercase
         const menuSelectLowercase = menuSelect.toLowerCase();
+        
+        // 0 dashboard
+        if(menuSelectLowercase === "0" || menuSelectLowercase === "dashboard"){
+          setMenuSelectLocation(0)
+        }
         // 1 my-settings
-        if(menuSelectLowercase === "1" || menuSelectLowercase === "my-settings"){
+        else if(menuSelectLowercase === "1" || menuSelectLowercase === "my-settings"){
           setMenuSelectLocation(1)
         }
         // 2 my-business
