@@ -1,7 +1,7 @@
 {
-  "name": "yourschedule",
-  "version": "0.1.0",
-  "description": "TBD",
+  "name": "Calendari",
+  "version": "1.0.0",
+  "description": "Calendari is a scheduling app for your business. It gives business owners the ability to streamline the appointment booking process by letting the users schedule their own appointments based on the business's availability. This app can be used by any business in any industy, and future development includes plans to customize the look of the website!",
   "main": "server/server.js",
   "scripts": {
     "seed": "cd server && npm run seed",

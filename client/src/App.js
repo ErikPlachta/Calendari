@@ -33,11 +33,25 @@ import './assets/css/animations.css';
 import PageNotFound from './pages/PageNotFound';
 
 
+//-- used to know what to do with graphQL uri based on if development or production
+let uri = "";
+
+ //-- if in development mode, use graphql local pathing
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+  console.log('//-- client in development');
+  uri = `http://localhost:${ process.env.PORT || 3001 }/graphql`;
+} ;
+
+//-- if in production mode, used by heroku so needs to update accordingly
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production'){
+  console.log('//-- client in production')
+  uri = '/graphql';
+} ;
+
 const httpLink = createHttpLink({
-  uri: '/graphql'
+  "uri": uri
   // uri: `http://localhost:${PORT}/graphql`
-  // // uri: `http://localhost:3001/graphql`
-});
+  });
 
 const authLink = setContext((_, { headers }) => {
   const token = localStorage.getItem('id_token');
