@@ -90,7 +90,6 @@ export default function Login() {
     <section> 
 
       {(() => {
-        //TODO:: 04/11/22 #EP || switch to not have !
         switch(Auth.isLoggedIn()) {    
           
           //-- if already logged in, route to busienss page
@@ -103,35 +102,39 @@ export default function Login() {
               <h2 alt="please login">Get Logged In</h2>
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
-                <input
-                    placeholder="Your email"
-                    name="email"
-                    type="email"
-                    id="email"
-                    minLength="8"
-                    autoComplete='email'
-                    value={formDetails.email}
-                    onChange={handleChange}
-                />
-                <br></br>
+                <span className="form-element">
+                <label for='password'>Email</label>
+                  <input
+                      placeholder="your@email.com"
+                      name="email"
+                      type="email"
+                      id="email"
+                      minLength="8"
+                      autoComplete='email'
+                      value={formDetails.email}
+                      onChange={handleChange}
+                  />
+                </span>
                 {/* USER PASSWORD */}
-                <input
-                    placeholder="********"
-                    name="password"
-                    type="password"
-                    id="password"
-                    minlength="6"
-                    autoComplete='current-password'
-                    value={formDetails.password}
-                    onChange={handleChange}
-                />
-                <br></br>
+                <span className="form-element">
+                  <label for='password'>Password</label>
+                  <input
+                      placeholder="********"
+                      name="password"
+                      type="password"
+                      id="password"
+                      minlength="6"
+                      autoComplete='current-password'
+                      value={formDetails.password}
+                      onChange={handleChange}
+                  />
+                </span>
+                {/* RECAPTCHA */}
+                <ReCAPTCHA formDetails={formDetails} />
                 {/* SUBMIT BUTTON */}
                 <button>Login</button>
               </form>
-              {/* RECAPTCHA */}
               
-              <ReCAPTCHA formDetails={formDetails} />
               
               {/* LINK TO SIGNUP */}
               <p id="login-form-signup-message" style={{opacity: "1"}}>

@@ -1,8 +1,7 @@
 import { now } from 'moment';
 import React, { useState, useEffect } from 'react';
-import Calendar from 'react-calendar';
 import 'react-calendar/dist/Calendar.css';
-import TimePicker from 'react-time-picker';
+import DateTimePicker from '../../../DateTimePicker';
 
 
 export default function DateTime({nextStep}) {
@@ -14,22 +13,21 @@ export default function DateTime({nextStep}) {
     <section className="page scheduleAppointment">
       <header>
         <h3>Select Date and Time</h3>
+        <p>Select the date and your best avaialble time!</p>
       </header>
-      <div className="appointmentCard appointmentCalendar">
-        <Calendar>Pick your appointment date</Calendar>
-        <p>Please select your appointment time</p>
-        <TimePicker onChange={onChange} value={value}></TimePicker>
-        <br></br>
-        <br></br>
-        <label htmlFor="notes">Anything we should know?</label>
-        <textarea
-          name="notes"
-          rows="5"
-          placeholder="During the appointment, I want to talk about..."
-        />
-        <br></br>
-        <button onClick={nextStep}>Schedule Appointment</button>
-      </div>
+      <form className="appointmentCard appointmentCalendar"  onSubmit={nextStep}>
+        <span className="form-element">
+          <DateTimePicker />
+        </span>
+        <span className='form-element'>
+        <input
+            type="submit"
+            className="button"
+            id="contact-me-submit"
+            value="Next"
+          />
+        </span>
+      </form>
     </section>
     
   )

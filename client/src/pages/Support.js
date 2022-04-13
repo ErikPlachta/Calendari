@@ -99,7 +99,7 @@ export default function Support() {
 
         {(() => {
             //TODO:: 04/11/22 #EP || switch to not have !
-            switch(!Auth.isLoggedIn()) {    
+            switch(Auth.isLoggedIn()) {    
             
             //-- if already logged in, route to busienss page
             case true:   return <Navigate replace to="/Business" />

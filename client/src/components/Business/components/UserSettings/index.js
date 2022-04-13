@@ -81,6 +81,7 @@ export default function UserSettings(userData) {
 
   const updateUser = (event) => {
     event.preventDefault();
+    // then next
 
   }
 

@@ -45,11 +45,16 @@
   /* BOX-SHADOWS */
   /*TODO:: 04/05/2022 #EP || Convert to pixels */
   --bs-01: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
-  /*TODO:: 04/05/2022 #EP || Add this focus */
-  /* --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3); */
-  --bs-02: 0 0rem .5rem var(--a_01);
-  /*TODO:: 04/05/2022 #EP || Add this focus */
-  /* --bs-02_focus: 0 0rem .5rem var(--a_01); */  
+  --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
+  
+  /* basic shadow on SVG */
+  --ds-01: drop-shadow(1px 1px .4px rgb(41 24 60 / .11));
+  --ds-01_focus: drop-shadow(0 0px 0px rgb(0 0 0 / 0));
+  
+  /* buttons */
+  --ds-02:       drop-shadow(1px 1px 0px rgb(41 24 60 / .11)); 
+  --ds-02_focus: drop-shadow(1px 1px 1px rgb(41 24 60 / .3));
+  
 
   /* SHADOWS */
   --s_black_a25: 0 0 .5rem var(--a_01);
@@ -183,27 +188,6 @@ li {
   font-size: 14px;
 }
 
-
-/* Default button Styling */
-button {
-        
-  /* Buttons text color */
-  --btn_tc_inactive: var(--plum); /* button inactive text color */
-  --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
-
-  /* Buttons background color */
-  --btn_bg_inactive: var(--light-pink); /* button inactive text color */
-  --btn_bg_active: var(--plum); /* button active text color for hover and click */
-
-
-  border-radius: var(--br_primary);
-  width: 8rem;
-  height: 3rem;
-  
-  background-color: var(--btn_bg_inactive);
-  color: var(--btn_tc_inactive);
-}
-
 /* Default Text Area Styling */
 
 textarea {
@@ -289,11 +273,91 @@ input:focus-visible{
 }
 
 /* When hovering input or text-area, add deeper shadow */
-input:hover,
+input[type="phone"]:hover,
+input[type="email"]:hover,
+input[type="text"]:hover,
 textarea:hover{
   opacity: 1;
   box-shadow: rgba(82, 0, 190, 0.2) 0px -2px 6px 0px inset;
 }
+
+
+/*----------------------------------------------------------------------------*/
+/* FORMS */
+
+/* #clientContactForm, */
+.clientContact,
+.clientContactForm,
+.clientContactForm span {
+  
+  display: flex;
+  flex-direction: column;
+  flex-direction: wrap;
+  justify-content: center;
+}
+
+.clientContact,
+.clientContactForm{
+  grid-gap: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+/* Inside a form - the labels/input value combos */
+.form-element{
+  display: flex;
+  flex-direction: column;
+  flex: 100%;
+}
+
+button,
+.form-element button,
+.form-element input[type|='submit']{
+  background-color:var(--darker-pink);
+  color: white;
+}
+
+button,
+.form-element button,
+.form-element input{
+  border-radius: var(--br_secondary);
+  font-size:16px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+  min-height: 2rem; /* make sure always big enough to click */
+  padding: 10px; /* make sure there is good spacing around the inside */ 
+  transition: ease-in-out 200ms;
+  filter: var(--ds-02);
+  
+}
+
+button:hover,
+.form-element button:hover,
+.form-element input[type|='submit']:hover{
+  cursor: pointer;
+  filter: var(--ds-02_focus) 
+          brightness(105%)
+  ;
+  
+}
+
+
+/* Inside the form element, making sure all content is full fit */
+.form-element button,
+.form-element input,
+.form-element label,
+.form-element textarea,
+.form-element select {
+  flex: 100%;
+  width: 100%;
+}
+
+.form-element#recaptcha{ 
+  align-items: center; /* into center of DIV element */
+}
+
 
 /*-------------------------------------------WAVE---------------------------*/
 @import url(//fonts.googleapis.com/css?family=Lato:300:400);
@@ -506,23 +570,6 @@ table {
   width: 100%;
 }
 
-.signupInformation button {
-    /* Buttons text color */
-    --btn_tc_inactive: var(--plum); /* button inactive text color */
-    --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
-  
-    /* Buttons background color */
-    --btn_bg_inactive: var(--darker-pink); /* button inactive text color */
-    --btn_bg_active: var(--plum); /* button active text color for hover and click */
-  
-    border-radius: var(--br_primary);
-    width: 6rem;
-    height: 2rem;
-    
-    background-color: var(--btn_bg_inactive);
-    color: var(--btn_tc_inactive);
-    margin: 10px;
-}
 
 
 
@@ -724,19 +771,17 @@ SHARED STYLES -> Business, Scheduler, PageNotFound, SignUp
   color: white;
 }
 
-.form-element input{
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style:groove;
-}
-
 
 /*------------------------------------------------------------------------------
-  BUSINESS STYLING
-*/
+  DateTimePicker Component Specific */
 
 
+.dateTimePicker button,
+.react-calendar__tile .react-calendar__month-view__days__day{
+  background-color: var(--c01);
+  color: var(--theme_plum);
+  padding: 0;
+}
 
 /*------------------------------------------------------------------------------
   SCHEDULER AND APPOINTMENT PAGE SPECIFIC CLASSES */
@@ -765,11 +810,11 @@ SHARED STYLES -> Business, Scheduler, PageNotFound, SignUp
   animation: slide-right-footerProgressBar 200ms;
 }
 .progressBarBackArrow img:hover {
-  filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.4)) brightness(105%);
+  filter: (var(--ds-01)) brightness(105%);
   cursor: pointer;
 }
 .progressBarBackArrow img:active { /* on click remove shadow */
-  filter: drop-shadow(0 0px 0px rgb(0 0 0 / 0));
+  filter: (var(--ds-01_focus));
 }
 .progressBarBackArrow img,
 .progressBarLabel {
@@ -807,41 +852,6 @@ progress.progressBarStep{
   color: white;
   font-weight: bold;
   font-size: 18px;
-}
-
-/*----------------------------------------------------------------------------*/
-/* CLIENT CONTACT FORM */
-
-/* #clientContactForm, */
-.clientContact,
-.clientContactForm,
-.clientContactForm span {
-  
-  display: flex;
-  flex-direction: column;
-  flex-direction: wrap;
-  justify-content: center;
-}
-
-.clientContact,
-.clientContactForm{
-  grid-gap: 2rem;
-  width: 80%;
-  margin: auto;
-}
-
-.clientContactForm textarea{
-  border-radius: var(--br_primary);
-}
-.clientContactForm input {
-  height: 2rem;
-}
-
-.form-element button {
-  border-radius: 50px;
-  background-color:var(--darker-pink);
-  color: white;
-  font-size:16px;
 }
 
 /*----------------------------------------------------------------------------*/

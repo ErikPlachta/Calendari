@@ -18,12 +18,12 @@ export default function Recaptcha(formDetails) {
     //--------------------------------------------------------------------------
     //-- return function
     return (
-        <span className="form-element" id='recaptcha'>
+        <span className="form-element" id='recaptcha'>  
             <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
                 onChange={e => (formDetails['g-recaptcha-response']=e)}
             />
-  </span>
+    </span>
   )
-}
+};
