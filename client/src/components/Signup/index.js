@@ -29,28 +29,21 @@ const {
 
 //------------------------------------------------------------------------------
 //-- ASSETS
-
 //-- Hardcoded data used to simulate the Database
-//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_Business = require('../../assets/json/business.json');
+const DB_Business = require('../../assets/json/business.json'); //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 
 //------------------------------------------------------------------------------
-/* EXPORT FUNCTION - Scheduler
-
-  URL PARAMS: (business_id_or_name, appointment_type_id)
-    - business_id_or_name:    The business they're scheduling for
-    - appointment_type_id:    The ID of the Appointment they selected
-*/
+/* EXPORT FUNCTION - Signup */
 export default function Signup() {
 
   useEffect(() => {
     document.title = `Calendari - Signup`;
   },[]);
 
-  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query - if business name is unique checking  
+  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query - if business name is unique checking   //TODO:: 04/12/22 #EP | Connect to GQL
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
     "userData"      : "",   //-- the users data
-    "businessData"  : "",   //-- the business data for the client
+    "businessData"  : "",   //-- the business data for the client //TODO:: 04/12/22 #EP | Connect to GQL
   })
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
@@ -66,28 +59,18 @@ export default function Signup() {
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( false );
 
-  //-- used to ReRoute Navigation away if invalid details
-  // const navigate = useNavigate();
-
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS  */
-
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
-
-    let validRequest = true;
+    let validRequest = true; //-- 04/10/22 #EP || ATM always true, but need to know if  offline
     setState(validRequest)
-    
-
     return validRequest; //-- return results to update the title-bar accordingly
   }
   
   useEffect(() => {
-    const validRequest = validateParams();
-     //-- IF valid request is TRUE, update title with business name. 
-    if(validRequest){ document.title = `Calendari - Signup`};
-    
-    //-- IF NOTE valid request is TRUE, update title with Invalid Request
-    if(!validRequest){ document.title = `Calendari - Invalid Request`};
+    const validRequest = validateParams(); //-- 04/12/22 #EP|| Always valid until offline awareness.
+    if(validRequest){ document.title = `Calendari - Signup`}; //-- IF valid request is TRUE, update title with business name. 
+    if(!validRequest){ document.title = `Calendari - Invalid Request`}; //-- IF NOTE valid request is TRUE, update title with Invalid Request
   },[]);
   
 
@@ -98,11 +81,9 @@ export default function Signup() {
     nextStepButton.preventDefault();
     
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
-    console.log(nextStepButton_id)
     if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
-      setAppointment_confirmation_id(nextStepButton_id);
-      //TODO:: 04/10/22 #EP || Get form data here
-      createAppointment(appointment_confirmation_id);
+      setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
+      createAppointment(appointment_confirmation_id); //TODO:: 04/10/22 #EP || post form data to database
     }
     else {
       setStep(step+1);
@@ -115,7 +96,7 @@ export default function Signup() {
   };
 
   //-- Client Input Template and Submitting Request //-- When Appointment is Verified, Submit it to API, and if success move to verification page
-  const createAppointment = async params => {// TODO - to run the API REQUEST from form submit
+  const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When client information verified and submitted, update database with appointment data
 
     // 1. Validate data
@@ -160,5 +141,3 @@ export default function Signup() {
     </section>
   )
 };
-
- 

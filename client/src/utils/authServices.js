@@ -67,7 +67,8 @@ class AuthService {
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
-    window.location.assign('/');
+    window.location.assign(`/`);
+    // window.location.assign(`/business/${business_id}`); //-- TODO:: 04/12/22 #EP || Get the ID
   }
 
   logout() {

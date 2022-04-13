@@ -1,35 +1,42 @@
-//-- IMPORTS
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react'
-// import {Link} from 'react-router'
 import { Redirect, Navigate } from 'react-router-dom';
 import { emailValidate } from '../utils/helpers';
-// import {capitalizeFirstLetter} from '../../utils/helpers';
-// import Signup from "../Signup";
-
+//------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
 import Auth from "../utils/authServices"
 import ReCAPTCHA from "react-google-recaptcha";
 
+//------------------------------------------------------------------------------
+//-- RESOURCES
 
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
+//-- TODO:: 04/12/22 #EP || Add Query to get business data based on the logged in user
 
+//------------------------------------------------------------------------------
+//-- MAIN FUNCTION -> Login
 export default function Login() {
 
-  //-- Form data goes here when submit to make the login attempt
-  const [user, setUser] = useState({
+  const [user, setUser] = useState({ //-- Form data goes here when submit to make the login attempt
     "email"     : "",
     "password"  : "",
     "submitAttempts" : 0,
     'g-recaptcha-response': '',
   });
-  //-- When login pressed, attempt to login 
-  const [login, { error }] = useMutation(LOGIN_USER);
+  
+  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
+  
+  //-- TODO:: 04/12/22 #EP || Add Query to get business data based on the logged in user
+  
+  
+  const recaptchaRef = React.createRef(); //-- for for submission
 
-  const recaptchaRef = React.createRef();
+  //----------------------------------------------------------------------------
+  //-- FORM MAANGEMENT
 
-  //-- Update state based on user input
-  const handleChange = (event) => {
+  const handleChange = (event) => { //-- Update state based on user input
     const { name, value } = event.target;
     
     setUser({ //-- update useState value
@@ -46,10 +53,9 @@ export default function Login() {
     }
   };
 
-  //-- Take data from email/password, attempt to login with mutation
-  const handleFormSubmit = async (event) => {
+  //-- Attempted to Login
+  const handleFormSubmit = async (event) => { //-- Take data from email/password, attempt to login with mutation
     event.preventDefault();
-
     //-- count every attempt
     setUser({...user, submitAttempts: user.submitAttempts+1});
     //-- Attempt to login with Auth
@@ -57,27 +63,27 @@ export default function Login() {
       const { data } = await login({
         variables: { ...user },
       });
+
+      //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
       Auth.login(data.login);
     }
-    catch (error) {//-- Otherwise failure so update UI somehow
-      errorPopup(error)
-    }
-
+    //-- Otherwise failure so update UI somehow
+    catch (error) { errorPopup(error)}
   };
-
-  //TODO:: 04/11/22 #EP || Onboard error message to UI
+  //-- The Error Message  to UI Manager
   const errorPopup = (error) => {
-    if ((error.toString()).includes('Incorrect credentials')) {
-      
-      //-- Message for Incorrect Creds
+    //-- IF bad creds
+    if ((error.toString()).includes('Incorrect credentials')) {   //-- Message for Incorrect Creds on UI
       document.getElementById("login-form-message").style.opacity="1";
       document.getElementById("login-form-message").classList.remove('fade-out');
       document.getElementById("login-form-message").classList.add('fade-in');
     };
   }
 
-  //-- Run once at load to verify if logged in already. If yes, re-routes
-  useEffect(() => {
+  //----------------------------------------------------------------------------
+  //-- Use Effect to verify if logged in
+
+  useEffect(() => { //-- Run once at load to verify if logged in already. If yes, re-routes
         
     if(Auth.isLoggedIn()){
       console.log("already logged in, redirecting to business page...")
@@ -85,20 +91,19 @@ export default function Login() {
     }
   }, []);
 
+  //----------------------------------------------------------------------------
+  //-- Primary Return Function
   return (
-
     <section> 
-
       {(() => {
-        //TODO:: 04/11/22 #EP || switch to not have !
+        //-- CHECK FOR JWT AUTH
         switch(Auth.isLoggedIn()) {    
           
-          //-- if already logged in, route to busienss page
-          case true:   return <Navigate replace to="/Business" />
-          // "Already Logged In Placeholder (TODO:: 04/11/22 #EP || Route to Business page)"
+          //-- IF EXISTS, REROUTE TO BUSINESS PAGE
+          case true:   return <Navigate replace to="/Business" /> 
           
-          //-- if NOT logged in, prompt login screen
-          case false:    return (
+          //-- IF NOT, LOAD LOGIN PAGE CONTENT
+          case false:    return ( 
             <div className="signupInformation">
               <h2 alt="please login">Get Logged In</h2>
               <form onSubmit={handleFormSubmit}>
@@ -149,10 +154,8 @@ export default function Login() {
               
             </div>
           )
-
           //-- If waiting for element to load, indicate it.
-          //TODO::04/11/22 #EP | Add loading element
-          default:    return "Loading...";
+          default:    return "Loading..."; //TODO::04/11/22 #EP | Add loading element
         }
         
       })()}
