@@ -6,7 +6,7 @@ import { emailValidate } from '../utils/helpers';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
-import ReCAPTCHA from "../components/ReCAPTCHA";
+import ReCAPTCHA from "../components/Recaptcha";
 import Auth from "../utils/authServices"
 
 //------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ import { Redirect, Navigate } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
-import ReCAPTCHA from '../components/ReCAPTCHA';
+import ReCAPTCHA from '../components/Recaptcha';
 import Auth from "../utils/authServices"
 
 //------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import ReCAPTCHA from "../../../ReCAPTCHA"
+import ReCAPTCHA from "../../../Recaptcha"
 
 const { 
   capitalizeFirstLetter,
