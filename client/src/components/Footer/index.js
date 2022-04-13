@@ -8,7 +8,6 @@ export default function Footer({ bob_static }) {
         <img className="brandLogo" alt="Bob" src={bob_static}></img>
         <p>Copyright of Mary Margaret Lawton, Erik Plachta, and Christiana Sullivan Morales</p> 
       </div>
-        
     </footer>
 
   )
