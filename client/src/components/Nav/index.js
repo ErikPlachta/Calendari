@@ -5,15 +5,21 @@ import { Link } from 'react-router-dom';
 
 export default function Nav({ bobData, bob2 }) {
 
-    const [bobs, setBobs] = useState({bobData});
-    
+    //--------------------------------------------------------------------------
+    //-- STATES
 
+    //TODO:: 04/13/22 #EP|| Delete?
+    const [bobs, setBobs] = useState({bobData});//-- Path to BOB SVG Icons
+
+    //--------------------------------------------------------------------------
+    //-- FUNCTIONS
     const logout = event => {
         event.preventDefault();
         Auth.logout();
-      };
+    };
 
-      console.log(bobData)
+    //--------------------------------------------------------------------------
+    //-- RETURN 
     return (
         <header className="navHeader"> 
             <div>  
