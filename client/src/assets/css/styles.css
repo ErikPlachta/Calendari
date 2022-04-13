@@ -820,44 +820,35 @@ progress[value]{
 }
 
 
+/*----------------------------------------------------------------------------*/
+/* brandLogo - used in Navigation, Footer, and PageNotFound */
+
 .brandLogo{
   margin: 0.25rem;
-  filter: 
-          drop-shadow(0px 0px 0px rgb(255 255 255 / 1))
-          drop-shadow(3px 2px 2px rgb(41 24 60 / .1))
-          /* drop-shadow(3px 2px 2px rgb(41 24 60 / .1)) */
-          /* drop-shadow(0px 0px 1px rgb(255 255 255 / .3)) */
-          /* drop-shadow(0px 0px 10px rgb(41 24 60 / .1)) */
-          /* drop-shadow(0px 0px 0px rgb(41 24 60 / .1)) */
-          /* drop-shadow(0px 0px 0px rgb(41 24 60 / .1)) */
-          /* drop-shadow(0px 0px 0px rgb(41 24 60 / .3)) */
-          
-  ;
-  /* transition: ease-in-out 200ms; */
-  /* -webkit-transform: translateZ(0);
-  transform: translateZ(0); */
-  
+  filter: drop-shadow(1px 1px .4px rgb(41 24 60 / .11)); /* basic shadow on SVG */
+  transition: ease-in-out 200ms;
 }
 
-.pageNotFound img{
+.pageNotFound img{ /* the brand-logo in PageNotFound */
   min-width: 150px;
   max-width: 180px;
 
 }
 
-header img.brandLogo{
+header img.brandLogo{ /* the brand-logo in Navigation/Header */
   width: 70px;
 }
 
-footer img.brandLogo{
+footer img.brandLogo{ /* The brandLogo int he footer. */
   width: 40px;
 }
 
 .brandLogo:hover {
   cursor: pointer;
-   
-   /* animation: shake 1s;
-  animation-iteration-count: infinite; */
+  filter: 
+        drop-shadow(1.7px 1.7px .4px rgb(41 24 60 / .1)) /* comes closer to you */
+        brightness(101%) /* almost not noticeable, so just draws your eye m ore */
+  ;
 }
 
 
