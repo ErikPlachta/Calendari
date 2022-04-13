@@ -15,6 +15,7 @@ export const ADD_USER = gql`
     mutation AddUser($nameFirst: String!, $nameLast: String!, $email: String!, $username: String!, $password: String!, $phoneNumber: String!, $businessId: ID!) {
         addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId) {
             _id
+            business_id
             name_first
             name_last
             username
