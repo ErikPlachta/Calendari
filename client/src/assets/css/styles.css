@@ -276,9 +276,11 @@ input:focus-visible{
 input[type="phone"]:hover,
 input[type="email"]:hover,
 input[type="text"]:hover,
+input[type="checkbox"]:hover,
 textarea:hover{
   opacity: 1;
   box-shadow: rgba(82, 0, 190, 0.2) 0px -2px 6px 0px inset;
+  cursor: pointer;
 }
 
 
@@ -340,7 +342,6 @@ button:hover,
   filter: var(--ds-02_focus) 
           brightness(105%)
   ;
-  
 }
 
 
@@ -355,6 +356,7 @@ button:hover,
 }
 
 .form-element#recaptcha{ 
+  transition: ease-in-out 200ms;
   align-items: center; /* into center of DIV element */
 }
 

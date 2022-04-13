@@ -172,13 +172,14 @@ export default function UserSettings(userData) {
                             value={user.email}
                           />
                         </span>
-
-                        <input
-                          type="submit"
-                          className="button"
-                          id="contact-me-submit"
-                          value="Submit"
-                        />
+                        <span className="form-element">
+                          <input
+                            type="submit"
+                            className="button"
+                            id="contact-me-submit"
+                            value="Submit"
+                          />
+                        </span>
                       </form>
                     </div>
                   )
