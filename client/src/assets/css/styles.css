@@ -835,8 +835,8 @@ progress[value]{
    */
    /* cursor: pointer; */
    
-   animation: shake 1s;
-  animation-iteration-count: infinite;
+   /* animation: shake 1s;
+  animation-iteration-count: infinite; */
 }
 
 

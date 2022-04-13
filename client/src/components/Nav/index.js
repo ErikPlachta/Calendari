@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import {capitalizeFirstLetter} from '../../utils/helpers';
 import Auth from '../../utils/authServices';
 import { Link } from 'react-router-dom';
 
-export default function Nav({ bob_static }) {
+export default function Nav({ bobData, bob2 }) {
+
+    const [bobs, setBobs] = useState({bobData});
     
 
     const logout = event => {
@@ -11,10 +13,11 @@ export default function Nav({ bob_static }) {
         Auth.logout();
       };
 
+      console.log(bobData)
     return (
         <header className="navHeader"> 
             <div>  
-                <img className="brandLogo" alt="Bob" src={bob_static}></img>
+                <img className="brandLogo" alt="Bob" src={bob2} width="50px"></img>
                 <span className="brandNameSlogan">
                     <h2 className="brandName" alt="appointment scheduler">
                         Calendari
