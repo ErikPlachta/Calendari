@@ -1,6 +1,14 @@
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
 
+//------------------------------------------------------------------------------
+//-- JWT LOGIN & AUTH
+import Recaptcha from "../../../ReCAPTCHA";         //-- Required for Signup
+import Auth from "../../../../utils/authServices";  //-- When signup happens, used to perform a login
+
+//------------------------------------------------------------------------------
+//-- HELPERS
 const { 
   capitalizeFirstLetter,
   dateGetMonths,
@@ -11,6 +19,9 @@ const {
   dateGetTimePassed,
   dateTimeFullLocal
 } = require('../../../../utils/helpers');
+
+//------------------------------------------------------------------------------
+//-- ASSETS / API
 
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
@@ -31,6 +42,7 @@ export default function Confirmtion({nextStep}) {
 
   //-- event listner on input
   const handleChange = (event) => {
+    //TODO:: Write this out
     setFormDetails({ ...formDetails, [event.target.name]: event.target.value, });
   };
 
@@ -53,14 +65,7 @@ export default function Confirmtion({nextStep}) {
                     <h4>TODO:: Add details from previous forms here and add Create Account Functionality</h4>
 
                     {/* RECAPTCHA */}
-                    <span className="form-element" id='recaptcha'>
-                      {/* Captcha*/}
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                        onChange={e => (formDetails['g-recaptcha-response']=e)}
-                      />
-                    </span>
+                    <Recaptcha formDetails={formDetails}/>
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 

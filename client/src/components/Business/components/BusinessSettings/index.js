@@ -141,6 +141,7 @@ export default function BusinessSettings(businessData) {
                           onChange={handleChange}
                         ></textarea>
                        
+                       {/* SUBMIT BUTTON */}
                         <input
                           type="submit"
                           className="button"

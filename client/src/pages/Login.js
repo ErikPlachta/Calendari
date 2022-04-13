@@ -1,44 +1,45 @@
+//------------------------------------------------------------------------------
 //-- IMPORTS
 import React, { useState, useEffect } from 'react'
-// import {Link} from 'react-router'
 import { Redirect, Navigate } from 'react-router-dom';
-import { emailValidate } from '../utils/helpers';
-// import {capitalizeFirstLetter} from '../../utils/helpers';
-// import Signup from "../Signup";
 
+//------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
+import ReCAPTCHA from '../components/ReCAPTCHA';
 import Auth from "../utils/authServices"
-import ReCAPTCHA from "react-google-recaptcha";
 
-
+//------------------------------------------------------------------------------
+//-- ASSETS / API
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
-export default function Login() {
 
-  //-- Form data goes here when submit to make the login attempt
-  const [user, setUser] = useState({
+
+//------------------------------------------------------------------------------
+//-- FUNCTION -> Login
+export default function Login() {
+  //-- The App's login page
+  
+  const [formDetails, setFormDetails] = useState({ //-- Form data goes here when submit to make the login attempt
     "email"     : "",
     "password"  : "",
     "submitAttempts" : 0,
     'g-recaptcha-response': '',
   });
-  //-- When login pressed, attempt to login 
-  const [login, { error }] = useMutation(LOGIN_USER);
 
-  const recaptchaRef = React.createRef();
-
-  //-- Update state based on user input
-  const handleChange = (event) => {
+  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
+  
+  //--
+  const handleChange = (event) => { //-- Update state based on user input
     const { name, value } = event.target;
     
-    setUser({ //-- update useState value
-      ...user,
+    setFormDetails({ //-- update useState value
+      ...formDetails,
       [name]: value,
     });
     
     //-- If a username, password are in form and tried to submit, run this otherwise don't.
-    if(user.email && user.password && user.submitAttempts>0 ){
+    if(formDetails.email && formDetails.password && formDetails.submitAttempts>0 ){
       //-- blank out error if there was one
       document.getElementById("login-form-message").classList.add('fade-out');
       document.getElementById("login-form-message").style.opacity="0";
@@ -51,11 +52,11 @@ export default function Login() {
     event.preventDefault();
 
     //-- count every attempt
-    setUser({...user, submitAttempts: user.submitAttempts+1});
+    setFormDetails({...formDetails, submitAttempts: formDetails.submitAttempts+1});
     //-- Attempt to login with Auth
     try {
       const { data } = await login({
-        variables: { ...user },
+        variables: { ...formDetails },
       });
       Auth.login(data.login);
     }
@@ -65,8 +66,7 @@ export default function Login() {
 
   };
 
-  //TODO:: 04/11/22 #EP || Onboard error message to UI
-  const errorPopup = (error) => {
+  const errorPopup = (error) => {  //-- if error, show msg
     if ((error.toString()).includes('Incorrect credentials')) {
       
       //-- Message for Incorrect Creds
@@ -110,7 +110,7 @@ export default function Login() {
                     id="email"
                     minLength="8"
                     autoComplete='email'
-                    value={user.email}
+                    value={formDetails.email}
                     onChange={handleChange}
                 />
                 <br></br>
@@ -122,7 +122,7 @@ export default function Login() {
                     id="password"
                     minlength="6"
                     autoComplete='current-password'
-                    value={user.password}
+                    value={formDetails.password}
                     onChange={handleChange}
                 />
                 <br></br>
@@ -130,14 +130,10 @@ export default function Login() {
                 <button>Login</button>
               </form>
               {/* RECAPTCHA */}
-              <span className="form-element" id='recaptcha'>
-                {/* Captcha*/}
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                  onChange={e => (user['g-recaptcha-response']=e)}
-                />
-              </span>
+              
+              <ReCAPTCHA formDetails={formDetails} />
+              
+              {/* LINK TO SIGNUP */}
               <p id="login-form-signup-message" style={{opacity: "1"}}>
                 <a href='/signup'>Don't have an account yet? Get Signed Up, here!</a>
               </p>

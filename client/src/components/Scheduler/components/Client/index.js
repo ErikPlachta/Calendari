@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-import Recaptcha from "../../../Recaptcha"
+import ReCAPTCHA from "../../../ReCAPTCHA"
 
 const { 
   capitalizeFirstLetter,
@@ -141,7 +141,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
                       <textarea  id='contact-description' rows="10" />
                     </span>
 
-                    <Recaptcha formDetails={formDetails} />
+                    <ReCAPTCHA formDetails={formDetails} />
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 

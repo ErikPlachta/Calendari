@@ -4,7 +4,6 @@ import React,{useEffect, useState} from 'react';
 import {  BrowserRouter, Route, Routes, useParams  } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-// import { setContext } from '@apollo/client/link/context';
 
 //------------------------------------------------------------------------------
 //-- PAGES
@@ -16,6 +15,7 @@ import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
 import Appointment from './pages/Appointment';
 import Business from "./components/Business";
+import Support from './pages/Support';
 
 //------------------------------------------------------------------------------
 //-- ASSETS
@@ -106,6 +106,8 @@ function App() {
           <Route path="/s/:business_id_or_brand_name"           element={<Scheduler/>}/>
           <Route path="/schedule/:business_id_or_brand_name"    element={<Scheduler/>}/>
           <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
+
+          <Route path="/support"  element={<Support />} />
 
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
