@@ -15,6 +15,7 @@ export const ADD_USER = gql`
     mutation AddUser($nameFirst: String!, $nameLast: String!, $email: String!, $username: String!, $password: String!, $phoneNumber: String!, $businessId: ID!) {
         addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId) {
             _id
+            business_id
             name_first
             name_last
             username
@@ -48,6 +49,15 @@ export const ADD_APPT_TYPE = gql`
                 appointment_duration
         }
     }
+`;
+// create new appointment field type
+export const ADD_APPT_FIELD = gql`
+    mutation AddApptField($apptTypeId: ID!, $fieldName: String!) {
+        addApptField(appt_type_id: $apptTypeId, field_name: $fieldName) {
+            _id
+            field_name
+        }
+  }
 `;
 // create new appointment
 export const ADD_APPT = gql`

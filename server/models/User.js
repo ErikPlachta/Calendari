@@ -8,6 +8,10 @@ const userSchema = new Schema(
             required: true,
             trim: true
         },
+        business_id: {
+            type: String,
+            required: true
+        },
         name_last: {
             type: String,
             required: true,
