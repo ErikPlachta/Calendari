@@ -539,16 +539,20 @@ table {
 }
 
 .signupBusiness h3{
-  padding-top:15px;
-  color: var(--darker-pink)
+  margin-top:30px;
+  color: var(--darker-pink);
+  margin-bottom: 0px;
 }
 
 .signupBusiness p {
+  margin-top:0px;
+  padding-top:0px;
   color: white;
 }
 
 .signupBusiness textarea {
   font-family: 'Lato', sans-serif;
+  color: var(--plum);
 }
 
 .signupUser h3{
@@ -567,6 +571,13 @@ table {
 
 .signupConfirmation p {
   color: white;
+}
+
+.form-element input{
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
 }
 
 .configure{
@@ -647,6 +658,20 @@ progress.progressBarStep{
   font-size: 1.5rem;
 }
 
+.appointmentConfirmation {
+  background-color: var(--darker-pink);
+  color: white;
+  margin: 40px 80px;
+  padding: 80px;
+  border-radius: 30px;
+}
+
+.appointmentConfirmation li {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 /* #progressBar{
   display: inline-block;
   text-align: center;
@@ -690,12 +715,18 @@ progress[value]{
   margin: auto;
 }
 
-.clientContactForm textarea,
-.clientContactForm input {
+.clientContactForm textarea{
   border-radius: var(--br_primary);
 }
 .clientContactForm input {
   height: 2rem;
+}
+
+.form-element button {
+  border-radius: 50px;
+  background-color:var(--darker-pink);
+  color: white;
+  font-size:16px;
 }
 
 /*----------------------------------------------------------------------------*/
@@ -788,8 +819,8 @@ progress[value]{
 }
 
 .brandLogo{
-  margin: 1rem;
-  width: 50px;
+  margin: 0.25rem;
+  width: 70px;
   /* transition: ease-in-out 200ms; */
   /* filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4)); */
   /* -webkit-transform: translateZ(0);

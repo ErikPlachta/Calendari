@@ -57,8 +57,8 @@ export default function Appointment({appointment_confirmation_id}) {
   const { appointment_id, appointment_date, appointment_time} = useParams();
 
   return (
-    <section class="containerResults">
-      <h1>Thanks for Scheduling your Appointment! Please see details below:</h1>
+    <section class="appointmentConfirmation">
+      <h1>You're Scheduled! Please see details below:</h1>
       <ul>
         <li>
           We will see you on DATE{appointment_date} at TIME{appointment_time}.

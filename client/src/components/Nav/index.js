@@ -14,7 +14,7 @@ export default function Nav({ bob_static }) {
     return (
         <header className="navHeader"> 
             <div>  
-                <img className="brandLogo" alt="Bob" src={bob_static} width="50px"></img>
+                <img className="brandLogo" alt="Bob" src={bob_static}></img>
                 <span className="brandNameSlogan">
                     <h2 className="brandName" alt="appointment scheduler">
                         Calendari
