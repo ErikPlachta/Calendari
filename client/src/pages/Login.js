@@ -5,7 +5,7 @@ import { Redirect, Navigate } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
-import ReCAPTCHA from '../components/ReCAPTCHA';
+import Recaptcha from '../components/Recaptcha';
 import Auth from "../utils/authServices"
 
 //------------------------------------------------------------------------------
@@ -129,7 +129,7 @@ export default function Login() {
                   />
                 </span>
                 {/* RECAPTCHA */}
-                <ReCAPTCHA formDetails={formDetails} />
+                <Recaptcha formDetails={formDetails} />
                 {/* SUBMIT BUTTON */}
                 <button>Login</button>
               </form>

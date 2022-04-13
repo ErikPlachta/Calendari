@@ -6,7 +6,7 @@ import { emailValidate } from '../utils/helpers';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
-import ReCAPTCHA from "../components/ReCAPTCHA";
+import Recaptcha from "../components/Recaptcha";
 import Auth from "../utils/authServices"
 
 //------------------------------------------------------------------------------
@@ -142,7 +142,7 @@ export default function Support() {
                     </span>
                     
                     {/* reCAPTCHA */}
-                    <ReCAPTCHA formDetails={formDetails} />
+                    <Recaptcha formDetails={formDetails} />
                     {/* SUBMIT BUTTON */}
                     <button>Login</button>
                 </form>

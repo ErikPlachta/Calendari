@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH
-import Recaptcha from "../../../ReCAPTCHA";         //-- Required for Signup
+import Recaptcha from "../../../Recaptcha";         //-- Required for Signup
 import Auth from "../../../../utils/authServices";  //-- When signup happens, used to perform a login
 
 //------------------------------------------------------------------------------
