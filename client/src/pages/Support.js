@@ -111,38 +111,42 @@ export default function Support() {
                 <h2 alt="please login">Submit Support Ticket</h2>
                 <form onSubmit={handleFormSubmit}>
                     {/*CATEGORY - The reason for the support ticket */}
-                    <label htmlFor="category">Category</label>
-                    <select 
-                        className="select"
-                        id="category"
-                        name="category" 
-                        onChange={handleChange} 
-                    >
-                        <option  value="please select" selected>Choose a Category..</option>
-                        <option  value="business">Business Account</option>
-                        <option value="user">User Account</option>
-                        <option value="scheduler">Scheduler</option>
-                        <option value="other">Other</option>
-                    </select>
-                    <br></br>
+                    <span className="form-element">
+                        <label htmlFor="category">Category</label>
+                        <select 
+                            className="select"
+                            id="category"
+                            name="category" 
+                            onChange={handleChange} 
+                        >
+                            <option  value="please select" selected>Choose a Category..</option>
+                            <option  value="business">Business Account</option>
+                            <option value="user">User Account</option>
+                            <option value="scheduler">Scheduler</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </span>
+                    
                     {/* DETAILS - Notes for the support ticket */}
-                    <label htmlFor='details'>Summary of Issue</label>
-                    <textarea
-                        name='details'
-                        type="textarea"
-                        rows='10'
-                        placeholder="I'm reaching out for support because..."
-                        required
-                        value={formDetails.details}
-                        onChange={handleChange}
-                    ></textarea>
-                    <br></br>
+                    <span className='form-element'>
+                        <label htmlFor='details'>Summary of Issue</label>
+                        <textarea
+                            name='details'
+                            type="textarea"
+                            rows='10'
+                            placeholder="I'm reaching out for support because..."
+                            required
+                            value={formDetails.details}
+                            onChange={handleChange}
+                        ></textarea>
+                    </span>
+                    
+                    {/* reCAPTCHA */}
+                    <ReCAPTCHA formDetails={formDetails} />
                     {/* SUBMIT BUTTON */}
                     <button>Login</button>
                 </form>
                 
-                {/* reCAPTCHA */}
-                <ReCAPTCHA formDetails={formDetails} />
 
                 {/* Used to notify if login event failure */}
                 <h5 id="login-form-message" style={{opacity: "0"}}>
