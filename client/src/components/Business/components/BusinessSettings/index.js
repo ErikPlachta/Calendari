@@ -131,9 +131,11 @@ export default function BusinessSettings(businessData) {
                         </span>
 
                         {/* Business Welcome Message */}
+                        <label htmlFor='message'>Business Scheduler Welcome Message</label>
                         <textarea
                           name='message'
                           type="textarea"
+                          id='message'
                           rows='10'
                           placeholder="I'm reaching out because..."
                           required

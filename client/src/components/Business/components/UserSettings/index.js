@@ -168,7 +168,7 @@ export default function UserSettings(userData) {
                             required
                             autoComplete="email"
                             onChange={handleChange}
-                            value={user.name_last}
+                            value={user.email}
                           />
                         </span>
 

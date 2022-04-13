@@ -104,12 +104,11 @@ html{
   /* Disabling user selection 
     //TODO: 04/05/22 #EP | Commented out for now left for reference
   */
-  /*
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
-  user-select: none; */
+  user-select: none;
 
     padding: 0;
     margin: 0;
@@ -205,6 +204,89 @@ button {
   color: var(--btn_tc_inactive);
 }
 
+/* Default Text Area Styling */
+
+textarea {
+  border-radius: var(--br_primary);
+  padding: 4px;
+  border: 1px solid var(--plum);
+  outline: none;
+  overflow: auto;
+  /*resize: none; /*remove the resize handle on the bottom right */
+  width: 90%;
+}
+
+textarea:focus,
+textarea::-moz-focus-inner {
+  outline: 10px solid red;
+  border: 1px solid green;
+  display: hidden;
+}
+
+
+/* Default Select Element Styling */
+select {
+  /* Removing all default formatting */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  background-image: none;
+
+  /* Personal Styling */
+  width: 100%; /* Fit's the parent */
+  padding: 0 1em;
+
+  background-color: var(--theme_light-pink);
+  cursor: pointer;
+  border-radius: var(--br_primary);
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  width: 20em;
+  height: 3em;
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: red;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+
+/* SHARED ANIMATIONS BETWEEN INPUT AND TEXTAREAS */
+textarea:is(:placeholder-shown),
+input:is(:placeholder-shown){
+  opacity: .5;
+  transition: ease-in-out 200ms;
+}
+
+textarea:hover,
+textarea:not(:placeholder-shown),
+textarea:focus-visible,
+input:hover,
+input:not(:placeholder-shown){
+  opacity: 1;
+  box-shadow: rgba(82, 0, 190, 0.2) 0px -1px 4px 0px inset;
+}
 
 
 /*-------------------------------------------WAVE---------------------------*/
@@ -289,7 +371,7 @@ button {
 
 
 /*------------------------------------------------------------------------------
-  UNIVERSAL CLASSES
+  CUSTOM UNIVERSAL CLASSES - Shared by Everything
 */
 
 .page {
@@ -383,36 +465,20 @@ table {
  }
 
 
+ .pinkh2 {
+   font-family: 'Lato', sans-serif;
+   font-weight:bolder;
+   letter-spacing: 2px;
+   color: var(--darker-pink);
+   text-align: center;
+   margin-top:40px;
+   margin-bottom:20px;
+ }
 
 
 /* ------------------------SIGNUP----------------------------- */
-.pinkh2 {
-  font-family: 'Lato', sans-serif;
-  font-weight:bolder;
-  letter-spacing: 2px;
-  color: var(--darker-pink);
-  text-align: center;
-  margin-top:40px;
-  margin-bottom:20px;
-}
 
 /* .signup{ } */
-
-.pageNotFound,
-.signupInformation {
-  flex: 100%;
-  width: 40%;
-  height: auto;
-  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
-  border-radius: var(--br_primary);
-  padding: 70px;
-  margin: 30px auto auto auto;
-  line-height: 2;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .signupInformation input {
   border-top-style: hidden;
@@ -552,9 +618,33 @@ table {
 }
 
 
+#rc-anchor-container{
+  width: 150px;
+  /* max-width: 300px; */
+}
+
 /*------------------------------------------------------------------------------
-BUSINESS, SCHEDULER, SIGN UP SHARED STYLING
+SHARED STYLES -> Business, Scheduler, PageNotFound, SignUp
 */
+
+.pageNotFound,
+.signupInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  
+  flex: 100%;
+  min-width: 40%;
+  max-width: 70%; /* Updated this to 70% to match the homepage styling */
+  height: auto;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  /* padding: 70px; /* 04/13/22 #EP || Commented this out because it was chaos on all pages */
+  margin: 30px auto auto auto;
+  line-height: 2;
+  background-color: white;
+}
+
 
 .appointment header h3,
 .business header h2,

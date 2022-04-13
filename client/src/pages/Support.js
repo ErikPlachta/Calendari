@@ -21,7 +21,6 @@ export default function Support() {
     //-- Standard "Support Form" Page
     const [formDetails, setFormDetails] = useState({ //-- Form data goes here when submit to make the login attempt
         "category"     : "",         //-- Account, Scheduler, Other
-        "summary"     : "",         //-- As few words as possible
         "details"  : "",            //-- Need to knows of problem
         "submitAttempts" : 0,       //-- Tracking attempts //TODO:: 04/13/22 #EP | Future
         'g-recaptcha-response': '', //-- Hold response from Google
@@ -100,7 +99,7 @@ export default function Support() {
 
         {(() => {
             //TODO:: 04/11/22 #EP || switch to not have !
-            switch(Auth.isLoggedIn()) {    
+            switch(!Auth.isLoggedIn()) {    
             
             //-- if already logged in, route to busienss page
             case true:   return <Navigate replace to="/Business" />
@@ -109,29 +108,33 @@ export default function Support() {
             //-- if NOT logged in, prompt login screen
             case false:    return (
                 <div className="signupInformation">
-                <h2 alt="please login">Get Logged In</h2>
+                <h2 alt="please login">Submit Support Ticket</h2>
                 <form onSubmit={handleFormSubmit}>
-                    {/* USER EMAIL */}
-                    <input
-                        placeholder="Your email"
-                        name="summary"
-                        type="email"
-                        id="email"
-                        minLength="8"
-                        autoComplete='email'
-                        value={formDetails.summary}
-                        onChange={handleChange}
-                    />
+                    {/*CATEGORY - The reason for the support ticket */}
+                    <label htmlFor="category">Category</label>
+                    <select 
+                        className="select"
+                        id="category"
+                        name="category" 
+                        onChange={handleChange} 
+                    >
+                        <option  value="please select" selected>Choose a Category..</option>
+                        <option  value="business">Business Account</option>
+                        <option value="user">User Account</option>
+                        <option value="scheduler">Scheduler</option>
+                        <option value="other">Other</option>
+                    </select>
                     <br></br>
-                    {/* SUPPORT TICKET  DETAILS */}
+                    {/* DETAILS - Notes for the support ticket */}
+                    <label htmlFor='details'>Summary of Issue</label>
                     <textarea
-                          name='details'
-                          type="textarea"
-                          rows='10'
-                          placeholder="I'm reaching out for support because..."
-                          required
-                          value={formDetails.details}
-                          onChange={handleChange}
+                        name='details'
+                        type="textarea"
+                        rows='10'
+                        placeholder="I'm reaching out for support because..."
+                        required
+                        value={formDetails.details}
+                        onChange={handleChange}
                     ></textarea>
                     <br></br>
                     {/* SUBMIT BUTTON */}

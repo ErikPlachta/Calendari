@@ -20,9 +20,13 @@ export default function DateTime({nextStep}) {
         <p>Please select your appointment time</p>
         <TimePicker onChange={onChange} value={value}></TimePicker>
         <br></br>
-        <label htmlFor="notes">Notes for Astronaut:</label>
         <br></br>
-        <textarea name="notes" rows="4"/>
+        <label htmlFor="notes">Anything we should know?</label>
+        <textarea
+          name="notes"
+          rows="5"
+          placeholder="During the appointment, I want to talk about..."
+        />
         <br></br>
         <button onClick={nextStep}>Schedule Appointment</button>
       </div>
