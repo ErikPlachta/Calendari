@@ -22,6 +22,7 @@ const AppointmentSchema = new Schema(
         appointment_status: {
             type: String,
             enum: ['Scheduled', 'Completed', 'Canceled']
+            //TODO:: 04/13/22 #EP || Change to lowercase, here. We'll capitalize in the frontend if needed.
         },
         timezone: {
             type: String
