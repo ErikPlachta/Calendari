@@ -26,14 +26,17 @@ const example =
 
 const AppointmentSchema = new Schema(
     {
-        // appt_type: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'Appointment_Type'
-        // },
-        // client: {
-        //     type: Schema.Types.ObjectId,
-        //     ref: 'User'
-        // },
+        appt_type_name: {
+            type: String
+        },
+        appt_type_summary: {
+            type: String,
+            length: 200
+        },
+        appt_type_notes: {
+            type: String,
+            length: 200
+        },
         appointment_date: {
             type: String
         },
@@ -43,6 +46,22 @@ const AppointmentSchema = new Schema(
         appointment_status: {
             type: String,
             enum: ['Scheduled', 'Completed', 'Canceled']
+        },
+        timezone: {
+            type: String
+        },
+        client_full_name: {
+            type: String
+        },
+        client_email: {
+            type: String
+        }, 
+        client_phone: {
+            type: String
+        },
+        appt_notes: {
+            type: String,
+            length: 200
         }
     }
 )

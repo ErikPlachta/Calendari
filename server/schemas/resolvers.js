@@ -1,4 +1,4 @@
-const { User, Business, Appointment, Appointment_Type } = require('../models');
+const { User, Business, Appointment, Appointment_Type, Appointment_Field } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 
 const resolvers = {
@@ -25,9 +25,15 @@ const resolvers = {
                 */
                 .select('-__v -password')
                 .populate({ path: 'users', populate: 'appointments' })
-                .populate('appointment_types')
+                .populate({ path: 'appointment_types', populate: 'appt_fields'})
                 .populate('appointments')
-        }
+        },
+        // find all appointment types
+        apptTypes: async () => {
+            return Appointment_Type.find()
+                .select('-__v')
+                .populate('appt_fields')
+        },
     },
     Mutation: {
         // add new user
@@ -60,6 +66,18 @@ const resolvers = {
             );
             
             return apptType; 
+        },
+        // add new appointment type field
+        addApptField: async (parent, args) => {
+            const apptField = await Appointment_Field.create(args);
+            
+            await Appointment_Type.findByIdAndUpdate(
+                { _id: args.appt_type_id},
+                { $addToSet: { appt_fields: apptField._id } },
+                { new: true, runValidators: true}
+            );
+            console.log(apptField)
+            return apptField;
         },
         // add new appointment
         addAppt: async (parent, args) => {

@@ -24,11 +24,13 @@ const example =
                     }
 }
 
-
-const AppointmentTypeSchema = new Schema(
+const ApptTypeSchema = new Schema(
     {   
         appt_type_name: {
             type: String,
+        },
+        subject: {
+            type: String
         },
         summary: {
             type: String,
@@ -37,10 +39,18 @@ const AppointmentTypeSchema = new Schema(
         },
         appointment_duration: {
             type: String
+        },
+        appt_type_notes: {
+            type: String,
+            lenght: 200
+        },
+        appt_fields: {
+            type: Schema.Types.ObjectId,
+            ref: 'Appointment_Field'
         }
     }
 )
 
-const Appointment_Type = model('Appointment_Type', AppointmentTypeSchema);
+const Appointment_Type = model('Appointment_Type', ApptTypeSchema);
 
 module.exports = Appointment_Type;
