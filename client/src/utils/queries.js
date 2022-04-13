@@ -11,15 +11,8 @@ export const QUERY_BUSINESSES = gql`
     }
 `;
 
-
-//TODO:: 04/10/22 #EP || Inline notes of change requests
-/*
-    - Add configuration as it's required 
-    - Rename to QUERY_BUSINESS
- */
-
-// query users and respecti-ve appointments by business
-export const QUERY_BUSINESS = gql`
+// query users and respective appointments by business
+export const QUERY_BUSINESS_CLIENTS = gql`
     query Business($brandName: String!) {
         business(brand_name: $brandName) {
             _id
@@ -42,27 +35,38 @@ export const QUERY_BUSINESS = gql`
         }
     }
 `;
-// query just appointments by business
-export const QUERY_APPTS = gql`
+// query all business info and appointments
+export const QUERY_BUSINESS = gql`
     query Business($brandName: String!) {
         business(brand_name: $brandName) {
             _id
             name
             brand_name
-            appointment_types {
-                _id
-                appt_type_name
-                summary
-                appointment_duration
-            }
+            configuration
             appointments {
                 _id
                 appt_type_name
                 appt_type_summary
+                appt_type_notes
+                client_full_name
+                client_email
+                client_phone
                 appointment_date
                 appointment_time
                 appointment_status
+                timezone
                 appt_notes
+            }
+            appointment_types {
+                _id
+                appt_type_name
+                subject
+                summary
+                appointment_duration
+                appt_type_notes
+                appt_fields {
+                    field_name
+                }
             }
         }
     }
@@ -88,9 +92,6 @@ export const QUERY_USER = gql`
                 appointment_time
                 appointment_status
                 timezone
-                client_full_name
-                client_email
-                client_phone
                 appt_notes
             }
         }
