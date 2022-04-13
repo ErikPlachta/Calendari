@@ -774,10 +774,10 @@ progress[value]{
   padding: 0;
   margin:0;
 }
-
+/* TODO:: 04/12/22 #EP | Use or delete
 .appointment_type_card_details ul {
   
-}
+} */
 
 .appointment_type_button{
   float: right;
@@ -790,7 +790,7 @@ progress[value]{
 }
 
 /*------------------------------------------------------------------------------
-  HEADER, NAV, BRAND-NAME and LOGO 
+  HEADER / NAVIGATION
 */
 
 /* SPA HEADER holds nav, brand-name and logo */
