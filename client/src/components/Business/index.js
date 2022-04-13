@@ -17,7 +17,7 @@ import Appointments from './components/Appointments'; //-- Appointment Managemen
 //------------------------------------------------------------------------------
 //-- ASSETS
 import { useQuery, useMutation } from '@apollo/client';
-import  { QUERY_BUSINESSES } from '../../utils/queries';
+import  { QUERY_BUSINESSES, QUERY_BUSINESS_THOROUGH } from '../../utils/queries';
 // import  { QUERY_USER_APPTS } from '../../utils/queries';
 
 //-- Hardcoded data used to simulate the Database
@@ -51,11 +51,16 @@ export default function Business() {
   //-- business brand_name, business_id , and also option for specific menu
   const {business_id_or_brand_name, menuSelect} = useParams();
   //-- Database Query
-  const { loading, data } = useQuery( QUERY_BUSINESSES );
+  const { loading, data } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
   // const { loading, data } = useQuery(QUERY_USER_APPTS, {
   //   variables: {brandName: business_id_or_brand_name} 
   // });
-
+  if(loading){
+    console.log("loading")
+  } else {
+    console.log(data.business.brand_name)
+  }
+    
 
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
