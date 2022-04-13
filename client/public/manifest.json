@@ -2,7 +2,7 @@
   "short_name": "Calendari",
   "name": "Calendari",
   "description" : "Your Calendar -- untangled.",
-  "scope" : "/",
+  "scope" : "/*",
   "start_url": ".",
   "theme_color": "#fafa",
   "background_color": "#fdfd",

@@ -42,7 +42,8 @@ let uri = "";
  //-- if in development mode, use graphql local pathing
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
   console.log('//-- client in development');
-  uri = `http://localhost:${ process.env.PORT || 3001 }/graphql`;
+  // uri = `http://localhost:${ process.env.PORT || 3001 }/graphql`;
+    uri = 'http://localhost:3001/graphql';
 } ;
 
 //-- if in production mode, used by heroku so needs to update accordingly
@@ -84,14 +85,15 @@ function App() {
       <main>
         <Routes>
 
-          <Route path="/" element={< Home />} />
-          <Route path="/Home" element={< Home />} />
+          <Route exact path="/" element={< Home />} />
+          <Route exact path="/graphql" to="/home"  />
+          <Route exact path="/Home" element={< Home />} />
 
-          <Route path="/Login" element={< Login />} />
-          <Route path="/signup" element={< Signup />} />
+          <Route exact path="/Login" element={< Login />} />
+          <Route exact path="/signup" element={< Signup />} />
 
-          <Route path="/b/:business_id_or_brand_name"         element={<Business/>} />
-          <Route path="/business/:business_id_or_brand_name"  element={<Business/>} />
+          <Route exact path="/b/:business_id_or_brand_name"         element={<Business/>} />
+          <Route exact path="/business/:business_id_or_brand_name"  element={<Business/>} />
           
           <Route path="/b/:business_id_or_brand_name/:menuSelect"         element={<Business/>} />
           <Route path="/business/:business_id_or_brand_name:/menuSelect"  element={<Business/>} />
@@ -103,6 +105,7 @@ function App() {
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
 
+          
           {/* push Page Not Found if bad route */}
           <Route path='*' element={ <PageNotFound />} ></Route>
         </Routes>

@@ -27,13 +27,9 @@ const startServer = async () => {
 
   // integrate our Apollo server with the Express application as middleware
   server.applyMiddleware({ app });
-  
 
   // log where we can go to test our GQL API
-  console.log(`
-    Server started. 
-    GraphQL middleware setup at http://localhost:${PORT}${server.graphqlPath}`
-  );
+  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
 };
 
 // Initialize the Apollo server
@@ -45,20 +41,27 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 
-//-- SETUP TO RUN FOR DEPLOYMENT SPECIFICALLY
-const path = require("path"); // Accessing the path module
-//-- route outside of server
-app.use(express.static(path.resolve(__dirname, "../client/build")));
-//-- point to build file
-app.get("*", function (request, response) {
-  response.sendFile(path.resolve(__dirname, '../client/build', "index.html"));
-});
+//------------------------------------------------------------------------------
+//-- If deployment to production, meet Heroku Requirements
 
+if(PORT != 3001) { //- If not in production port, is likely Heroku Part
+  console.log(`
+        /-- Not running on Port 3001!
+        - server.s switching configuration to Production...`
+  );
+  //-- SETUP TO RUN FOR DEPLOYMENT SPECIFICALLY
+  const path = require("path"); // Accessing the path module
+  //-- route outside of server
+  app.use(express.static(path.resolve(__dirname, "../client/build")));
+  //-- point to build file
+  app.get("*", function (request, response) {
+    response.sendFile(path.resolve(__dirname, '../client/build', "index.html"));
+  });
+  console.log(` /-- Production configuration finalized. Read to start server.` );
+}
 
-// if we're in production, serve client/build as static assets
-// if (process.env.NODE_ENV === 'production') {
-//   app.use(express.static(path.join(__dirname, '../client/build')));
-// }
+//------------------------------------------------------------------------------
+//-- Start database connection
 
 console.log("Starting connection to database...")
 db.once('open', () => {
