@@ -90,7 +90,3 @@ export function dateGetTimePassed(date){
   //-- If for some reason gets to this point, return nothing. ( shouldn't happen but being safe )
   return null;
 };
-
-
-//------------------------------------------------------------------------------
-//-- Exports

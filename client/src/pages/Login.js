@@ -13,8 +13,6 @@ import Auth from "../utils/authServices"
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 
-
-
 //------------------------------------------------------------------------------
 //-- FUNCTION -> Login
 export default function Login() {
@@ -103,7 +101,7 @@ export default function Login() {
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
                 <span className="form-element">
-                <label for='password'>Email</label>
+                <label htmlFor='password'>Email</label>
                   <input
                       placeholder="your@email.com"
                       name="email"
@@ -117,13 +115,13 @@ export default function Login() {
                 </span>
                 {/* USER PASSWORD */}
                 <span className="form-element">
-                  <label for='password'>Password</label>
+                  <label htmlFor='password'>Password</label>
                   <input
                       placeholder="********"
                       name="password"
                       type="password"
                       id="password"
-                      minlength="6"
+                      minLength="6"
                       autoComplete='current-password'
                       value={formDetails.password}
                       onChange={handleChange}
