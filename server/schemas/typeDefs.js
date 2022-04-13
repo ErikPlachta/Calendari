@@ -52,7 +52,7 @@ const typeDefs = gql`
     type Query {
         allBusinesses: [Business]
         user(username: String!): User
-        business(brand_name: String!): Business
+        business(brand_name: String, ID: String): Business
     }
     type Auth {
         token: ID!

@@ -54,7 +54,6 @@ const resolvers = {
             if (!correctPw) {
               throw new AuthenticationError('Incorrect credentials');
             }
-            //TODO:: 04/13/22 #EP || have query here to look for brand_name based on user's business_id
             const token = signToken(user);
             return { token, user };
           },

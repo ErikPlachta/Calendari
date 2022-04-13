@@ -77,12 +77,12 @@ class AuthService {
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
-    if(user.business_id){
-      window.location.assign(`/b/${user.busines_id}`);
-    }
-    if(!user.business_id){
+    // if(user.business_id){
+    //   window.location.assign(`/b/${user.busines_id}`);
+    // }
+    // if(!user.business_id){
       window.location.assign('/');
-    }
+    // }
   }
 
   logout() {
