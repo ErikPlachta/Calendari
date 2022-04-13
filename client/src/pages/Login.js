@@ -1,26 +1,12 @@
 //------------------------------------------------------------------------------
-<<<<<<< HEAD
-//-- MODULES
-import React, { useState, useEffect } from 'react'
-import { Redirect, Navigate } from 'react-router-dom';
-import { emailValidate } from '../utils/helpers';
-=======
 //-- IMPORTS
 import React, { useState, useEffect } from 'react'
 import { Redirect, Navigate } from 'react-router-dom';
 
->>>>>>> f/client/forms-to-server
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
 import ReCAPTCHA from '../components/ReCAPTCHA';
 import Auth from "../utils/authServices"
-<<<<<<< HEAD
-import ReCAPTCHA from "react-google-recaptcha";
-
-//------------------------------------------------------------------------------
-//-- RESOURCES
-=======
->>>>>>> f/client/forms-to-server
 
 //------------------------------------------------------------------------------
 //-- ASSETS / API
@@ -29,41 +15,20 @@ import { LOGIN_USER } from '../utils/mutations';
 //-- TODO:: 04/12/22 #EP || Add Query to get business data based on the logged in user
 
 //------------------------------------------------------------------------------
-<<<<<<< HEAD
-//-- MAIN FUNCTION -> Login
-export default function Login() {
-
-  const [user, setUser] = useState({ //-- Form data goes here when submit to make the login attempt
-=======
 //-- FUNCTION -> Login
 export default function Login() {
   //-- The App's login page
   
   const [formDetails, setFormDetails] = useState({ //-- Form data goes here when submit to make the login attempt
->>>>>>> f/client/forms-to-server
     "email"     : "",
     "password"  : "",
     "submitAttempts" : 0,
     'g-recaptcha-response': '',
   });
-<<<<<<< HEAD
-  
-  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
-  
-  //-- TODO:: 04/12/22 #EP || Add Query to get business data based on the logged in user
-  
-  
-  const recaptchaRef = React.createRef(); //-- for for submission
-
-  //----------------------------------------------------------------------------
-  //-- FORM MAANGEMENT
-
-=======
 
   const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
   
   //--
->>>>>>> f/client/forms-to-server
   const handleChange = (event) => { //-- Update state based on user input
     const { name, value } = event.target;
     
