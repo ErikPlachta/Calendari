@@ -37,12 +37,12 @@ export default function AppointmentType({business, business_id, nextStep}) {
         
         {/* Main Header Section on Business Page */}
         <header className="business">  
-        <h2>{business.name}</h2>
-          <p>{business.welcome}</p>
-        </header>
+          <h2>{business.name}</h2>
+            <p>{business.welcome}</p>
+          </header>
 
         {/* container holding appointment types  */}
-        <section className="containerResults">
+        <section className="signupCard">
           {Object.keys(appointment_types).map( (appointment_type, index) => (        
             // <form>
             <div className="containerResults appointment_type_card" key={appointment_types[appointment_type]['_id']}>

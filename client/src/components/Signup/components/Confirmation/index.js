@@ -34,53 +34,16 @@ export default function Confirmtion({nextStep}) {
     setFormDetails({ ...formDetails, [event.target.name]: event.target.value, });
   };
 
-  //-- phone validation
-  function onKeyUpPhone(event){
-
-    //-- if trying to erase, don't try to format
-    if(event.key === "Backspace" || event.key === 'Delete'){ return null;}
-     
-    //-- extract value
-     const phoneIn = event.target.value;
-     //-- get current stored value
-    //  const phoneCurrent = toSend.from_phone;
-     
-     //-- if nothing just exit
-     if(!phoneIn) return;
-
-    //-- clean it up  
-    const digits = phoneIn.replace(/\D/g, '');
-
-    //-- format it
-    // const formattedDigits = (digits.substring(0,1) + '(' + digits.substring(1,4) + ')' + digits.substring(4,7) + '-' + digits.substring(7,11)); //-- with area code
-    const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
-
-    // console.log(formattedPhone.length)
-    
-    //-- inline styling so red border until good.
-    var input = event.target;
-    var isError = ( (formattedPhone.length) < 13 );
-    var color =  (isError) ? "red" : "grey";
-    var borderWidth =  (isError)? "3px" : "1px"; 
-    input.style.borderColor = color;
-    input.style.borderWidth = borderWidth;
-   
-    
-    //-- update ui input
-    event.target.value = formattedPhone;
-    //-- update data to send
-    formDetails.from_phone = formattedPhone;
-    return null;
-  }
-
   // console.log(appointment_template)
   return (
     <section className="page signupBusiness">
-      <h3>Please Review the Following Information</h3>
-      <p>Review the following information and then click Create Account to finalize your account setup.</p>
+      <header>
+        <h3>Please Review the Following Information</h3>
+        <p>Review the following information and then click Create Account to finalize your account setup.</p>
+      </header>
       
       {/* SUBMISSION FORM */}
-      <form id="confirmation-submit" className="homeInformation" onSubmit={nextStep}>
+      <form id="confirmation-submit" className="signupCard" onSubmit={nextStep}>
         {(() => {
           switch("appointment_template"){
             // case "appointment_template": return "appointment_template";

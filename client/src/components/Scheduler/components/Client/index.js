@@ -81,9 +81,12 @@ export default function Client({nextStep, createAppointment, appointment_templat
 
   // console.log(appointment_template)
   return (
-    <section className="page clientContact">
-      <h3>Enter your Contact Information</h3>
-      <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
+    <section className="page scheduleAppointment">
+      <header>
+        <h3>Enter your Contact Information</h3>
+      </header>
+      
+      <form id="clientContactForm" className="appointmentCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){

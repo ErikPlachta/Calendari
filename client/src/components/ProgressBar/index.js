@@ -5,12 +5,12 @@ import { useParams } from "react-router-dom";
 
 
 //-- ASSETS
-import backArrow from '../../../../assets/svg/backward-front-gradient.svg';
+import backArrow from '../../assets/svg/backward-front-gradient.svg';
 
-export default function StatusBar({step, state, maxSteps, formerStep}) {
+export default function ProgressBar({step, state, maxSteps, formerStep}) {
   return (
-    <section className="statusBar">
-      <span className="" id='progressBar'>
+    <section className="progressBar">
+      <span id='progressBar'>
         {step > 1 
           ? [
             <span className="progressBarBackArrow">

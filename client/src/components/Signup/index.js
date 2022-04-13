@@ -9,7 +9,7 @@ import PageNotFound from '../../pages/PageNotFound';
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
-import StatusBar from './components/StatusBar';
+import ProgressBar from '../../components/ProgressBar';
 import Client from './components/Client';
 import Business from './components/Business';
 import Confirmation from './components/Confirmation';
@@ -147,8 +147,10 @@ export default function Signup() {
           switch(state) {    
             case true:  return (
               <section>
-                  {signupPages[step]} {/* The current step / page in the scheduler */}
-                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} /> {/* The bottom status bar */}
+                  <section>
+                    {signupPages[step]} {/* The current step / page in the scheduler */}
+                  </section>
+                  <ProgressBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} /> {/* The bottom status bar */}
               </section>
             );
             case false: return <PageNotFound />; //-- Shouldn't happen put here just in case, maybe server error

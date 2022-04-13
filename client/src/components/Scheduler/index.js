@@ -12,7 +12,7 @@ import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
-import StatusBar from './components/StatusBar';
+import ProgressBar from './../ProgressBar';
 import AppointmentTypes from './components/AppointmentTypes';
 import DateTime from './components/DateTime';
 import Client from './components/Client';
@@ -175,7 +175,7 @@ export default function Scheduler() {
                   {schedulerPages[step]}
                   
                   {/* The bottom status bar */}
-                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
+                  <ProgressBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
               </section>
             );
             case false: return <PageNotFound />;

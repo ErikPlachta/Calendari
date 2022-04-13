@@ -42,8 +42,6 @@ export default function Business({nextStep}) {
      
     //-- extract value
      const phoneIn = event.target.value;
-     //-- get current stored value
-    //  const phoneCurrent = toSend.from_phone;
      
      //-- if nothing just exit
      if(!phoneIn) return;
@@ -52,10 +50,7 @@ export default function Business({nextStep}) {
     const digits = phoneIn.replace(/\D/g, '');
 
     //-- format it
-    // const formattedDigits = (digits.substring(0,1) + '(' + digits.substring(1,4) + ')' + digits.substring(4,7) + '-' + digits.substring(7,11)); //-- with area code
     const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
-
-    // console.log(formattedPhone.length)
     
     //-- inline styling so red border until good.
     var input = event.target;
@@ -74,13 +69,15 @@ export default function Business({nextStep}) {
 
   // console.log(appointment_template)
   return (
-    <section className="page signupBusiness">
-      <h3>Tell us about your Business</h3>
-      <p>
-        In this section you'll define your business details, some of which are
-        displayed on your public scheduler link.
-      </p>
-      <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
+    <section className="signupBusiness">
+      <header>
+        <h3>Tell us about your Business</h3>
+        <p>
+          In this section you'll define your business details, some of which are
+          displayed on your public scheduler link.
+        </p>
+      </header>
+      <form id="clientContactForm" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
