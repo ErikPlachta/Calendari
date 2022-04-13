@@ -1,30 +1,52 @@
 //------------------------------------------------------------------------------
+<<<<<<< HEAD
 //-- MODULES
 import React, { useState, useEffect } from 'react'
 import { Redirect, Navigate } from 'react-router-dom';
 import { emailValidate } from '../utils/helpers';
+=======
+//-- IMPORTS
+import React, { useState, useEffect } from 'react'
+import { Redirect, Navigate } from 'react-router-dom';
+
+>>>>>>> f/client/forms-to-server
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
+import ReCAPTCHA from '../components/ReCAPTCHA';
 import Auth from "../utils/authServices"
+<<<<<<< HEAD
 import ReCAPTCHA from "react-google-recaptcha";
 
 //------------------------------------------------------------------------------
 //-- RESOURCES
+=======
+>>>>>>> f/client/forms-to-server
 
+//------------------------------------------------------------------------------
+//-- ASSETS / API
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
 //-- TODO:: 04/12/22 #EP || Add Query to get business data based on the logged in user
 
 //------------------------------------------------------------------------------
+<<<<<<< HEAD
 //-- MAIN FUNCTION -> Login
 export default function Login() {
 
   const [user, setUser] = useState({ //-- Form data goes here when submit to make the login attempt
+=======
+//-- FUNCTION -> Login
+export default function Login() {
+  //-- The App's login page
+  
+  const [formDetails, setFormDetails] = useState({ //-- Form data goes here when submit to make the login attempt
+>>>>>>> f/client/forms-to-server
     "email"     : "",
     "password"  : "",
     "submitAttempts" : 0,
     'g-recaptcha-response': '',
   });
+<<<<<<< HEAD
   
   const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
   
@@ -36,16 +58,22 @@ export default function Login() {
   //----------------------------------------------------------------------------
   //-- FORM MAANGEMENT
 
+=======
+
+  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
+  
+  //--
+>>>>>>> f/client/forms-to-server
   const handleChange = (event) => { //-- Update state based on user input
     const { name, value } = event.target;
     
-    setUser({ //-- update useState value
-      ...user,
+    setFormDetails({ //-- update useState value
+      ...formDetails,
       [name]: value,
     });
     
     //-- If a username, password are in form and tried to submit, run this otherwise don't.
-    if(user.email && user.password && user.submitAttempts>0 ){
+    if(formDetails.email && formDetails.password && formDetails.submitAttempts>0 ){
       //-- blank out error if there was one
       document.getElementById("login-form-message").classList.add('fade-out');
       document.getElementById("login-form-message").style.opacity="0";
@@ -57,11 +85,11 @@ export default function Login() {
   const handleFormSubmit = async (event) => { //-- Take data from email/password, attempt to login with mutation
     event.preventDefault();
     //-- count every attempt
-    setUser({...user, submitAttempts: user.submitAttempts+1});
+    setFormDetails({...formDetails, submitAttempts: formDetails.submitAttempts+1});
     //-- Attempt to login with Auth
     try {
       const { data } = await login({
-        variables: { ...user },
+        variables: { ...formDetails },
       });
 
       //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
@@ -70,10 +98,11 @@ export default function Login() {
     //-- Otherwise failure so update UI somehow
     catch (error) { errorPopup(error)}
   };
-  //-- The Error Message  to UI Manager
-  const errorPopup = (error) => {
-    //-- IF bad creds
-    if ((error.toString()).includes('Incorrect credentials')) {   //-- Message for Incorrect Creds on UI
+
+  const errorPopup = (error) => {  //-- if error, show msg
+    if ((error.toString()).includes('Incorrect credentials')) {
+      
+      //-- Message for Incorrect Creds
       document.getElementById("login-form-message").style.opacity="1";
       document.getElementById("login-form-message").classList.remove('fade-out');
       document.getElementById("login-form-message").classList.add('fade-in');
@@ -96,7 +125,6 @@ export default function Login() {
   return (
     <section> 
       {(() => {
-        //-- CHECK FOR JWT AUTH
         switch(Auth.isLoggedIn()) {    
           
           //-- IF EXISTS, REROUTE TO BUSINESS PAGE
@@ -108,41 +136,41 @@ export default function Login() {
               <h2 alt="please login">Get Logged In</h2>
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
-                <input
-                    placeholder="Your email"
-                    name="email"
-                    type="email"
-                    id="email"
-                    minLength="8"
-                    autoComplete='email'
-                    value={user.email}
-                    onChange={handleChange}
-                />
-                <br></br>
+                <span className="form-element">
+                <label htmlFor='password'>Email</label>
+                  <input
+                      placeholder="your@email.com"
+                      name="email"
+                      type="email"
+                      id="email"
+                      minLength="8"
+                      autoComplete='email'
+                      value={formDetails.email}
+                      onChange={handleChange}
+                  />
+                </span>
                 {/* USER PASSWORD */}
-                <input
-                    placeholder="********"
-                    name="password"
-                    type="password"
-                    id="password"
-                    minlength="6"
-                    autoComplete='current-password'
-                    value={user.password}
-                    onChange={handleChange}
-                />
-                <br></br>
+                <span className="form-element">
+                  <label htmlFor='password'>Password</label>
+                  <input
+                      placeholder="********"
+                      name="password"
+                      type="password"
+                      id="password"
+                      minLength="6"
+                      autoComplete='current-password'
+                      value={formDetails.password}
+                      onChange={handleChange}
+                  />
+                </span>
+                {/* RECAPTCHA */}
+                <ReCAPTCHA formDetails={formDetails} />
                 {/* SUBMIT BUTTON */}
                 <button>Login</button>
               </form>
-              {/* RECAPTCHA */}
-              <span className="form-element" id='recaptcha'>
-                {/* Captcha*/}
-                <ReCAPTCHA
-                  ref={recaptchaRef}
-                  sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                  onChange={e => (user['g-recaptcha-response']=e)}
-                />
-              </span>
+              
+              
+              {/* LINK TO SIGNUP */}
               <p id="login-form-signup-message" style={{opacity: "1"}}>
                 <a href='/signup'>Don't have an account yet? Get Signed Up, here!</a>
               </p>

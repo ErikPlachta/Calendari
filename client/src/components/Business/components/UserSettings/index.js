@@ -81,6 +81,7 @@ export default function UserSettings(userData) {
 
   const updateUser = (event) => {
     event.preventDefault();
+    // then next
 
   }
 
@@ -168,16 +169,17 @@ export default function UserSettings(userData) {
                             required
                             autoComplete="email"
                             onChange={handleChange}
-                            value={user.name_last}
+                            value={user.email}
                           />
                         </span>
-
-                        <input
-                          type="submit"
-                          className="button"
-                          id="contact-me-submit"
-                          value="Submit"
-                        />
+                        <span className="form-element">
+                          <input
+                            type="submit"
+                            className="button"
+                            id="contact-me-submit"
+                            value="Submit"
+                          />
+                        </span>
                       </form>
                     </div>
                   )

@@ -45,11 +45,16 @@
   /* BOX-SHADOWS */
   /*TODO:: 04/05/2022 #EP || Convert to pixels */
   --bs-01: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
-  /*TODO:: 04/05/2022 #EP || Add this focus */
-  /* --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3); */
-  --bs-02: 0 0rem .5rem var(--a_01);
-  /*TODO:: 04/05/2022 #EP || Add this focus */
-  /* --bs-02_focus: 0 0rem .5rem var(--a_01); */  
+  --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
+  
+  /* basic shadow on SVG */
+  --ds-01: drop-shadow(1px 1px .4px rgb(41 24 60 / .11));
+  --ds-01_focus: drop-shadow(0 0px 0px rgb(0 0 0 / 0));
+  
+  /* buttons */
+  --ds-02:       drop-shadow(1px 1px 0px rgb(41 24 60 / .11)); 
+  --ds-02_focus: drop-shadow(1px 1px 1px rgb(41 24 60 / .3));
+  
 
   /* SHADOWS */
   --s_black_a25: 0 0 .5rem var(--a_01);
@@ -104,12 +109,11 @@ html{
   /* Disabling user selection 
     //TODO: 04/05/22 #EP | Commented out for now left for reference
   */
-  /*
   -webkit-user-select: none;
   -khtml-user-select: none;
   -moz-user-select: none;
   -o-user-select: none;
-  user-select: none; */
+  user-select: none;
 
     padding: 0;
     margin: 0;
@@ -184,27 +188,177 @@ li {
   font-size: 14px;
 }
 
+/* Default Text Area Styling */
 
-/* Default button Styling */
-button {
-        
-  /* Buttons text color */
-  --btn_tc_inactive: var(--plum); /* button inactive text color */
-  --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
-
-  /* Buttons background color */
-  --btn_bg_inactive: var(--light-pink); /* button inactive text color */
-  --btn_bg_active: var(--plum); /* button active text color for hover and click */
-
-
+textarea {
   border-radius: var(--br_primary);
-  width: 8rem;
-  height: 3rem;
-  
-  background-color: var(--btn_bg_inactive);
-  color: var(--btn_tc_inactive);
+  padding: 4px;
+  border: 1px solid var(--plum);
+  outline: none;
+  overflow: auto;
+  /*resize: none; /*remove the resize handle on the bottom right */
+  /* width: 90%; */
 }
 
+textarea:focus,
+textarea::-moz-focus-inner {
+  outline: 10px solid red;
+  border: 1px solid green;
+  display: hidden;
+}
+
+
+/* Default Select Element Styling */
+select {
+  /* Removing all default formatting */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  background-image: none;
+
+  /* Personal Styling */
+  width: 100%; /* Fit's the parent */
+  padding: 0 1em;
+
+  background-color: var(--theme_light-pink);
+  cursor: pointer;
+  border-radius: var(--br_primary);
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  /* width: 20em; */
+  height: 3em;
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: red;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+
+/* SHARED ANIMATIONS BETWEEN INPUT AND TEXTAREAS */
+textarea:is(:placeholder-shown),
+input:is(:placeholder-shown){
+  opacity: .5;
+  transition: ease-in-out 200ms;
+}
+
+/* When content within input or textarea or selected so focused  */
+textarea:not(:placeholder-shown),
+textarea:focus-visible,
+input:not(:placeholder-shown),
+input:focus-visible{
+  opacity: 1;
+  box-shadow: rgba(82, 0, 190, 0.2) 0px -1px 4px 0px inset;
+}
+
+/* When hovering input or text-area, add deeper shadow */
+input[type="phone"]:hover,
+input[type="email"]:hover,
+input[type="text"]:hover,
+input[type="checkbox"]:hover,
+textarea:hover{
+  opacity: 1;
+  box-shadow: rgba(82, 0, 190, 0.2) 0px -2px 6px 0px inset;
+  cursor: pointer;
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* FORMS */
+
+/* #clientContactForm, */
+.clientContact,
+.clientContactForm,
+.clientContactForm span {
+  
+  display: flex;
+  flex-direction: column;
+  flex-direction: wrap;
+  justify-content: center;
+}
+
+.clientContact,
+.clientContactForm{
+  grid-gap: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+/* Inside a form - the labels/input value combos */
+.form-element{
+  display: flex;
+  flex-direction: column;
+  flex: 100%;
+}
+
+button,
+.form-element button,
+.form-element input[type|='submit']{
+  background-color:var(--darker-pink);
+  color: white;
+}
+
+button,
+.form-element button,
+.form-element input{
+  border-radius: var(--br_secondary);
+  font-size:16px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+  min-height: 2rem; /* make sure always big enough to click */
+  padding: 10px; /* make sure there is good spacing around the inside */ 
+  transition: ease-in-out 200ms;
+  filter: var(--ds-02);
+  
+}
+
+button:hover,
+.form-element button:hover,
+.form-element input[type|='submit']:hover{
+  cursor: pointer;
+  filter: var(--ds-02_focus) 
+          brightness(105%)
+  ;
+}
+
+
+/* Inside the form element, making sure all content is full fit */
+.form-element button,
+.form-element input,
+.form-element label,
+.form-element textarea,
+.form-element select {
+  flex: 100%;
+  width: 100%;
+}
+
+.form-element#recaptcha{ 
+  transition: ease-in-out 200ms;
+  align-items: center; /* into center of DIV element */
+}
 
 
 /*-------------------------------------------WAVE---------------------------*/
@@ -289,7 +443,7 @@ button {
 
 
 /*------------------------------------------------------------------------------
-  UNIVERSAL CLASSES
+  CUSTOM UNIVERSAL CLASSES - Shared by Everything
 */
 
 .page {
@@ -303,13 +457,6 @@ button {
   flex-wrap: wrap;
   grid-gap: 1rem;
   
-}
-
-
-.scheduledAppointments{
-  display: flex;
-  flex-direction: column;
-  /* width: 80%; */
 }
 
 .container{
@@ -390,36 +537,20 @@ table {
  }
 
 
+ .pinkh2 {
+   font-family: 'Lato', sans-serif;
+   font-weight:bolder;
+   letter-spacing: 2px;
+   color: var(--darker-pink);
+   text-align: center;
+   margin-top:40px;
+   margin-bottom:20px;
+ }
 
 
 /* ------------------------SIGNUP----------------------------- */
-.pinkh2 {
-  font-family: 'Lato', sans-serif;
-  font-weight:bolder;
-  letter-spacing: 2px;
-  color: var(--darker-pink);
-  text-align: center;
-  margin-top:40px;
-  margin-bottom:20px;
-}
 
 /* .signup{ } */
-
-.pageNotFound,
-.signupInformation {
-  flex: 100%;
-  width: 40%;
-  height: auto;
-  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
-  border-radius: var(--br_primary);
-  padding: 70px;
-  margin: 30px auto auto auto;
-  line-height: 2;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
 
 .signupInformation input {
   border-top-style: hidden;
@@ -429,23 +560,18 @@ table {
   padding-bottom: 5px;
 }
 
-.signupInformation button {
-    /* Buttons text color */
-    --btn_tc_inactive: var(--plum); /* button inactive text color */
-    --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
-  
-    /* Buttons background color */
-    --btn_bg_inactive: var(--darker-pink); /* button inactive text color */
-    --btn_bg_active: var(--plum); /* button active text color for hover and click */
-  
-    border-radius: var(--br_primary);
-    width: 6rem;
-    height: 2rem;
-    
-    background-color: var(--btn_bg_inactive);
-    color: var(--btn_tc_inactive);
-    margin: 10px;
+.signupInformation form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-gap: 1rem;
 }
+
+.signupInformation form textarea{
+  flex: 100%;
+  width: 100%;
+}
+
 
 
 
@@ -464,11 +590,6 @@ table {
   margin: 0 1rem;
 }
 
-.appointment header h3,
-.business header h2,
-.business header h3 {
-  color: var(--darker-pink);
-}
 
 .business header p {
   color: var(--light-pink);
@@ -481,65 +602,7 @@ table {
   flex: 100%;
   /* margin: auto; */
   /* justify-content: center; */
-  
 }
-
-.scheduleAppointment h3,
-.signupBusiness h3{
-  /* padding: 0 2rem; */
-  margin-top:30px;
-  margin-bottom: 0px;
-  color: var(--darker-pink);
-}
-
-.scheduleAppointment p,
-.signupBusiness p {
-  margin-top:0px;
-  padding-top:0px;
-  color: white;
-}
-
-.scheduleAppointment p,
-.scheduleAppointment h3,
-.signupBusiness p,
-.signupBusiness h3{
-  /* padding: 0 2rem; */
-  text-align: justify;
-  line-height: 1.6;
-  max-width: 80%;
-  margin: auto;
-}
-
-.signupBusiness textarea {
-  font-family: 'Lato', sans-serif;
-  color: var(--plum);
-}
-
-.signupUser h3{
-  padding-top:15px;
-  color: var(--darker-pink)
-}
-
-.signupUser p {
-  color: white;
-}
-
-.signupConfirmation h3{
-  padding-top:15px;
-  color: var(--darker-pink)
-}
-
-.signupConfirmation p {
-  color: white;
-}
-
-.form-element input{
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style:groove;
-}
-
 
 /* the aside in the Business Page */
 .businessSidebar{
@@ -599,17 +662,6 @@ table {
   margin: auto;
 }
 
-
-/* Used for ALL business configuration menus ?  */
-.businessContainerResults,
-.containerResults {
-  margin: 2rem;
-  padding: 2rem;
-  border-radius: 25px;
-  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
-              2px 2px 10px -3px rgba(0,0,0,0.1);
-}
-
 .businessSidebarList,
 .businessContainerResults{
   background-color: var(--C00);
@@ -621,6 +673,117 @@ table {
 .user {}
 .calendar {} */
 
+
+/* Used for ALL business configuration menus ?  */
+.businessContainerResults,
+.containerResults {
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
+              2px 2px 10px -3px rgba(0,0,0,0.1);
+}
+
+
+
+/*------------------------------------------------------------------------------
+SHARED STYLES -> Business, Scheduler, PageNotFound, SignUp
+*/
+
+.pageNotFound,
+.signupInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 100%;
+  min-width: 40%;
+  max-width: 70%; /* Updated this to 70% to match the homepage styling */
+  height: auto;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  /* padding: 70px; /* 04/13/22 #EP || Commented this out because it was chaos on all pages */
+  margin: 30px auto auto auto;
+  line-height: 2;
+  background-color: white;
+}
+
+
+.appointment header h3,
+.business header h2,
+.business header h3 {
+  color: var(--darker-pink);
+}
+
+.scheduledAppointments{
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+}
+
+.scheduleAppointment h3,
+.signupBusiness h3{
+  /* padding: 0 2rem; */
+  margin-top:30px;
+  margin-bottom: 0px;
+  color: var(--darker-pink);
+}
+
+.scheduleAppointment p,
+.signupBusiness p {
+  margin-top:0px;
+  padding-top:0px;
+  color: white;
+}
+
+.scheduleAppointment p,
+.scheduleAppointment h3,
+.signupBusiness p,
+.signupBusiness h3{
+  /* padding: 0 2rem; */
+  text-align: justify;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: auto;
+}
+
+/*------------------------------------------------------------------------------
+  SIGN UP STYLING
+*/
+
+.signupBusiness textarea {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+}
+
+.signupUser h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupUser p {
+  color: white;
+}
+
+.signupConfirmation h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupConfirmation p {
+  color: white;
+}
+
+
+/*------------------------------------------------------------------------------
+  DateTimePicker Component Specific */
+
+
+.dateTimePicker button,
+.react-calendar__tile .react-calendar__month-view__days__day{
+  background-color: var(--c01);
+  color: var(--theme_plum);
+  padding: 0;
+}
 
 /*------------------------------------------------------------------------------
   SCHEDULER AND APPOINTMENT PAGE SPECIFIC CLASSES */
@@ -649,11 +812,11 @@ table {
   animation: slide-right-footerProgressBar 200ms;
 }
 .progressBarBackArrow img:hover {
-  filter: drop-shadow(0 2px 1px rgb(0 0 0 / 0.4)) brightness(105%);
+  filter: (var(--ds-01)) brightness(105%);
   cursor: pointer;
 }
 .progressBarBackArrow img:active { /* on click remove shadow */
-  filter: drop-shadow(0 0px 0px rgb(0 0 0 / 0));
+  filter: (var(--ds-01_focus));
 }
 .progressBarBackArrow img,
 .progressBarLabel {
@@ -694,42 +857,7 @@ progress.progressBarStep{
 }
 
 /*----------------------------------------------------------------------------*/
-/* CLIENT CONTACT FORM */
-
-/* #clientContactForm, */
-.clientContact,
-.clientContactForm,
-.clientContactForm span {
-  
-  display: flex;
-  flex-direction: column;
-  flex-direction: wrap;
-  justify-content: center;
-}
-
-.clientContact,
-.clientContactForm{
-  grid-gap: 2rem;
-  width: 80%;
-  margin: auto;
-}
-
-.clientContactForm textarea{
-  border-radius: var(--br_primary);
-}
-.clientContactForm input {
-  height: 2rem;
-}
-
-.form-element button {
-  border-radius: 50px;
-  background-color:var(--darker-pink);
-  color: white;
-  font-size:16px;
-}
-
-/*----------------------------------------------------------------------------*/
-/* APPOINTMENT TYPE CARDS */
+/* SHARED CARD STYLING */
 
 .businessDashboard,
 .appointment_type_card{
@@ -742,6 +870,9 @@ progress.progressBarStep{
   /* position: relative; */
   /* padding: 1rem; */
 }
+
+/*----------------------------------------------------------------------------*/
+/* APPOINTMENT TYPE CARDS */
 
 .appointment_type_card_summary{
   flex: 100%;

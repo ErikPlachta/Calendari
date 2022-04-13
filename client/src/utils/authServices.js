@@ -1,6 +1,15 @@
 import decode from 'jwt-decode';
 
 
+const makeApiCall = async user => {
+     
+}
+
+
+const makeLocalStorageCall = async user => {
+     
+}
+
 
 class AuthService {
   
@@ -45,7 +54,7 @@ class AuthService {
 
   login(dataLogin) {
     // Saves user token to localStorage
-    // localStorage.setItem('id_token', idToken);
+    // localStorage.setItem('id_token', idToken);    
 
     //-- extracting JWT token
     const idToken       = dataLogin.token ? dataLogin.token : "NaN";
@@ -63,12 +72,17 @@ class AuthService {
       "_id"           : _id,
       "name"          : username,
       "date_created"  : date_created,
-      "business_id"   : business_id
+      "business_id"   : business_id,
+      'all'           : user,
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
-    window.location.assign(`/`);
-    // window.location.assign(`/business/${business_id}`); //-- TODO:: 04/12/22 #EP || Get the ID
+    // if(user.business_id){
+    //   window.location.assign(`/b/${user.busines_id}`);
+    // }
+    // if(!user.business_id){
+      window.location.assign('/');
+    // }
   }
 
   logout() {

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
+
+import ReCAPTCHA from "../../../ReCAPTCHA"
 
 const { 
   capitalizeFirstLetter,
@@ -13,18 +14,12 @@ const {
 } = require('../../../../utils/helpers');
 
 
-
-
-
-
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
 
 export default function Client({nextStep, createAppointment, appointment_template}) {
 
-  //-- reference variable for the captcha result response code
-  const recaptchaRef = React.createRef();
-  
+  //-- Submission form details
   const [formDetails, setFormDetails] = useState({
     from_name: '',
     to_name: 'Calendari',
@@ -58,10 +53,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
     const digits = phoneIn.replace(/\D/g, '');
 
     //-- format it
-    // const formattedDigits = (digits.substring(0,1) + '(' + digits.substring(1,4) + ')' + digits.substring(4,7) + '-' + digits.substring(7,11)); //-- with area code
     const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
-
-    // console.log(formattedPhone.length)
     
     //-- inline styling so red border until good.
     var input = event.target;
@@ -71,7 +63,6 @@ export default function Client({nextStep, createAppointment, appointment_templat
     input.style.borderColor = color;
     input.style.borderWidth = borderWidth;
    
-    
     //-- update ui input
     event.target.value = formattedPhone;
     //-- update data to send
@@ -86,82 +77,82 @@ export default function Client({nextStep, createAppointment, appointment_templat
         <h3>Enter your Contact Information</h3>
       </header>
       
-      <form id="clientContactForm" className="appointmentCard" onSubmit={nextStep}>
+      <div id="clientContactForm" className="appointmentCard">
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
             // case "appointment_template": return "appointment_template";
             default: return (
-                  <div className="clientContactForm">
-                    
-                    {/* CLIENT NAME */}
-                    <span className="form-element">
-                      <label htmlFor="client-name">Your Name</label>
-                      <input
-                        name='from_name'
-                        id="client-name"
-                        type='text'
-                        placeholder='Full Name'
-                        required
-                        autoComplete='given-name'
-                        onChange={handleChange}
-                        value={formDetails.client_name}
-                      />
-                    </span>
-                    
-                    {/* PHONE NUMBER */}
-                    
-                    <span className="form-element">
-                      <label htmlFor="contact-phone">Phone Number</label>
-                      <input
-                        name="phone"
-                        id="contact-phone"
-                        type="tel"
-                        aria-label="Please enter your phone number"
-                        placeholder="ex. (111)-111-1111"
-                        autoComplete='tel'
-                        onKeyUp={onKeyUpPhone}
-                        // value={toSend.from_phone} //-- not needed, defined above in cleanup function.
-                      />
-                    </span>
-                    
-                    {/* EMAIL ADDRESS */}
-                    <span className="form-element">
-                      <label htmlFor="contact-email">Email Address</label>
-                      <input
-                        name="reply_to"
-                        id="contact-email"
-                        type="email"
-                        placeholder='your@email.com'
-                        required
-                        autoComplete="email"
-                        onChange={handleChange}
-                        value={formDetails.reply_to}
-                      />
-                    </span>
+              <form className="clientContactForm"  onSubmit={nextStep}>  
+                {/* CLIENT NAME */}
+                <span className="form-element">
+                  <label htmlFor="client-name">Your Name</label>
+                  <input
+                    name='from_name'
+                    id="client-name"
+                    type='text'
+                    placeholder='Full Name'
+                    required
+                    autoComplete='given-name'
+                    onChange={handleChange}
+                    value={formDetails.client_name}
+                  />
+                </span>
+                
+                {/* PHONE NUMBER */}
+                <span className="form-element">
+                  <label htmlFor="contact-phone">Phone Number</label>
+                  <input
+                    name="phone"
+                    id="contact-phone"
+                    type="tel"
+                    aria-label="Please enter your phone number"
+                    placeholder="ex. (111)-111-1111"
+                    autoComplete='tel'
+                    onKeyUp={onKeyUpPhone}
+                    // value={toSend.from_phone} //-- not needed, defined above in cleanup function.
+                  />
+                </span>
+                
+                {/* EMAIL ADDRESS */}
+                <span className="form-element">
+                  <label htmlFor="contact-email">Email Address</label>
+                  <input
+                    name="reply_to"
+                    id="contact-email"
+                    type="email"
+                    placeholder='your@email.com'
+                    required
+                    autoComplete="email"
+                    onChange={handleChange}
+                    value={formDetails.reply_to}
+                  />
+                </span>
 
-                    {/* DESCRIPTION */}
-                    <span>
-                      <label htmlFor='contact-description'>Description</label>
-                      <textarea  id='contact-description' rows="10" />
-                    </span>
+                {/* DESCRIPTION */}
+                <span className='form-element'>
+                  <label htmlFor='contact-description'>Description</label>
+                  <textarea 
+                    id='contact-description'
+                    rows="10"
+                    placeholder='During the appointment, I want to discuss...'
+                    />
+                </span>
 
-                    {/* RECAPTCHA */}
-                    <span className="form-element" id='recaptcha'>
-                      {/* Captcha*/}
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                        onChange={e => (formDetails['g-recaptcha-response']=e)}
-                      />
-                    </span>
+                <span className='form-element'>
+                  <ReCAPTCHA formDetails={formDetails} />
+                </span>
 
-                    {/* SUBMIT BUTTON */}
-                    <span className="form-element"> 
-                      <input type="submit" className="button" id="contact-submit" value="Submit" />
-                    </span>
-
-                  </div>
+                {/* SUBMIT BUTTON */}
+                <span className="form-element"> 
+                  <input
+                    type="submit"
+                    className="button"
+                    id="contact-me-submit"
+                    value="Next"
+                  />
+                </span>
+              </form>
             )}
         })()}
       {/* 
@@ -169,7 +160,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
         
         
       */}
-      </form>
+      </div>
     </section>
     
   )
