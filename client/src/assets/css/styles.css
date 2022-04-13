@@ -305,13 +305,6 @@ button {
   
 }
 
-
-.scheduledAppointments{
-  display: flex;
-  flex-direction: column;
-  /* width: 80%; */
-}
-
 .container{
   flex: 5 60%;
   /* width: 100%; */
@@ -464,11 +457,6 @@ table {
   margin: 0 1rem;
 }
 
-.appointment header h3,
-.business header h2,
-.business header h3 {
-  color: var(--darker-pink);
-}
 
 .business header p {
   color: var(--light-pink);
@@ -481,65 +469,7 @@ table {
   flex: 100%;
   /* margin: auto; */
   /* justify-content: center; */
-  
 }
-
-.scheduleAppointment h3,
-.signupBusiness h3{
-  /* padding: 0 2rem; */
-  margin-top:30px;
-  margin-bottom: 0px;
-  color: var(--darker-pink);
-}
-
-.scheduleAppointment p,
-.signupBusiness p {
-  margin-top:0px;
-  padding-top:0px;
-  color: white;
-}
-
-.scheduleAppointment p,
-.scheduleAppointment h3,
-.signupBusiness p,
-.signupBusiness h3{
-  /* padding: 0 2rem; */
-  text-align: justify;
-  line-height: 1.6;
-  max-width: 80%;
-  margin: auto;
-}
-
-.signupBusiness textarea {
-  font-family: 'Lato', sans-serif;
-  color: var(--plum);
-}
-
-.signupUser h3{
-  padding-top:15px;
-  color: var(--darker-pink)
-}
-
-.signupUser p {
-  color: white;
-}
-
-.signupConfirmation h3{
-  padding-top:15px;
-  color: var(--darker-pink)
-}
-
-.signupConfirmation p {
-  color: white;
-}
-
-.form-element input{
-  border-top-style: hidden;
-  border-right-style: hidden;
-  border-left-style: hidden;
-  border-bottom-style:groove;
-}
-
 
 /* the aside in the Business Page */
 .businessSidebar{
@@ -599,6 +529,17 @@ table {
   margin: auto;
 }
 
+.businessSidebarList,
+.businessContainerResults{
+  background-color: var(--C00);
+}
+
+/* TODO:: 04/12/22 #EP || Review and use or delete
+.configure{}
+.dayOfWeek{}
+.user {}
+.calendar {} */
+
 
 /* Used for ALL business configuration menus ?  */
 .businessContainerResults,
@@ -610,16 +551,88 @@ table {
               2px 2px 10px -3px rgba(0,0,0,0.1);
 }
 
-.businessSidebarList,
-.businessContainerResults{
-  background-color: var(--C00);
+
+/*------------------------------------------------------------------------------
+BUSINESS, SCHEDULER, SIGN UP SHARED STYLING
+*/
+
+.appointment header h3,
+.business header h2,
+.business header h3 {
+  color: var(--darker-pink);
 }
 
-/* TODO:: 04/12/22 #EP || Review and use or delete
-.configure{}
-.dayOfWeek{}
-.user {}
-.calendar {} */
+.scheduledAppointments{
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+}
+
+.scheduleAppointment h3,
+.signupBusiness h3{
+  /* padding: 0 2rem; */
+  margin-top:30px;
+  margin-bottom: 0px;
+  color: var(--darker-pink);
+}
+
+.scheduleAppointment p,
+.signupBusiness p {
+  margin-top:0px;
+  padding-top:0px;
+  color: white;
+}
+
+.scheduleAppointment p,
+.scheduleAppointment h3,
+.signupBusiness p,
+.signupBusiness h3{
+  /* padding: 0 2rem; */
+  text-align: justify;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: auto;
+}
+
+/*------------------------------------------------------------------------------
+  SIGN UP STYLING
+*/
+
+.signupBusiness textarea {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+}
+
+.signupUser h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupUser p {
+  color: white;
+}
+
+.signupConfirmation h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupConfirmation p {
+  color: white;
+}
+
+.form-element input{
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+}
+
+
+/*------------------------------------------------------------------------------
+  BUSINESS STYLING
+*/
+
 
 
 /*------------------------------------------------------------------------------
@@ -729,7 +742,7 @@ progress.progressBarStep{
 }
 
 /*----------------------------------------------------------------------------*/
-/* APPOINTMENT TYPE CARDS */
+/* SHARED CARD STYLING */
 
 .businessDashboard,
 .appointment_type_card{
@@ -742,6 +755,9 @@ progress.progressBarStep{
   /* position: relative; */
   /* padding: 1rem; */
 }
+
+/*----------------------------------------------------------------------------*/
+/* APPOINTMENT TYPE CARDS */
 
 .appointment_type_card_summary{
   flex: 100%;

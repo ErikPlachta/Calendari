@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
+
+import Recaptcha from "../../../Recaptcha"
 
 const { 
   capitalizeFirstLetter,
@@ -13,18 +14,12 @@ const {
 } = require('../../../../utils/helpers');
 
 
-
-
-
-
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
 
 export default function Client({nextStep, createAppointment, appointment_template}) {
 
-  //-- reference variable for the captcha result response code
-  const recaptchaRef = React.createRef();
-  
+  //-- Submission form details
   const [formDetails, setFormDetails] = useState({
     from_name: '',
     to_name: 'Calendari',
@@ -146,15 +141,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
                       <textarea  id='contact-description' rows="10" />
                     </span>
 
-                    {/* RECAPTCHA */}
-                    <span className="form-element" id='recaptcha'>
-                      {/* Captcha*/}
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                        onChange={e => (formDetails['g-recaptcha-response']=e)}
-                      />
-                    </span>
+                    <Recaptcha formDetails={formDetails} />
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 
