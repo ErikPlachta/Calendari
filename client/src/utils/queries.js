@@ -84,7 +84,7 @@ export const QUERY_USER = gql`
             phone_number
             date_created
             appointments {
-                _id: ID
+                _id
                 appt_type_name
                 appt_type_summary
                 appt_type_notes
