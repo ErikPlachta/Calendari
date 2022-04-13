@@ -1,7 +1,13 @@
 import React from 'react'
+import bob_static from '../assets/svg/bob_static.svg';
 
 export default function PageNotFound() {
   return (
-    <h2>404 - Page Not Found</h2>
+    <main>
+          <div class="signupInformation">
+            <img alt="Bob" src={bob_static} width="180px"></img>
+            <h2>404 - Page Not Found</h2>
+          </div>
+    </main> 
   )
 }

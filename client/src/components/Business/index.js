@@ -1,15 +1,29 @@
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react';
-import { Redirect, useParams } from "react-router-dom";
+import { Navigate, useParams } from "react-router-dom";
 
+//-- JWT Auth
+import Auth from "../../utils/authServices";
 
 //------------------------------------------------------------------------------
 //-- PAGES
-import PageNotFound from '../../pages/PageNotFound';
-import Aside from './sub-components/Aside';
-import Dashboard from './sub-components/Dashboard';
-import UserSettings from './sub-components/UserSettings'; //- the actual user settings page
-import BusinessSettings from './sub-components/BusinessSettings'; //-- The business settings
-import Appointments from './sub-components/Appointments'; //-- Appointment Management
+import Aside from './components/Aside';
+import Dashboard from './components/Dashboard';
+import UserSettings from './components/UserSettings'; //- the actual user settings page
+import BusinessSettings from './components/BusinessSettings'; //-- The business settings
+import Appointments from './components/Appointments'; //-- Appointment Management
+
+//------------------------------------------------------------------------------
+//-- ASSETS
+import { useQuery, useMutation } from '@apollo/client';
+import  { QUERY_BUSINESSES } from '../../utils/queries';
+// import  { QUERY_USER_APPTS } from '../../utils/queries';
+
+//-- Hardcoded data used to simulate the Database
+//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
+const DB_User =     require('../../assets/json/user.json');
+const DB_Business = require('../../assets/json/business.json');
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -21,48 +35,28 @@ const {
   dateDayOfWeek,
   dateHourOfDay,
   dateGetTimePassed,
-  dateTimeFullLocal
+  dateTimeFullLocal,
+  validateEmail
 } = require('../../utils/helpers');
 
 //------------------------------------------------------------------------------
-//-- ASSETS
-
-//-- Hardcoded data used to simulate the Database
-//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_User =     require('../../assets/json/user.json');
-const DB_Business = require('../../assets/json/business.json');
-
-//------------------------------------------------------------------------------
-/* EXPORT FUNCTION - Business
-
-  //TODO:: 04/10/22 #EP || Update this
-  PROPS: (user_id)
-  URL PARAMS: (business_id_or_name)
-    - business_id_or_name:    The business they're scheduling for
-    
-*/
+/* EXPORT FUNCTION - Business URL PARAMS: (business_id_or_name) The business they're signing in with. */
 export default function Business() {
+  //----------------------------------------------------------------------------
+  /*  1. menu location awareness  - by default just the dashboard  */
+  const [menuSelectLocation, setMenuSelectLocation] = useState(0);  //-- The current page
 
-  const [menuSelection, setMenuSelection] = useState(1);  //-- The current page
+  //----------------------------------------------------------------------------
+  /*  2. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
+  //-- business brand_name, business_id , and also option for specific menu
+  const {business_id_or_brand_name, menuSelect} = useParams();
+  //-- Database Query
+  const { loading, data } = useQuery( QUERY_BUSINESSES );
+  // const { loading, data } = useQuery(QUERY_USER_APPTS, {
+  //   variables: {brandName: business_id_or_brand_name} 
+  // });
 
-  //------------------------------------------------------------------------------
-  /*  1. VERIFY IF LOGGED IN    */
-  //TODO:: 04/05/22 #EP || Add auth, for now assuming logged in
-  const authCheck = true;
 
-
-  //------------------------------------------------------------------------------
-  /*  2. IF LOGGED IN GET AUTH TOKEN THAT CONTAINS BUSINESS ID AND USER ID  */
-  if(!authCheck){ 
-    console.log("Reload page placeholder");
-  }
-
-  //------------------------------------------------------------------------------
-  /*  3. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
-
-  const {business_id_or_brand_name, appointment_type_id} = useParams();
-
-  
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
   const [Users, setUsers] = useState(DB_User); 
@@ -79,71 +73,36 @@ export default function Business() {
 
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( false );
-  
-  //-- TODO:: not hard-coded like this
-  // let business = {}; //-- The Specific Business response for the logged in user from API
-  
 
   //----------------------------------------------------------------------------
-  /* VALIDATING PARAMS
+  /* VALIDATING PARAMS - Is user signed in, is business from query in database */
 
-    validateParams
-      Looking to see if valid params are provided.
-
-      1. If empty business info
-        - Re-routes
-      
-        2. Check if valid business info provided
-        - If exists in database, load
-        - If not, re-routes
-
-      3. If valid business info AND provided appointment_type_id info
-        - If business has that appointment_type_id skip the select appointment type
-        - Otherwise ignore or show messages
-      
-      4. If valid business info but invalid or no appointment_type_id
-        - Loads default schedule
-  */
   const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
     
     let validRequest = null;  //-- is a valid request to Business component was made, true.
 
-
-    // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){
-      //-- Doesn't exist, re-route to homepage or 404 page 
-      //-- this should not happen technically
+    //1. if NOT logged in, state false
+    if(!Auth.isLoggedIn()){
       validRequest = false;
-    }
-    
-    // 2. If  valid business_id or business_name extract just the business ID
-      // -- grabs it and stores into const here
-    //TODO:: 04/09/22 #EP | 
-    else if(!Businesses[business_id_or_brand_name]){
-      // navigate('/')
-      validRequest = false
-      
+      setState(validRequest)
     }
 
-    //-- if the param received matches, update the state with the business info
-    else if(Businesses[business_id_or_brand_name]){
+    else if(!business_id_or_brand_name){ validRequest = false; } // 2. If No business_id, no business_name or invalid values found, exit
+    else if(!Businesses[business_id_or_brand_name]){ validRequest = false } // 3. If  valid business_id or business_name extract just the business ID
+    else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){ // 4. If the param received matches, and If Logged in, load content
 
-      const businessData = Businesses[business_id_or_brand_name];
-      
       //TODO:: 04/10/22 #EP || Need to simplify this massively.
+      const businessData = Businesses[business_id_or_brand_name];
       const businessUsersRaw = Businesses[business_id_or_brand_name].Users;
       const businessUsers = () =>{
         return Businesses[business_id_or_brand_name].Users.map( user => {
-          // console.log("//-- User: ")
-          // console.log(Users[user])
           return Users[user];
         })
       };
       const usersClean = businessUsers();
-      
       const appointmentData = businessData.Appointment;
-
-      setBusiness({
+      
+      setBusiness({ //-- update Business Page state from query data
         ...business,
         "appointmentData" : appointmentData,
         "businessData": businessData,
@@ -152,79 +111,114 @@ export default function Business() {
         "userData"    : usersClean,
       });
 
-      validRequest = true;
-      //04/10/22 #EP || Assuming valid load attempt, setting state of load as true
-      setState(validRequest)
-    };
-    
 
-    // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
+      //-- IF a sub-page was requested in route, see if it should route to it
+      if(menuSelect){
+        //-- force to lowercase
+        const menuSelectLowercase = menuSelect.toLowerCase();
+        
+        // 0 dashboard
+        if(menuSelectLowercase === "0" || menuSelectLowercase === "dashboard"){
+          setMenuSelectLocation(0)
+        }
+        // 1 my-settings
+        else if(menuSelectLowercase === "1" || menuSelectLowercase === "my-settings"){
+          setMenuSelectLocation(1)
+        }
+        // 2 my-business
+        else if(menuSelectLowercase === "2" || menuSelectLowercase === "my-business"){
+          setMenuSelectLocation(2)
+        }
+        // 3 my-Appointments
+        else if(menuSelectLowercase === "3" || menuSelectLowercase === "my-apppointments"){
+          setMenuSelectLocation(3)
+        }
+      }
+
+      validRequest = true; //-- was a valid request and completed
+      setState(validRequest); //-- Update overall Business Page state as TRUE to allow content to load
+    };
+
+    // 5.  Return this value
     return validRequest;
   }
    
+  //----------------------------------------------------------------------------
+  //-- Runs once, validates load state or directs the exit
+
   useEffect( () => {
-    validateParams();
-    document.title = `Calendari - BUSINESS_NAME_PLACEHOLDER`;
+    const validRequest = validateParams();
     
-    // console.log(`//-- Business Component: Received Payload:`);
-    // console.log(business)
+    //-- IF valid request is TRUE, update title with business name. 
+    if(validRequest){ document.title = `Calendari - ${business.businessData.name}`};
+    
+    //-- IF NOTE valid request is TRUE, update title with Invalid Request
+    if(!validRequest){ document.title = `Calendari - Invalid Request`};
   },[]);
 
-   //----------------------------------------------------------------------------
-  /* Browser Local Storage AND CURRENT STATE CHECKING State checking
-    - Should it load anything from local-storage vs default
-  */
 
-    //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-
-  //-- Browser Local Storage Checking
-
-//----------------------------------------------------------------------------
-  /* Page Location and Logic
-  */
-  
-  
-  //-- Index used for on-click of what to render //TODO:: 04/10/22 #EP || Make a state
-  const businessPages = { 
-    // 1 : "", 
-    // 0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
-    1 : <UserSettings userData={business.userData} />,
+  //----------------------------------------------------------------------------
+  /* Page Location and Logic */
+  const businessPages = { //-- This is an INDEX of available sub-components that can be rendered
+    0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
+    1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
-    3 : <Appointments appointmentData={business.appointmentData} />
+    3 : <Appointments     appointmentData={business.appointmentData} />,
+    // 4: <AppointmentTypes appointmentTypeData={business.appointmentTypeData} />,
   };
+
+  const setPage = setPageButton => { //-- load based on selection
+    const menuChoice = setPageButton.target.id;
+    if(menuChoice === "aside-dashboard"){
+      setMenuSelectLocation(0)
+    }
+
+    else if(menuChoice === "aside-my-settings"){
+      setMenuSelectLocation(1)
+    }
+    // 2 my-business
+    else if(menuChoice === "aside-my-business"){
+      setMenuSelectLocation(2)
+    }
+    // 3 my-Appointments
+    else if(menuChoice === "aside-my-appointments"){
+      setMenuSelectLocation(3)
+    }
+  };
+  
+
+  //----------------------------------------------------------------------------
+  /* TODO:: 04/09/22 #EP || Browser Local Storage AND CURRENT STATE CHECKING State checking */
 
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
-    <section className="page scheduler">
-      
-      {/* contains the step location, back arrow, and has awareness of if local storage or not */}  
+    <section className="page business">
+    
+      {/* This switch checks the state to determine if loading, bad request, or good request. If good, loads content. */}
       {(() => {
         switch(state) {    
+          
+          //-- Returns here if user is logged in and successful database request
           case true:  return (
             <section className="page business">
               
               {/* Aside bar within the business page */}
               <section className="businessAside">
-                <Aside businessName={business.businessData.name} userName={business.userData.name} />
+                {/* TODO:: 04/10/22 #EP || Hide or stylize */}
+                <Aside setPage={setPage} businessName={business.businessData.name} userName={business.userData.name} />
               </section>
-              
-              <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />
-
               {/* Main Content Area in Business Page */}
-              <section className="businessMain">
-                <h4>page 1</h4>
-                {businessPages[1]}
-                <h4>page 2</h4>
-                {businessPages[2]}
-                <h4>page 3</h4>
-                {businessPages[3]}
+              <section className="businessMain"> 
+                {businessPages[menuSelectLocation]}
               </section>
             </section>
           );
-          case false: return <PageNotFound />;
-          //TODO::04/10/22 #EP | Add loading
-          default:    return <PageNotFound />;
+
+          //-- if NOT loading, return loading, otherwise not logged in
+          case false: return loading ? "Loading..." : <Navigate replace to="/login" />
+          //TODO::04/10/22 #EP | Add loading element
+          default:    return "Loading...";
         }
     })()}
     </section>

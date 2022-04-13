@@ -1,5 +1,6 @@
 const { User, Business, Appointment, Appointment_Type } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
+const { signToken } = require('../utils/authServices');
 
 const resolvers = {
     Query: {
@@ -19,6 +20,10 @@ const resolvers = {
         // find business by brand name
         business: async (parent, { brand_name }) => {
             return Business.findOne({ brand_name })
+                //TODO:: 04/10/22 #EP | Inline Notes of Change Requests
+                /* 
+                   - add by brand_name or by business_id
+                */
                 .select('-__v -password')
                 .populate({ path: 'users', populate: 'appointments' })
                 .populate('appointment_types')
@@ -39,6 +44,19 @@ const resolvers = {
             console.log(user)
             return user;
         },
+        //-- Login an existing user
+        login: async (parent, { email, password }) => {
+            const user = await User.findOne({ email });
+            if (!user) {
+              throw new AuthenticationError('Incorrect credentials');
+            }
+            const correctPw = await user.isCorrectPassword(password);
+            if (!correctPw) {
+              throw new AuthenticationError('Incorrect credentials');
+            }
+            const token = signToken(user);
+            return { token, user };
+          },
         // add new business
         addBusiness: async (parent, args) => {
             const business = await Business.create(args);
@@ -75,6 +93,31 @@ const resolvers = {
                 { new: true, runValidators: true }
             )
             return appt;
+        },
+        // update user email or phone number
+        updateUser: async (parent, args) => {
+            const user = await User.findByIdAndUpdate(
+                { _id: args._id },
+                args,
+                { new: true, runValidators: true }
+            )
+            return user;
+        },
+        // update Appointment details
+        updateAppt: async (parent, args) => {
+            const appt = await Appointment.findByIdAndUpdate(
+                { _id: args._id },
+                args,
+                { new: true, runValidators: true }
+            )
+            return appt;
+        },
+        // delete Appointment Type 
+        delApptType: async (parent, args) => {
+            await Appointment_Type.findOneAndDelete(
+                { _id: args._id}
+            )
+            return;
         }
     }
 };

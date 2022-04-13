@@ -6,10 +6,27 @@ export default function Home() {
 
   return (
     <section>
-      <div id="calendariSlogan" class="slogan">
-        <h1>Your Schedule: Untangled</h1>
+      <div id="wavecontainer">
+          <div class="slogan">
+            <h3 id="sloganForHero" class="inner-header flex">Your Schedule: Untangled</h3>
+            <svg class="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto">
+              <defs>
+                <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
+              </defs>
+                <g class="parallax">
+                <use xlinkHref="#gentle-wave" x="48" y="0" fill="rgba(255,255,255,0.7)" />
+                <use xlinkHref="#gentle-wave" x="48" y="3" fill="rgba(255,255,255,0.5)" />
+                <use xlinkHref="#gentle-wave" x="48" y="5" fill="rgba(255,255,255,0.3)" />
+                <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
+                </g>
+            </svg>
+          </div>
+        
+        <div class="content flex">
+          <p>By Erik, Christiana and Mary Margaret</p>
+        </div>
       </div>
-      <div id="whatIsThis">
+      <div id="whatIsThis" class="homeInformation">
         <h3>What is Calendari?</h3>
         <p>
           Calendari is a scheduling app for your business. It gives business owners the
@@ -19,7 +36,10 @@ export default function Home() {
           plans to customize the look of the website!
         </p>
       </div>
-      <div id="whyIsThisDifferent">
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id="whyIsThisDifferent" class="homeInformation">
       <h3>Why is Calendari Different from Other Scheduling Apps?</h3>
         <p>
           Calendari differs from other scheduling apps because of it's easy, clean interface
@@ -30,7 +50,10 @@ export default function Home() {
            the current scheduling apps on the market, check them out below!
         </p>
       </div>
-      <div id="futureDev">
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id="futureDev" class="homeInformation">
       <h3>What Does the Future Hold for Calendari?</h3>
         <p>
           We are always looking to improve our customers experience on the app. A few of our enhancements we are currently working outlined below:
@@ -38,12 +61,17 @@ export default function Home() {
         <ul>
           <li>Premium Version - This option allows the business the option to choose a theme for their website, schedule appointments 6+ months in advance, users can schedule appointments months in advance, and 24/7 tech support. Please see table below for more information.</li>
           <li>Theme selection - The business can customize the interface to fit their specific business. Whether it's a tattoo parlor, a scuba training facility, or a kids bounce house, we have you covered!</li>
+          <li>Schedule Selection - Allows the busines owner the option to select their hours of operation per day instead of the same hours every day.</li>
         </ul>
       </div>
-      <div id="freeVsPremium">
+      <br></br>
+      <br></br>
+      <br></br>
+      <div id="freeVsPremium" class="homeInformation">
       <h3>What's the Difference Between Free and Premium?</h3>
+      <br></br>
         <div classname="tableContainer">
-          <table>
+          <table align="center">
             <thead>
               <tr>
                 <th>Feature</th>
@@ -64,7 +92,6 @@ export default function Home() {
               </tr>
               <tr>
                 <td>24/7 tech Support</td>
-
                 <td> ❌ </td>
                 <td> ✔️ </td>
               </tr>

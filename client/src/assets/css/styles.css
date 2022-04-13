@@ -1,4 +1,3 @@
-
 @import url("./animations.css");
 /*------------------------------------------------------------------------------
   ROOT VARIABLES
@@ -20,6 +19,13 @@
   --theme_plum: #290628;
   --theme_light-pink: #ffa0fd;
   --theme_darker-pink: rgb(233, 82, 222); /*#e952de;*/
+
+  --light-pink: #ffa0fd;
+  --darker-pink: #e952de;
+  --lighter-purple: #6200b3;
+  --darker-purple: #3b0086;
+  --plum: #290628;
+
 
   /* BASIC COLOR SCHEMA PLACEHOLDER */
   /*TODO:: 04/05/2022 #EP || Define this color schema */
@@ -120,11 +126,12 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  background-color: var(--C04);
+  background-color: var(--darker-purple);
 }
 
 main{
   /* adding this to prevent weird overflow of data issues */
+  
   width: 100%;
   overflow: hidden;
 }
@@ -149,16 +156,45 @@ h1,h2,h3,h4,h5{
   margin: 0;
 }
 
+body {
+  margin:0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight:300;
+  letter-spacing: 2px;
+  font-size:48px;
+}
+
+h3 {
+  color: var(--plum);
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
+  font-size:16px;
+  color: var(--plum);
+}
+
+li {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+  font-size: 14px;
+}
+
+
 /* Default button Styling */
 button {
         
   /* Buttons text color */
-  --btn_tc_inactive: var(--c_05); /* button inactive text color */
-  --btn_tc_active: var(--c_04); /* button active text color for hover and click */
+  --btn_tc_inactive: var(--plum); /* button inactive text color */
+  --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
 
   /* Buttons background color */
-  --btn_bg_inactive: var(--c_05); /* button inactive text color */
-  --btn_bg_active: var(--c_04); /* button active text color for hover and click */
+  --btn_bg_inactive: var(--light-pink); /* button inactive text color */
+  --btn_bg_active: var(--plum); /* button active text color for hover and click */
 
 
   border-radius: var(--br_primary);
@@ -168,7 +204,89 @@ button {
   background-color: var(--btn_bg_inactive);
   color: var(--btn_tc_inactive);
 }
-  
+
+
+
+/*-------------------------------------------WAVE---------------------------*/
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+.inner-header {
+  font-family: 'Lato', sans-serif;
+  font-weight:bolder;
+  height:50px;
+  width:100%;
+  margin: 0px;
+  padding-top: 90px;
+}
+
+.flex { /*Flexbox for containers*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.waves {
+  position:relative;
+  width: 100%;
+  height:15vh;
+  margin-bottom:-7px; /*Fix for safari gap*/
+  min-height:100px;
+  max-height:300px;
+  margin-top:3rem;
+}
+
+.content {
+  position:relative;
+  height:90px;
+  text-align:center;
+  background-color: white;
+}
+
+/* Animation */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+  .content {
+    height:30vh;
+  }
+  h1 {
+    font-size:24px;
+  }
+}
+
+
+
 
 /*------------------------------------------------------------------------------
   UNIVERSAL CLASSES
@@ -177,41 +295,223 @@ button {
 .page {
   width: 100%;
   /* border: 1px solid red; */
-  background-color: var(--C01);
+  background-color: var(--darker-purple);
 
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   flex-wrap: wrap;
   grid-gap: 1rem;
   
 }
 
-.sidebar{
+/* the aside in the Business Page */
+.businessSidebar{
   /* border: 1px solid orangered; */
   flex: 1 20%;
   float: left;
-  max-width: 20%;
+  padding-top: 2rem;
+  padding-left: 0;
+  border-right: 1px solid var(--a_01);
+  height: 100%;
+}
+
+/* the UL in the Aside in the Business Page */
+.businessSidebarList,
+.businessSidebarList li
+{
+  margin-top: .1rem;
+  padding-left: 0; /* gets rid of spacing on the side normally on a list */
+  list-style: none; /* hide bullets */
+  line-height: 2;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: ease-in-out 200ms;
+  border-bottom: 1px solid transparent;
+  overflow: hidden;
+}
+
+/* The little + symbol on the aside after the text */
+.businessSidebarList li::after
+{
+  content: '\002B';
+  float: right;
+  margin-right: 1rem;
+  transition: ease-in-out 100ms;
+  font-weight: 500;
+}
+
+/* When hovering the LI in the aside, effects */
+.businessSidebarList li:hover
+{
+  cursor: pointer;
+  border-top: .5px solid var(--darker-purple);
+  border-bottom: 2px solid var(--darker-purple);
+  transform: scale(1.05);
+}
+.businessSidebarList li:hover::after{
+  color: var(--darker-purple);
+  font-weight:900;
+  transform: rotate(-90deg) translateY(-20px);
+  /* transform: translateX(-30px); */
+}
+
+.businessMain{
+  flex: 60%;
+  padding: 0;
+  margin: auto;
+}
+
+.scheduledAppointments{
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
 }
 
 .container{
   flex: 5 60%;
   /* width: 100%; */
-  
   /* min-width: 80%; */
-  
-  
+}
+
+
+.containerResults {
+  background-color: var(--darker-pink);
 }
 
 /* Used for ALL business configuration menus ?  */
+.businessContainerResults,
 .containerResults {
   margin: 2rem;
   padding: 2rem;
   border-radius: 25px;
   box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
               2px 2px 10px -3px rgba(0,0,0,0.1);
-  background-color: #fff;
 }
+
+.businessSidebarList,
+.businessContainerResults{
+  background-color: var(--C00);
+}
+
+
+/* --------------------------HOME--------------------------------------- */
+.homeInformation {
+  flex: 100%;
+  width: 70%;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  padding: 1rem;
+  margin: 20px auto 0px auto;
+  line-height: 2;
+  background-color: white;
+}
+
+table {
+  width: 60%;
+  border-collapse: collapse;
+ }
+ 
+ th {
+   height: 30px;
+   text-align: center;
+   font-weight:bold;
+   padding: 10px;
+   border: 2px solid var(--plum);
+   color:#e952de;
+   background-color: var(--plum);
+ }
+ 
+ tr, td {
+   height:20px;
+   text-align: center;
+   padding: 10px;
+   border: 2px solid var(--plum);
+ }
+ 
+ .tableContainer {
+   margin-left:auto;
+   margin-right: auto;
+   padding: 20px;
+   margin: 20px;
+ }
+ 
+ .slogan {
+   text-align:center;
+   vertical-align: middle;
+   background: linear-gradient(180deg, var(--darker-purple) 0%, var(--lighter-purple) 30%, var(--darker-pink) 70%, var(--light-pink) 100%);
+   color:white;   
+  padding-top:0;
+ }
+ 
+ #sloganForHero {
+   z-index:99999;
+   color: white;
+   font-size: 3rem;
+   font-weight: 400;
+ }
+
+
+
+
+/* ------------------------SIGNUP----------------------------- */
+.pinkh2 {
+  font-family: 'Lato', sans-serif;
+  font-weight:bolder;
+  letter-spacing: 2px;
+  color: var(--darker-pink);
+  text-align: center;
+  margin-top:40px;
+  margin-bottom:20px;
+}
+
+.signup{
+  display: flex;
+  flex-direction: row;
+}
+
+.signupInformation {
+  flex: 100%;
+  width: 40%;
+  height: auto;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  padding: 70px;
+  margin: 30px auto auto auto;
+  line-height: 2;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.signupInformation input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+  padding-bottom: 5px;
+}
+
+.signupInformation button {
+    /* Buttons text color */
+    --btn_tc_inactive: var(--plum); /* button inactive text color */
+    --btn_tc_active: var(--light-pink); /* button active text color for hover and click */
+  
+    /* Buttons background color */
+    --btn_bg_inactive: var(--darker-pink); /* button inactive text color */
+    --btn_bg_active: var(--plum); /* button active text color for hover and click */
+  
+    border-radius: var(--br_primary);
+    width: 6rem;
+    height: 2rem;
+    
+    background-color: var(--btn_bg_inactive);
+    color: var(--btn_tc_inactive);
+    margin: 10px;
+}
+
 
 
 /*------------------------------------------------------------------------------
@@ -219,12 +519,65 @@ button {
 */
 
 .business {
-
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-shrink: auto;
 }
 
 .business header{
   width: 100%;
   margin: 0 1rem;
+}
+
+.business header h2,
+.business header h3 {
+  color: var(--darker-pink);
+}
+
+.business header p {
+  color: var(--light-pink);
+}
+
+.signupBusiness h3{
+  margin-top:30px;
+  color: var(--darker-pink);
+  margin-bottom: 0px;
+}
+
+.signupBusiness p {
+  margin-top:0px;
+  padding-top:0px;
+  color: white;
+}
+
+.signupBusiness textarea {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+}
+
+.signupUser h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupUser p {
+  color: white;
+}
+
+.signupConfirmation h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupConfirmation p {
+  color: white;
+}
+
+.form-element input{
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
 }
 
 .configure{
@@ -305,6 +658,20 @@ progress.progressBarStep{
   font-size: 1.5rem;
 }
 
+.appointmentConfirmation {
+  background-color: var(--darker-pink);
+  color: white;
+  margin: 40px 80px;
+  padding: 80px;
+  border-radius: 30px;
+}
+
+.appointmentConfirmation li {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
 /* #progressBar{
   display: inline-block;
   text-align: center;
@@ -322,6 +689,13 @@ progress[value]{
   vertical-align: center;  
 } */
 
+
+
+
+
+
+/*----------------------------------------------------------------------------*/
+/* CLIENT CONTACT FORM */
 
 /* #clientContactForm, */
 .clientContact,
@@ -341,22 +715,31 @@ progress[value]{
   margin: auto;
 }
 
-.clientContactForm textarea,
-.clientContactForm input {
+.clientContactForm textarea{
   border-radius: var(--br_primary);
 }
 .clientContactForm input {
   height: 2rem;
 }
 
+.form-element button {
+  border-radius: 50px;
+  background-color:var(--darker-pink);
+  color: white;
+  font-size:16px;
+}
 
+/*----------------------------------------------------------------------------*/
+/* APPOINTMENT TYPE CARDS */
 
+.businessDashboard,
 .appointment_type_card{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   justify-content: justify;
   line-height: 1.6;
+  background-color: white;
   /* position: relative; */
   /* padding: 1rem; */
 }
@@ -411,8 +794,22 @@ progress[value]{
 
 /* SPA HEADER holds nav, brand-name and logo */
 .navHeader {
-  padding: 0 2rem; 
+  padding: 0 2rem 0.001rem 0; 
   margin: 0;
+  background-color: white;
+}
+
+.navHeader a {
+  color: var(--plum);
+  font-weight: bold;
+}
+
+.navHeader a:hover {
+  color: var(--darker-pink)
+}
+
+.navheader a:visited {
+  color: var(--plum);
 }
 
 .navHeader div{
@@ -422,10 +819,10 @@ progress[value]{
 }
 
 .brandLogo{
-  margin: 1rem;
-  width: 50px;
+  margin: 0.25rem;
+  width: 70px;
   /* transition: ease-in-out 200ms; */
-  filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4));
+  /* filter: drop-shadow(3px 5px 2px rgb(0 0 0 / 0.4)); */
   /* -webkit-transform: translateZ(0);
   transform: translateZ(0); */
   
@@ -468,9 +865,6 @@ h2.brandName{
   /* font-variant-caps: all; */
 }
 
-/*  */
-
-
 /* NAVIGATION MENU Choices */
 nav ul{
   display: flex;
@@ -501,9 +895,35 @@ nav ul{
 */
 
 footer {
+  background-color: var(--light-pink);
+  color: var(--plum);
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  padding: 10px; 
+  margin: auto;
+  display: flex;
+  justify-content: space-around; 
+}
+
+.footerElements {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  align-items: center;
+}
+
+
+/*------------------------------------------404 error-----------------*/
+
+.errorPageElements {
 
 }
 
+.errorPageElements h2{
+  
+  color: red;
+}
 
 /*------------------------------------------------------------------------------
   MEDIA TYPES

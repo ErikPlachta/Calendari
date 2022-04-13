@@ -7,15 +7,15 @@ import { useNavigate } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- PAGES
-import BusinessScheduler from './pages/BusinessScheduler';
-import DateTime from './pages/DateTime';
-import Client from './pages/Client';
 import PageNotFound from '../../pages/PageNotFound';
 import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
-import StatusBar from './sub-components/StatusBar';
+import StatusBar from './components/StatusBar';
+import AppointmentTypes from './components/AppointmentTypes';
+import DateTime from './components/DateTime';
+import Client from './components/Client';
 
 //------------------------------------------------------------------------------
 //-- Helpers
@@ -47,11 +47,6 @@ const DB_Business = require('../../assets/json/business.json');
 */
 export default function Scheduler() {
 
-  useEffect(() => {
-    document.title = `Calendari`;
-  },[]);
-
-
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query    
   
@@ -64,8 +59,10 @@ export default function Scheduler() {
   //TODO:: 04/09/22 #EP || Get this to work as a state 
   // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
 
-  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
+  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on AppointmentTypes page
   const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
+  
+  
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
   
   const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
@@ -73,205 +70,119 @@ export default function Scheduler() {
   //-- Extract URL Parameters
   const {business_id_or_brand_name, appointment_type_id} = useParams();
 
+  //-- Verifying if requests are made properly or not
+  const [state, setState] = useState( false );
 
   //-- used to ReRoute Navigation away if invalid details
   // const navigate = useNavigate();
 
   //----------------------------------------------------------------------------
-  /* VALIDATING PARAMS
-
-    validateParams
-      Looking to see if valid params are provided.
-
-      1. If empty business info
-        - Re-routes
-      
-        2. Check if valid business info provided
-        - If exists in database, load
-        - If not, re-routes
-
-      3. If valid business info AND provided appointment_type_id info
-        - If business has that appointment_type_id skip the select appointment type
-        - Otherwise ignore or show messages
-      
-      4. If valid business info but invalid or no appointment_type_id
-        - Loads default schedule
-  */
+  /* VALIDATING PARAMS  */
 
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
     let validRequest = null;
-
-
     // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){
-      //-- Doesn't exist, re-route to homepage or 404 page 
-      //-- this should not happen technically
-    }
+    if(!business_id_or_brand_name){ validRequest = false }
     
     // 2. If  valid business_id or business_name extract just the business ID
-      // -- grabs it and stores into const here
-    //TODO:: 04/09/22 #EP | 
-    if(!Businesses[business_id_or_brand_name]){
-      // navigate('/')
-      validRequest = false
-      
-    }
+    else if(!Businesses[business_id_or_brand_name]){ validRequest = false }
 
-    //-- if the business ID or brand_name IS in the database
-    if(Businesses[business_id_or_brand_name]){
+    // 3. if the business ID or brand_name IS in the database, Load  Scheduler
+    else if(Businesses[business_id_or_brand_name]){
       //-- 1. Update Scheduler state
       setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
       //-- 2. Confirm it's a valid request
       validRequest = true;
+      //-- 3. Set Scheduler state to true so page loads
+      setState(validRequest);
     }
-    
-    // 3. Does appointment_type_id exist and if yes for this business
-      //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
-    // if(appointment_type_id) {
-      //-- if yes, re-route to that specific appointment type and load page 2 in the schedulerPages index
-      // setAppointment_template(business[business_id_TEMP].Appointment_Types[appointment_type_id])
-      //-- Otherwise ignore it and/or update screen with message
-    // }
 
-    // 4.  Otherwise return the business_id value and assume to load Page 1 on schedulerPages index
-    return validRequest;
+    // 4. Does appointment_type_id exist and if yes for this business //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
+
+    return validRequest; //-- return results to update the title-bar accordingly
   }
-
-    
+  
   useEffect(() => {
     const validRequest = validateParams();
-    console.log(`validRequest: ${validRequest}`)
+     //-- IF valid request is TRUE, update title with business name. 
+    if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
+    
+    //-- IF NOTE valid request is TRUE, update title with Invalid Request
+    if(!validRequest){ document.title = `Calendari - Invalid Request`};
   },[]);
   
 
   //----------------------------------------------------------------------------
-  /* Page Location and Logic
+  /* Page Location and Logic */
 
-   - next and former step button onClick events
-      nextStep
-      formerStep
+  const nextStep = nextStepButton => { //-- Move to the next step until LAST step
+    nextStepButton.preventDefault();
+    
+    setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
+    const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
+    if(nextStepButton_id === "contact-submit"){ //-- if the contact-submit ( final button ) do API call
+      setAppointment_confirmation_id(nextStepButton_id);
+      //TODO:: 04/10/22 #EP || Get form data here
+      createAppointment(appointment_confirmation_id);
+    }
+    else {
+      setStep(step+1);
+    }
+  };
+  
+  const formerStep = formerStepButton => { //-- Go back a step
+    formerStepButton.preventDefault();
+    setStep(step-1);
+  };
 
-    - schedulerPages
-      the index of what pages it needs to go to
-
-  */
-
-   //-- Client Input Template and Submitting Request  
-  //-- When Appointment is Verified, Submit it to API, and if success move to verification page
-  //TODO:: 04/09/22 #EP || Build logic for API call of submission
-  const createAppointment = async params => {
+  //-- Client Input Template and Submitting Request //-- When Appointment is Verified, Submit it to API, and if success move to verification page
+  const createAppointment = async params => {// TODO - to run the API REQUEST from form submit
     //-- When client information verified and submitted, update database with appointment data
 
     // 1. Validate data
     // 2. Submit to database
     // 3. Verify response
     // 4. Approve re-route or message to UI
-    setStep(maxSteps); //-- 5 is finshed and out of here.
-
     // return response;
   }
-
-  //-- Move to the next step
-  const nextStep = nextStepButton => {
-    // nextStepButton.preventDefault();
-    
-    //-- set the template state variable state
-    setAppointment_template(nextStepButton.target.id);
-    
-    // console.log(nextStepButton.target.id)
-    console.log(nextStepButton.target)
-    // console.log(appointment_template)
-    
-    const nextStepButton_id = nextStepButton.target.id;
-    
-    if(nextStepButton_id === "contact-submit"){
-      setAppointment_confirmation_id(nextStepButton_id);
-      createAppointment()
-    }
-    else {
-      setStep(step+1);
-    }
-  };
-
-  const formerStep = formerStepButton => {
-    formerStepButton.preventDefault();
-    setStep(step-1);
-  };
-
-  //-- INDEX of Each Page, which is a step of scheduler
-  // const [schedulerPages,setSchedulerPages] = useState({
-  //TODO:: 04/10/22 #EP || Make a state
-  const schedulerPages = {
-    1: <BusinessScheduler business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></BusinessScheduler>,
+  
+  const schedulerPages = { //-- INDEX of Each Page, which is a step of scheduler
+    1: <AppointmentTypes business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></AppointmentTypes>,
     2: <DateTime nextStep={nextStep}/>,
     3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
     4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
   };
 
-  //-- Get the number of keys in the pages
-  const [maxSteps, setMaxSteps] = useState(
+  const [maxSteps, setMaxSteps] = useState( //-- Get the number of keys in the pages ( needs to be down here to function )
     Object.keys(schedulerPages).length
   );
 
   //----------------------------------------------------------------------------
-  /* Browser Local Storage State checking
-    - Should it load anything from local-storage vs default
-  */
-
-    //TODO:: 04/09/22 #EP || Build Local Storage to know if scheduling an appt for offline and state awareness. If exists, pull info and start from there.
-
-  //-- Browser Local Storage Checking
-
-
-  //----------------------------------------------------------------------------
-  /* Verify Request Integrity
-  */
-
-  //-- Verifying if requests are made properly or not
-  const checkState = () => {
-
-    let response = true
-
-    //1. See if Local Storage Contains data
-
-    //2. If it does, return to that state
-    // setStep(localStorageNumber);
-
-    //3. if does not, just return false
-    if(!scheduler.businessData._id){ 
-      response = false; 
-      console.log(scheduler)
-    }
-    
-    return response;
-  }
-  
-  // 
-  
+  /*TODO:: Browser Local Storage State checking - Should it load anything from local-storage vs default */
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
     <section className="page scheduler">
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
-      
-        {/* { checkState()
-              ? <StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} /> 
-              && schedulerPages[step]
-              : <PageNotFound /> */}
-              {(() => {
-                switch(checkState()) {    
-                  case true:  return (
-                    <section>
-                        {schedulerPages[step]}
-                        (<StatusBar step={step} state={checkState} maxSteps={maxSteps} formerStep={formerStep} />)
-                    </section>
-                  );
-                  case false: return <PageNotFound />;
-                  default:    return <PageNotFound />;
-                }
-            })()}
+        {(() => {
+          switch(state) {    
+            case true:  return (
+              <section>
+                  
+                  {/* The current step / page in the scheduler */}
+                  {schedulerPages[step]}
+                  
+                  {/* The bottom status bar */}
+                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
+              </section>
+            );
+            case false: return <PageNotFound />;
+            //TODO:: 04/10/22 #EP || Add component for loading
+            default:    return "Loading...";
+          }
+        })()}
     </section>
   )
 };

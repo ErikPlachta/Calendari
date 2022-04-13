@@ -4,6 +4,10 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') 
+{console.log('//-- starting dev')}  // development
+// else { console.log('prod')}// production 
+
 ReactDOM.render(
   <React.StrictMode>
     <App />
