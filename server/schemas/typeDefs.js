@@ -53,7 +53,6 @@ const typeDefs = gql`
         allBusinesses: [Business]
         user(username: String!): User
         business(brand_name: String!): Business
-        apptTypes: [AppointmentType]
     }
     type Mutation {
         addUser(

@@ -27,13 +27,7 @@ const resolvers = {
                 .populate({ path: 'users', populate: 'appointments' })
                 .populate({ path: 'appointment_types', populate: 'appt_fields'})
                 .populate('appointments')
-        },
-        // find all appointment types
-        apptTypes: async () => {
-            return Appointment_Type.find()
-                .select('-__v')
-                .populate('appt_fields')
-        },
+        }
     },
     Mutation: {
         // add new user
@@ -76,7 +70,6 @@ const resolvers = {
                 { $addToSet: { appt_fields: apptField._id } },
                 { new: true, runValidators: true}
             );
-            console.log(apptField)
             return apptField;
         },
         // add new appointment
