@@ -90,7 +90,7 @@ export default function Business({nextStep}) {
                     
                     {/* BUSINESS NAME */}
                     <span className="form-element">
-                      <label htmlFor="business-name">Business Name</label>
+                      <label htmlFor="business-name">Business Name:</label>
                       <input
                         name='business_name'
                         id="business-name"
@@ -104,7 +104,7 @@ export default function Business({nextStep}) {
                     
                     {/* BRAND_NAME */}
                     <span className="form-element">
-                      <label htmlFor="business-brand-name">Your URL Name</label>
+                      <label htmlFor="business-brand-name">Your URL Name:</label>
                       <input
                         name='business_name'
                         id="business-name"
@@ -121,7 +121,7 @@ export default function Business({nextStep}) {
                     
                     {/* BUSINESS PHONE NUMBER */}
                     <span className="form-element">
-                      <label htmlFor="business-phone">Business Phone Number</label>
+                      <label htmlFor="business-phone">Business Phone Number:</label>
                       <input
                         name="business_phone"
                         id="business-phone"
@@ -135,13 +135,13 @@ export default function Business({nextStep}) {
 
                     {/* Welcome Message */}
                     <span>
-                      <label htmlFor='business-welcome'>Welcome Message</label>
+                      <label htmlFor='business-welcome'>Welcome Message:</label>
                       <textarea  id='business-welcome' rows="10" />
                     </span>
 
                     {/* SUBMIT BUTTON */}
-                    <span className="form-element"> 
-                      <input type="submit" className="button" id="contact-submit" value="Next" />
+                    <span class="form-element"> 
+                      <button type="submit" id="contact-submit" value="Next">Next</button>
                     </span>
 
                   </div>

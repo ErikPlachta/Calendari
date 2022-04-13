@@ -75,12 +75,12 @@ export default function Confirmtion({nextStep}) {
 
   // console.log(appointment_template)
   return (
-    <section className="page signupConfirmation">
+    <section className="page signupBusiness">
       <h3>Please Review the Following Information</h3>
       <p>Review the following information and then click Create Account to finalize your account setup.</p>
       
       {/* SUBMISSION FORM */}
-      <form id="confirmation-submit" className="containerResults" onSubmit={nextStep}>
+      <form id="confirmation-submit" className="homeInformation" onSubmit={nextStep}>
         {(() => {
           switch("appointment_template"){
             // case "appointment_template": return "appointment_template";
@@ -101,7 +101,7 @@ export default function Confirmtion({nextStep}) {
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 
-                      <input type="submit" className="button" id="confirmation-submit" value="Create my Account!" />
+                      <button type="submit" className="button" id="confirmation-submit" value="Create Account!">Create Account!</button>
                     </span>
 
                   </div>

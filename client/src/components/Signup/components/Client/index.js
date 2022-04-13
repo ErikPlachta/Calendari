@@ -74,13 +74,13 @@ export default function Client({nextStep}) {
 
   // console.log(appointment_template)
   return (
-    <section className="page signupUser">
+    <section className="page signupBusiness">
       <h3>Enter Your information</h3>
       <p>
         In this section you'll define your details, which will be used to login 
         and manage your scheduler.
       </p>
-      <form id="clientContactForm" className="containerResults" onSubmit={nextStep}>
+      <form id="clientContactForm" className="homeInformation" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
@@ -119,8 +119,8 @@ export default function Client({nextStep}) {
                     </span>
 
                     {/* SUBMIT BUTTON */}
-                    <span className="form-element"> 
-                      <input type="submit" className="button" id="contact-submit" value="Next" />
+                    <span class="form-element"> 
+                      <button type="submit" id="contact-submit" value="Next">Next</button>
                     </span>
 
                   </div>
