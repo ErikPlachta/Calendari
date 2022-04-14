@@ -44,14 +44,6 @@ export default function Confirmtion({nextStep, errorPop}) {
   const handleChange = (event) => {
     //TODO:: Write this out
     setFormDetails({ ...formDetails, [event.target.name]: event.target.value, });
-
-    //-- If a username, password are in form and tried to submit, run this otherwise don't.
-    if(formDetails.email && formDetails.password && formDetails.submitAttempts>0 ){
-      //-- blank out error if there was one
-      document.getElementById("login-form-message").classList.add('fade-out');
-      document.getElementById("login-form-message").style.opacity="0";
-      document.getElementById("login-form-message").classList.remove('fade-in');
-    }
   };
 
   
@@ -65,8 +57,8 @@ export default function Confirmtion({nextStep, errorPop}) {
       </header>
       
       {/* IF FAILS TO SUBMIT ERROR MESSAGE */}
-      <h5 id="login-form-message" style={{opacity: "0"}}>
-          Invalid Credentials, please try again
+      <h5 id="signup-form-message" style={{opacity: "0"}}>
+          Error Creating Account. Please refresh to try again or check with admin.
       </h5>
       
       {/* SUBMISSION FORM */}

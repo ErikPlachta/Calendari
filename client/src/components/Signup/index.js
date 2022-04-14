@@ -139,31 +139,39 @@ export default function Signup() {
     setStep(step-1);
   };
 
-  //-- Client Input Template and Submitting Request //-- When Appointment is Verified, Submit it to API, and if success move to verification page
+
   const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When client information verified and submitted, update database with appointment data
-    //--  const [addUser, { addUserError }] = useMutation(ADD_USER); 
-    // const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
+    //-- mutations -> for reference
+                      //--  const [addUser, { addUserError }] = useMutation(ADD_USER); 
+                      // const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
 
+    
+    //- -try to create new business, then new user
     try {
-      console.log("//-- creating business", newAccount.business)
       
+      //--      ATTEMPT TO CREATE BUSINESS
+
+      console.log("//-- creating business", newAccount.business)
+      console.log(newAccount.busines)
+
       const { businessData } = await addBusiness({
         variables: { ...newAccount.business },
       });
       console.log("//-- creating business completed!")
       console.log(businessData)
       
-      
       //TODO 04/14/22 #EP || Get Business ID here from response to send in with user
-      
       const businessId = { 
         "businessID" : businessData._id  //-- extract business ID from response
       }
-
       setNewAccount({...newAccount, "user"  : businessId }) //-- update user to post
-      
+
+
+      //--      ATTEMPT TO CREATE USER
+
       console.log("//-- creating user...")
+      console.log(newAccount.user)
       const { userData } = await addUser({
         variables: { ...newAccount.user },
       });
@@ -172,31 +180,41 @@ export default function Signup() {
 
 
       //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-      // Auth.login(data.login);
+      Auth.login(userData.login);
     }
     
+
+    //-- FAILED TO CREATE
     catch (error) { //-- Failure could be related to bad data, already used values, or no db connection
       const databaseErrors = { //- hold errors to send down
         'addBusinessErorr' : addBusinessError,
         'addUserError'     : addUserError
       }
-
+      
+      //-- PRINTING ERRORS
+      console.log(`Catch Error: ${error}` )
+      console.log(`Database Errors:`)
+      console.log(databaseErrors)
       errorPopup(error,databaseErrors) //-- THIS HAPPENS IN THE COMPONENT CONFIRMATION
     }
     // return response;
   }
 
 
+  //TODO:: 04/14/22 #EP || Make this appear
   const errorPopup = (error, databaseErrors) => {  //-- if error, show msg
      //-- Sends this to component Confirmation, and is used to notify on screen if database error
      
-    if ((error.toString()).includes('Incorrect credentials')) {
+    // if ((error.toString()).includes('Incorrect credentials')) {
       
-      //-- Message for Incorrect Creds
-      document.getElementById("login-form-message").style.opacity="1";
-      document.getElementById("login-form-message").classList.remove('fade-out');
-      document.getElementById("login-form-message").classList.add('fade-in');
-    };
+    document.getElementById("login-form-message").style.opacity="1";
+    document.getElementById("login-form-message").classList.remove('fade-out');
+    document.getElementById("login-form-message").classList.add('fade-in');
+    // //-- blank out error
+    // document.getElementById("signup-form-message").classList.add('fade-out');
+    // document.getElementById("signup-form-message").style.opacity="0";
+    // document.getElementById("signup-form-message").classList.remove('fade-in')
+    // };
   }
   
   //----------------------------------------------------------------------------
