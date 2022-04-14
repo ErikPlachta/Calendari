@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import PageNotFound from '../../../../pages/PageNotFound';
 
-
+//-- JWT Auth
+import Auth from "../../../../utils/authServices";
 
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - User
@@ -15,22 +16,19 @@ export default function UserSettings(userData) {
   
   //TODO 04/10/22 #EP || Update with the logged in users data by grabbing ID from JWT and then build page with this
   const [user, setUser] = useState({ //-- the logged in user
-    _id           : '',
     name_first    : '',
     name_last     : '',
     email         : '',
-    date_created  : '',
-    date_login    : '',
-    business_id   : ''
   })
 
   
-  const validateParams = async (userData) => {  //-- Determine which params are sent in and update state accordingly
+  const validateParams = async () => {  //-- Determine which params are sent in and update state accordingly
     // console.log(appointmentData)
     
     //-- Grab ALL user data for business to store here
     if(userData){ 
-      setUsers({...userData.userData})
+      setUser({...userData.userData[0]})
+      console.log(user)
     };
 
     //TODO:: 04/10/22 #EP || Add the logged-in users data to update the user state.
@@ -41,7 +39,7 @@ export default function UserSettings(userData) {
 
   //-- Runs to set variables
   useEffect( () => {
-    validateParams(userData)
+    validateParams()
   },[]);
 
 
@@ -98,15 +96,15 @@ export default function UserSettings(userData) {
                   case true:  return (
                     <div className="businessContainerResults">
                       <h3>
-                        {user._id 
-                            ? `for ${user.name_first}'s` 
+                        {Auth.getCurrentUser().data._id 
+                            ? `${Auth.getCurrentUser().data.username}'s ` 
                             : <span>Empty User Value: <code>name_first</code></span>
                         }
                         User Settings
                       </h3>
                       {/* TODO:: 04/10/22 #EP || Map logged in user, fille in data below */}
 
-                      <div className="businessUserStats">
+                      {/* <div className="businessUserStats">
                         <span>
                           Account Created:  { 
                                   //TODO:: 04/10/22 #EP || Add formatting w helpers
@@ -114,9 +112,9 @@ export default function UserSettings(userData) {
                                     ? user.date_created
                                     : <span>Empty User Value: <code>created_date</code> </span>
                           }
-                        </span>
+                        </span> */}
                         {/* Date of last login */}
-                        <span>
+                        {/* <span>
                           Last Login:  { 
                                   //TODO:: 04/10/22 #EP || Add formatting w helpers
                                   user.date_login
@@ -124,7 +122,7 @@ export default function UserSettings(userData) {
                                     : <span>Empty User Value: <code>created_date</code> </span>
                           }
                         </span>
-                      </div>
+                      </div> */}
                       
                       {/* for user to update their settings */}
                       <form id="userSettingsForm" className="clientContactForm" onSubmit={updateUser}>

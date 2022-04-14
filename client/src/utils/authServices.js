@@ -23,7 +23,7 @@ class AuthService {
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
-
+  
   isTokenExpired(token) {
     try {
       const decoded = decode(token);

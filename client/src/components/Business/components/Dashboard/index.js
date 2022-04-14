@@ -52,7 +52,7 @@ export default function Dashboard({appointmentDetails, businessName, userName}) 
       {/* Dashboard is high-level summary  */}
       <div id="businessDashboard">
         <h3>{capitalizeFirstLetter(businessName)}'s Business Homepage</h3>
-        <p>Welcome to your business page. Use the navigation on the left to can
+        <p>Welcome to your business page. Use the navigation on the left to
           manage your business, your settings, and your appointments.
         </p>
 

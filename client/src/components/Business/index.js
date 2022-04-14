@@ -130,8 +130,8 @@ export default function Business() {
 
       // const businessData = Businesses[business_id_or_brand_name];
       const businessData = data.businessByBrandName;
-      const businessUsersRaw = data.businessByBrandName.users;
-      
+      const businessUsersRaw = businessData.users;
+      console.log(businessData.users)
       const businessUsers = () =>{
         return businessUsersRaw.map( user => {
           return Users[user];
@@ -146,8 +146,8 @@ export default function Business() {
         "appointmentsData" : appointmentsData,
         "appointmentTypesData" : appointmentTypesData,
         "businessData": businessData,
-        "businessUsers" :  businessUsersRaw, 
-        "userData"    : businessUsers,
+        "businessUsers" :  businessData.users, 
+        "userData"    : businessData.users,
       });
 
       //-- IF a sub-page was requested in route, see if it should route to it
@@ -197,7 +197,9 @@ export default function Business() {
     // 0 : <Dashboard appointmentDetails={data.business.appointments} businessName={business.businessData.name} userName={business.userData.name} />,
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
-    3 : <Appointments     appointmentsData={business.appointmentsData} appointmentTypesData={business.appointmentTypesData} />,
+    3 : <Appointments     appointmentsData={business.appointmentsData} 
+                          appointmentTypesData={business.appointmentTypesData} 
+    />,
     // 4: <AppointmentTypes appointmentTypeData={business.appointmentTypeData} />,
   };
 
