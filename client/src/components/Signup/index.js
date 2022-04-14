@@ -53,7 +53,9 @@ export default function Signup() {
   //-- holds form submissions
   const [signupForm, setSignupForm] = useState({ //-- when form submission happens, stores here via the nextStep function
     "business": {},
-    "user"  : {}
+    "user"  : {
+      businessId: ''
+    }
   })
 
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
@@ -144,14 +146,29 @@ export default function Signup() {
     // const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
 
     try {
+      console.log("//-- creating business", newAccount.business)
       
       const { businessData } = await addBusiness({
         variables: { ...newAccount.business },
       });
+      console.log("//-- creating business completed!")
+      console.log(businessData)
       
+      
+      //TODO 04/14/22 #EP || Get Business ID here from response to send in with user
+      
+      const businessId = { 
+        "businessID" : businessData._id  //-- extract business ID from response
+      }
+
+      setNewAccount({...newAccount, "user"  : businessId }) //-- update user to post
+      
+      console.log("//-- creating user...")
       const { userData } = await addUser({
         variables: { ...newAccount.user },
       });
+      console.log("//-- creating user completed!")
+      console.log(userData)
 
 
       //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE

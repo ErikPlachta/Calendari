@@ -63,7 +63,9 @@ export default function Client({nextStep}) {
 
   //-- event listner on input
   const handleChange = (event) => {
-    setUserDetails({ ...userDetails, [event.target.name]: event.target.value,  });
+    if(event.target.id != "phone_number"){ //-- this is controlled by the onKeyUpPhone functions
+      setUserDetails({ ...userDetails, [event.target.name]: event.target.value,  });
+    }
   };
 
   // console.log(appointment_template)
@@ -128,8 +130,8 @@ export default function Client({nextStep}) {
                         maxLength="13"
                         // required
                         onKeyUp={onKeyUpPhone}
-                        value={userDetails.phone}
-                        onChange={handleChange}
+                        // value={userDetails.phone} //-- can't have this with how it's built throws error, but validation function requires it
+                        // onChange={handleChange}
                       />
                     </span>
                     
