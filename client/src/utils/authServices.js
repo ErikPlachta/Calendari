@@ -14,6 +14,12 @@ class AuthService {
     return results.business_id
   }
 
+  getBusinessBrandName(){
+    let results = JSON.parse(localStorage.getItem('calendari'));
+    
+    return results.branName;
+  }
+
   // Checks if there is a saved token and it's still valid
   isLoggedIn() {
     const token = this.getToken();
@@ -73,7 +79,7 @@ class AuthService {
       "name"          : username,
       "date_created"  : date_created,
       "business_id"   : business_id,
-      "brandName"    : brandName
+      "brandName"     : brandName
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
