@@ -96,8 +96,8 @@ export default function User({nextStep}) {
                         placeholder='First Name'
                         // required
                         autoComplete='given-name'
-                        onChange={handleChange}
                         value={userDetails.name_first}
+                        onChange={handleChange}
                       />
                     </span>
 

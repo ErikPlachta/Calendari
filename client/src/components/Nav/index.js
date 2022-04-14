@@ -49,7 +49,7 @@ export default function Nav({ bobData, bob2 }) {
                                     Business
                                 </Link>
                             </li>
-                            {/* <li> <Link to="/business">Scheduler</Link></li> */}
+                            <li> <Link to="/business">Scheduler</Link></li>
                             <li><a href="/" onClick={logout}> Logout </a> </li>
                             {/*TODO:: 04/11/22 #EP || Add Support page for if need help  */}
                             {/* <li>Support</li> */}
