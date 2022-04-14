@@ -23,13 +23,8 @@ export default function DateTimePicker() {
                     <section>
                         {/* {dateTimePickerLocation[1]}
                         {dateTimePickerLocation[2]} */}
-                        <label for="datetime">Enter a date and time for your appointment:</label>
-                        <input 
-                                id="datetime"
-                                type='datetime-local'
-                                min={get}
-                        
-                        ></input>
+
+                       
                     </section>
                     );
                     // case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;
