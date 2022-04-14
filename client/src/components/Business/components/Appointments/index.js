@@ -3,6 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import PageNotFound from '../../../../pages/PageNotFound';
 
+import { useMutation } from '@apollo/client';
+import { ADD_APPT } from '../../../../utils/mutations';
 
 //------------------------------------------------------------------------------
 //-- HELPERS
@@ -28,6 +30,36 @@ const {
     const [appointments, setAppointments] = useState({});
     const [appointmentTypes, setAppointmentTypes] = useState({});
 
+    // add appt test object
+    const apptTest = {
+      businessId: "625608e9d634e02c54faece3",
+      userId: "625608f3d634e02c54faece5",
+      apptTypeId: "6256090ed634e02c54faece8",
+      appointmentDate: "date",
+      appointmentTime: "time"
+    }
+
+    // add appointment mutation
+    const [addAppt] = useMutation(ADD_APPT);
+
+    const addApptSubmit = async () => {
+      try {
+        await addAppt({
+          variables: {
+            businessId: apptTest.businessId,
+            userId: apptTest.userId,
+            apptTypeId: apptTest.apptTypeId,
+            appointmentStatus: "Scheduled",
+            appointmentDate: apptTest.appointmentDate,
+            appointmentTime: apptTest.appointmentTime
+          }
+        })
+        console.log("success!")
+      } catch (e){
+        console.error(e);
+      }
+    };
+
     
     const validateParams = async () => {  //-- Determine which params are sent in and update state accordingly
         
@@ -49,8 +81,8 @@ const {
   
   return (   
     <section className="scheduledAppointments">
-        <header className="business">
-          <h3>Here are your schedule appointments</h3>
+        <header className="business" onClick={addApptSubmit}>
+          <h3>Here are your scheduled appointments</h3>
         </header>
           
           
