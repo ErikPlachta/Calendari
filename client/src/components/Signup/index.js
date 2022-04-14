@@ -196,16 +196,16 @@ export default function Signup() {
         setNewBusiness({ results });
         setNewAccount({...newAccount, business_id: [results.data] })
        
-        console.log("//-- results businessData..")
-        console.log(results)
-        console.log("//-- creating business completed!")
-        console.log(`businessId`)
-        console.log(businessId)
-        console.log("//-- completed business_id value!")
+        // console.log("//-- results businessData..")
+        // console.log(results)
+        // console.log("//-- creating business completed!")
+        // console.log(`businessId`)
+        // console.log(businessId)
+        // console.log("//-- completed business_id value!")
       });
 
-      console.log("//-- New Account with Business")
-      console.log(newAccount)
+      // console.log("//-- New Account with Business")
+      // console.log(newAccount)
       // console.log(newBusiness)
       
       var businessId = '6258512a827ae3493855de82'
@@ -221,10 +221,10 @@ export default function Signup() {
        
       
       //--      4. ATTEMPT TO CREATE USER
-      console.log("//-- creating user...")
+      // console.log("//-- creating user...")
 
       newAccount.user['businessId'] = '6258512a827ae3493855de82';
-      console.log(newAccount.user)
+      // console.log(newAccount.user)
       
       const userData  = await addUser({
         variables: { ...newAccount.user },
@@ -246,7 +246,7 @@ export default function Signup() {
 
         
         //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-        const loginResults = login({
+        const userData = login({
             variables: { ...loginData },
         }).
         then(results =>{
@@ -276,17 +276,17 @@ export default function Signup() {
 
       //--      4. ATTEMPT TO CREATE USER
 
-      console.log("//-- creating user...")
-      console.log(newAccount.user)
-      const { userData } = await addUser({
-        variables: { ...newAccount.user },
-      });
-      console.log("//-- creating user completed!")
-      console.log(userData)
+      // console.log("//-- creating user...")
+      // console.log(newAccount.user)
+      // const { userData } = await addUser({
+      //   variables: { ...newAccount.user },
+      // });
+      // console.log("//-- creating user completed!")
+      // console.log(userData)
 
 
       //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-      Auth.login(userData.login);
+      // Auth.login(userData.login);
     }
     
 
