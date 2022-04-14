@@ -21,7 +21,7 @@ import Confirmation from './components/Confirmation';
 //------------------------------------------------------------------------------
 //-- ASSETS
 //-- Hardcoded data used to simulate the Database
-import {ADD_USER, ADD_BUSINESS, ADD_APPT_TYPE} from '../../utils/mutations';
+import {ADD_USER, ADD_BUSINESS, ADD_APPT_TYPE, LOGIN_USER} from '../../utils/mutations';
 const DB_Business = require('../../assets/json/business.json'); //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 
 //------------------------------------------------------------------------------
@@ -46,10 +46,16 @@ export default function Signup() {
   const [addUser, { addUserError }] = useMutation(ADD_USER); 
   const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
   const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE);
+  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
 
   useEffect(() => { //-- updates the page title
     document.title = `Calendari - Signup`;
   },[]);
+
+  const [newBusiness, setNewBusiness] = useState({
+    'name' :'',
+    'brandName' :''
+  })
 
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
     "business": {
@@ -57,17 +63,17 @@ export default function Signup() {
       'brandName' :''
     },
     "user"  : {
-      "businessId": '',
-      "name_first": '',
-      "name_last": '', 
-      "email":  '', 
-      'username': '',
-      'password': '',
-      'phone_number': '',
-      'business_id': ''
+      "businessId"  : '',
+      "nameFirst" : '',
+      "nameLast"  : '',
+      "email" : '',
+      "username"  : '',
+      "password"  : '',
+      "phoneNumber" : '',
     },
     "appointment_type" : {
       "businessId"  : "",
+      "business_id"  : "",
       "apptTypeName": "General",
       "summary"     : "Schedule an appointment"
       // TODO:: Add more than 1 type
@@ -159,52 +165,117 @@ export default function Signup() {
 
   const createAccount = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When user information verified and submitted, update database with appointment data
-    //-- mutations -> for reference
-                      //--  const [addUser, { addUserError }] = useMutation(ADD_USER); 
-                      // const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
 
     //- -try to create new business, then new user
     try {
       
+
+      
+
       console.log("//-- Creating New Account..", newAccount)
       
       
       //--      1. ATTEMPT TO CREATE BUSINESS
-
       console.log("//-- creating business...", newAccount.business)
-
       const create = await addBusiness({
         variables: { ...newAccount.business },
       })    
+      
+      //--      2. ADD businessId RESPONSE TO STATE
       .then(results=>{
-
-        console.log("//-- results businessData..")
-        console.log(results)
-        console.log("//-- creating business completed!")
-
-        //--      2. ADD businessId RESPONSE TO STATE
-        console.log("//-- updating business_id value for each element that needs it...")
-
+        
         const businessId = { 
           "businessId" : results.data.addBusiness._id  //-- extract business ID from response
         }
-        setNewAccount({...newAccount, business: businessId }) //-- update user to post
-        setNewAccount({...newAccount, user: businessId }) //-- update user to post
-        setNewAccount({...newAccount, appointment_type: businessId }) //-- update user to post
-        
+        // setNewAccount({
+        //   ...newAccount,
+        //   [results] : results,
+        // }); //-- update user to post
+        // setNewAccount({...newAccount, user: businessId }) //-- update user to post
+        // setNewAccount({...newAccount, appointment_type: businessId }) //-- update user to post
+        setNewBusiness({ results });
+        setNewAccount({...newAccount, business_id: [results.data] })
+       
+        console.log("//-- results businessData..")
+        console.log(results)
+        console.log("//-- creating business completed!")
         console.log(`businessId`)
         console.log(businessId)
         console.log("//-- completed business_id value!")
-      })
+      });
+
+      console.log("//-- New Account with Business")
+      console.log(newAccount)
+      // console.log(newBusiness)
       
+      var businessId = '6258512a827ae3493855de82'
       //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
-      .then(()=>{
-        console.log("//-- creating appointment types", newAccount.appointment_type)
-        const { apptType } = addApptType({
-        variables: { ...newAccount.apptType },
-        })
-        return apptType;
+      
+      newAccount.appointment_type['businessId'] = '6258512a827ae3493855de82';
+      const apptType = await addApptType({
+        variables: { ...newAccount.appointment_type },
       })
+      .then(results => {
+        console.log(results)
+      })
+       
+      
+      //--      4. ATTEMPT TO CREATE USER
+      console.log("//-- creating user...")
+
+      newAccount.user['businessId'] = '6258512a827ae3493855de82';
+      console.log(newAccount.user)
+      
+      const userData  = await addUser({
+        variables: { ...newAccount.user },
+      })
+      .then(results =>{
+        
+        console.log("//-- creating user completed!")
+        
+
+
+        console.log("attempt auth")
+        console.log(results.data.addUser)
+        
+        const loginData={
+          _id     : results.data.addUser._id,
+          password : newAccount.user.password,
+          email : newAccount.user.email
+          // '_id'    : "62587b5b1780f46534ad64f6",
+          // password : "password",
+          // email : "eriks@erik.com"
+        }
+
+        
+        //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
+        const loginResults = login({
+            variables: { ...loginData },
+        }).
+        then(results =>{
+          
+          Auth.login(results);
+        })
+
+      })
+
+      
+
+      /*
+        resultsfunction
+
+      */
+      
+      
+      
+      // .then(()=>{
+
+      //   console.log("//-- creating appointment types", newAccount.appointment_type)  
+      //   const { apptType } = addApptType({
+      //   variables: { ...newAccount.apptType },
+      //   })
+      //   return apptType;
+      // })
 
       // //--      4. ATTEMPT TO CREATE USER
       // console.log("//-- creating user...")

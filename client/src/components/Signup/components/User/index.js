@@ -19,12 +19,13 @@ export default function User({nextStep}) {
   const recaptchaRef = React.createRef();
   
   const [userDetails, setUserDetails] = useState({ //-- placeholder for emails later
-    name_first: '',
-    name_last: '',
-    phone:  '',
-    email: '',
-    username: '',
-    password: '',
+    "businessId"  : '',
+    "nameFirst" : '',
+    "nameLast"  : '',
+    "email" : '',
+    "username"  : '',
+    "password"  : '',
+    "phoneNumber" : '',
     'g-recaptcha-response': '',
   });
 
@@ -88,10 +89,10 @@ export default function User({nextStep}) {
                     
                     {/* CLIENT NAME */}
                     <span className="form-element">
-                      <label htmlFor="name_first">First Name</label>
+                      <label htmlFor="nameFirst">First Name</label>
                       <input
-                        name='name_first'
-                        id="name_first"
+                        name='nameFirst'
+                        id="nameFirst"
                         type='text'
                         placeholder='First Name'
                         // required
@@ -103,10 +104,10 @@ export default function User({nextStep}) {
 
                     {/* CLIENT NAME */}
                     <span className="form-element">
-                      <label htmlFor="name_last">Last Name</label>
+                      <label htmlFor="nameLast">Last Name</label>
                       <input
-                        name='name_last'
-                        id="name_last"
+                        name='nameLast'
+                        id="nameLast"
                         type='text'
                         placeholder='Last Name'
                         // required
@@ -118,10 +119,10 @@ export default function User({nextStep}) {
 
                    {/* User PHONE NUMBER */}
                    <span className="form-element">
-                      <label htmlFor="phone_number">Phone Number:</label>
+                      <label htmlFor="phoneNumber">Phone Number:</label>
                       <input
-                        name="phone_number"
-                        id="phone_number"
+                        name="phoneNumber"
+                        id="phoneNumber"
                         type="tel"
                         aria-label="Please enter a valid phone number"
                         placeholder="ex. (111)-111-1111"
