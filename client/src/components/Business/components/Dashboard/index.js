@@ -1,6 +1,7 @@
 //------------------------------------------------------------------------------
 //-- MODULES
 import React, { useEffect, useState } from 'react';
+import { capitalizeFirstLetter } from '../../../../utils/helpers';
 
 
 
@@ -16,7 +17,7 @@ export default function Dashboard({appointmentDetails, businessName, userName}) 
     }
   })
 
-  console.log(appointmentDetails)
+  console.log()
 
   const validateParams = async (appointmentData) => {  //-- Determine which params are sent in and update state accordingly
     // console.log(appointmentData)
@@ -50,15 +51,17 @@ export default function Dashboard({appointmentDetails, businessName, userName}) 
     <section className="businessContainerResults">
       {/* Dashboard is high-level summary  */}
       <div id="businessDashboard">
-        <h3>Dashboard</h3>
-        <p>placeholder text for summary, here.</p>
+        <h3>{capitalizeFirstLetter(businessName)}'s Business Homepage</h3>
+        <p>Welcome to your business page. Use the navigation on the left to can
+          manage your business, your settings, and your appointments.
+        </p>
 
-        <h4>Appointments</h4>
+        {/* <h4>Appointments</h4>
         <ul>
           <li>Scheduled: {appointments.stats.scheduled} </li>
           <li>Completed: {appointments.stats.completed} </li>
           <li>Canceled:  {appointments.stats.canceled}  </li>
-        </ul>
+        </ul> */}
       </div>
     </section>
   )

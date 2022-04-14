@@ -61,7 +61,8 @@ export default function Business() {
     // "config"        : {}, //-- placeholder for templates //TODO:: 04/10/22 #EP || Add these in Phase3
     "userData"        : "",
     "businessData"    : "",
-    "appointmentData" : ""
+    "appointmentsData" : "",
+    "appointmentTypesData" : ""
   });
   
   //-- Database Query
@@ -90,8 +91,6 @@ export default function Business() {
       setMenuSelectLocation(3)
     }
   };
-  
-
   
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
@@ -126,27 +125,26 @@ export default function Business() {
     // else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){ 
     else if(data && Auth.isLoggedIn()){ 
 
-      console.log("data and auth found")
-      console.log(data)      
+      console.log("//-- business/index.js | data and auth found. setting variable")
+      // console.log(data)      
 
       // const businessData = Businesses[business_id_or_brand_name];
       const businessData = data.businessByBrandName;
       const businessUsersRaw = data.businessByBrandName.users;
-      // const businessData = data.business;
-      // const businessUsersRaw = data.business.users;
-      
       
       const businessUsers = () =>{
         return businessUsersRaw.map( user => {
           return Users[user];
         })
       };
-      const appointmentData = businessData.appointments;
-      console.log(appointmentData)
+      const appointmentsData = businessData.appointments;
+      const appointmentTypesData = businessData.appointment_types;
+      
       
       setBusiness({ //-- update Business Page state from query data
         ...business,
-        "appointmentData" : appointmentData,
+        "appointmentsData" : appointmentsData,
+        "appointmentTypesData" : appointmentTypesData,
         "businessData": businessData,
         "businessUsers" :  businessUsersRaw, 
         "userData"    : businessUsers,
@@ -189,26 +187,6 @@ export default function Business() {
   //----------------------------------------------------------------------------
   //-- Runs once, validates load state or directs the exit
 
-  // useEffect(() => {
-    // setBusiness(data)
-    
-  //   // if(loading){
-  //   //   console.log("loading..")
-  //   //   // setDatbaseNew(data.business);
-  //   // }else{
-  //   //   console.log(data)
-  //   //   // setDatbaseNew(data.business);
-  //   // }
-    
-  //   // const validRequest = validateParams();
-    
-  //   // //-- IF valid request is TRUE, update title with business name. 
-  //   // if(validRequest){ document.title = `Calendari - ${business.businessData.name}`};
-    
-  //   // //-- IF NOTE valid request is TRUE, update title with Invalid Request
-  //   // if(!validRequest){ document.title = `Calendari - Invalid Request`};
-  // },[]);
-
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
   const businessPages = { //-- This is an INDEX of available sub-components that can be rendered
@@ -219,7 +197,7 @@ export default function Business() {
     // 0 : <Dashboard appointmentDetails={data.business.appointments} businessName={business.businessData.name} userName={business.userData.name} />,
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
-    3 : <Appointments     appointmentData={business.appointmentData} />,
+    3 : <Appointments     appointmentsData={business.appointmentsData} appointmentTypesData={business.appointmentTypesData} />,
     // 4: <AppointmentTypes appointmentTypeData={business.appointmentTypeData} />,
   };
 
@@ -247,7 +225,7 @@ export default function Business() {
           <section className="businessAside">
             <Aside  setPage={setPage}
                     businessName={data.businessByBrandName.name} 
-                    userName={business.userData.name} />
+                    userName={Auth.getCurrentUser().data.username} />
           </section>
           {/* Main Content Area in Business Page */}
           <section className="businessMain"> 
