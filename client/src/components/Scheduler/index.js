@@ -17,6 +17,12 @@ import DateTime from './components/DateTime';
 import Client from './components/Client';
 
 //------------------------------------------------------------------------------
+//-- ASSETS
+
+import {ADD_APPT} from '../../utils/mutations';
+const DB_Business = require('../../assets/json/business.json'); //-- Hardcoded data used to simulate the Database
+
+//------------------------------------------------------------------------------
 //-- Helpers
 const { 
   capitalizeFirstLetter,
@@ -28,14 +34,6 @@ const {
   dateGetTimePassed,
   dateTimeFullLocal
 } = require('../../utils/helpers');
-
-//------------------------------------------------------------------------------
-//-- ASSETS
-
-//-- Hardcoded data used to simulate the Database
-//TODO:: 04/05/22 #EP|| Make GraphQL Connections here
-const DB_Business = require('../../assets/json/business.json');
-
 
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Scheduler
@@ -52,6 +50,14 @@ export default function Scheduler() {
   const [scheduler, setScheduler] = useState({
     "clientData"      : "",
     "businessData"  : "",
+    "addAppt"       : {
+      "businessId": "",
+      "userId"    : "",
+      'appointmentStatus' : '',
+      'appointmentTime': '',
+      'appointmentDate' : '',
+      'apptTypeId'      : ''
+    }
   })
 
   let business = {}; //-- The Specific Business response for the logged in user from API

@@ -21,7 +21,7 @@ import Confirmation from './components/Confirmation';
 //------------------------------------------------------------------------------
 //-- ASSETS
 //-- Hardcoded data used to simulate the Database
-import {ADD_USER, ADD_BUSINESS} from '../../utils/mutations';
+import {ADD_USER, ADD_BUSINESS, ADD_APPT_TYPE} from '../../utils/mutations';
 const DB_Business = require('../../assets/json/business.json'); //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 
 //------------------------------------------------------------------------------
@@ -45,22 +45,23 @@ export default function Signup() {
   //-- MUTATIONS
   const [addUser, { addUserError }] = useMutation(ADD_USER); 
   const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
+  const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE);
 
   useEffect(() => { //-- updates the page title
     document.title = `Calendari - Signup`;
   },[]);
 
-  //-- holds form submissions
-  const [signupForm, setSignupForm] = useState({ //-- when form submission happens, stores here via the nextStep function
+  const [newAccount, setNewAccount] = useState({ //-- the user form payload
     "business": {},
     "user"  : {
-      businessId: ''
+      "businessId": ''
+    },
+    "appointment_type" : {
+      "businessId"  : "",
+      "apptTypeName": "General",
+      "summary"     : "Schedule an appointment"
+      // TODO:: Add more than 1 type
     }
-  })
-
-  const [newAccount, setNewAccount] = useState({ //-- the user form payload
-    "user"      : "",   //-- the users data
-    "business"  : "",   //-- the business data for the client //TODO:: 04/12/22 #EP | Connect to GQL
   })
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
@@ -106,18 +107,18 @@ export default function Signup() {
 
     const formResults = {}  //--holds form submission results
     for(let i = 0; i < resultsLength-1; i++ ){ //-- iterates through all results excluding the button
-      formResults[results[i].id] = results[i].value; //-- adds to dictionary
+      formResults[results[i].id] = results[i].value.String; //-- adds to dictionary
     }
     
     //---------------------------------
     //-- 2. form for business submitted
-    if(nextStepButton.target.id == "business"){
+    if(nextStepButton.target.id === "business"){
       setNewAccount({...newAccount, "business"  : formResults })
     }
 
     //------------------------------
     //-- 3.  form for user submitted
-    if(nextStepButton.target.id == "user"){
+    if(nextStepButton.target.id === "user"){
       setNewAccount({...newAccount, "user"  : formResults })
     }
     
@@ -139,21 +140,22 @@ export default function Signup() {
     setStep(step-1);
   };
 
-
   const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When client information verified and submitted, update database with appointment data
     //-- mutations -> for reference
                       //--  const [addUser, { addUserError }] = useMutation(ADD_USER); 
                       // const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
 
-    
     //- -try to create new business, then new user
     try {
       
-      //--      ATTEMPT TO CREATE BUSINESS
+      console.log("//-- Creating New User", newAccount)
+      
+      
+      //--      1. ATTEMPT TO CREATE BUSINESS
 
       console.log("//-- creating business", newAccount.business)
-      console.log(newAccount.busines)
+      console.log(newAccount.business)
 
       const { businessData } = await addBusiness({
         variables: { ...newAccount.business },
@@ -161,14 +163,28 @@ export default function Signup() {
       console.log("//-- creating business completed!")
       console.log(businessData)
       
-      //TODO 04/14/22 #EP || Get Business ID here from response to send in with user
+
+      //--      2. ADD businessId RESPONSE TO STATE
+
+      //TODO 04/14/22 #EP || Make sure this works!
       const businessId = { 
         "businessID" : businessData._id  //-- extract business ID from response
       }
       setNewAccount({...newAccount, "user"  : businessId }) //-- update user to post
 
 
-      //--      ATTEMPT TO CREATE USER
+      //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
+
+      console.log("//-- creating appointment types", newAccount.appointment_type)
+      console.log(newAccount.appointment_type)
+
+      const { apptType } = await addApptType({
+        variables: { ...newAccount.apptType },
+      });
+      console.log("//-- creating business completed!")
+      console.log(businessData)
+
+      //--      4. ATTEMPT TO CREATE USER
 
       console.log("//-- creating user...")
       console.log(newAccount.user)
@@ -187,8 +203,9 @@ export default function Signup() {
     //-- FAILED TO CREATE
     catch (error) { //-- Failure could be related to bad data, already used values, or no db connection
       const databaseErrors = { //- hold errors to send down
-        'addBusinessErorr' : addBusinessError,
-        'addUserError'     : addUserError
+        'addBusinessError'  : addBusinessError,
+        'addUserError'      : addUserError,
+        'addApptTypeError'  : addApptTypeError
       }
       
       //-- PRINTING ERRORS
@@ -203,9 +220,13 @@ export default function Signup() {
 
   //TODO:: 04/14/22 #EP || Make this appear
   const errorPopup = (error, databaseErrors) => {  //-- if error, show msg
-     //-- Sends this to component Confirmation, and is used to notify on screen if database error
+    //-- Sends this to component Confirmation, and is used to notify on screen if database error
+    
+    //TODO:: 02/14/22 #EP || Add Error awareness
      
-    // if ((error.toString()).includes('Incorrect credentials')) {
+    // if error E11000 duplicate key error collection: calendari
+    
+     // if ((error.toString()).includes('Incorrect credentials')) {
       
     // document.getElementById("login-form-message").style.opacity="1";
     // document.getElementById("login-form-message").classList.remove('fade-out');
