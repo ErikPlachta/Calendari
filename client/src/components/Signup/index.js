@@ -263,10 +263,7 @@ export default function Signup() {
 
       /*
         resultsfunction
-
       */
-      
-      
       
       // .then(()=>{
 
