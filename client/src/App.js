@@ -47,7 +47,7 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
 
 //-- if in production mode, used by heroku so needs to update accordingly
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'production'){
-  console.log('//-- client in production')
+  // console.log('//-- client in production')
   uri = '/graphql';
 } ;
 
