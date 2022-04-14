@@ -9,9 +9,6 @@ export default function Nav({ bobData, bob2 }) {
     //-- ASSETS
     const [bobs, setBobs] = useState({bobData});//-- Path to BOB SVG Icons //TODO:: 04/13/22 #EP|| Delete?
 
-    const [business_id] = useState(Auth.getBusinessId())
-    
-
     //--------------------------------------------------------------------------
     //-- FUNCTIONS
     const logout = event => {
@@ -48,7 +45,7 @@ export default function Nav({ bobData, bob2 }) {
                             <li> <a href="/">Calendari</a> </li>
                             <li>
                                 <Link 
-                                    to={"/business/"+business_id}>
+                                    to={"/business/"+Auth.getBusinessId()}>
                                     Business
                                 </Link>
                             </li>
