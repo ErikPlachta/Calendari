@@ -58,7 +58,18 @@ export default function Scheduler() {
       'appointmentDate' : '',
       'apptTypeId'      : ''
     }
-  })
+  });
+
+
+  const formDetails ={
+    "businessId": "6257268f1fbc1664e0193a57",
+     "userId" : "6258933cccffbe8a38bca462", //-- local
+    //  "userId": "62589daf6a7be00016287f94", // cloud
+    "apptTypeId": "62572c211fbc1664e0193a6a",
+    "appointmentDate": "04/15/2022",
+    "appointmentTime": "10:00 am",
+    "appointmentStatus": "Scheduled"
+  }
 
   const [business, setBusiness] = useState({
     // "config"        : {}, //-- placeholder for templates //TODO:: 04/10/22 #EP || Add these in Phase3
@@ -115,7 +126,7 @@ export default function Scheduler() {
       const businessData = data.businessByBrandName;
       const appointmentsData = data.businessByBrandName.appointments;
       const appointmentTypesData = data.businessByBrandName.appointment_types;
-      console.log(appointmentTypesData)
+      // console.log(data.businessByBrandName)
 
       setBusiness({ //-- update Business Page state from query data
         ...business,
@@ -127,7 +138,7 @@ export default function Scheduler() {
       validRequest = true; //-- was a valid request and completed
       setState(validRequest); //-- Update overall Business Page state as TRUE to allow content to load
 
-      if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
+      if(validRequest){ document.title = `Calendari - ${capitalizeFirstLetter(data.businessByBrandName.brand_name)}'s Scheduler`};
     }
 
     // 4. Does appointment_type_id exist and if yes for this business //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
@@ -149,13 +160,35 @@ export default function Scheduler() {
 
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
     nextStepButton.preventDefault();
+
+
+    
+    const results = nextStepButton.target;              //-- used to build dict for mutation
+    
+    if(results.id == "apptTypeId"){
+      setScheduler({...scheduler, apptTypeId: results.value })
+    }
+
+    else {
+      const resultsLength = results.length;
+      let formResults = {}  //--holds form submission results
+   
+      for(let i = 0; i < resultsLength-1; i++ ){ //-- iterates through all results excluding the button
+          formResults[results[i].id] = results[i].value; //-- adds to dictionary
+      }
+
+
+      setScheduler({...scheduler, formResults })
+
+    }
+
     
     // setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
+    
     if(nextStepButton_id === "contact-submit"){ //-- if the contact-submit ( final button ) do API call
       setAppointment_confirmation_id(nextStepButton_id);
-      //TODO:: 04/10/22 #EP || Get form data here
-      createAppointment(appointment_confirmation_id);
+      // createAppointment(appointment_confirmation_id);
     }
     else {
       setStep(step+1);
@@ -200,11 +233,11 @@ export default function Scheduler() {
 
   if (loading) {
       console.log("loading");
-      console.log(business_id_or_brand_name)
+      // console.log(business_id_or_brand_name)
     } else if (data) {
-      console.log(data)
+      // console.log(data)
     } else {
-      console.log(error)
+      // console.log(error)
     }
 
   if(loading)return(<h1>loading</h1>)

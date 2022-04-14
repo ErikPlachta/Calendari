@@ -58,18 +58,20 @@ export default function Appointment({appointment_confirmation_id}) {
 
   return (
     <section class="appointmentConfirmation">
-      <h1>You're Scheduled! Please see details below:</h1>
-      <ul>
+      <header>
+        <h1>You're Scheduled!</h1>
+      </header>
+      {/* <ul> */}
         {/* <li>
           We will see you on DATE{appointment_date} at TIME{appointment_time}.
         </li> */}
-        <li>
+        {/* <li>
           Confirmation ID: {appointment_id}{appointment_confirmation_id}
         </li>
         <li>
           Questions? Concerns? Cancellations? Please email us at email@noemail.com.
         </li>
-      </ul>
+      </ul> */}
     </section>
   )
 }

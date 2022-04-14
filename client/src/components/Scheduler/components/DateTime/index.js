@@ -13,9 +13,10 @@ export default function DateTime({nextStep}) {
         <h3>Select Date and Time</h3>
         <p>Select the date and your best avaialble time!</p>
       </header>
-      <form className="appointmentCard appointmentCalendar"  onSubmit={nextStep}>
+      
+      <form id='scheduler-date-time' className="appointmentCard appointmentCalendar"  onSubmit={nextStep}>
         <span className="form-element">
-          <label for="date">Enter a date for your appointment:</label>
+          <label htmlFor="date">Enter a date for your appointment:</label>
           <input 
             id='date'
             type="date"
@@ -25,7 +26,7 @@ export default function DateTime({nextStep}) {
             required
            />
           {/* <input id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY" /> */}
-          <label for="time">Select a Start Time</label>
+          <label htmlFor="time-start">Select a Start Time</label>
           <input 
             id="time-start"
             type='time'
@@ -35,7 +36,7 @@ export default function DateTime({nextStep}) {
             required
           ></input>
           {/* end time */}
-          <label for="time">Select an End Time</label>
+          {/* <label for="time">Select an End Time</label>
           <input 
             id="time-end"
             type='time'
@@ -43,7 +44,7 @@ export default function DateTime({nextStep}) {
             max="17:00 PM"
             // step="3600"
             required
-          ></input>
+          ></input> */}
         </span>
         <span className='form-element'>
         <input

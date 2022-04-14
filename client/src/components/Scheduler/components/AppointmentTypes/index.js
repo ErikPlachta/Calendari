@@ -70,15 +70,15 @@ export default function AppointmentType({
                   </span>
                   <span>
                     <button 
+                      value={appointmentTypes[appointment]['_id']}
                       className="appointment_type_button" 
-                      id={appointmentTypes[appointment]['_id']}
+                      id="apptTypeId"
                       onClick={nextStep}
                     >
                       Start Scheduling
                     </button>
                   </span>
               </div>
-              
             </section>
           ))}
 
