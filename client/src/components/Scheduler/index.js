@@ -2,6 +2,7 @@
 //-- MODULES
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams, Navigate } from "react-router-dom";
+import { useQuery } from '@apollo/client';
 
 
 //------------------------------------------------------------------------------
@@ -19,7 +20,8 @@ import Client from './components/Client';
 //------------------------------------------------------------------------------
 //-- ASSETS
 
-import {ADD_APPT} from '../../utils/mutations';
+import { QUERY_BUSINESS } from '../../utils/queries';
+import { ADD_APPT } from '../../utils/mutations';
 const DB_Business = require('../../assets/json/business.json'); //-- Hardcoded data used to simulate the Database
 
 //------------------------------------------------------------------------------
@@ -74,6 +76,17 @@ export default function Scheduler() {
   // let appointment_confirmation_id = ""; //-- placeholder
   //-- Extract URL Parameters
   const {business_id_or_brand_name, appointment_type_id} = useParams();
+
+  // query for business appt info
+  const { loading, data, error } = useQuery( QUERY_BUSINESS, { variables: { brandName: business_id_or_brand_name } } );
+
+  if (loading) {
+    console.log("loading");
+  } else if (data) {
+    console.log(data)
+  } else {
+    console.log(error)
+  }
 
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( false );
