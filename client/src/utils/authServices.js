@@ -55,6 +55,7 @@ class AuthService {
 
     //-- deconstructing to simplify below
     const user = dataLogin.user ? dataLogin.user : dataLogin;
+    
     //-- extracting values for local storage
     const _id           = user._id ? user._id : "NaN";
     const username      = user.username  ? user.username  : "NaN";

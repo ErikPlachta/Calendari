@@ -168,7 +168,7 @@ export default function Signup() {
 
     //- -try to create new business, then new user
     try {
-      
+      var businessId= "NaN"; //-- to be defined at time of biz creation
 
       
 
@@ -184,9 +184,10 @@ export default function Signup() {
       //--      2. ADD businessId RESPONSE TO STATE
       .then(results=>{
         
-        const businessId = { 
-          "businessId" : results.data.addBusiness._id  //-- extract business ID from response
-        }
+        businessId = results.data.addBusiness._id
+        // const businessId = { 
+        //   "businessId" : results.data.addBusiness._id  //-- extract business ID from response
+        // }
         // setNewAccount({
         //   ...newAccount,
         //   [results] : results,
@@ -208,10 +209,12 @@ export default function Signup() {
       // console.log(newAccount)
       // console.log(newBusiness)
       
-      var businessId = '6258512a827ae3493855de82'
+      // var businessId = '6258512a827ae3493855de82'
       //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
       
-      newAccount.appointment_type['businessId'] = '6258512a827ae3493855de82';
+      // newAccount.appointment_type['businessId'] = '6258512a827ae3493855de82';
+      newAccount.appointment_type['businessId'] = businessId;
+      
       const apptType = await addApptType({
         variables: { ...newAccount.appointment_type },
       })
@@ -223,7 +226,8 @@ export default function Signup() {
       //--      4. ATTEMPT TO CREATE USER
       // console.log("//-- creating user...")
 
-      newAccount.user['businessId'] = '6258512a827ae3493855de82';
+      // newAccount.user['businessId'] = '6258512a827ae3493855de82';
+      newAccount.user['businessId'] = businessId;
       // console.log(newAccount.user)
       
       const userData  = await addUser({
@@ -250,8 +254,7 @@ export default function Signup() {
             variables: { ...loginData },
         }).
         then(results =>{
-          
-          Auth.login(results);
+          Auth.login(results.data.login);
         })
 
       })

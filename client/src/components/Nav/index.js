@@ -1,7 +1,10 @@
+//-- MODULES
 import React, { useEffect, useState } from 'react';
 import {capitalizeFirstLetter} from '../../utils/helpers';
-import Auth from '../../utils/authServices';
 import { Link } from 'react-router-dom';
+
+//--- AUTH
+import Auth from '../../utils/authServices';
 
 export default function Nav({ bobData, bob2 }) {
 
@@ -15,7 +18,6 @@ export default function Nav({ bobData, bob2 }) {
         event.preventDefault();
         Auth.logout();
     };
-
     
     //--------------------------------------------------------------------------
     //-- RETURN 
