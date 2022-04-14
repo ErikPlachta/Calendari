@@ -139,7 +139,7 @@ export default function Signup() {
     //-- 4. Final Form to submit so actual last step,here
     if(nextStepButton_id == "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
       // setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
-      createAccount(); //-- runs the mutations
+      createAppointment(); //-- runs the mutations
     }
 
     //-- 5. move to next step
@@ -155,9 +155,9 @@ export default function Signup() {
 
 
   //----------------------------------------------------------------------------
-  /* MUTATIONS TO CREATE BUSINESS, USER, AND APPOINTMENT_TYPE FOR BUSINESS */
+  /* Page Location and Logic */
 
-  const createAccount = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
+  const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When user information verified and submitted, update database with appointment data
     //-- mutations -> for reference
                       //--  const [addUser, { addUserError }] = useMutation(ADD_USER); 
@@ -166,14 +166,15 @@ export default function Signup() {
     //- -try to create new business, then new user
     try {
       
-      console.log("//-- Creating New Account..", newAccount)
+      console.log("//-- Creating New User", newAccount)
       
       
       //--      1. ATTEMPT TO CREATE BUSINESS
 
-      console.log("//-- creating business...", newAccount.business)
+      console.log("//-- creating business", newAccount.business)
+      console.log(newAccount.business)
 
-      const create = await addBusiness({
+      let businessData = await addBusiness({
         variables: { ...newAccount.business },
       })    
       .then(results=>{
@@ -182,41 +183,48 @@ export default function Signup() {
         console.log(results)
         console.log("//-- creating business completed!")
 
+
         //--      2. ADD businessId RESPONSE TO STATE
         console.log("//-- updating business_id value for each element that needs it...")
 
         const businessId = { 
           "businessId" : results.data.addBusiness._id  //-- extract business ID from response
         }
-        setNewAccount({...newAccount, business: businessId }) //-- update user to post
-        setNewAccount({...newAccount, user: businessId }) //-- update user to post
-        setNewAccount({...newAccount, appointment_type: businessId }) //-- update user to post
         
         console.log(`businessId`)
         console.log(businessId)
         console.log("//-- completed business_id value!")
       })
       
+      
+
+
+      // setNewAccount({...newAccount, user: businessId }) //-- update user to post
+
+
       //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
-      .then(()=>{
-        console.log("//-- creating appointment types", newAccount.appointment_type)
-        const { apptType } = addApptType({
+
+      console.log("//-- creating appointment types", newAccount.appointment_type)
+      console.log(newAccount.appointment_type)
+
+      const { apptType } = await addApptType({
         variables: { ...newAccount.apptType },
-        })
-        return apptType;
-      })
+      });
+      console.log("//-- creating business completed!")
 
-      // //--      4. ATTEMPT TO CREATE USER
-      // console.log("//-- creating user...")
-      // console.log(newAccount.user)
-      // const { userData } = await addUser({
-      //   variables: { ...newAccount.user },
-      // });
-      // console.log("//-- creating user completed!")
-      // console.log(userData)
+      //--      4. ATTEMPT TO CREATE USER
 
-      // //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-      // Auth.login(userData.login);
+      console.log("//-- creating user...")
+      console.log(newAccount.user)
+      const { userData } = await addUser({
+        variables: { ...newAccount.user },
+      });
+      console.log("//-- creating user completed!")
+      console.log(userData)
+
+
+      //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
+      Auth.login(userData.login);
     }
     
 
@@ -230,7 +238,6 @@ export default function Signup() {
       
       //-- PRINTING ERRORS
       console.log(`Catch Error: ${error}` )
-      console.log(error)
       console.log(`Database Errors:`)
       console.log(databaseErrors)
       errorPopup(error,databaseErrors) //-- THIS HAPPENS IN THE COMPONENT CONFIRMATION
