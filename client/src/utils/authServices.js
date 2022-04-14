@@ -65,6 +65,7 @@ class AuthService {
     const username      = user.username  ? user.username  : "NaN";
     const date_created  = user.date_created  ? user.date_created  : "NaN";
     const business_id   = user.business_id ? user.business_id : "NaN";
+    const brandName     = user.branName ? user.brandName : "NaN";
 
     const jwtData = {
       "id_token"      :  idToken,
@@ -72,7 +73,7 @@ class AuthService {
       "name"          : username,
       "date_created"  : date_created,
       "business_id"   : business_id,
-      'all'           : user,
+      "brandName"    : brandName
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 

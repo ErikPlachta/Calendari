@@ -186,8 +186,8 @@ export default function Signup() {
       //--      2. ADD businessId RESPONSE TO STATE
       .then(results=>{
         
-        businessId = results.data.addBusiness._id
-        brandName = results.data.addBusiness.brandName
+        businessId = results.data.addBusiness._id;
+        brandName = results.data.addBusiness.brandName;
         // const businessId = { 
         //   "businessId" : results.data.addBusiness._id  //-- extract business ID from response
         // }
