@@ -28,7 +28,7 @@ export default function UserSettings(userData) {
     //-- Grab ALL user data for business to store here
     if(userData){ 
       setUser({...userData.userData[0]})
-      console.log(user)
+      // console.log(user)
     };
 
     //TODO:: 04/10/22 #EP || Add the logged-in users data to update the user state.

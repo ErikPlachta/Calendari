@@ -59,11 +59,11 @@ export default function Nav({ bobData, bob2 }) {
             </nav>
             
             {/*TODO:: 04/11/22 #EP|| Remove once done testing  */}
-            <div style={{position: "absolute", top:"0", right: "0", display: "flex", margin: "auto", flexDirection: "row", justifyContent:"space-evenly", border: "2px solid red" }}>
+            {/* <div style={{position: "absolute", top:"0", right: "0", display: "flex", margin: "auto", flexDirection: "row", justifyContent:"space-evenly", border: "2px solid red" }}>
                 <h5>Placeholder Links for Testing 👉🏼</h5>
                 <a href="/s/0000-AAAA" alt="scheduler">schedule/0000-AAAA</a>
                 <a href="/b/0000-AAAA" alt="business">business/0000-AAAA</a>
-            </div>
+            </div> */}
         </header>
     )
 };

@@ -99,7 +99,7 @@ export default function Business() {
 
   const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
     
-    console.log("validating")
+    // console.log("validating")
 
     let validRequest = null;  //-- is a valid request to Business component was made, true.
 
@@ -111,32 +111,32 @@ export default function Business() {
      // 2. If No business_id, no business_name or invalid values found, exit
     else if(!business_id_or_brand_name){ 
       validRequest = false;
-      console.log("no params")
+      // console.log("no params")
     }
     
     // 3. If  valid business_id or business_name extract just the business ID
     // else if(!Businesses[business_id_or_brand_name]){ validRequest = false } 
     else if(!loading && !data){ 
       validRequest = false 
-      console.log("not loading no data")
+      // console.log("not loading no data")
     } 
    
     // 4. If the param received matches, and If Logged in, load content
     // else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){ 
     else if(data && Auth.isLoggedIn()){ 
 
-      console.log("//-- business/index.js | data and auth found. setting variable")
+      // console.log("//-- business/index.js | data and auth found. setting variable")
       // console.log(data)      
 
       // const businessData = Businesses[business_id_or_brand_name];
       const businessData = data.businessByBrandName;
       const businessUsersRaw = businessData.users;
       console.log(businessData.users)
-      const businessUsers = () =>{
-        return businessUsersRaw.map( user => {
-          return Users[user];
-        })
-      };
+      // const businessUsers = () =>{
+      //   return businessUsersRaw.map( user => {
+      //     return Users[user];
+      //   })
+      // };
       const appointmentsData = businessData.appointments;
       const appointmentTypesData = businessData.appointment_types;
       
