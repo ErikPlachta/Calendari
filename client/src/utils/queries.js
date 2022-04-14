@@ -36,8 +36,8 @@ export const QUERY_BUSINESS_CLIENTS = gql`
 `;
 // query business info and appointments
 export const QUERY_BUSINESS = gql`
-    query Business($brandName: String!) {
-        business(brand_name: $brandName) {
+    query BusinessByBrandName($brandName: String!) {
+        businessByBrandName(brand_name: $brandName) {
             _id
             name
             brand_name
