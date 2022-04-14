@@ -187,7 +187,7 @@ export default function Signup() {
       .then(results=>{
         
         businessId = results.data.addBusiness._id;
-        brandName = results.data.addBusiness.brandName;
+        brandName = results.data.addBusiness.brandName ? results.data.addBusiness.brandName : "NaN";
         // const businessId = { 
         //   "businessId" : results.data.addBusiness._id  //-- extract business ID from response
         // }
@@ -232,7 +232,7 @@ export default function Signup() {
       
       // newAccount.user['businessId'] = '6258512a827ae3493855de82';
       newAccount.user['businessId'] = businessId;
-      newAccount.use['brandName'] = brandName;
+      newAccount.user['brandName'] = brandName;
       // console.log(newAccount.user)
       
       const userData  = await addUser({

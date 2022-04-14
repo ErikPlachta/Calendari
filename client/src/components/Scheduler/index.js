@@ -4,7 +4,6 @@ import React, { useState, useEffect } from 'react';
 import { Redirect, useParams, Navigate } from "react-router-dom";
 import { useQuery } from '@apollo/client';
 
-
 //------------------------------------------------------------------------------
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
@@ -19,8 +18,7 @@ import Client from './components/Client';
 
 //------------------------------------------------------------------------------
 //-- ASSETS
-
-import { QUERY_BUSINESS } from '../../utils/queries';
+import  { QUERY_BUSINESS, QUERY_BUSINESSES, QUERY_BUSINESS_THOROUGH, QUERY_BUSINESS_THOROUGH_BY_ID } from '../../utils/queries';
 import { ADD_APPT } from '../../utils/mutations';
 const DB_Business = require('../../assets/json/business.json'); //-- Hardcoded data used to simulate the Database
 
@@ -62,9 +60,12 @@ export default function Scheduler() {
     }
   })
 
-  let business = {}; //-- The Specific Business response for the logged in user from API
-  //TODO:: 04/09/22 #EP || Get this to work as a state 
-  // let [business, setBusiness] = useState({}); //-- The Specific Business response for the logged in user from API
+  const [business, setBusiness] = useState({
+    // "config"        : {}, //-- placeholder for templates //TODO:: 04/10/22 #EP || Add these in Phase3
+    "businessData"    : "",
+    "appointmentsData" : "",
+    "appointmentTypesData" : ""
+  });
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on AppointmentTypes page
   const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
@@ -80,15 +81,6 @@ export default function Scheduler() {
   // query for business appt info
   const { loading, data, error } = useQuery( QUERY_BUSINESS, { variables: { brandName: business_id_or_brand_name } } );
 
-  if (loading) {
-    console.log("loading");
-    console.log(business_id_or_brand_name)
-  } else if (data) {
-    console.log(data)
-  } else {
-    console.log(error)
-  }
-
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( false );
 
@@ -101,35 +93,55 @@ export default function Scheduler() {
   const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
     let validRequest = null;
-    // 1. If No business_id, no business_name or invalid values found, exit
-    if(!business_id_or_brand_name){ validRequest = false }
     
-    // 2. If  valid business_id or business_name extract just the business ID
-    else if(!Businesses[business_id_or_brand_name]){ validRequest = false }
+    // 1. If No business_id, no business_name or invalid values found, exit
+    if(!business_id_or_brand_name){
+      validRequest = false 
+      //-- IF NOT valid request is TRUE, update title with Invalid Request
+      if(!validRequest){ document.title = `Calendari - Invalid Request`};
+    }
+    
+    // 2. If DONE loading but no data, FALSE
+    else if(!loading && !data){ 
+      validRequest = false 
+      //-- IF NOT valid request is TRUE, update title with Invalid Request
+      if(!validRequest){ document.title = `Calendari - Invalid Request`};
+      // console.log("not loading no data")
+    } 
+   
+    // 3. If not loading and there IS data
+    else if( !loading && data ){ 
+      
+      const businessData = data.businessByBrandName;
+      const appointmentsData = data.businessByBrandName.appointments;
+      const appointmentTypesData = data.businessByBrandName.appointment_types;
+      console.log(appointmentTypesData)
 
-    // 3. if the business ID or brand_name IS in the database, Load  Scheduler
-    else if(Businesses[business_id_or_brand_name]){
-      //-- 1. Update Scheduler state
-      setScheduler({...scheduler, businessData: Businesses[business_id_or_brand_name]});
-      //-- 2. Confirm it's a valid request
-      validRequest = true;
-      //-- 3. Set Scheduler state to true so page loads
-      setState(validRequest);
+      setBusiness({ //-- update Business Page state from query data
+        ...business,
+        "appointmentsData" : appointmentsData,
+        "appointmentTypesData" : appointmentTypesData,
+        "businessData": businessData,
+      });
+
+      validRequest = true; //-- was a valid request and completed
+      setState(validRequest); //-- Update overall Business Page state as TRUE to allow content to load
+
+      if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
     }
 
     // 4. Does appointment_type_id exist and if yes for this business //TODO:: 04/10/22 #EP || Actually have this do a query and check appointment_type_id
-
     return validRequest; //-- return results to update the title-bar accordingly
   }
   
-  useEffect(() => {
-    const validRequest = validateParams();
+  // useEffect(() => {
+  //   const validRequest = validateParams();
      //-- IF valid request is TRUE, update title with business name. 
-    if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
+    // if(validRequest){ document.title = `Calendari - {business.businessData.name} Scheduler`};
     
     //-- IF NOTE valid request is TRUE, update title with Invalid Request
-    if(!validRequest){ document.title = `Calendari - Invalid Request`};
-  },[]);
+  //   if(!validRequest){ document.title = `Calendari - Invalid Request`};
+  // },[]);
   
 
   //----------------------------------------------------------------------------
@@ -138,7 +150,7 @@ export default function Scheduler() {
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
     nextStepButton.preventDefault();
     
-    setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
+    // setAppointment_template(nextStepButton.target.id);  //-- set the template state variable state
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
     if(nextStepButton_id === "contact-submit"){ //-- if the contact-submit ( final button ) do API call
       setAppointment_confirmation_id(nextStepButton_id);
@@ -167,7 +179,14 @@ export default function Scheduler() {
   }
   
   const schedulerPages = { //-- INDEX of Each Page, which is a step of scheduler
-    1: <AppointmentTypes business={scheduler.businessData} business_id={scheduler.businessData._id} nextStep={nextStep}></AppointmentTypes>,
+    1: <AppointmentTypes
+          appointmentsData={business.appointmentsData} 
+          appointmentTypesData={business.appointmentTypesData} 
+          business={business.businessData}
+          business_id={business.businessData._id}
+          nextStep={nextStep}>    
+      </AppointmentTypes>
+    ,
     2: <DateTime nextStep={nextStep}/>,
     3: <Client nextStep={nextStep} createAppointment={createAppointment} appointment_template={appointment_template}/>,
     4: <Appointment appointment_confirmation_id={appointment_confirmation_id} />
@@ -177,33 +196,55 @@ export default function Scheduler() {
     Object.keys(schedulerPages).length
   );
 
+
+
+  if (loading) {
+      console.log("loading");
+      console.log(business_id_or_brand_name)
+    } else if (data) {
+      console.log(data)
+    } else {
+      console.log(error)
+    }
+
+  if(loading)return(<h1>loading</h1>)
+  //-- if Error or bad URl request, send to 404
+  if(error || !data.businessByBrandName || !data) return(<Navigate replace to="/404" />)
+
   //----------------------------------------------------------------------------
   /*TODO:: Browser Local Storage State checking - Should it load anything from local-storage vs default */
   //----------------------------------------------------------------------------
   //-- RETURN STATEMENTS
   return (
     <section className="page scheduler">
+      { !state ? validateParams() : "" }
       
       {/* contains the step location, back arrow, and has awareness of if local storage or not */}
-        {(() => {
-          switch(state) {    
-            case true:  return (
-              <section>
-                  
-                  {/* The current step / page in the scheduler */}
-                  {schedulerPages[step]}
-                  
-                  {/* The bottom status bar */}
-                  <ProgressBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
-              </section>
-            );
-            case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;
-            //TODO:: 04/10/22 #EP || Add component for loading
-            default:    return "Loading...";
-          }
-        })()}
+      {schedulerPages[step]}
+      <ProgressBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
     </section>
   )
 };
 
  
+
+
+
+
+// {(() => {
+//           switch(state) {    
+//             case true:  return (
+//               <section>
+                  
+//                   {/* The current step / page in the scheduler */}
+//                   {schedulerPages[step]}
+                  
+//                   {/* The bottom status bar */}
+//                   <ProgressBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
+//               </section>
+//             );
+//             case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;
+//             //TODO:: 04/10/22 #EP || Add component for loading
+//             default:    return "Loading...";
+//           }
+//         })()}

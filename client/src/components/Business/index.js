@@ -54,7 +54,7 @@ export default function Business() {
   /*  2. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
   //-- business brand_name, business_id , and also option for specific menu
   
-  const [Users, setUsers] = useState(DB_User); 
+  const [Users, setUsers] = useState(DB_User);
   
   //-- Business Page State
   const [business, setBusiness] = useState({
@@ -128,16 +128,11 @@ export default function Business() {
 
       // console.log("//-- business/index.js | data and auth found. setting variable")
       // console.log(data)      
-
       // const businessData = Businesses[business_id_or_brand_name];
+      
       const businessData = data.businessByBrandName;
       const businessUsersRaw = businessData.users;
-      // console.log(businessData.users)
-      // const businessUsers = () =>{
-      //   return businessUsersRaw.map( user => {
-      //     return Users[user];
-      //   })
-      // };
+
       const appointmentsData = businessData.appointments;
       const appointmentTypesData = businessData.appointment_types;
       

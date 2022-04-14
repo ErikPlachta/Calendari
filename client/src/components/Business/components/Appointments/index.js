@@ -78,7 +78,6 @@ const {
         console.log(e);
       }
     }
-
     
     const validateParams = async () => {  //-- Determine which params are sent in and update state accordingly
         
