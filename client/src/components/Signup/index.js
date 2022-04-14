@@ -242,9 +242,6 @@ export default function Signup() {
           _id     : results.data.addUser._id,
           password : newAccount.user.password,
           email : newAccount.user.email
-          // '_id'    : "62587b5b1780f46534ad64f6",
-          // password : "password",
-          // email : "eriks@erik.com"
         }
 
         
