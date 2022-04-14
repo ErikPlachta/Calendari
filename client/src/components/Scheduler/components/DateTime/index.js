@@ -25,7 +25,18 @@ export default function DateTime({nextStep}) {
             required
            />
           {/* <input id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY" /> */}
-          <label for="time">Enter a date for your appointment:</label>
+          <label for="time">Select a Start Time</label>
+          <input 
+            id="time"
+            type='time'
+            min="9:00 AM"
+            max="17:00 PM"
+            step="3600"
+            required
+          ></input>
+        </span>
+
+        <label for="time">Select an End Time</label>
           <input 
             id="time"
             type='time'

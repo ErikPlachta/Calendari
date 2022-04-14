@@ -66,8 +66,7 @@ export default function AppointmentType({
                 </h4>
                    <br/>
                   <span>
-                  
-                  {appointmentTypes[appointment].summary} 
+                    {appointmentTypes[appointment].summary} 
                   </span>
                   <span>
                     <button 
