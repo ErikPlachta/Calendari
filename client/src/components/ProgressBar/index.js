@@ -7,13 +7,14 @@ import React from 'react'
 import backArrow from '../../assets/svg/backward-front-gradient.svg';
 
 export default function ProgressBar({step, state, maxSteps, formerStep}) {
+  //-- Used by SignUp and Scheduler as a bott-bar for awareness of location in steps
   return (
     <section className="progressBar">
       <span id='progressBar'>
         {step > 1 
           ? [
-            <span className="progressBarBackArrow">
-          <img src={backArrow} alt='back-arrow' onClick={formerStep}/>
+            <span key="progress-bar-key-arrow-span" className="progressBarBackArrow">
+          <img key="progress-bar-key-arrow-img" src={backArrow} alt='back-arrow' onClick={formerStep}/>
         </span>
           ]
 

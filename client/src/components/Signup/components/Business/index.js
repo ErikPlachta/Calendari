@@ -62,7 +62,7 @@ export default function Business({nextStep}) {
                         placeholder='Enter your business name'
                         required
                         onChange={handleChange}
-                        value={businessDetails.client_name}
+                        value={businessDetails.name}
                       />
                     </span>
                     
@@ -75,8 +75,8 @@ export default function Business({nextStep}) {
                         type='text'
                         placeholder='Enter your business name'
                         // required
-                        value={businessDetails.brand_name}
                         onChange={handleChange}
+                        value={businessDetails.brand_name}
                       />
                       {/* <span>
                         https://calendari.day/s/<span id="brand-name-url"></span>

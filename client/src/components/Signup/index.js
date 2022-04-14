@@ -4,6 +4,9 @@ import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
 import { useQuery, useMutation } from '@apollo/client';
+
+import Auth from "../../utils/authServices"; //  if singup worked, this should happen
+
 //------------------------------------------------------------------------------
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
@@ -39,18 +42,20 @@ const {
 /* EXPORT FUNCTION - Signup */
 export default function Signup() {
 
-  useEffect(() => {
+  //-- MUTATIONS
+  const [addUser, { addUserError }] = useMutation(ADD_USER); 
+  const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
+
+  useEffect(() => { //-- updates the page title
     document.title = `Calendari - Signup`;
   },[]);
 
-
-  const [signupForm, setSignupForm] = useState({
+  //-- holds form submissions
+  const [signupForm, setSignupForm] = useState({ //-- when form submission happens, stores here via the nextStep function
     "business": {},
     "user"  : {}
   })
 
-
-  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query - if business name is unique checking   //TODO:: 04/12/22 #EP | Connect to GQL
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
     "user"      : "",   //-- the users data
     "business"  : "",   //-- the business data for the client //TODO:: 04/12/22 #EP | Connect to GQL
@@ -88,37 +93,40 @@ export default function Signup() {
   /* Page Location and Logic */
 
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
-    nextStepButton.preventDefault();
-    const results = nextStepButton.target;
-    const resultsLength = nextStepButton.target.length;
-    
-    const formResults = {}
-    for(let i = 0; i < resultsLength-1; i++ ){
-      formResults[results[i].id] = results[i].value;
-    }
 
+    nextStepButton.preventDefault();
+    const results = nextStepButton.target;              //-- used to build dict for mutation
+    const resultsLength = nextStepButton.target.length; //-- used to build the dict for mutation
+    const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button to verify submission
+    
+    //-----------------------------------
+    //-- 1. Update state for submissions
+
+    const formResults = {}  //--holds form submission results
+    for(let i = 0; i < resultsLength-1; i++ ){ //-- iterates through all results excluding the button
+      formResults[results[i].id] = results[i].value; //-- adds to dictionary
+    }
+    
+    //---------------------------------
+    //-- 2. form for business submitted
     if(nextStepButton.target.id == "business"){
       setNewAccount({...newAccount, "business"  : formResults })
     }
-    
+
+    //------------------------------
+    //-- 3.  form for user submitted
     if(nextStepButton.target.id == "user"){
       setNewAccount({...newAccount, "user"  : formResults })
     }
-
-    else{
-      console.log(newAccount)
-    }
-
-    // { results[i].id : results[i].value } 
-
-  
-  
     
-    const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
+    //------------------------------------------
+    //-- 4. Final Form to submit so actual last step,here
     if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
       // setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
-      createAppointment(appointment_confirmation_id); //TODO:: 04/10/22 #EP || post form data to database
+      createAppointment(); //-- runs the mutations
     }
+
+    //-- 5. move to next step
     else {
       setStep(step+1);
     }
@@ -132,18 +140,54 @@ export default function Signup() {
   //-- Client Input Template and Submitting Request //-- When Appointment is Verified, Submit it to API, and if success move to verification page
   const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When client information verified and submitted, update database with appointment data
+    //--  const [addUser, { addUserError }] = useMutation(ADD_USER); 
+    // const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
 
-    // 1. Validate data
-    // 2. Submit to database
-    // 3. Verify response
-    // 4. Approve re-route or message to UI
+    try {
+      
+      const { businessData } = await addBusiness({
+        variables: { ...newAccount.business },
+      });
+      
+      const { userData } = await addUser({
+        variables: { ...newAccount.user },
+      });
+
+
+      //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
+      // Auth.login(data.login);
+    }
+    
+    catch (error) { //-- Failure could be related to bad data, already used values, or no db connection
+      const databaseErrors = { //- hold errors to send down
+        'addBusinessErorr' : addBusinessError,
+        'addUserError'     : addUserError
+      }
+
+      errorPopup(error,databaseErrors) //-- THIS HAPPENS IN THE COMPONENT CONFIRMATION
+    }
     // return response;
   }
+
+
+  const errorPopup = (error, databaseErrors) => {  //-- if error, show msg
+     //-- Sends this to component Confirmation, and is used to notify on screen if database error
+     
+    if ((error.toString()).includes('Incorrect credentials')) {
+      
+      //-- Message for Incorrect Creds
+      document.getElementById("login-form-message").style.opacity="1";
+      document.getElementById("login-form-message").classList.remove('fade-out');
+      document.getElementById("login-form-message").classList.add('fade-in');
+    };
+  }
   
+  //----------------------------------------------------------------------------
+  //-- PAGE LOCATION / INDEX 
   const signupPages = { //-- INDEX of Each Page, which is a step of scheduler
     1: <Business nextStep={nextStep} />,
     2: <Client nextStep={nextStep}  />,
-    3: <Confirmation nextStep={nextStep} />
+    3: <Confirmation nextStep={nextStep} errorPopup={errorPopup} />
   };
 
   const [maxSteps, setMaxSteps] = useState( //-- Get the number of keys in the pages ( needs to be down here to function )

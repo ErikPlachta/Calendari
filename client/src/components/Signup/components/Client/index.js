@@ -18,13 +18,13 @@ export default function Client({nextStep}) {
   //-- reference variable for the captcha result response code
   const recaptchaRef = React.createRef();
   
-  const [userDetails, setUserDetails] = useState({
-    from_name: '',
-    to_name: 'Calendari',
-    from_phone: '',
-    message: '',
-    reply_to: '',
-    subject: '',
+  const [userDetails, setUserDetails] = useState({ //-- placeholder for emails later
+    name_first: '',
+    name_last: '',
+    phone:  '',
+    email: '',
+    username: '',
+    password: '',
     'g-recaptcha-response': '',
   });
 
@@ -95,7 +95,7 @@ export default function Client({nextStep}) {
                         // required
                         autoComplete='given-name'
                         onChange={handleChange}
-                        value={userDetails.client_name}
+                        value={userDetails.name_first}
                       />
                     </span>
 
@@ -110,7 +110,7 @@ export default function Client({nextStep}) {
                         // required
                         autoComplete='family-name'
                         onChange={handleChange}
-                        value={userDetails.client_name}
+                        value={userDetails.name_last}
                       />
                     </span>
 
@@ -129,6 +129,7 @@ export default function Client({nextStep}) {
                         // required
                         onKeyUp={onKeyUpPhone}
                         value={userDetails.phone}
+                        onChange={handleChange}
                       />
                     </span>
                     
@@ -143,7 +144,7 @@ export default function Client({nextStep}) {
                         // required
                         autoComplete="email"
                         onChange={handleChange}
-                        value={userDetails.reply_to}
+                        value={userDetails.email}
                       />
                     </span>
 
@@ -157,7 +158,7 @@ export default function Client({nextStep}) {
                         placeholder='username'
                         // required
                         onChange={handleChange}
-                        value={userDetails.client_name}
+                        value={userDetails.username}
                       />
                     </span>
 
