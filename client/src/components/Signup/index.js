@@ -112,13 +112,13 @@ export default function Signup() {
     
     //---------------------------------
     //-- 2. form for business submitted
-    if(nextStepButton.target.id === "business"){
+    if(nextStepButton.target.id == "business"){
       setNewAccount({...newAccount, "business"  : formResults })
     }
 
     //------------------------------
     //-- 3.  form for user submitted
-    if(nextStepButton.target.id === "user"){
+    if(nextStepButton.target.id == "user"){
       setNewAccount({...newAccount, "user"  : formResults })
     }
     
