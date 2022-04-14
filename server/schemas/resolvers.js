@@ -41,7 +41,7 @@ const resolvers = {
                 { $push: { users: user._id } },
                 { new: true, runValidators: true }
             );
-            console.log(user)
+            // console.log(user)
             return user;
         },
         //-- Login an existing user

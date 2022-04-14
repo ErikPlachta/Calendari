@@ -45,22 +45,17 @@ export default function Business() {
   //----------------------------------------------------------------------------
   /*  1. menu location awareness  - by default just the dashboard  */
   const [menuSelectLocation, setMenuSelectLocation] = useState(0);  //-- The current page
+  
 
   //----------------------------------------------------------------------------
   /*  2. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
   //-- business brand_name, business_id , and also option for specific menu
   const {business_id_or_brand_name, menuSelect} = useParams();
+  
   //-- Database Query
-  const { loading, data } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
-  // const { loading, data } = useQuery(QUERY_USER_APPTS, {
-  //   variables: {brandName: business_id_or_brand_name} 
-  // });
-  if(loading){
-    console.log("loading")
-  } else {
-    console.log(data.business.brand_name)
-  }
-    
+  const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
+
+  
 
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
@@ -77,8 +72,11 @@ export default function Business() {
   })
 
   //-- Verifying if requests are made properly or not
-  const [state, setState] = useState( false );
-
+  const [state, setState] = useState( loading ); //TODO:: 04/13/22 #EP | REROUTING
+  
+  
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS - Is user signed in, is business from query in database */
 
@@ -91,29 +89,44 @@ export default function Business() {
       validRequest = false;
       setState(validRequest)
     }
+     // 2. If No business_id, no business_name or invalid values found, exit
+    else if(!business_id_or_brand_name){ 
+      validRequest = false;
+      console.log("no params")
+    }
+    
+    // 3. If  valid business_id or business_name extract just the business ID
+    // else if(!Businesses[business_id_or_brand_name]){ validRequest = false } 
+    else if(!loading && !data){ 
+      validRequest = false 
+      console.log("not loading no data")
+    } 
+   
+    // 4. If the param received matches, and If Logged in, load content
+    // else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){ 
+    else if(data && Auth.isLoggedIn()){ 
 
-    else if(!business_id_or_brand_name){ validRequest = false; } // 2. If No business_id, no business_name or invalid values found, exit
-    else if(!Businesses[business_id_or_brand_name]){ validRequest = false } // 3. If  valid business_id or business_name extract just the business ID
-    else if(Businesses[business_id_or_brand_name] && Auth.isLoggedIn()){ // 4. If the param received matches, and If Logged in, load content
+      console.log("data and auth found")
+      console.log(data)      
 
-      //TODO:: 04/10/22 #EP || Need to simplify this massively.
-      const businessData = Businesses[business_id_or_brand_name];
-      const businessUsersRaw = Businesses[business_id_or_brand_name].Users;
+      // const businessData = Businesses[business_id_or_brand_name];
+      const businessData = data.business;
+      
+      const businessUsersRaw = data.business.users;
+      
       const businessUsers = () =>{
-        return Businesses[business_id_or_brand_name].Users.map( user => {
+        return businessUsersRaw.map( user => {
           return Users[user];
         })
       };
-      const usersClean = businessUsers();
-      const appointmentData = businessData.Appointment;
+      const appointmentData = businessData.appointments;
       
       setBusiness({ //-- update Business Page state from query data
         ...business,
         "appointmentData" : appointmentData,
         "businessData": businessData,
         "businessUsers" :  businessUsersRaw, 
-        //TODO:: 04/10/22 #EP || Know the Specific User here, or use JWT for that?
-        "userData"    : usersClean,
+        "userData"    : businessUsers,
       });
 
 
@@ -148,24 +161,37 @@ export default function Business() {
     return validRequest;
   }
    
+  //-- The ABOVE Function is what verifies IF/WHAT will Load on the page
+  //----------------------------------------------------------------------------
+  //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
   //-- Runs once, validates load state or directs the exit
 
-  useEffect( () => {
-    const validRequest = validateParams();
+  // useEffect(() => {
     
-    //-- IF valid request is TRUE, update title with business name. 
-    if(validRequest){ document.title = `Calendari - ${business.businessData.name}`};
     
-    //-- IF NOTE valid request is TRUE, update title with Invalid Request
-    if(!validRequest){ document.title = `Calendari - Invalid Request`};
-  },[]);
-
+  //   // if(loading){
+  //   //   console.log("loading..")
+  //   //   // setDatbaseNew(data.business);
+  //   // }else{
+  //   //   console.log(data)
+  //   //   // setDatbaseNew(data.business);
+  //   // }
+    
+  //   // const validRequest = validateParams();
+    
+  //   // //-- IF valid request is TRUE, update title with business name. 
+  //   // if(validRequest){ document.title = `Calendari - ${business.businessData.name}`};
+    
+  //   // //-- IF NOTE valid request is TRUE, update title with Invalid Request
+  //   // if(!validRequest){ document.title = `Calendari - Invalid Request`};
+  // },[]);
 
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
   const businessPages = { //-- This is an INDEX of available sub-components that can be rendered
     0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
+    // 0 : <Dashboard appointmentDetails={data.business.appointments} businessName={business.businessData.name} userName={business.userData.name} />,
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
     3 : <Appointments     appointmentData={business.appointmentData} />,
@@ -219,7 +245,7 @@ export default function Business() {
           );
 
           //-- if NOT loading, return loading, otherwise not logged in
-          case false: return loading ? "Loading..." : <Navigate replace to="/login" />
+          case false: return loading ? "Loading..." : "wanting to re-route away." // <Navigate replace to="/login" />
          
           default:    return "Loading...";  //TODO::04/10/22 #EP | Add loading element
         }
