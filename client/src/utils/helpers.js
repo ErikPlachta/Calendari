@@ -67,10 +67,15 @@ export function getDays(numberOfDays){
   
   // var startdate = "20.03.2014";
   // console.log(startDate,endDate,new_date)
-
   console.log(dateList);
+}
 
 
+
+
+
+export function dateFormatPicker(date){
+  return moment(date).format('YYYY-MM-DD');
 }
 
 
@@ -91,9 +96,7 @@ export function dateHourOfDay(date){
   return moment(date).format("ddd, hA"); 
 }
 
-export function dateFormatPicker(date){
-  return moment(date).format('YYYY-MM-DD');
-}
+
 //-- Send in raw JavaScript Date/Time Value from date.Now() and returns MM/DD/YYYY format
 export function dateFormat(date) {
   return moment(date).format('MM-DD-YYYY');

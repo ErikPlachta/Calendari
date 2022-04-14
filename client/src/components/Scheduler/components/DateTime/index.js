@@ -16,16 +16,23 @@ export default function DateTime({nextStep}) {
       <form className="appointmentCard appointmentCalendar"  onSubmit={nextStep}>
         <span className="form-element">
           <label for="date">Enter a date for your appointment:</label>
-          <input id='date' type="date" step="1" min={dateFormatPicker(Date.now())} />
+          <input 
+            id='date'
+            type="date"
+            step="1"
+            min={dateFormatPicker(Date.now())}
+            // max={dateFormatPicker( ) }
+            required
+           />
           {/* <input id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY" /> */}
           <label for="time">Enter a date for your appointment:</label>
           <input 
-                  id="time"
-                  type='time'
-                  min="9:00"
-                  max="17:00"
-                  step="3600"
-          
+            id="time"
+            type='time'
+            min="9:00 AM"
+            max="17:00 PM"
+            step="3600"
+            required
           ></input>
         </span>
         <span className='form-element'>
