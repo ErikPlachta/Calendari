@@ -3,6 +3,7 @@
 import React, { useState, useEffect } from 'react';
 import { Redirect, useParams } from "react-router-dom";
 import { useNavigate } from 'react-router-dom';
+import { useQuery, useMutation } from '@apollo/client';
 //------------------------------------------------------------------------------
 //-- PAGES
 import PageNotFound from '../../pages/PageNotFound';
@@ -13,6 +14,12 @@ import ProgressBar from '../../components/ProgressBar';
 import Client from './components/Client';
 import Business from './components/Business';
 import Confirmation from './components/Confirmation';
+
+//------------------------------------------------------------------------------
+//-- ASSETS
+//-- Hardcoded data used to simulate the Database
+import {ADD_USER, ADD_BUSINESS} from '../../utils/mutations';
+const DB_Business = require('../../assets/json/business.json'); //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 
 //------------------------------------------------------------------------------
 //-- Helpers
@@ -27,10 +34,6 @@ const {
   dateTimeFullLocal
 } = require('../../utils/helpers');
 
-//------------------------------------------------------------------------------
-//-- ASSETS
-//-- Hardcoded data used to simulate the Database
-const DB_Business = require('../../assets/json/business.json'); //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Signup */

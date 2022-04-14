@@ -118,6 +118,7 @@ export default function Login() {
                       onChange={handleChange}
                   />
                 </span>
+                
                 {/* USER PASSWORD */}
                 <span className="form-element">
                   <label htmlFor='password'>Password</label>

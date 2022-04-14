@@ -34,46 +34,6 @@ export default function Business({nextStep}) {
     setBusinessDetails({ ...businessDetails, [event.target.name]: event.target.value,  });
   };
 
-  //-- url update inline
-  // function onKeyUpUrl(event){
-  //   console.log.apply("hi")
-  //   // document.getElementById("brand-name-url")
-
-  // }
-
-  //-- phone validation
-  function onKeyUpPhone(event){
-
-    //-- if trying to erase, don't try to format
-    if(event.key === "Backspace" || event.key === 'Delete'){ return null;}
-     
-    //-- extract value
-     const phoneIn = event.target.value;
-     
-     //-- if nothing just exit
-     if(!phoneIn) return;
-
-    //-- clean it up  
-    const digits = phoneIn.replace(/\D/g, '');
-
-    //-- format it
-    const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
-    
-    //-- inline styling so red border until good.
-    var input = event.target;
-    var isError = ( (formattedPhone.length) < 13 );
-    var color =  (isError) ? "red" : "grey";
-    var borderWidth =  (isError)? "3px" : "1px"; 
-    input.style.borderColor = color;
-    input.style.borderWidth = borderWidth;
-     
-    //-- update ui input
-    event.target.value = formattedPhone;
-    //-- update data to send
-    businessDetails.from_phone = formattedPhone;
-    return null;
-  }
-
   // console.log(appointment_template)
   return (
     <section className="signupBusiness">
@@ -123,21 +83,6 @@ export default function Business({nextStep}) {
                       </span> */}
                     </span>
                     
-                    {/* BUSINESS PHONE NUMBER */}
-                    <span className="form-element">
-                      <label htmlFor="business-phone">Business Phone Number:</label>
-                      <input
-                        name="business_phone"
-                        id="business-phone"
-                        type="tel"
-                        aria-label="Please enter a valid phone number"
-                        placeholder="ex. (111)-111-1111"
-                        autoComplete='tel'
-                        onKeyUp={onKeyUpPhone}
-                        value={businessDetails.phone}
-                      />
-                    </span>
-
                     {/* Welcome Message */}
                     {/* <span>
                       <label htmlFor='business-welcome'>Welcome Message:</label>

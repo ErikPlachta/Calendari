@@ -23,7 +23,7 @@ import  { QUERY_BUSINESSES, QUERY_BUSINESS_THOROUGH, QUERY_BUSINESS_THOROUGH_BY_
 //-- Hardcoded data used to simulate the Database
 //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 const DB_User =     require('../../assets/json/user.json');
-const DB_Business = require('../../assets/json/business.json');
+// const DB_Business = require('../../assets/json/business.json');
 
 //------------------------------------------------------------------------------
 //-- HELPERS

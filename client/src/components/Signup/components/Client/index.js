@@ -28,6 +28,39 @@ export default function Client({nextStep}) {
     'g-recaptcha-response': '',
   });
 
+  //-- phone validation
+  function onKeyUpPhone(event){
+
+    //-- if trying to erase, don't try to format
+    if(event.key === "Backspace" || event.key === 'Delete'){ return null;}
+     
+    //-- extract value
+     const phoneIn = event.target.value;
+     
+     //-- if nothing just exit
+     if(!phoneIn) return;
+
+    //-- clean it up  
+    const digits = phoneIn.replace(/\D/g, '');
+
+    //-- format it
+    const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
+    
+    //-- inline styling so red border until good.
+    var input = event.target;
+    var isError = ( (formattedPhone.length) < 13 );
+    var color =  (isError) ? "red" : "grey";
+    var borderWidth =  (isError)? "3px" : "1px"; 
+    input.style.borderColor = color;
+    input.style.borderWidth = borderWidth;
+     
+    //-- update ui input
+    event.target.value = formattedPhone;
+    //-- update data to send
+    userDetails.from_phone = formattedPhone;
+    return null;
+  }
+
   //-- event listner on input
   const handleChange = (event) => {
     setUserDetails({ ...userDetails, [event.target.name]: event.target.value,  });
@@ -53,31 +86,93 @@ export default function Client({nextStep}) {
                     
                     {/* CLIENT NAME */}
                     <span className="form-element">
-                      <label htmlFor="client-name">Your Name</label>
+                      <label htmlFor="name_first">First Name</label>
                       <input
-                        name='from_name'
-                        id="client-name"
+                        name='name_first'
+                        id="name_first"
                         type='text'
-                        placeholder='Full Name'
+                        placeholder='First Name'
                         // required
                         autoComplete='given-name'
                         onChange={handleChange}
                         value={userDetails.client_name}
                       />
                     </span>
+
+                    {/* CLIENT NAME */}
+                    <span className="form-element">
+                      <label htmlFor="name_last">Last Name</label>
+                      <input
+                        name='name_last'
+                        id="name_last"
+                        type='text'
+                        placeholder='Last Name'
+                        // required
+                        autoComplete='family-name'
+                        onChange={handleChange}
+                        value={userDetails.client_name}
+                      />
+                    </span>
+
+                   {/* User PHONE NUMBER */}
+                   <span className="form-element">
+                      <label htmlFor="phone_number">Phone Number:</label>
+                      <input
+                        name="phone_number"
+                        id="phone_number"
+                        type="tel"
+                        aria-label="Please enter a valid phone number"
+                        placeholder="ex. (111)-111-1111"
+                        autoComplete='tel'
+                        minLength="13"
+                        maxLength="13"
+                        // required
+                        onKeyUp={onKeyUpPhone}
+                        value={userDetails.phone}
+                      />
+                    </span>
                     
                     {/* EMAIL ADDRESS */}
                     <span className="form-element">
-                      <label htmlFor="contact-email">Email Address</label>
+                      <label htmlFor="email">Email Address</label>
                       <input
-                        name="reply_to"
-                        id="contact-email"
+                        name="email"
+                        id="email"
                         type="email"
                         placeholder='your@email.com'
                         // required
                         autoComplete="email"
                         onChange={handleChange}
                         value={userDetails.reply_to}
+                      />
+                    </span>
+
+                     {/* USERNAME */}
+                     <span className="form-element">
+                      <label htmlFor="username">Username</label>
+                      <input
+                        name='username'
+                        id="username"
+                        type='text'
+                        placeholder='username'
+                        // required
+                        onChange={handleChange}
+                        value={userDetails.client_name}
+                      />
+                    </span>
+
+                    {/* USER PASSWORD */}
+                    <span className="form-element">
+                      <label htmlFor='password'>Password</label>
+                      <input
+                          placeholder="********"
+                          name="password"
+                          type="password"
+                          id="password"
+                          minLength="6"
+                          autoComplete='current-password'
+                          value={userDetails.password}
+                          onChange={handleChange}
                       />
                     </span>
 
