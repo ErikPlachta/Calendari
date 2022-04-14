@@ -607,6 +607,7 @@ table {
 /* the aside in the Business Page */
 .businessSidebar{
   /* border: 1px solid orangered; */
+  min-width: 14rem;
   flex: 1 20%;
   float: left;
   padding-top: 2rem;

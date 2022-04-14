@@ -82,7 +82,7 @@ export default function Signup() {
     
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
     if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
-      setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
+      // setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
       createAppointment(appointment_confirmation_id); //TODO:: 04/10/22 #EP || post form data to database
     }
     else {

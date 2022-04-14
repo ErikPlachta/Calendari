@@ -1,16 +1,4 @@
 import decode from 'jwt-decode';
-
-
-const makeApiCall = async user => {
-     
-}
-
-
-const makeLocalStorageCall = async user => {
-     
-}
-
-
 class AuthService {
   
   //-- Get token if user has one
@@ -23,7 +11,7 @@ class AuthService {
     const token = this.getToken();
     return !!token && !this.isTokenExpired(token); // handwaiving here
   }
-  
+
   isTokenExpired(token) {
     try {
       const decoded = decode(token);

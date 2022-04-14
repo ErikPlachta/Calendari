@@ -131,7 +131,7 @@ export default function Business() {
       // const businessData = Businesses[business_id_or_brand_name];
       const businessData = data.businessByBrandName;
       const businessUsersRaw = businessData.users;
-      console.log(businessData.users)
+      // console.log(businessData.users)
       // const businessUsers = () =>{
       //   return businessUsersRaw.map( user => {
       //     return Users[user];
