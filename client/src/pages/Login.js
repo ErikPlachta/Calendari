@@ -99,6 +99,10 @@ export default function Login() {
           case false:    return ( 
             <div className="signupInformation">
               <h2 alt="please login">Get Logged In</h2>
+              {/* Used to notify if login event failure */}
+              <h5 id="login-form-message" style={{opacity: "0"}}>
+                Invalid Credentials, please try again
+              </h5>
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
                 <span className="form-element">
@@ -140,10 +144,7 @@ export default function Login() {
                 <a href='/signup'>Don't have an account yet? Get Signed Up, here!</a>
               </p>
 
-              {/* Used to notify if login event failure */}
-              <h5 id="login-form-message" style={{opacity: "0"}}>
-                Invalid Credentials, please try again
-              </h5>
+              
               
             </div>
           )

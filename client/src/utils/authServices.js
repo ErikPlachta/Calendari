@@ -6,6 +6,12 @@ class AuthService {
     return decode(this.getToken());
   }
 
+  getBusinessId(){
+    let results = JSON.parse(localStorage.getItem('calendari'));
+    
+    return results.business_id
+  }
+
   // Checks if there is a saved token and it's still valid
   isLoggedIn() {
     const token = this.getToken();

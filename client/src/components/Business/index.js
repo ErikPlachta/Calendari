@@ -67,6 +67,7 @@ export default function Business() {
   
   //-- Database Query
   const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
+  // const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
 
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( false ); //TODO:: 04/13/22 #EP | REROUTING

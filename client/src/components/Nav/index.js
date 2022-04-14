@@ -9,6 +9,9 @@ export default function Nav({ bobData, bob2 }) {
     //-- ASSETS
     const [bobs, setBobs] = useState({bobData});//-- Path to BOB SVG Icons //TODO:: 04/13/22 #EP|| Delete?
 
+    const [business_id] = useState(Auth.getBusinessId())
+    
+
     //--------------------------------------------------------------------------
     //-- FUNCTIONS
     const logout = event => {
@@ -16,6 +19,7 @@ export default function Nav({ bobData, bob2 }) {
         Auth.logout();
     };
 
+    
     //--------------------------------------------------------------------------
     //-- RETURN 
     return (
@@ -42,8 +46,13 @@ export default function Nav({ bobData, bob2 }) {
                         //-- If logged in, show this
                         ? (<>
                             <li> <a href="/">Calendari</a> </li>
-                            <li><Link to="/business">My Business</Link></li>
-                            <li> <Link to="/business">My Scheduler</Link></li>
+                            <li>
+                                <Link 
+                                    to={"/business/"+business_id}>
+                                    Business
+                                </Link>
+                            </li>
+                            {/* <li> <Link to="/business">Scheduler</Link></li> */}
                             <li><a href="/" onClick={logout}> Logout </a> </li>
                             {/*TODO:: 04/11/22 #EP || Add Support page for if need help  */}
                             {/* <li>Support</li> */}
