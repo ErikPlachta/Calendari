@@ -17,7 +17,7 @@ import Appointments from './components/Appointments'; //-- Appointment Managemen
 //------------------------------------------------------------------------------
 //-- ASSETS
 import { useQuery, useMutation } from '@apollo/client';
-import  { QUERY_BUSINESSES, QUERY_BUSINESS_THOROUGH } from '../../utils/queries';
+import  { QUERY_BUSINESSES, QUERY_BUSINESS_THOROUGH, QUERY_BUSINESS_THOROUGH_BY_ID } from '../../utils/queries';
 // import  { QUERY_USER_APPTS } from '../../utils/queries';
 
 //-- Hardcoded data used to simulate the Database
@@ -47,27 +47,14 @@ export default function Business() {
   const [menuSelectLocation, setMenuSelectLocation] = useState(0);  //-- The current page
   
 
+  const {business_id_or_brand_name, menuSelect} = useParams();
   //----------------------------------------------------------------------------
   /*  2. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
   //-- business brand_name, business_id , and also option for specific menu
-  const {business_id_or_brand_name, menuSelect} = useParams();
   
   //-- Database Query
   const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
-
-  if(loading){
-    console.log("loading")
-  }
-  else{
-    console.log(data)
-  }
-  
-
-  //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
-  const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query   
   const [Users, setUsers] = useState(DB_User); 
-  // const user_id     = '0000-0000';
-  // const user     = Users[user_id];
 
   //-- Business Page State
   const [business, setBusiness] = useState({
@@ -75,19 +62,41 @@ export default function Business() {
     "userData"        : "",
     "businessData"    : "",
     "appointmentData" : ""
-  })
+  });
 
   //-- Verifying if requests are made properly or not
   const [state, setState] = useState( loading ); //TODO:: 04/13/22 #EP | REROUTING
   
+  const setPage = setPageButton => { //-- load based on selection
+    const menuChoice = setPageButton.target.id;
+    if(menuChoice === "aside-dashboard"){
+      setMenuSelectLocation(0)
+    }
+    // -- the aside menu that's always there with nav and business name
+    else if(menuChoice === "aside-my-settings"){
+      setMenuSelectLocation(1)
+    }
+    // 2 my-business
+    else if(menuChoice === "aside-my-business"){
+      setMenuSelectLocation(2)
+    }
+    // 3 my-Appointments
+    else if(menuChoice === "aside-my-appointments"){
+      setMenuSelectLocation(3)
+    }
+  };
+  
+
   
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS - Is user signed in, is business from query in database */
 
-  const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
+  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
     
+    console.log("validating")
+
     let validRequest = null;  //-- is a valid request to Business component was made, true.
 
     //1. if NOT logged in, state false
@@ -116,9 +125,11 @@ export default function Business() {
       console.log(data)      
 
       // const businessData = Businesses[business_id_or_brand_name];
-      const businessData = data.business;
+      const businessData = data.businessByBrandName;
+      const businessUsersRaw = data.businessByBrandName.users;
+      // const businessData = data.business;
+      // const businessUsersRaw = data.business.users;
       
-      const businessUsersRaw = data.business.users;
       
       const businessUsers = () =>{
         return businessUsersRaw.map( user => {
@@ -126,6 +137,7 @@ export default function Business() {
         })
       };
       const appointmentData = businessData.appointments;
+      console.log(appointmentData)
       
       setBusiness({ //-- update Business Page state from query data
         ...business,
@@ -134,7 +146,6 @@ export default function Business() {
         "businessUsers" :  businessUsersRaw, 
         "userData"    : businessUsers,
       });
-
 
       //-- IF a sub-page was requested in route, see if it should route to it
       if(menuSelect){
@@ -174,7 +185,7 @@ export default function Business() {
   //-- Runs once, validates load state or directs the exit
 
   // useEffect(() => {
-    
+    // setBusiness(data)
     
   //   // if(loading){
   //   //   console.log("loading..")
@@ -196,7 +207,10 @@ export default function Business() {
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
   const businessPages = { //-- This is an INDEX of available sub-components that can be rendered
-    0 : <Dashboard appointmentDetails={business.businessData.Appointment} businessName={business.businessData.name} userName={business.userData.name} />,
+    0 : <Dashboard  appointmentDetails={business.businessData.Appointment} 
+                    businessName={business.businessData.name}
+                    userName={business.userData.name} 
+      />,
     // 0 : <Dashboard appointmentDetails={data.business.appointments} businessName={business.businessData.name} userName={business.userData.name} />,
     1 : <UserSettings     userData={business.userData} />,
     2 : <BusinessSettings businessData={business.businessData} />,
@@ -204,58 +218,73 @@ export default function Business() {
     // 4: <AppointmentTypes appointmentTypeData={business.appointmentTypeData} />,
   };
 
-  const setPage = setPageButton => { //-- load based on selection
-    const menuChoice = setPageButton.target.id;
-    if(menuChoice === "aside-dashboard"){
-      setMenuSelectLocation(0)
-    }
-
-    else if(menuChoice === "aside-my-settings"){
-      setMenuSelectLocation(1)
-    }
-    // 2 my-business
-    else if(menuChoice === "aside-my-business"){
-      setMenuSelectLocation(2)
-    }
-    // 3 my-Appointments
-    else if(menuChoice === "aside-my-appointments"){
-      setMenuSelectLocation(3)
-    }
-  };
+  
   
 
   //----------------------------------------------------------------------------
   /* TODO:: 04/09/22 #EP || Browser Local Storage AND CURRENT STATE CHECKING State checking */
 
+
+    
   //----------------------------------------------------------------------------
-  //-- RETURN STATEMENTS
+  //-- STILL LOADING RETURN STATEMENTS
+
+  if(!Auth.isLoggedIn()) return(<Navigate replace to="/login" />)
+
+  if(loading)return(<h1>loading</h1>)
+
+  if(error)return(<h1>ERROR</h1>)
+  
+  //-- if bad URl request
+  if(!data.businessByBrandName || !data) return(<Navigate replace to="/404" />)
+  
+  console.log(data)
+
   return (
     <section className="page business">
-    
-      {/* This switch checks the state to determine if loading, bad request, or good request. If good, loads content. */}
-      {(() => {
-        switch(state) {    
-          
-          //-- Returns here if user is logged in and successful database request
-          case true:  return (
-            <section className="page business">
-              {/* Aside bar within the business page */}
-              <section className="businessAside">
-                <Aside setPage={setPage} businessName={business.businessData.name} userName={business.userData.name} />
-              </section>
-              {/* Main Content Area in Business Page */}
-              <section className="businessMain"> 
-                {businessPages[menuSelectLocation]}
-              </section>
-            </section>
-          );
+        {/* if state false, run check validateParams to read the payload and update properly */}
+        { !state ? validateParams()  : "Validated" }
+        {/* {!loading ? "done" : "LOADING..." } */}
+        {console.log(business)}
 
-          //-- if NOT loading, return loading, otherwise not logged in
-          case false: return loading ? "Loading..." : "wanting to re-route away." // <Navigate replace to="/login" />
-         
-          default:    return "Loading...";  //TODO::04/10/22 #EP | Add loading element
-        }
-    })()}
+        <section className="page business">
+          {/* Aside bar within the business page */}
+          <section className="businessAside">
+            <Aside  setPage={setPage}
+                    businessName={data.businessByBrandName.name} 
+                    userName={business.userData.name} />
+          </section>
+          {/* Main Content Area in Business Page */}
+          <section className="businessMain"> 
+            {businessPages[menuSelectLocation]}
+          </section>
+        </section>
     </section>
   )
 }
+
+
+// {(() => {
+  {/* This switch checks the state to determine if loading, bad request, or good request. If good, loads content. */}
+//   switch(state) {    
+    
+//     //-- Returns here if user is logged in and successful database request
+//     case true:  return (
+//       <section className="page business">
+//         {/* Aside bar within the business page */}
+//         <section className="businessAside">
+//           <Aside setPage={setPage} businessName={business.businessData.name} userName={business.userData.name} />
+//         </section>
+//         {/* Main Content Area in Business Page */}
+//         <section className="businessMain"> 
+//           {businessPages[menuSelectLocation]}
+//         </section>
+//       </section>
+//     );
+
+//     //-- if NOT loading, return loading, otherwise not logged in
+//     case false: return loading ? "Loading..." : "wanting to re-route away." // <Navigate replace to="/login" />
+   
+//     default:    return "Loading...";  //TODO::04/10/22 #EP | Add loading element
+//   }
+// })()}

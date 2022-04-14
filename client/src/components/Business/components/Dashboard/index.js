@@ -16,6 +16,8 @@ export default function Dashboard({appointmentDetails, businessName, userName}) 
     }
   })
 
+  console.log(appointmentDetails)
+
   const validateParams = async (appointmentData) => {  //-- Determine which params are sent in and update state accordingly
     // console.log(appointmentData)
 

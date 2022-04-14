@@ -23,7 +23,7 @@ const {
 /* EXPORT FUNCTION - User
   //TODO:: 04/10/22 #EP || Update this
 */export default function Appointments({appointmentData}) {
-
+    // console.log(appointmentData)
 
     const [appointments, setAppointments] = useState({});
 
