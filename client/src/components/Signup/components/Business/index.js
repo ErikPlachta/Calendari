@@ -44,7 +44,7 @@ export default function Business({nextStep}) {
           displayed on your public scheduler link.
         </p>
       </header>
-      <form id="business" className="signupCard" onSubmit={nextStep}>
+      <form id="business-form" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
@@ -54,10 +54,10 @@ export default function Business({nextStep}) {
                     
                     {/* BUSINESS NAME */}
                     <span className="form-element">
-                      <label htmlFor="business-name">Business Name:</label>
+                      <label htmlFor="name">Business Name:</label>
                       <input
-                        name='business_name'
-                        id="business-name"
+                        name='name'
+                        id="name"
                         type='text'
                         placeholder='Enter your business name'
                         required
@@ -68,15 +68,15 @@ export default function Business({nextStep}) {
                     
                     {/* BRAND_NAME */}
                     <span className="form-element">
-                      <label htmlFor="business-brand-name">Your URL Name:</label>
+                      <label htmlFor="brandName">Your URL Name:</label>
                       <input
-                        name='brand_name'
-                        id="business-brand-name"
+                        name='brandName'
+                        id="brandName"
                         type='text'
                         placeholder='Enter your business name'
                         // required
                         onChange={handleChange}
-                        value={businessDetails.brand_name}
+                        value={businessDetails.brandName}
                       />
                       {/* <span>
                         https://calendari.day/s/<span id="brand-name-url"></span>

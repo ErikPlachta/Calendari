@@ -13,7 +13,7 @@ const {
 
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
-export default function Client({nextStep}) {
+export default function User({nextStep}) {
 
   //-- reference variable for the captcha result response code
   const recaptchaRef = React.createRef();
@@ -78,7 +78,7 @@ export default function Client({nextStep}) {
           and manage your scheduler.
         </p>
       </header>
-      <form id="user" className="signupCard" onSubmit={nextStep}>
+      <form id="user-form" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){

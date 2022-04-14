@@ -14,7 +14,7 @@ import PageNotFound from '../../pages/PageNotFound';
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
 import ProgressBar from '../../components/ProgressBar';
-import Client from './components/Client';
+import User from './components/User';
 import Business from './components/Business';
 import Confirmation from './components/Confirmation';
 
@@ -112,19 +112,19 @@ export default function Signup() {
     
     //---------------------------------
     //-- 2. form for business submitted
-    if(nextStepButton.target.id == "business"){
+    if(nextStepButton.target.id == "business-form"){
       setNewAccount({...newAccount, "business"  : formResults })
     }
 
     //------------------------------
     //-- 3.  form for user submitted
-    if(nextStepButton.target.id == "user"){
+    if(nextStepButton.target.id == "user-form"){
       setNewAccount({...newAccount, "user"  : formResults })
     }
     
     //------------------------------------------
     //-- 4. Final Form to submit so actual last step,here
-    if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
+    if(nextStepButton_id == "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
       // setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
       createAppointment(); //-- runs the mutations
     }
@@ -242,7 +242,7 @@ export default function Signup() {
   //-- PAGE LOCATION / INDEX 
   const signupPages = { //-- INDEX of Each Page, which is a step of scheduler
     1: <Business nextStep={nextStep} />,
-    2: <Client nextStep={nextStep}  />,
+    2: <User nextStep={nextStep}  />,
     3: <Confirmation nextStep={nextStep} errorPopup={errorPopup} />
   };
 
