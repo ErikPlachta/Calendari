@@ -21,7 +21,7 @@ import Confirmation from './components/Confirmation';
 //------------------------------------------------------------------------------
 //-- ASSETS
 //-- Hardcoded data used to simulate the Database
-import {ADD_USER, ADD_BUSINESS, ADD_APPT_TYPE, LOGIN_USER} from '../../utils/mutations';
+import {ADD_USER, ADD_BUSINESS, ADD_APPT_TYPE, LOGIN_USER } from '../../utils/mutations';
 const DB_Business = require('../../assets/json/business.json'); //TODO:: 04/05/22 #EP|| Make GraphQL Connections here
 
 //------------------------------------------------------------------------------
@@ -46,6 +46,7 @@ export default function Signup() {
   const [addUser, { addUserError }] = useMutation(ADD_USER); 
   const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
   const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE);
+
   const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
 
   useEffect(() => { //-- updates the page title
@@ -64,6 +65,7 @@ export default function Signup() {
     },
     "user"  : {
       "businessId"  : '',
+      "brandName"   : '',
       "nameFirst" : '',
       "nameLast"  : '',
       "email" : '',
@@ -169,7 +171,7 @@ export default function Signup() {
     //- -try to create new business, then new user
     try {
       var businessId= "NaN"; //-- to be defined at time of biz creation
-
+      var brandName = 'NaN';
       
 
       console.log("//-- Creating New Account..", newAccount)
@@ -185,6 +187,7 @@ export default function Signup() {
       .then(results=>{
         
         businessId = results.data.addBusiness._id
+        brandName = results.data.addBusiness.brandName
         // const businessId = { 
         //   "businessId" : results.data.addBusiness._id  //-- extract business ID from response
         // }
@@ -226,8 +229,10 @@ export default function Signup() {
       //--      4. ATTEMPT TO CREATE USER
       // console.log("//-- creating user...")
 
+      
       // newAccount.user['businessId'] = '6258512a827ae3493855de82';
       newAccount.user['businessId'] = businessId;
+      newAccount.use['brandName'] = brandName;
       // console.log(newAccount.user)
       
       const userData  = await addUser({

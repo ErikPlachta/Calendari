@@ -1,4 +1,6 @@
 import decode from 'jwt-decode';
+
+
 class AuthService {
   
   //-- Get token if user has one
@@ -49,6 +51,8 @@ class AuthService {
   login(dataLogin) {
     // Saves user token to localStorage
     // localStorage.setItem('id_token', idToken);    
+
+
 
     //-- extracting JWT token
     const idToken       = dataLogin.token ? dataLogin.token : "NaN";

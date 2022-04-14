@@ -82,6 +82,7 @@ export default function Scheduler() {
 
   if (loading) {
     console.log("loading");
+    console.log(business_id_or_brand_name)
   } else if (data) {
     console.log(data)
   } else {

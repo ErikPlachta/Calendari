@@ -47,11 +47,16 @@ export default function Nav({ bobData, bob2 }) {
                             <li> <a href="/">Calendari</a> </li>
                             <li>
                                 <Link 
-                                    to={"/business/"+Auth.getBusinessId()}>
+                                    to={"/b/"+Auth.getBusinessId()}>
                                     Business
                                 </Link>
                             </li>
-                            <li> <Link to="/business">Scheduler</Link></li>
+                            <li>
+                                <Link 
+                                    to={"/s/"+Auth.getBusinessId()}>
+                                        Scheduler
+                                </Link>
+                            </li>
                             <li><a href="/" onClick={logout}> Logout </a> </li>
                             {/*TODO:: 04/11/22 #EP || Add Support page for if need help  */}
                             {/* <li>Support</li> */}
