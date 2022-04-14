@@ -20,7 +20,8 @@ export default function DateTimePicker() {
                 switch(state) {    
                     case true:  return (
                     <section>
-                        {dateTimePickerLocation[step]}
+                        {dateTimePickerLocation[1]}
+                        {dateTimePickerLocation[2]}
                     </section>
                     );
                     // case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;

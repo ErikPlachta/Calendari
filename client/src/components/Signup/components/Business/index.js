@@ -20,7 +20,7 @@ export default function Business({nextStep}) {
   
   const [businessDetails, setBusinessDetails] = useState({
     business_name: '',
-    business_brand_name: '',
+    brand_name: '',
     to_name: 'Calendari',
     from_phone: '',
     message: '',
@@ -33,6 +33,13 @@ export default function Business({nextStep}) {
   const handleChange = (event) => {
     setBusinessDetails({ ...businessDetails, [event.target.name]: event.target.value,  });
   };
+
+  //-- url update inline
+  // function onKeyUpUrl(event){
+  //   console.log.apply("hi")
+  //   // document.getElementById("brand-name-url")
+
+  // }
 
   //-- phone validation
   function onKeyUpPhone(event){
@@ -93,7 +100,7 @@ export default function Business({nextStep}) {
                         id="business-name"
                         type='text'
                         placeholder='Enter your business name'
-                        // required
+                        required
                         onChange={handleChange}
                         value={businessDetails.client_name}
                       />
@@ -103,17 +110,17 @@ export default function Business({nextStep}) {
                     <span className="form-element">
                       <label htmlFor="business-brand-name">Your URL Name:</label>
                       <input
-                        name='business_name'
-                        id="business-name"
+                        name='brand_name'
+                        id="business-brand-name"
                         type='text'
                         placeholder='Enter your business name'
                         // required
                         onChange={handleChange}
-                        value={businessDetails.client_name}
+                        value={businessDetails.brand_name}
                       />
-                      <span>
-                        https://calendari.day/s/{businessDetails.business_brand_name}
-                      </span>
+                      {/* <span>
+                        https://calendari.day/s/<span id="brand-name-url"></span>
+                      </span> */}
                     </span>
                     
                     {/* BUSINESS PHONE NUMBER */}
@@ -137,7 +144,7 @@ export default function Business({nextStep}) {
                     </span>
 
                     {/* SUBMIT BUTTON */}
-                    <span class="form-element"> 
+                    <span className="form-element"> 
                       <button type="submit" id="contact-submit" value="Next">Next</button>
                     </span>
 

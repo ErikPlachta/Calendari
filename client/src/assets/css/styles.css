@@ -273,6 +273,7 @@ input:focus-visible{
 }
 
 /* When hovering input or text-area, add deeper shadow */
+input[type="tel"]:hover,
 input[type="phone"]:hover,
 input[type="email"]:hover,
 input[type="text"]:hover,
