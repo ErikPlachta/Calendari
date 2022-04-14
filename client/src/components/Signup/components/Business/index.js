@@ -84,7 +84,7 @@ export default function Business({nextStep}) {
           displayed on your public scheduler link.
         </p>
       </header>
-      <form id="clientContactForm" className="signupCard" onSubmit={nextStep}>
+      <form id="business" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
@@ -115,8 +115,8 @@ export default function Business({nextStep}) {
                         type='text'
                         placeholder='Enter your business name'
                         // required
-                        onChange={handleChange}
                         value={businessDetails.brand_name}
+                        onChange={handleChange}
                       />
                       {/* <span>
                         https://calendari.day/s/<span id="brand-name-url"></span>
@@ -134,14 +134,15 @@ export default function Business({nextStep}) {
                         placeholder="ex. (111)-111-1111"
                         autoComplete='tel'
                         onKeyUp={onKeyUpPhone}
+                        value={businessDetails.phone}
                       />
                     </span>
 
                     {/* Welcome Message */}
-                    <span>
+                    {/* <span>
                       <label htmlFor='business-welcome'>Welcome Message:</label>
                       <textarea  id='business-welcome' rows="10" />
-                    </span>
+                    </span> */}
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 

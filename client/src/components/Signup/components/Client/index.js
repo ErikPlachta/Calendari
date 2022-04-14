@@ -43,7 +43,7 @@ export default function Client({nextStep}) {
           and manage your scheduler.
         </p>
       </header>
-      <form id="clientContactForm" className="signupCard" onSubmit={nextStep}>
+      <form id="user" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
@@ -82,7 +82,7 @@ export default function Client({nextStep}) {
                     </span>
 
                     {/* SUBMIT BUTTON */}
-                    <span class="form-element"> 
+                    <span className="form-element"> 
                       <button type="submit" id="contact-submit" value="Next">Next</button>
                     </span>
 

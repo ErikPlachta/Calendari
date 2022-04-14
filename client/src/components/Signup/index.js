@@ -40,10 +40,17 @@ export default function Signup() {
     document.title = `Calendari - Signup`;
   },[]);
 
+
+  const [signupForm, setSignupForm] = useState({
+    "business": {},
+    "user"  : {}
+  })
+
+
   const [Businesses, setBusinesses] = useState(DB_Business); //-- simulating Graph QL query - if business name is unique checking   //TODO:: 04/12/22 #EP | Connect to GQL
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
-    "userData"      : "",   //-- the users data
-    "businessData"  : "",   //-- the business data for the client //TODO:: 04/12/22 #EP | Connect to GQL
+    "user"      : "",   //-- the users data
+    "business"  : "",   //-- the business data for the client //TODO:: 04/12/22 #EP | Connect to GQL
   })
 
   // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
@@ -79,6 +86,30 @@ export default function Signup() {
 
   const nextStep = nextStepButton => { //-- Move to the next step until LAST step
     nextStepButton.preventDefault();
+    const results = nextStepButton.target;
+    const resultsLength = nextStepButton.target.length;
+    
+    const formResults = {}
+    for(let i = 0; i < resultsLength-1; i++ ){
+      formResults[results[i].id] = results[i].value;
+    }
+
+    if(nextStepButton.target.id == "business"){
+      setNewAccount({...newAccount, "business"  : formResults })
+    }
+    
+    if(nextStepButton.target.id == "user"){
+      setNewAccount({...newAccount, "user"  : formResults })
+    }
+
+    else{
+      console.log(newAccount)
+    }
+
+    // { results[i].id : results[i].value } 
+
+  
+  
     
     const nextStepButton_id = nextStepButton.target.id; //-- grab ID of selected button
     if(nextStepButton_id === "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
@@ -108,7 +139,7 @@ export default function Signup() {
   
   const signupPages = { //-- INDEX of Each Page, which is a step of scheduler
     1: <Business nextStep={nextStep} />,
-    2: <Client nextStep={nextStep} />,
+    2: <Client nextStep={nextStep}  />,
     3: <Confirmation nextStep={nextStep} />
   };
 
@@ -141,3 +172,4 @@ export default function Signup() {
     </section>
   )
 };
+

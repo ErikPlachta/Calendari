@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Date from './components/Date';
 import Time from './components/Time';
+import {} from '../../utils/helpers'
 
 export default function DateTimePicker() {
 
@@ -20,8 +21,15 @@ export default function DateTimePicker() {
                 switch(state) {    
                     case true:  return (
                     <section>
-                        {dateTimePickerLocation[1]}
-                        {dateTimePickerLocation[2]}
+                        {/* {dateTimePickerLocation[1]}
+                        {dateTimePickerLocation[2]} */}
+                        <label for="datetime">Enter a date and time for your appointment:</label>
+                        <input 
+                                id="datetime"
+                                type='datetime-local'
+                                min={get}
+                        
+                        ></input>
                     </section>
                     );
                     // case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;
