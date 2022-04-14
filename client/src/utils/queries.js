@@ -71,8 +71,8 @@ export const QUERY_BUSINESS = gql`
 `;
 // query ALL business info, including appt types, appts, and users - by brand name
 export const QUERY_BUSINESS_THOROUGH = gql`
-    query Business($brandName: String!) {
-        business(brand_name: $brandName) {
+    query businessByBrandName($brandName: String!) {
+        businessByBrandName(brand_name: $brandName) {
             _id
             name
             brand_name

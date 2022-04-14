@@ -55,6 +55,12 @@ export default function Business() {
   //-- Database Query
   const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
 
+  if(loading){
+    console.log("loading")
+  }
+  else{
+    console.log(data)
+  }
   
 
   //TODO:: 05/09/22 #EP || useState(DB_Business) to be replaced with GraphQL Query
