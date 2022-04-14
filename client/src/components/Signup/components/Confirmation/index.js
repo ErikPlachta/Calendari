@@ -37,7 +37,7 @@ export default function Confirmtion({nextStep, errorPop}) {
     message: '',
     reply_to: '',
     subject: '',
-    'g-recaptcha-response': '',
+    gRecaptchaResponse: '',
   });
 
   //-- event listner on input

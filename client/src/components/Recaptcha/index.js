@@ -22,7 +22,8 @@ export default function Recaptcha(formDetails) {
             <ReCAPTCHA
                 ref={recaptchaRef}
                 sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                onChange={e => (formDetails['g-recaptcha-response']=e)}
+                value=''
+                // onChange={e => (console.log(e))}
             />
     </span>
   )

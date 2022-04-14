@@ -134,7 +134,7 @@ export default function Login() {
                   />
                 </span>
                 {/* RECAPTCHA */}
-                <Recaptcha formDetails={formDetails} />
+                <Recaptcha formDetails={formDetails}  />
                 {/* SUBMIT BUTTON */}
                 <button>Login</button>
               </form>
