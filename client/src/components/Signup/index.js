@@ -207,9 +207,9 @@ export default function Signup() {
      
     // if ((error.toString()).includes('Incorrect credentials')) {
       
-    document.getElementById("login-form-message").style.opacity="1";
-    document.getElementById("login-form-message").classList.remove('fade-out');
-    document.getElementById("login-form-message").classList.add('fade-in');
+    // document.getElementById("login-form-message").style.opacity="1";
+    // document.getElementById("login-form-message").classList.remove('fade-out');
+    // document.getElementById("login-form-message").classList.add('fade-in');
     // //-- blank out error
     // document.getElementById("signup-form-message").classList.add('fade-out');
     // document.getElementById("signup-form-message").style.opacity="0";
