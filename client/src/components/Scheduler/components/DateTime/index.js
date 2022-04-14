@@ -27,22 +27,21 @@ export default function DateTime({nextStep}) {
           {/* <input id="date1" size="60" type="date" format="MM/DD/YYYY" placeholder="MM/DD/YYYY" /> */}
           <label for="time">Select a Start Time</label>
           <input 
-            id="time"
+            id="time-start"
             type='time'
             min="9:00 AM"
             max="17:00 PM"
-            step="3600"
+            // step="3600"
             required
           ></input>
-        </span>
-
-        <label for="time">Select an End Time</label>
+          {/* end time */}
+          <label for="time">Select an End Time</label>
           <input 
-            id="time"
+            id="time-end"
             type='time'
             min="9:00 AM"
             max="17:00 PM"
-            step="3600"
+            // step="3600"
             required
           ></input>
         </span>
