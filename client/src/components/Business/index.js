@@ -42,6 +42,8 @@ const {
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - Business URL PARAMS: (business_id_or_name) The business they're signing in with. */
 export default function Business() {
+
+  
   //----------------------------------------------------------------------------
   /*  1. menu location awareness  - by default just the dashboard  */
   const [menuSelectLocation, setMenuSelectLocation] = useState(0);  //-- The current page
@@ -52,10 +54,8 @@ export default function Business() {
   /*  2. LOAD PROPER BUSINESS NAME ACCORDINGLY    */
   //-- business brand_name, business_id , and also option for specific menu
   
-  //-- Database Query
-  const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
   const [Users, setUsers] = useState(DB_User); 
-
+  
   //-- Business Page State
   const [business, setBusiness] = useState({
     // "config"        : {}, //-- placeholder for templates //TODO:: 04/10/22 #EP || Add these in Phase3
@@ -63,10 +63,15 @@ export default function Business() {
     "businessData"    : "",
     "appointmentData" : ""
   });
+  
+  //-- Database Query
+  const { loading, data, error } = useQuery( QUERY_BUSINESS_THOROUGH, { variables: { brandName: business_id_or_brand_name } } );
 
   //-- Verifying if requests are made properly or not
-  const [state, setState] = useState( loading ); //TODO:: 04/13/22 #EP | REROUTING
+  const [state, setState] = useState( false ); //TODO:: 04/13/22 #EP | REROUTING
   
+  if(!Auth.isLoggedIn()) return(<Navigate replace to="/login" />)
+
   const setPage = setPageButton => { //-- load based on selection
     const menuChoice = setPageButton.target.id;
     if(menuChoice === "aside-dashboard"){
@@ -219,33 +224,23 @@ export default function Business() {
   };
 
   
-  
-
   //----------------------------------------------------------------------------
   /* TODO:: 04/09/22 #EP || Browser Local Storage AND CURRENT STATE CHECKING State checking */
-
-
-    
   //----------------------------------------------------------------------------
   //-- STILL LOADING RETURN STATEMENTS
 
-  if(!Auth.isLoggedIn()) return(<Navigate replace to="/login" />)
 
   if(loading)return(<h1>loading</h1>)
-
-  if(error)return(<h1>ERROR</h1>)
+  //-- if Error or bad URl request, send to 404
+  if(error || !data.businessByBrandName || !data) return(<Navigate replace to="/404" />)
   
-  //-- if bad URl request
-  if(!data.businessByBrandName || !data) return(<Navigate replace to="/404" />)
-  
-  console.log(data)
+  // console.log(data)
 
   return (
     <section className="page business">
         {/* if state false, run check validateParams to read the payload and update properly */}
-        { !state ? validateParams()  : "Validated" }
+        { !state ? validateParams()  : "" }
         {/* {!loading ? "done" : "LOADING..." } */}
-        {console.log(business)}
 
         <section className="page business">
           {/* Aside bar within the business page */}
