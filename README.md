@@ -11,7 +11,8 @@ This application was built using GraphQL with a Node and Express server on the b
 ## What does it look like?
 Please see a screenshot and a gif below of the home page of our application:
 
-![calendariGif](client/public/calendariHomeGIF.gif)
+![calendari](https://user-images.githubusercontent.com/17508965/163516050-13f5f82f-8802-4ea9-899a-196af43b87a1.gif)
+
 
 ## Where can I find this?
 You can either visit our github repository (https://github.com/ErikPlachta/Calendari) or visit the deployed application at https://calendari-day.herokuapp.com/
@@ -59,7 +60,3 @@ An online appointment management system that automates Creating, Updating, Cance
 10. Optionally, you can also do the following
      1. Configure your User Account
      12. Create new Users
-
-
-
-![calendari](https://user-images.githubusercontent.com/17508965/163516050-13f5f82f-8802-4ea9-899a-196af43b87a1.gif)
