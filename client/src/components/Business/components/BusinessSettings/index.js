@@ -3,9 +3,11 @@
 import React, { useEffect, useState } from 'react';
 import PageNotFound from '../../../../pages/PageNotFound';
 import { capitalizeFirstLetter } from '../../../../utils/helpers';
+import { useMutation } from '@apollo/client';
 
+import { UPDATE_BUSINESS } from '../../../../utils/mutations';
 
-
+import Auth from '../../../../utils/authServices';
 //------------------------------------------------------------------------------
 /* EXPORT FUNCTION - User
   //TODO:: 04/10/22 #EP || Update this
@@ -55,8 +57,31 @@ export default function BusinessSettings(businessData) {
     setBusiness({ ...business, [event.target.name]: event.target.value, });
   };
 
-  const updateUser = (event) => {
+  // update business info
+  const [updateBusiness] = useMutation(UPDATE_BUSINESS);
+  const updateBusinessHandler = async (event) => {
     event.preventDefault();
+
+    setBusiness({ ...business, [event.target.name]: event.target.value, });
+
+    //retrieve business Id from logged in user info
+    const businessId = await Auth.getBusinessId();
+
+    console.log(businessId);
+    console.log(business);
+
+    try {
+      await updateBusiness({
+        variables: { 
+          id: businessId,
+          name: business.name,
+          brand: business.brand_name
+        }
+      });
+      console.log("success!")
+    } catch (e) {
+      console.error(e);
+    }
 
   }
 
@@ -97,11 +122,10 @@ export default function BusinessSettings(businessData) {
                           }
                         </span>
                         
-
                       </div> */}
                       
                       {/* for user to update their settings */}
-                      <form id="businessSettingsForm" className="clientContactForm" onSubmit={updateUser}>
+                      <form id="businessSettingsForm" className="clientContactForm" onSubmit={updateBusinessHandler}>
                         
                         {/* Name of the Business */}
                         <span className="form-element">
@@ -126,6 +150,7 @@ export default function BusinessSettings(businessData) {
                             type='text'
                             placeholder="Enter your Business Brand Name"
                             required
+                            readOnly
                             onChange={handleChange}
                             value={business.brand_name}
                           />

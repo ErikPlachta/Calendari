@@ -1,3 +1,4 @@
+
 const { User, Business, Appointment, Appointment_Type, Appointment_Field } = require('../models');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/authServices');
@@ -108,6 +109,15 @@ const resolvers = {
                 { new: true, runValidators: true }
             )
             return appt;
+        },
+        // update business brand or name
+        updateBusiness: async (parent, args) => {
+            const business = await Business.findByIdAndUpdate(
+                { _id: args._id},
+                args,
+                { new: true, runValidators: true }
+            )
+            return business;
         },
         // update user email or phone number
         updateUser: async (parent, args) => {
