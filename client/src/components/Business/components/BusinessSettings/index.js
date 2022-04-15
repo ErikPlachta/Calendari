@@ -62,8 +62,6 @@ export default function BusinessSettings(businessData) {
   const updateBusinessHandler = async (event) => {
     event.preventDefault();
 
-    setBusiness({ ...business, [event.target.name]: event.target.value, });
-
     //retrieve business Id from logged in user info
     const businessId = await Auth.getBusinessId();
 
@@ -150,9 +148,9 @@ export default function BusinessSettings(businessData) {
                             type='text'
                             placeholder="Enter your Business Brand Name"
                             required
-                            readOnly
                             onChange={handleChange}
                             value={business.brand_name}
+                            readOnly
                           />
                         </span>
 

@@ -76,8 +76,8 @@ export const UPDATE_BUSINESS = gql`
 `;
 // update user info
 export const UPDATE_USER = gql`
-    mutation UpdateUser($id: ID!, $phoneNumber: String, $email: String) {
-        updateUser(_id: $id, phone_number: $phoneNumber, email: $email ) {
+    mutation UpdateUser($id: ID!, $nameFirst: String, $nameLast: String) {
+        updateUser(_id: $id, name_first: $nameFirst, name_last: $nameLast ) {
             _id
             name_first
             name_last

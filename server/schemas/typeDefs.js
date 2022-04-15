@@ -104,8 +104,8 @@ const typeDefs = gql`
         ): Business
         updateUser(
             _id: ID!
-            email: String,
-            phone_number: String
+            name_first: String,
+            name_last: String
         ): User
         updateAppt(
             _id: ID!

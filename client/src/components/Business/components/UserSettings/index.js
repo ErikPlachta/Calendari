@@ -2,7 +2,9 @@
 //-- MODULES
 import React, { useEffect, useState } from 'react';
 import PageNotFound from '../../../../pages/PageNotFound';
+import { useMutation } from '@apollo/client';
 
+import { UPDATE_USER } from '../../../../utils/mutations';
 //-- JWT Auth
 import Auth from "../../../../utils/authServices";
 
@@ -77,9 +79,29 @@ export default function UserSettings(userData) {
     setUser({ ...user, [event.target.name]: event.target.value,  });
   };
 
-  const updateUser = (event) => {
+  // update user info
+  const [updateUser] = useMutation(UPDATE_USER);
+  const updateUserHandler = async (event) => {
     event.preventDefault();
-    // then next
+
+    //retrieve business Id from logged in user info
+    const userId = await Auth.getCurrentUser().data._id;
+
+    console.log(userId);
+    console.log(user);
+
+    try {
+      await updateUser({
+        variables: { 
+          id: userId,
+          nameFirst: user.name_first,
+          nameLast: user.name_last
+        }
+      });
+      console.log("success!")
+    } catch (e) {
+      console.error(e);
+    }
 
   }
 
@@ -125,7 +147,7 @@ export default function UserSettings(userData) {
                       </div> */}
                       
                       {/* for user to update their settings */}
-                      <form id="userSettingsForm" className="clientContactForm" onSubmit={updateUser}>
+                      <form id="userSettingsForm" className="clientContactForm" onSubmit={updateUserHandler}>
                         {/* User First Name */}
                         <span className="form-element">
                           <label htmlFor="user-name_first">First Name</label>
@@ -168,6 +190,7 @@ export default function UserSettings(userData) {
                             autoComplete="email"
                             onChange={handleChange}
                             value={user.email}
+                            readOnly
                           />
                         </span>
                         <span className="form-element">
