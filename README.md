@@ -59,3 +59,7 @@ An online appointment management system that automates Creating, Updating, Cance
 10. Optionally, you can also do the following
      1. Configure your User Account
      12. Create new Users
+
+
+
+![calendari](https://user-images.githubusercontent.com/17508965/163516050-13f5f82f-8802-4ea9-899a-196af43b87a1.gif)
