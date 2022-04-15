@@ -83,7 +83,7 @@ export default function Client({nextStep, createAppointment, appointment_templat
           switch("appointment_template"){
             // case "appointment_template": return "appointment_template";
             default: return (
-              <form className="clientContactForm"  onSubmit={nextStep}>  
+              <form className="client-details"  onSubmit={nextStep}>  
                 {/* CLIENT NAME */}
                 <span className="form-element">
                   <label htmlFor="client-name">Your Name</label>
