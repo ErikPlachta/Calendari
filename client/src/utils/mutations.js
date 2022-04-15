@@ -1,3 +1,4 @@
+
 import { gql } from '@apollo/client';
 
 // create new business
@@ -16,6 +17,7 @@ export const ADD_USER = gql`
         addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId) {
             _id
             business_id
+            busienss_brand_name
             name_first
             name_last
             username
@@ -62,10 +64,20 @@ export const ADD_APPT = gql`
         }
     }
 `;
+// update business info
+export const UPDATE_BUSINESS = gql`
+        mutation UpdateBusiness($id: ID!, $brandName: String, $name: String) {
+            updateBusiness(_id: $id, brand_name: $brandName, name: $name) {
+                _id
+                name
+                brand_name
+            }
+    }
+`;
 // update user info
 export const UPDATE_USER = gql`
-    mutation UpdateUser($id: ID!, $phoneNumber: String, $email: String) {
-        updateUser(_id: $id, phone_number: $phoneNumber, email: $email ) {
+    mutation UpdateUser($id: ID!, $nameFirst: String, $nameLast: String) {
+        updateUser(_id: $id, name_first: $nameFirst, name_last: $nameLast ) {
             _id
             name_first
             name_last
