@@ -1,0 +1,1094 @@
+@import url("./animations.css");
+/*------------------------------------------------------------------------------
+  ROOT VARIABLES
+*/
+:root {
+
+
+  --fade-purple-dark: rgb(167, 169, 208); /*#a7a9d0*/
+  --fade-purple-light: rgb(230, 237, 241); /*#e6edf1*/
+
+  --theme-l-gp_0: rgb(245, 244, 255);
+  --theme-l-gp_1: rgb(223, 216, 220); /* #dfd8dc; */
+  --theme-l-gp_2: rgb(211, 211, 220); /*#d3d3dc;*/
+
+  --theme_lighter-purple: #6200b3;
+  --theme_darker-purple: #3b0086;
+  --theme_deep-purple: rgb(25, 0, 57);
+  --theme_purple_black: rgb(2, 0, 6);
+  --theme_plum: #290628;
+  --theme_light-pink: #ffa0fd;
+  --theme_darker-pink: rgb(233, 82, 222); /*#e952de;*/
+
+  --light-pink: #ffa0fd;
+  --darker-pink: #e952de;
+  --lighter-purple: #6200b3;
+  --darker-purple: #3b0086;
+  --plum: #290628;
+
+
+  /* BASIC COLOR SCHEMA PLACEHOLDER */
+  /*TODO:: 04/05/2022 #EP || Define this color schema */
+  --C00: #fcfdff;
+  --C01: #FEFEFE;
+  --C02: rgb(249, 250, 251); /* #f9fafb */
+  --C03: rgb(243, 244, 246); /* #f3f4f6 */
+  --C04: rgb(249, 251, 252); /* f9fbfc */
+  --C05: #666;
+  --C06: #555;
+  --C07: #444;
+  --C08: #333;
+  --C09: #222;
+  --C10: #111;
+
+
+  /* BOX-SHADOWS */
+  /*TODO:: 04/05/2022 #EP || Convert to pixels */
+  --bs-01: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
+  --bs-01_focus: 0rem 0rem .5rem rgba(0 0 0 / .3), 0 0 .2rem rgba(0 0 0 / .3);
+  
+  /* basic shadow on SVG */
+  --ds-01: drop-shadow(1px 1px .4px rgb(41 24 60 / .11));
+  --ds-01_focus: drop-shadow(0 0px 0px rgb(0 0 0 / 0));
+  
+  /* buttons */
+  --ds-02:       drop-shadow(1px 1px 0px rgb(41 24 60 / .11)); 
+  --ds-02_focus: drop-shadow(1px 1px 1px rgb(41 24 60 / .3));
+  
+
+  /* SHADOWS */
+  --s_black_a25: 0 0 .5rem var(--a_01);
+  --s_black_2px_a25: 2px solid var(--a_01);
+
+
+  /* BORDERS */
+  /*TODO:: 04/05/2022 #EP || Define these colors */
+  --b_10: 1px solid var(--c_10); /* default border and font color */ 
+  --b_10_focus: 2px solid var(--c_10); /* secondary for more obvious accents hovered */
+  --b_02: 1px solid var(--c_02); /* secondary for more obvious accents */
+  --b_02_focus: 1px solid var(--c_02); /* secondary for more obvious accents */
+  --b_03: 1px solid var(--c_03); /* secondary for more obvious accents */
+  --b_03_focus: 2px solid var(--c_03); /* secondary for more obvious accents hovered */
+
+
+  /* RADIUS */
+  /*TODO:: 04/05/2022 #EP || Verify these  */
+  --br_primary: .5rem;
+  --br_secondary: .25rem;
+
+
+  /* ALPHAS */
+  /*TODO:: 04/05/2022 #EP || Verify these */
+  --a_01: rgba(0 0 0 /.25);
+  --a_02: rgba(0 0 0 /.5);
+}
+
+/*------------------------------------------------------------------------------
+/* FONTS */
+@font-face {
+  font-family: 'Sunny Spells';
+  src: url('../font/SunnyspellsRegular.otf');
+  
+}
+
+/*------------------------------------------------------------------------------
+  UNIVERSAL ELEMENTS
+*/
+
+/* Keeps elements from overflowing containers */
+*, *::before, *::after {  
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html{
+
+  scroll-behavior: smooth;
+
+  /* Disabling user selection 
+    //TODO: 04/05/22 #EP | Commented out for now left for reference
+  */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+
+    padding: 0;
+    margin: 0;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: var(--darker-purple);
+}
+
+main{
+  /* adding this to prevent weird overflow of data issues */
+  
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Default Inline Code Styling */
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+/* Default Hyperlink Styling */
+a {
+
+  /* --a-light: var(--body_fc_light);
+  --a-dark: var(--body_fc_dark);
+  color: var(--body_fc_dark); */
+  text-decoration: none;
+}
+
+h1,h2,h3,h4,h5{
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  margin:0;
+}
+
+h1 {
+  font-family: 'Lato', sans-serif;
+  font-weight:300;
+  letter-spacing: 2px;
+  font-size:48px;
+}
+
+h3 {
+  color: var(--plum);
+}
+
+p {
+  font-family: 'Lato', sans-serif;
+  letter-spacing: 1px;
+  font-size:16px;
+  color: var(--plum);
+}
+
+li {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+  font-size: 14px;
+}
+
+/* Default Text Area Styling */
+
+textarea {
+  border-radius: var(--br_primary);
+  padding: 4px;
+  border: 1px solid var(--plum);
+  outline: none;
+  overflow: auto;
+  /*resize: none; /*remove the resize handle on the bottom right */
+  /* width: 90%; */
+}
+
+textarea:focus,
+textarea::-moz-focus-inner {
+  outline: 10px solid red;
+  border: 1px solid green;
+  display: hidden;
+}
+
+
+/* Default Select Element Styling */
+select {
+  /* Removing all default formatting */
+  appearance: none;
+  outline: 0;
+  border: 0;
+  box-shadow: none;
+  background-image: none;
+
+  /* Personal Styling */
+  width: 100%; /* Fit's the parent */
+  padding: 0 1em;
+
+  background-color: var(--theme_light-pink);
+  cursor: pointer;
+  border-radius: var(--br_primary);
+}
+
+/* Remove IE arrow */
+select::-ms-expand {
+  display: none;
+}
+/* Custom Select wrapper */
+.select {
+  position: relative;
+  display: flex;
+  /* width: 20em; */
+  height: 3em;
+  border-radius: .25em;
+  overflow: hidden;
+}
+/* Arrow */
+.select::after {
+  content: '\25BC';
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 1em;
+  background-color: red;
+  transition: .25s all ease;
+  pointer-events: none;
+}
+/* Transition */
+.select:hover::after {
+  color: #f39c12;
+}
+
+
+/* SHARED ANIMATIONS BETWEEN INPUT AND TEXTAREAS */
+textarea:is(:placeholder-shown),
+input:is(:placeholder-shown){
+  opacity: .5;
+  transition: ease-in-out 200ms;
+}
+
+/* When content within input or textarea or selected so focused  */
+textarea:not(:placeholder-shown),
+textarea:focus-visible,
+input:not(:placeholder-shown),
+input:focus-visible{
+  opacity: 1;
+  box-shadow: rgba(82, 0, 190, 0.2) 0px -1px 4px 0px inset;
+}
+
+/* When hovering input or text-area, add deeper shadow */
+input[type="tel"]:hover,
+input[type="phone"]:hover,
+input[type="email"]:hover,
+input[type="text"]:hover,
+input[type="checkbox"]:hover,
+textarea:hover{
+  opacity: 1;
+  box-shadow: rgba(82, 0, 190, 0.2) 0px -2px 6px 0px inset;
+  cursor: pointer;
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* FORMS */
+
+/* #clientContactForm, */
+.clientContact,
+.clientContactForm,
+.clientContactForm span {
+  
+  display: flex;
+  flex-direction: column;
+  flex-direction: wrap;
+  justify-content: center;
+}
+
+.clientContact,
+.clientContactForm{
+  grid-gap: 1rem;
+  width: 80%;
+  margin: auto;
+}
+
+/* Inside a form - the labels/input value combos */
+.form-element{
+  display: flex;
+  flex-direction: column;
+  flex: 100%;
+}
+
+button,
+.form-element button,
+.form-element input[type|='submit']{
+  background-color:var(--darker-pink);
+  color: white;
+}
+
+button,
+.form-element button,
+.form-element input{
+  border-radius: var(--br_secondary);
+  font-size:16px;
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+  min-height: 2rem; /* make sure always big enough to click */
+  padding: 10px; /* make sure there is good spacing around the inside */ 
+  transition: ease-in-out 200ms;
+  filter: var(--ds-02);
+  
+}
+
+button:hover,
+.form-element button:hover,
+.form-element input[type|='submit']:hover{
+  cursor: pointer;
+  filter: var(--ds-02_focus) 
+          brightness(105%)
+  ;
+}
+
+
+/* Inside the form element, making sure all content is full fit */
+.form-element button,
+.form-element input,
+.form-element label,
+.form-element textarea,
+.form-element select {
+  flex: 100%;
+  width: 100%;
+}
+
+.form-element#recaptcha{ 
+  transition: ease-in-out 200ms;
+  align-items: center; /* into center of DIV element */
+}
+
+
+/*-------------------------------------------WAVE---------------------------*/
+@import url(//fonts.googleapis.com/css?family=Lato:300:400);
+
+.inner-header {
+  font-family: 'Lato', sans-serif;
+  font-weight:bolder;
+  height:50px;
+  width:100%;
+  margin: 0px;
+  padding-top: 90px;
+}
+
+.flex { /*Flexbox for containers*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.waves {
+  position:relative;
+  width: 100%;
+  height:15vh;
+  margin-bottom:-7px; /*Fix for safari gap*/
+  min-height:100px;
+  max-height:300px;
+  margin-top:3rem;
+}
+
+.content {
+  position:relative;
+  height:90px;
+  text-align:center;
+  background-color: white;
+}
+
+/* Animation */
+.parallax > use {
+  animation: move-forever 25s cubic-bezier(.55,.5,.45,.5)     infinite;
+}
+.parallax > use:nth-child(1) {
+  animation-delay: -2s;
+  animation-duration: 7s;
+}
+.parallax > use:nth-child(2) {
+  animation-delay: -3s;
+  animation-duration: 10s;
+}
+.parallax > use:nth-child(3) {
+  animation-delay: -4s;
+  animation-duration: 13s;
+}
+.parallax > use:nth-child(4) {
+  animation-delay: -5s;
+  animation-duration: 20s;
+}
+@keyframes move-forever {
+  0% {
+   transform: translate3d(-90px,0,0);
+  }
+  100% { 
+    transform: translate3d(85px,0,0);
+  }
+}
+/*Shrinking for mobile*/
+@media (max-width: 768px) {
+  .waves {
+    height:40px;
+    min-height:40px;
+  }
+  .content {
+    height:30vh;
+  }
+  h1 {
+    font-size:24px;
+  }
+}
+
+
+
+
+/*------------------------------------------------------------------------------
+  CUSTOM UNIVERSAL CLASSES - Shared by Everything
+*/
+
+.page {
+  width: 100%;
+  /* border: 1px solid red; */
+  background-color: var(--darker-purple);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex-wrap: wrap;
+  grid-gap: 1rem;
+  
+}
+
+.container{
+  flex: 5 60%;
+  /* width: 100%; */
+  /* min-width: 80%; */
+}
+
+
+.containerResults {
+  background-color: var(--darker-pink);
+}
+
+/* --------------------------HOME--------------------------------------- */
+.appointmentCard,
+.signupCard,
+.homeInformation {
+  flex: 100%;
+  width: 70%;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  padding: 1rem;
+  margin: 20px auto 0px auto;
+  line-height: 2;
+  background-color: white;
+}
+
+.appointmentCalendar{
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  align-items: center;
+}
+
+
+table {
+  width: 100%;
+  border-radius: var(--br_primary);
+  border-color: none;
+  border-collapse: collapse;
+ }
+ 
+ th {
+   height: 30px;
+   text-align: center;
+   font-weight:bold;
+   font-size: 1.2rem;
+   
+   padding: 10px;
+   border: 2px solid var(--plum);
+   color:#e952de;
+   background-color: var(--theme);
+   border-radius: var(--br_primary);
+ }
+ 
+ tr, td {
+   height:20px;
+   text-align: center;
+   padding: 10px;
+   border: 2px solid var(--plum);
+ }
+ 
+ .tableContainer {
+   margin: auto;
+   border-radius: var(--br_primary);
+   
+ }
+ 
+ .slogan {
+   text-align:center;
+   vertical-align: middle;
+   background: 
+              linear-gradient(180deg, 
+              var(--theme_plum) 0%,
+              var(--darker-purple) 5%,
+              var(--lighter-purple) 30%,
+              var(--darker-pink) 70%,
+              var(--light-pink) 100%);
+   color:white;   
+  padding-top:0;
+ }
+ 
+ #sloganForHero {
+   z-index:99999;
+   color: white;
+   font-size: 3rem;
+   font-weight: 400;
+   filter: var(--ds-02_focus);
+ }
+
+
+ .pinkh2 {
+   font-family: 'Lato', sans-serif;
+   font-weight:bolder;
+   letter-spacing: 2px;
+   color: var(--darker-pink);
+   text-align: center;
+   margin-top:40px;
+   margin-bottom:20px;
+ }
+
+
+/* ------------------------SIGNUP----------------------------- */
+
+/* .signup{ } */
+
+.signupInformation input {
+  border-top-style: hidden;
+  border-right-style: hidden;
+  border-left-style: hidden;
+  border-bottom-style:groove;
+  padding-bottom: 5px;
+}
+
+.signupInformation form{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  grid-gap: 1rem;
+}
+
+.signupInformation form textarea{
+  flex: 100%;
+  width: 100%;
+}
+
+
+
+
+/*------------------------------------------------------------------------------
+  BUSINESS PAGE SPECIFIC CLASSES
+*/
+
+.business {
+  flex-direction: row;
+  justify-content: flex-start;
+  flex-shrink: auto;
+}
+
+.business header{
+  width: 100%;
+  margin: 0 1rem;
+}
+
+
+.business header p {
+  color: var(--light-pink);
+}
+
+.scheduleAppointment,
+.signupBusiness{
+  /* display: flex; */
+  padding: 0 2rem;
+  flex: 100%;
+  /* margin: auto; */
+  /* justify-content: center; */
+}
+
+/* the aside in the Business Page */
+.businessSidebar{
+  /* border: 1px solid orangered; */
+  min-width: 14rem;
+  flex: 1 20%;
+  float: left;
+  padding-top: 2rem;
+  padding-left: 0;
+  border-right: 1px solid var(--a_01);
+  height: 100%;
+}
+
+/* the UL in the Aside in the Business Page */
+.businessSidebarList,
+.businessSidebarList li
+{
+  margin-top: .1rem;
+  padding-left: 0; /* gets rid of spacing on the side normally on a list */
+  list-style: none; /* hide bullets */
+  line-height: 2;
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: ease-in-out 200ms;
+  border-bottom: 1px solid transparent;
+  overflow: hidden;
+}
+
+/* The little + symbol on the aside after the text */
+.businessSidebarList li::after
+{
+  content: '\002B';
+  float: right;
+  margin-right: 1rem;
+  transition: ease-in-out 100ms;
+  font-weight: 500;
+}
+
+/* When hovering the LI in the aside, effects */
+.businessSidebarList li:hover
+{
+  cursor: pointer;
+  border-top: .5px solid var(--darker-purple);
+  border-bottom: 2px solid var(--darker-purple);
+  transform: scale(1.05);
+}
+.businessSidebarList li:hover::after{
+  color: var(--darker-purple);
+  font-weight:900;
+  transform: rotate(-90deg) translateY(-20px);
+  /* transform: translateX(-30px); */
+}
+
+.businessMain{
+  flex: 60%;
+  padding: 0;
+  margin: auto;
+}
+
+.businessSidebarList,
+.businessContainerResults{
+  background-color: var(--C00);
+}
+
+/* TODO:: 04/12/22 #EP || Review and use or delete
+.configure{}
+.dayOfWeek{}
+.user {}
+.calendar {} */
+
+
+/* Used for ALL business configuration menus ?  */
+.businessContainerResults,
+.containerResults {
+  margin: 2rem;
+  padding: 2rem;
+  border-radius: 25px;
+  box-shadow: 0px 1px 1px 1px rgba(0,0,0,0.2),
+              2px 2px 10px -3px rgba(0,0,0,0.1);
+}
+
+
+
+/*------------------------------------------------------------------------------
+SHARED STYLES -> Business, Scheduler, PageNotFound, SignUp
+*/
+
+.pageNotFound,
+.signupInformation {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 100%;
+  min-width: 40%;
+  max-width: 70%; /* Updated this to 70% to match the homepage styling */
+  height: auto;
+  box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
+  border-radius: var(--br_primary);
+  /* padding: 70px; /* 04/13/22 #EP || Commented this out because it was chaos on all pages */
+  margin: 30px auto auto auto;
+  line-height: 2;
+  background-color: white;
+}
+
+
+.appointment header h3,
+.business header h2,
+.business header h3 {
+  color: var(--darker-pink);
+}
+
+.scheduledAppointments{
+  display: flex;
+  flex-direction: column;
+  /* width: 80%; */
+}
+
+.scheduleAppointment h3,
+.signupBusiness h3{
+  /* padding: 0 2rem; */
+  margin-top:30px;
+  margin-bottom: 0px;
+  color: var(--darker-pink);
+}
+
+.scheduleAppointment p,
+.signupBusiness p {
+  margin-top:0px;
+  padding-top:0px;
+  color: white;
+}
+
+.scheduleAppointment p,
+.scheduleAppointment h3,
+.signupBusiness p,
+.signupBusiness h3{
+  /* padding: 0 2rem; */
+  text-align: justify;
+  line-height: 1.6;
+  max-width: 80%;
+  margin: auto;
+}
+
+/*------------------------------------------------------------------------------
+  SIGN UP STYLING
+*/
+
+.signupBusiness textarea {
+  font-family: 'Lato', sans-serif;
+  color: var(--plum);
+}
+
+.signupUser h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupUser p {
+  color: white;
+}
+
+.signupConfirmation h3{
+  padding-top:15px;
+  color: var(--darker-pink)
+}
+
+.signupConfirmation p {
+  color: white;
+}
+
+
+/*------------------------------------------------------------------------------
+  DateTimePicker Component Specific */
+
+
+.dateTimePicker button,
+.react-calendar__tile .react-calendar__month-view__days__day{
+  background-color: var(--c01);
+  color: var(--theme_plum);
+  padding: 0;
+}
+
+/*------------------------------------------------------------------------------
+  SCHEDULER AND APPOINTMENT PAGE SPECIFIC CLASSES */
+
+.progressBar{
+  bottom: 44px;
+  box-shadow: 0 -1px 3px 0px var(--a_01);
+  margin: auto;
+  padding: .2rem 2rem;
+  width: 100%;
+  position: fixed;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  background-color: var(--theme-l-gp_0);
+  color: var(--C10);
+  opacity: 1;
+  z-index: 1000;
+}
+
+.progressBarBackArrow img{
+  margin-right: 1rem;
+  width: 30px;
+  transition: ease-in-out 200ms;
+  animation: slide-right-footerProgressBar 200ms;
+}
+.progressBarBackArrow img:hover {
+  filter: (var(--ds-01)) brightness(105%);
+  cursor: pointer;
+}
+.progressBarBackArrow img:active { /* on click remove shadow */
+  filter: (var(--ds-01_focus));
+}
+.progressBarBackArrow img,
+.progressBarLabel {
+  margin: auto;
+  vertical-align: center;
+  height: 100%;
+}
+
+#progressBar{ /* the progress-bar itself has this unique styling */
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex: 100%;
+  grid-gap: 1rem;
+}
+progress.progressBarStep{
+  flex: 80%;
+  margin: auto;
+  font-size: 1.5rem;
+}
+
+/*------------------------------------------------------------------------------
+  APPOINTMENT CONFIRMATION AND VERIFICATION PAGE
+*/
+
+.appointmentConfirmation {
+  background-color: var(--darker-pink);
+  color: white;
+  margin: 40px 80px;
+  padding: 80px;
+  border-radius: 30px;
+}
+
+.appointmentConfirmation li {
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+/*----------------------------------------------------------------------------*/
+/* SHARED CARD STYLING */
+
+.businessDashboard,
+.appointment_type_card{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: justify;
+  line-height: 1.6;
+  background-color: white;
+  /* position: relative; */
+  /* padding: 1rem; */
+}
+
+/*----------------------------------------------------------------------------*/
+/* APPOINTMENT TYPE CARDS */
+
+.appointment_type_card_summary{
+  flex: 100%;
+  /* text-align: center; */
+  font-size: 1.1em;
+  margin-bottom: 1rem;
+
+}
+
+.appointment_type_card_description{
+  flex: 100%;
+  text-align: justify;
+  width: 100%;
+  box-shadow: inset 0px 1px 1px 1px rgba(0,0,0,0.2),
+              inset 2px 2px 10px -3px rgba(0,0,0,0.1);
+  border-radius: var(--br_primary);
+  padding: 1rem;
+  margin: auto;
+  line-height: 2;
+}
+
+.appointment_type_card_details{
+  /* margin-top: 1rem;   */
+  padding-top: .5rem;
+}
+
+.appointment_type_card_details_subject {
+  padding: 0;
+  margin:0;
+}
+/* TODO:: 04/12/22 #EP | Use or delete
+.appointment_type_card_details ul {
+  
+} */
+
+.appointment_type_button{
+  float: right;
+
+  /* to make button float on bottom right */
+  /* bottom: 1rem;
+  right: 1rem;
+  position: absolute; */
+
+}
+
+/*------------------------------------------------------------------------------
+  HEADER / NAVIGATION
+*/
+
+/* SPA HEADER holds nav, brand-name and logo */
+.navHeader {
+  padding: 0 2rem 0.001rem 0; 
+  margin: 0;
+  background-color: white;
+}
+
+.navHeader a {
+  color: black;
+  font-weight: bold;
+  filter: var(--ds-01_focus);
+  transition: ease-in-out 200ms;
+}
+
+.navHeader a:hover {
+  filter: var(--ds-02_focus);
+}
+
+/* .navheader a:visited {
+  color: black;
+} */
+
+.navHeader div{
+  display: flex;
+  flex-direction: row;
+  justify-content: center; 
+}
+
+
+/*----------------------------------------------------------------------------*/
+/* brandLogo - used in Navigation, Footer, and PageNotFound */
+
+.brandLogo{
+  margin: 0.25rem;
+  filter: drop-shadow(1px 1px .4px rgb(41 24 60 / .11)); /* basic shadow on SVG */
+  transition: ease-in-out 200ms;
+}
+
+.pageNotFound img{ /* the brand-logo in PageNotFound */
+  min-width: 150px;
+  max-width: 180px;
+
+}
+
+header img.brandLogo{ /* the brand-logo in Navigation/Header */
+  width: 70px;
+}
+
+footer img.brandLogo{ /* The brandLogo int he footer. */
+  width: 40px;
+}
+
+.brandLogo:hover {
+  cursor: pointer;
+  filter: 
+        drop-shadow(1.7px 1.7px .4px rgb(41 24 60 / .1)) /* comes closer to you */
+        brightness(101%) /* almost not noticeable, so just draws your eye m ore */
+  ;
+}
+
+
+.brandLogo:hover::after {
+  
+}
+
+.brandNameSlogan{
+  display: flex;
+  flex-direction: column;
+  /* padding-left: .1rem; */
+  padding: 0;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+h2.brandName{
+  font-family: "Sunny Spells";
+  font-size: 5rem;
+  padding: 0 !important;
+  margin: 0 !important;
+  margin-top: auto;
+  font-weight: 100;
+  font-variant-caps: all;
+  
+}
+
+/* NAVIGATION MENU Choices */
+nav ul{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  list-style: none;
+  justify-content: space-between;
+}
+
+/*------------------------------------------------------------------------------
+  CALENDAR */
+/*------------------------------------------------------------------------------
+  FOOTER  */
+
+footer {
+  background-color: var(--light-pink);
+  color: var(--plum);
+  position: fixed;
+  bottom: 0;
+  width:100%;
+  padding: 0px; 
+  margin: auto;
+  display: flex;
+  justify-content: space-around; 
+  z-index: 1001; /* puts it in front of the progressbar */
+}
+
+.footerElements {
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+  align-items: center;
+}
+
+
+footer img.brandLogo{
+  width: 40px;
+}
+
+footer p{
+  font-size: .8rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+
+/*------------------------------------------404 error-----------------*/
+
+.errorPageElements {
+
+}
+
+.errorPageElements h2{
+  
+  color: red;
+}
+
+/*------------------------------------------------------------------------------
+  MEDIA TYPES
+
+    Using min-width to make changes for all desktop views, not max-width.
+    - This allows for less complex CSS
+*/
+
+
+
+@media (min-width: 600px) {
+
+
+}

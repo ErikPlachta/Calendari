@@ -1,0 +1,396 @@
+{
+    "0000-AAAA" : {
+        "_id"               :   "0000-AAAA",
+        "name"              :   "Starfleet Academy",
+        "welcome"            :   "Welcome the the Starfleet Academy Online Scheduler.",
+        "brand_name"        :   "starfleet-academy",
+        "configuration"     :   {
+                                    "appointment_types"  : {
+                                        "0000-0000" : {
+                                            "_id"           :   "0000-0000",
+                                            "name"          :   "Federation Citizen - Starfleet Exam 🖖🏼",
+                                            "summary"       :   "All Federation citizens, schedule your StarFleet Exam here.",
+                                            "description"   :   "This exam is designed to look for certain qualities a person displayed, including: integrity, intelligence, courage, imagination, and leadership qualities. Candidates are to expect the unexpected during this exam.",
+                                            "date_time"          :   "6 Hours",
+                                            "Details"        :   {
+                                                                    "subject"       : "Federation Citizen - Starfleet Exam",
+                                                                    "date"          : "04/14/2022",
+                                                                    "duration"      : "Undetermined",
+                                                                    "time_start"    : "04:00",
+                                                                    "timezone"      : "Earth",
+                                                                    "client"        : {
+                                                                                        "name": "",
+                                                                                        "email": "",
+                                                                                        "phone": ""
+                                                                    }
+                                            }
+                                        },
+                                        "0000-0001" : {
+                                            "_id"           :   "0000-0001",
+                                            "name"          :   "Non-Federation Citizen - Starfleet Exam 🌎",
+                                            "summary"       :   "For non-Federation citizens, eligibility is considered with a letter of reference from a Command Level Starfleet Officer on file.",
+                                            "description"   :   "This exam is designed to look for certain qualities a person displayed, including: integrity, intelligence, courage, imagination, and leadership qualities. Candidates are to expect the unexpected during this exam.",
+                                            "date_time"          :   "6 Hours",
+                                            "Details"        :   {
+                                                                    "subject"       : "Non-Federation Citizen - Starfleet Exam",
+                                                                    "date"          : "04/23/2022",
+                                                                    "duration"      : "Undetermined",
+                                                                    "time_start"    : "04:00",
+                                                                    "timezone"      : "Earth",
+                                                                    "client"        : {
+                                                                                        "name": "",
+                                                                                        "email": "",
+                                                                                        "phone": ""
+                                                                    }
+                                            }
+                                        }
+                                    },
+                                    "schedule"  : {
+                                        "sunday": {
+
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+        },
+        "Appointment_Type"  :   {
+            "0000-0000" : {
+                "_id"           :   "0000-0000",
+                "name"          :   "General",
+                "description"   :   "Schedule an appointment with ${brand_name}.",
+                "date_time"          :   "${date_time}",
+                "Details"        :   {
+                                        "subject"       : "",
+                                        "date"          : "",
+                                        "duration"      : "",
+                                        "time_start"    : "",
+                                        "timezone"      : "",
+                                        "client"        : {
+                                                            "name": "",
+                                                            "email": "",
+                                                            "phone": ""
+                                        }
+                },
+                "Users"         :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        },
+        "Appointment"       :   {
+            "0000-0000-1111" : {
+                                "_id"               :   "0000-0000-1111",
+                                "status"            :   "Scheduled",
+                                "User"              :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name_first"    :   "Erik",
+                                                            "name_last"     :   "Plachta"
+                                },
+                                "Business"          :   {
+                                                            "_id"           :   "0000-AAAA",
+                                                            "brand_name"    :   "Erik's Business Brand Name"
+                                },
+                                "Appointment_Type"  :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name"          :   "General",
+                                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                                },
+                                "Details"           :   {
+                                                            "subject"       : "Want to discuss X with You",
+                                                            "summary"       : "I want to talk about x and go over y to accomplish z",
+                                                            "date_time"          : "2022-04-13 10:00:00",
+                                                            "duration"      : "45 minutes",
+                                                            "timezone"      : "EST",
+                                                            "client"        : {
+                                                                                "name": "Mary",
+                                                                                "email": "mary@noemail.com",
+                                                                                "phone": "000-867-5309"
+                                                            }
+                                }
+            },
+            "0000-0000-1112" : {
+                                "_id"               :   "0000-0000-1112",
+                                "status"            :   "Scheduled",
+                                "User"              :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name_first"    :   "Erik",
+                                                            "name_last"     :   "Plachta"
+                                },
+                                "Business"          :   {
+                                                            "_id"           :   "0000-AAAA",
+                                                            "brand_name"    :   "Erik's Business Brand Name"
+                                },
+                                "Appointment_Type"  :   {
+                                                            "_id"           :   "0000-0000",
+                                                            "name"          :   "General",
+                                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                                },
+                                "Details"           :   {
+                                                            "subject"       : "Want to discuss X with You",
+                                                            "summary"       : "I want to talk about x and go over y to accomplish z",
+                                                            "date_time"          : "2022-04-10 14:00:00",
+                                                            "duration"      : "45 minutes",
+                                                            "timezone"      : "EST",
+                                                            "client"        : {
+                                                                                "name": "Christiana",
+                                                                                "email": "christiana@noemail.com",
+                                                                                "phone": "000-867-5309"
+                                                            }
+                                }
+}
+        },
+        "Users"             :   ["0000-0000"]
+    },
+    "0000-BBBB" : {
+        "_id"               :   "0000-BBBB",
+        "name"              :   "Christiana's Business Name",
+        "brand_name"        :   "Christiana's Business Brand Name",
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+        },
+        "Appointment_Type"  :   {
+            "0000-0000" : {
+                "_id"           :   "0000-0000",
+                "name"          :   "General",
+                "description"   :   "Schedule an appointment with ${brand_name}.",
+                "date_time"          :   "${date_time}",
+                "Details"        :   {
+                                        "subject"       : "",
+                                        "date"          : "",
+                                        "duration"      : "",
+                                        "time_start"    : "",
+                                        "timezone"      : "",
+                                        "client"        : {
+                                                            "name": "",
+                                                            "email": "",
+                                                            "phone": ""
+                                        }
+                },
+                "Users"         :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        },
+        "Appointment"       :   {
+            "0000-0000-2222" : {
+                "_id"           :   "0000-0000-2222",
+                "status"            :   "Scheduled",
+                "User"              :   {
+                                            "_id"           :   "0000-1111",
+                                            "name_first"    :   "Christiana",
+                                            "name_last"     :   "Sullivan Morales"
+                },
+                "Business"          :   {
+                                             "_id"           :   "0000-BBBB",
+                                             "brand_name"    :   "Christian's Business Brand Name"
+                },
+                "Appointment_Type"  :   {
+                                            "_id"           :   "0000-0000",
+                                            "name"          :   "General",
+                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                },
+                "Details"           :   {
+                                            "subject"       : "Want to discuss X with You",
+                                            "date_time"          : 1649216132913,
+                                            "duration"      : "45 minutes",
+                                            "timezone"      : "EST",
+                                            "client"        : {
+                                                                "name": "Fake Client",
+                                                                "email": "my@noemail.com",
+                                                                "phone": "000-867-5309"
+                                            }
+                }
+            }
+        },
+        "Users"             :   ["1111-1111"]
+
+    },
+    "0000-CCCC" : {
+        "_id"               :   "0000-CCCC",
+        "name"              :   "Mary's Business Name",
+        "brand_name"        :   "Mary's Business Brand Name",
+        "configuration"     :   {
+                                    "schedule"  : {
+                                        "sunday": {
+                                            "start"     :   "00:00",
+                                            "end"       :   "00:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "monday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "tuesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "wednesday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "thursday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "friday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        },
+                                        "saturday": {
+                                            "start"     :   "09:00",
+                                            "end"       :   "15:00",
+                                            "verified"  :   "false"
+                                        }
+                                    }
+        },
+        "Appointment_Type"  :   {
+            "0000-0000" : {
+                "_id"           :   "0000-0000",
+                "name"          :   "General",
+                "description"   :   "Schedule an appointment with ${brand_name}.",
+                "date_time"          :   "${date_time}",
+                "Details"        :   {
+                                        "subject"       : "",
+                                        "date"          : "",
+                                        "duration"      : "",
+                                        "time_start"    : "",
+                                        "timezone"      : "",
+                                        "client"        : {
+                                                            "name": "",
+                                                            "email": "",
+                                                            "phone": ""
+                                        }
+                },
+                "Users"         :   [
+                                        "0000-0000",
+                                        "1111-1111",
+                                        "2222-2222"
+                ],
+                "Appointments"  : [
+                                        "0000-0000-1111",
+                                        "0000-0000-2222",
+                                        "0000-0000-3333"   
+                ]
+            }
+        },
+        "Appointment"       :   {
+            "0000-0000-3333" : {
+                "_id"           :   "0000-0000-3333",
+                "status"            :   "Scheduled",
+                "User"              :   {
+                                            "_id"           :   "0000-2222",
+                                            "name_first"    :   "Mary",
+                                            "name_last"     :   "lawton"
+                },
+                "Business"          :   {
+                                            "_id"           :   "0000-CCCC",
+                                            "brand_name"    :   "Mary's Business Brand Name"
+                },
+                "Appointment_Type"  :   {
+                                            "_id"           :   "0000-0000",
+                                            "name"          :   "General",
+                                            "description"   :   "Schedule an appointment with ${brand_name}."
+                },
+                "Details"           :   {
+                                            "subject"       : "Want to discuss X with You",
+                                            "summary"       : "I want to talk about x and go over y to accomplish z",
+                                            "date_time"          : 1649216132913,
+                                            "duration"      : "45 minutes",
+                                            "timezone"      : "EST",
+                                            "client"        : {
+                                                                "name": "Fake Client",
+                                                                "email": "my@noemail.com",
+                                                                "phone": "000-867-5309"
+                                            }
+                }
+            }
+        },
+        "Users"             :   ["2222-2222"]
+
+    }
+}
