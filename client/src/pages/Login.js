@@ -5,15 +5,14 @@ import { Redirect, Navigate } from 'react-router-dom';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH 
-import ReCAPTCHA from '../components/ReCAPTCHA';
+import Recaptcha from '../components/Recaptcha';
 import Auth from "../utils/authServices"
 
 //------------------------------------------------------------------------------
 //-- ASSETS / API
 import { useMutation } from '@apollo/client';
 import { LOGIN_USER } from '../utils/mutations';
-
-
+//-- TODO:: 04/12/22 #EP || Add Query to get business data based on the logged in user
 
 //------------------------------------------------------------------------------
 //-- FUNCTION -> Login
@@ -47,10 +46,9 @@ export default function Login() {
     }
   };
 
-  //-- Take data from email/password, attempt to login with mutation
-  const handleFormSubmit = async (event) => {
+  //-- Attempted to Login
+  const handleFormSubmit = async (event) => { //-- Take data from email/password, attempt to login with mutation
     event.preventDefault();
-
     //-- count every attempt
     setFormDetails({...formDetails, submitAttempts: formDetails.submitAttempts+1});
     //-- Attempt to login with Auth
@@ -58,12 +56,12 @@ export default function Login() {
       const { data } = await login({
         variables: { ...formDetails },
       });
+
+      //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
       Auth.login(data.login);
     }
-    catch (error) {//-- Otherwise failure so update UI somehow
-      errorPopup(error)
-    }
-
+    //-- Otherwise failure so update UI somehow
+    catch (error) { errorPopup(error)}
   };
 
   const errorPopup = (error) => {  //-- if error, show msg
@@ -76,8 +74,10 @@ export default function Login() {
     };
   }
 
-  //-- Run once at load to verify if logged in already. If yes, re-routes
-  useEffect(() => {
+  //----------------------------------------------------------------------------
+  //-- Use Effect to verify if logged in
+
+  useEffect(() => { //-- Run once at load to verify if logged in already. If yes, re-routes
         
     if(Auth.isLoggedIn()){
       console.log("already logged in, redirecting to business page...")
@@ -85,25 +85,28 @@ export default function Login() {
     }
   }, []);
 
+  //----------------------------------------------------------------------------
+  //-- Primary Return Function
   return (
-
     <section> 
-
       {(() => {
         switch(Auth.isLoggedIn()) {    
           
-          //-- if already logged in, route to busienss page
-          case true:   return <Navigate replace to="/Business" />
-          // "Already Logged In Placeholder (TODO:: 04/11/22 #EP || Route to Business page)"
+          //-- IF EXISTS, REROUTE TO BUSINESS PAGE
+          case true:   return <Navigate replace to="/Business" /> 
           
-          //-- if NOT logged in, prompt login screen
-          case false:    return (
+          //-- IF NOT, LOAD LOGIN PAGE CONTENT
+          case false:    return ( 
             <div className="signupInformation">
               <h2 alt="please login">Get Logged In</h2>
+              {/* Used to notify if login event failure */}
+              <h5 id="login-form-message" style={{opacity: "0"}}>
+                Invalid Credentials, please try again
+              </h5>
               <form onSubmit={handleFormSubmit}>
                 {/* USER EMAIL */}
                 <span className="form-element">
-                <label for='password'>Email</label>
+                <label htmlFor='password'>Email</label>
                   <input
                       placeholder="your@email.com"
                       name="email"
@@ -115,22 +118,23 @@ export default function Login() {
                       onChange={handleChange}
                   />
                 </span>
+                
                 {/* USER PASSWORD */}
                 <span className="form-element">
-                  <label for='password'>Password</label>
+                  <label htmlFor='password'>Password</label>
                   <input
                       placeholder="********"
                       name="password"
                       type="password"
                       id="password"
-                      minlength="6"
+                      minLength="6"
                       autoComplete='current-password'
                       value={formDetails.password}
                       onChange={handleChange}
                   />
                 </span>
                 {/* RECAPTCHA */}
-                <ReCAPTCHA formDetails={formDetails} />
+                <Recaptcha formDetails={formDetails}  />
                 {/* SUBMIT BUTTON */}
                 <button>Login</button>
               </form>
@@ -141,17 +145,12 @@ export default function Login() {
                 <a href='/signup'>Don't have an account yet? Get Signed Up, here!</a>
               </p>
 
-              {/* Used to notify if login event failure */}
-              <h5 id="login-form-message" style={{opacity: "0"}}>
-                Invalid Credentials, please try again
-              </h5>
+              
               
             </div>
           )
-
           //-- If waiting for element to load, indicate it.
-          //TODO::04/11/22 #EP | Add loading element
-          default:    return "Loading...";
+          default:    return "Loading..."; //TODO::04/11/22 #EP | Add loading element
         }
         
       })()}

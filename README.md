@@ -1,14 +1,21 @@
-# Project3
-YourSchedule.io
+# Calendari
 
 ## What is this application?
-This application is for scheduling appointments. It can be customized per the business needs, whether it's a tattoo studio, a hair salon, or a scuba diving facility. The users will log in, select the date they want to have an appointment, and then based on the current appointments already scheduled, present the user with times that are available.
+This application is for scheduling appointments. It can be customized per the business needs, whether it's a tattoo studio, a hair salon, or a scuba diving facility. The users will log in, select the date they want to have an appointment, and then based on the current appointments already scheduled, the user will be presented with times that aren't already taken.
+
+This also allows the business to customize their schedule to their needs, and get a birds eye view of their appointments they have coming up, including cancellations.
 
 ## How did we build this?
+This application was built using GraphQL with a Node and Express server on the backend, that communicated with MongoDB and the Mongoose ODM. Queries and mutations were used to retrieve, add, update and delete data. We styled this application using React and CSS, and deployed it using Heroku.
 
 ## What does it look like?
+Please see a screenshot and a gif below of the home page of our application:
+
+![calendariGif](client/public/calendariHomeGIF.gif)
 
 ## Where can I find this?
+You can either visit our github repository (https://github.com/ErikPlachta/Calendari) or visit the deployed application at https://calendari-day.herokuapp.com/
+
 
 ---
 

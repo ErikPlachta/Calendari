@@ -20,7 +20,7 @@ export default function Business({nextStep}) {
   
   const [businessDetails, setBusinessDetails] = useState({
     business_name: '',
-    business_brand_name: '',
+    brand_name: '',
     to_name: 'Calendari',
     from_phone: '',
     message: '',
@@ -34,39 +34,6 @@ export default function Business({nextStep}) {
     setBusinessDetails({ ...businessDetails, [event.target.name]: event.target.value,  });
   };
 
-  //-- phone validation
-  function onKeyUpPhone(event){
-
-    //-- if trying to erase, don't try to format
-    if(event.key === "Backspace" || event.key === 'Delete'){ return null;}
-     
-    //-- extract value
-     const phoneIn = event.target.value;
-     
-     //-- if nothing just exit
-     if(!phoneIn) return;
-
-    //-- clean it up  
-    const digits = phoneIn.replace(/\D/g, '');
-
-    //-- format it
-    const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
-    
-    //-- inline styling so red border until good.
-    var input = event.target;
-    var isError = ( (formattedPhone.length) < 13 );
-    var color =  (isError) ? "red" : "grey";
-    var borderWidth =  (isError)? "3px" : "1px"; 
-    input.style.borderColor = color;
-    input.style.borderWidth = borderWidth;
-     
-    //-- update ui input
-    event.target.value = formattedPhone;
-    //-- update data to send
-    businessDetails.from_phone = formattedPhone;
-    return null;
-  }
-
   // console.log(appointment_template)
   return (
     <section className="signupBusiness">
@@ -77,7 +44,7 @@ export default function Business({nextStep}) {
           displayed on your public scheduler link.
         </p>
       </header>
-      <form id="clientContactForm" className="signupCard" onSubmit={nextStep}>
+      <form id="business-form" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
           switch("appointment_template"){
@@ -87,57 +54,43 @@ export default function Business({nextStep}) {
                     
                     {/* BUSINESS NAME */}
                     <span className="form-element">
-                      <label htmlFor="business-name">Business Name:</label>
+                      <label htmlFor="name">Business Name:</label>
                       <input
-                        name='business_name'
-                        id="business-name"
+                        name='name'
+                        id="name"
                         type='text'
                         placeholder='Enter your business name'
-                        // required
+                        required
                         onChange={handleChange}
-                        value={businessDetails.client_name}
+                        value={businessDetails.name}
                       />
                     </span>
                     
                     {/* BRAND_NAME */}
                     <span className="form-element">
-                      <label htmlFor="business-brand-name">Your URL Name:</label>
+                      <label htmlFor="brandName">Your URL Name:</label>
                       <input
-                        name='business_name'
-                        id="business-name"
+                        name='brandName'
+                        id="brandName"
                         type='text'
                         placeholder='Enter your business name'
                         // required
                         onChange={handleChange}
-                        value={businessDetails.client_name}
+                        value={businessDetails.brandName}
                       />
-                      <span>
-                        https://calendari.day/s/{businessDetails.business_brand_name}
-                      </span>
+                      {/* <span>
+                        https://calendari.day/s/<span id="brand-name-url"></span>
+                      </span> */}
                     </span>
                     
-                    {/* BUSINESS PHONE NUMBER */}
-                    <span className="form-element">
-                      <label htmlFor="business-phone">Business Phone Number:</label>
-                      <input
-                        name="business_phone"
-                        id="business-phone"
-                        type="tel"
-                        aria-label="Please enter a valid phone number"
-                        placeholder="ex. (111)-111-1111"
-                        autoComplete='tel'
-                        onKeyUp={onKeyUpPhone}
-                      />
-                    </span>
-
                     {/* Welcome Message */}
-                    <span>
+                    {/* <span>
                       <label htmlFor='business-welcome'>Welcome Message:</label>
                       <textarea  id='business-welcome' rows="10" />
-                    </span>
+                    </span> */}
 
                     {/* SUBMIT BUTTON */}
-                    <span class="form-element"> 
+                    <span className="form-element"> 
                       <button type="submit" id="contact-submit" value="Next">Next</button>
                     </span>
 

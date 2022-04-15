@@ -2,6 +2,7 @@
 //-- MODULES
 import React, { useEffect, useState } from 'react';
 import PageNotFound from '../../../../pages/PageNotFound';
+import { capitalizeFirstLetter } from '../../../../utils/helpers';
 
 
 
@@ -73,14 +74,14 @@ export default function BusinessSettings(businessData) {
                     <div className="businessContainerResults">
                       <h3>
                         {business._id 
-                            ? `${business.name} `
+                            ? `${capitalizeFirstLetter(business.name)} `
                             : <span>Empty User Value: <code>name_first</code></span>
                         }
                         - Business Settings
                       </h3>
                       {/* TODO:: 04/10/22 #EP || Map logged in user, fille in data below */}
 
-                      <div className="businessUserStats">
+                      {/* <div className="businessUserStats">
                         <span>
                           Account Created:  { 
                                   business.date_created 
@@ -97,7 +98,7 @@ export default function BusinessSettings(businessData) {
                         </span>
                         
 
-                      </div>
+                      </div> */}
                       
                       {/* for user to update their settings */}
                       <form id="businessSettingsForm" className="clientContactForm" onSubmit={updateUser}>
@@ -131,7 +132,7 @@ export default function BusinessSettings(businessData) {
                         </span>
 
                         {/* Business Welcome Message */}
-                        <label htmlFor='message'>Business Scheduler Welcome Message</label>
+                        {/* <label htmlFor='message'>Business Scheduler Welcome Message</label>
                         <textarea
                           name='message'
                           type="textarea"
@@ -141,7 +142,7 @@ export default function BusinessSettings(businessData) {
                           required
                           value={business.welcome}
                           onChange={handleChange}
-                        ></textarea>
+                        ></textarea> */}
                        
                        {/* SUBMIT BUTTON */}
                         <span className='form-element'>

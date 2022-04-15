@@ -18,12 +18,16 @@ const resolvers = {
                 .populate('appointments');
         },
         // find business by brand name
-        business: async (parent, { brand_name }) => {
+        businessByBrandName: async (parent, { brand_name }) => {
             return Business.findOne({ brand_name })
-                //TODO:: 04/10/22 #EP | Inline Notes of Change Requests
-                /* 
-                   - add by brand_name or by business_id
-                */
+                .select('-__v -password')
+                .populate({ path: 'users', populate: 'appointments' })
+                .populate({ path: 'appointment_types', populate: 'appt_fields'})
+                .populate('appointments')
+        },
+        // find business by _id
+        businessById: async (parent, { _id }) => {
+            return Business.findById({ _id })
                 .select('-__v -password')
                 .populate({ path: 'users', populate: 'appointments' })
                 .populate({ path: 'appointment_types', populate: 'appt_fields'})
@@ -41,7 +45,7 @@ const resolvers = {
                 { $push: { users: user._id } },
                 { new: true, runValidators: true }
             );
-            console.log(user)
+            // console.log(user)
             return user;
         },
         //-- Login an existing user

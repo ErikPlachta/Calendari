@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 //------------------------------------------------------------------------------
 //-- JWT LOGIN & AUTH
-import Recaptcha from "../../../ReCAPTCHA";         //-- Required for Signup
+import Recaptcha from "../../../Recaptcha";         //-- Required for Signup
 import Auth from "../../../../utils/authServices";  //-- When signup happens, used to perform a login
 
 //------------------------------------------------------------------------------
@@ -25,7 +25,7 @@ const {
 
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
-export default function Confirmtion({nextStep}) {
+export default function Confirmtion({nextStep, errorPop}) {
 
   //-- reference variable for the captcha result response code
   const recaptchaRef = React.createRef();
@@ -37,7 +37,7 @@ export default function Confirmtion({nextStep}) {
     message: '',
     reply_to: '',
     subject: '',
-    'g-recaptcha-response': '',
+    gRecaptchaResponse: '',
   });
 
   //-- event listner on input
@@ -45,6 +45,8 @@ export default function Confirmtion({nextStep}) {
     //TODO:: Write this out
     setFormDetails({ ...formDetails, [event.target.name]: event.target.value, });
   };
+
+  
 
   // console.log(appointment_template)
   return (
@@ -54,6 +56,11 @@ export default function Confirmtion({nextStep}) {
         <p>Review the following information and then click Create Account to finalize your account setup.</p>
       </header>
       
+      {/* IF FAILS TO SUBMIT ERROR MESSAGE */}
+      <h5 id="signup-form-message" style={{opacity: "0"}}>
+          Error Creating Account. Please refresh to try again or check with admin.
+      </h5>
+      
       {/* SUBMISSION FORM */}
       <form id="confirmation-submit" className="signupCard" onSubmit={nextStep}>
         {(() => {
@@ -62,7 +69,7 @@ export default function Confirmtion({nextStep}) {
             default: return (
                   <div className="clientContactForm">
                     
-                    <h4>TODO:: Add details from previous forms here and add Create Account Functionality</h4>
+                    {/* <h4>TODO:: Add details from previous forms here and add Create Account Functionality</h4> */}
 
                     {/* RECAPTCHA */}
                     <Recaptcha formDetails={formDetails}/>

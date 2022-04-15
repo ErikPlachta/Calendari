@@ -44,6 +44,40 @@ export function dateGetMonths(){
   return moment.months();
 }
 
+export function getDays(numberOfDays){
+  //-- Request number of days from today, get results
+
+  var getDaysBetweenDates = function(startDate, endDate) {
+    var now = startDate.clone(), dates = [];
+
+    while (now.isSameOrBefore(endDate)) {
+        dates.push(now.format('MM-DD-YYYY'));
+        now.add(1, 'days');
+    }
+    return dates;
+  };
+
+  var startDate = moment('04-01-2022','MM-DD-YYYY');
+  var endDate = moment(dateFormat(new Date(new Date().setDate(new Date().getDate() + numberOfDays))));
+  // console.log(startDate,endDate)
+  // console.log(dateFormat(Date.now()))
+  
+  
+  var dateList = getDaysBetweenDates(startDate, endDate);
+  
+  // var startdate = "20.03.2014";
+  // console.log(startDate,endDate,new_date)
+  console.log(dateList);
+}
+
+
+
+
+
+export function dateFormatPicker(date){
+  return moment(date).format('YYYY-MM-DD');
+}
+
 
 export function dateTimeFullLocal(date){
   return moment(date).local().format("dddd, MMMM Do YYYY, h:mm:ss a");
@@ -61,6 +95,7 @@ export function dateDayOfWeek(date){
 export function dateHourOfDay(date){
   return moment(date).format("ddd, hA"); 
 }
+
 
 //-- Send in raw JavaScript Date/Time Value from date.Now() and returns MM/DD/YYYY format
 export function dateFormat(date) {

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 
 import Date from './components/Date';
 import Time from './components/Time';
+import {} from '../../utils/helpers'
 
 export default function DateTimePicker() {
 
@@ -20,7 +21,10 @@ export default function DateTimePicker() {
                 switch(state) {    
                     case true:  return (
                     <section>
-                        {dateTimePickerLocation[step]}
+                        {/* {dateTimePickerLocation[1]}
+                        {dateTimePickerLocation[2]} */}
+
+                       
                     </section>
                     );
                     // case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;

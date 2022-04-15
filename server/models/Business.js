@@ -19,7 +19,8 @@ const BusinessSchema = new Schema(
             }
         ],
         configuration: {
-            type: Object
+            type: Object,
+            length: 200
         },
         appointment_types: [
             {

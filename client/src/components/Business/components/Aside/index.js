@@ -8,8 +8,8 @@ export default function Aside({setPage, businessName, userName}) {
                         
       <header className="business">  
         <h2>{businessName}</h2>
-        <p>
-          Welcome, {userName ?userName :"NO_USER_NAME"}! 
+        <p> 
+          Welcome, {userName ?userName : "NO_USER_NAME"}! 
         </p>
       </header>
       

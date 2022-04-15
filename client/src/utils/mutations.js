@@ -26,7 +26,7 @@ export const ADD_USER = gql`
     }
 `;
 //-- Login existing user
-//TODO:: 04/11/22 #EP || Add business_id
+//TODO:: 04/11/22 #EP || Add business business_id/brand_name on return
 export const LOGIN_USER = gql`
   mutation login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
@@ -35,6 +35,7 @@ export const LOGIN_USER = gql`
         _id
         username
         date_created
+        business_id
       }
     }
   }

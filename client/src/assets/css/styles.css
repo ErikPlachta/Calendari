@@ -273,6 +273,7 @@ input:focus-visible{
 }
 
 /* When hovering input or text-area, add deeper shadow */
+input[type="tel"]:hover,
 input[type="phone"]:hover,
 input[type="email"]:hover,
 input[type="text"]:hover,
@@ -493,7 +494,9 @@ button:hover,
 
 
 table {
-  width: 60%;
+  width: 100%;
+  border-radius: var(--br_primary);
+  border-color: none;
   border-collapse: collapse;
  }
  
@@ -501,10 +504,13 @@ table {
    height: 30px;
    text-align: center;
    font-weight:bold;
+   font-size: 1.2rem;
+   
    padding: 10px;
    border: 2px solid var(--plum);
    color:#e952de;
-   background-color: var(--plum);
+   background-color: var(--theme);
+   border-radius: var(--br_primary);
  }
  
  tr, td {
@@ -515,16 +521,21 @@ table {
  }
  
  .tableContainer {
-   margin-left:auto;
-   margin-right: auto;
-   padding: 20px;
-   margin: 20px;
+   margin: auto;
+   border-radius: var(--br_primary);
+   
  }
  
  .slogan {
    text-align:center;
    vertical-align: middle;
-   background: linear-gradient(180deg, var(--darker-purple) 0%, var(--lighter-purple) 30%, var(--darker-pink) 70%, var(--light-pink) 100%);
+   background: 
+              linear-gradient(180deg, 
+              var(--theme_plum) 0%,
+              var(--darker-purple) 5%,
+              var(--lighter-purple) 30%,
+              var(--darker-pink) 70%,
+              var(--light-pink) 100%);
    color:white;   
   padding-top:0;
  }
@@ -534,6 +545,7 @@ table {
    color: white;
    font-size: 3rem;
    font-weight: 400;
+   filter: var(--ds-02_focus);
  }
 
 
@@ -607,6 +619,7 @@ table {
 /* the aside in the Business Page */
 .businessSidebar{
   /* border: 1px solid orangered; */
+  min-width: 14rem;
   flex: 1 20%;
   float: left;
   padding-top: 2rem;
@@ -930,17 +943,19 @@ progress.progressBarStep{
 }
 
 .navHeader a {
-  color: var(--plum);
+  color: black;
   font-weight: bold;
+  filter: var(--ds-01_focus);
+  transition: ease-in-out 200ms;
 }
 
 .navHeader a:hover {
-  color: var(--darker-pink)
+  filter: var(--ds-02_focus);
 }
 
-.navheader a:visited {
-  color: var(--plum);
-}
+/* .navheader a:visited {
+  color: black;
+} */
 
 .navHeader div{
   display: flex;
