@@ -76,7 +76,8 @@ export default function BusinessSettings(businessData) {
           brand: business.brand_name
         }
       });
-      console.log("success!")
+      console.log("success!");
+      window.location.reload();
     } catch (e) {
       console.error(e);
     }

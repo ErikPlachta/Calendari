@@ -98,7 +98,8 @@ export default function UserSettings(userData) {
           nameLast: user.name_last
         }
       });
-      console.log("success!")
+      console.log("success!");
+      window.location.reload();
     } catch (e) {
       console.error(e);
     }
