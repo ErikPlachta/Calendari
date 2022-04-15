@@ -1,6 +1,60 @@
+
+.progressBar,
+footer {
+  animation-delay: 200ms;
+  animation: slide-up-footerProgressBar 200ms;
+}
+
+
+
+
 @keyframes hover {
 	100% {
 		transform: translateX(-30rem);
+	}
+}
+
+
+@keyframes slide-up-footerProgressBar {
+	0% {
+		opacity: .7;
+    transform: translateY(30px);
+	}
+  25% {
+		transform: translateY(15px);
+	}
+  50% {
+		transform: translateY(5px);
+    opacity: .8;
+	}
+  85% {
+		transform: translateY(2px);
+	}
+  96% {
+		transform: translateY(1px);
+	}
+  100% {
+		transform: translateY(0px);
+    opacity: 1;
+	}
+}
+
+@keyframes slide-right-footerProgressBar {
+	0% {
+		opacity: .6;
+    transform: translateX(-100px);
+	}
+  80% {
+		transform: translateX(2px);
+    opacity: .7;
+	}
+  90% {
+		transform: translateX(-1px);
+    opacity: .8;
+	}
+  100% {
+		transform: translateX(0px);
+    opacity: 1;
 	}
 }
 

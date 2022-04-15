@@ -1,10 +1,9 @@
 //------------------------------------------------------------------------------
 //-- MODULES
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {  BrowserRouter, Route, Routes, useParams  } from 'react-router-dom';
 import { ApolloProvider, ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-// import { setContext } from '@apollo/client/link/context';
 
 //------------------------------------------------------------------------------
 //-- PAGES
@@ -16,6 +15,7 @@ import Scheduler from './components/Scheduler';
 import Footer from './components/Footer'
 import Appointment from './pages/Appointment';
 import Business from "./components/Business";
+import Support from './pages/Support';
 
 //------------------------------------------------------------------------------
 //-- ASSETS
@@ -25,9 +25,8 @@ import calendarDynamic from './assets/svg/calender-dynamic-gradient.svg';
 import calendarIso from './assets/svg/calender-iso-gradient.svg';
 import calendarFront from './assets/svg/calender-front-gradient.svg';
 import bob1 from './assets/svg/bob_1.0_tr_nbg_ds.svg';
-// import bob_wave_single from './assets/svg/bob_wave_single.svg';
-// import bob_wave_15s from './assets/svg/bob_wave_15s.svg';
-import bob_static from './assets/svg/bob_static.svg';
+import bob2 from "./assets/svg/bob_static.svg";
+// import bob3 from './assets/svg/bob_wave_single.svg';
 
 //-- STYLESHEET
 //TODO:: 05/09/22 #EP || Move stylesheet to root
@@ -39,7 +38,7 @@ import PageNotFound from './pages/PageNotFound';
 //-- used to know what to do with graphQL uri based on if development or production
 let uri = "";
 
- //-- if in development mode, use graphql local pathing
+ //-- if in development mode, use graphql local path
 if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
   console.log('//-- client in development');
   // uri = `http://localhost:${ process.env.PORT || 3001 }/graphql`;
@@ -77,16 +76,22 @@ function App() {
   useEffect(() => {
     document.title = `Calendari`;
   },[]);
+  
+  //-- built this as an easy way to import files in but likely not needed.
+  const [bobData, setBobData] = useState({
+    bob_static      :   './assets/svg/bob_static.svg',
+    bob_waves_1_ns  :   './assets/svg/bob_wave_single_noscript.svg',
+    bob_waves_1     :   './assets/svg/bob_wave_single.svg',
+    bob_wave_15s    :   './assets/svg/bob_wave_15s.svg'
+  });
 
   return (
   <ApolloProvider client={client}>
     <BrowserRouter>
-      <Nav bob_static={bob_static} />
+      <Nav bobData={bobData} bob2={bob2} />
       <main>
         <Routes>
-
           <Route exact path="/" element={< Home />} />
-          <Route exact path="/graphql" to="/home"  />
           <Route exact path="/Home" element={< Home />} />
 
           <Route exact path="/Login" element={< Login />} />
@@ -101,6 +106,8 @@ function App() {
           <Route path="/s/:business_id_or_brand_name"           element={<Scheduler/>}/>
           <Route path="/schedule/:business_id_or_brand_name"    element={<Scheduler/>}/>
           <Route path="/scheduler/:business_id_or_brand_name"   element={<Scheduler/>}/>
+
+          <Route path="/support"  element={<Support />} />
 
           <Route path='/a/:appointment_id' element={<Appointment/>}/>
           <Route path='/appointment/:appointment_id' element={<Appointment/>}/>
@@ -117,7 +124,7 @@ function App() {
         <br></br>
         <br></br>
         <br></br>
-      <Footer bob_static={bob_static}/>
+      <Footer bobData={bobData} bob2={bob2}/>
     </BrowserRouter>
   </ApolloProvider>
   );

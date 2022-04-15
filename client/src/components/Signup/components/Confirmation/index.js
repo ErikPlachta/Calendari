@@ -1,6 +1,14 @@
+//------------------------------------------------------------------------------
+//-- MODULES
 import React, { useState, useEffect } from 'react';
-import ReCAPTCHA from "react-google-recaptcha";
 
+//------------------------------------------------------------------------------
+//-- JWT LOGIN & AUTH
+import Recaptcha from "../../../ReCAPTCHA";         //-- Required for Signup
+import Auth from "../../../../utils/authServices";  //-- When signup happens, used to perform a login
+
+//------------------------------------------------------------------------------
+//-- HELPERS
 const { 
   capitalizeFirstLetter,
   dateGetMonths,
@@ -11,6 +19,9 @@ const {
   dateGetTimePassed,
   dateTimeFullLocal
 } = require('../../../../utils/helpers');
+
+//------------------------------------------------------------------------------
+//-- ASSETS / API
 
 //------------------------------------------------------------------------------
 //-- EXPORT FUNCTION
@@ -31,56 +42,20 @@ export default function Confirmtion({nextStep}) {
 
   //-- event listner on input
   const handleChange = (event) => {
+    //TODO:: Write this out
     setFormDetails({ ...formDetails, [event.target.name]: event.target.value, });
   };
-
-  //-- phone validation
-  function onKeyUpPhone(event){
-
-    //-- if trying to erase, don't try to format
-    if(event.key === "Backspace" || event.key === 'Delete'){ return null;}
-     
-    //-- extract value
-     const phoneIn = event.target.value;
-     //-- get current stored value
-    //  const phoneCurrent = toSend.from_phone;
-     
-     //-- if nothing just exit
-     if(!phoneIn) return;
-
-    //-- clean it up  
-    const digits = phoneIn.replace(/\D/g, '');
-
-    //-- format it
-    // const formattedDigits = (digits.substring(0,1) + '(' + digits.substring(1,4) + ')' + digits.substring(4,7) + '-' + digits.substring(7,11)); //-- with area code
-    const formattedPhone = ('(' + digits.substring(0,3) + ')' + digits.substring(3,6) + '-' + digits.substring(6,10)); //-- without area-code
-
-    // console.log(formattedPhone.length)
-    
-    //-- inline styling so red border until good.
-    var input = event.target;
-    var isError = ( (formattedPhone.length) < 13 );
-    var color =  (isError) ? "red" : "grey";
-    var borderWidth =  (isError)? "3px" : "1px"; 
-    input.style.borderColor = color;
-    input.style.borderWidth = borderWidth;
-   
-    
-    //-- update ui input
-    event.target.value = formattedPhone;
-    //-- update data to send
-    formDetails.from_phone = formattedPhone;
-    return null;
-  }
 
   // console.log(appointment_template)
   return (
     <section className="page signupBusiness">
-      <h3>Please Review the Following Information</h3>
-      <p>Review the following information and then click Create Account to finalize your account setup.</p>
+      <header>
+        <h3>Please Review the Following Information</h3>
+        <p>Review the following information and then click Create Account to finalize your account setup.</p>
+      </header>
       
       {/* SUBMISSION FORM */}
-      <form id="confirmation-submit" className="homeInformation" onSubmit={nextStep}>
+      <form id="confirmation-submit" className="signupCard" onSubmit={nextStep}>
         {(() => {
           switch("appointment_template"){
             // case "appointment_template": return "appointment_template";
@@ -90,14 +65,7 @@ export default function Confirmtion({nextStep}) {
                     <h4>TODO:: Add details from previous forms here and add Create Account Functionality</h4>
 
                     {/* RECAPTCHA */}
-                    <span className="form-element" id='recaptcha'>
-                      {/* Captcha*/}
-                      <ReCAPTCHA
-                        ref={recaptchaRef}
-                        sitekey={process.env.REACT_APP_RECAPTCHA_SITEKEY}
-                        onChange={e => (formDetails['g-recaptcha-response']=e)}
-                      />
-                    </span>
+                    <Recaptcha formDetails={formDetails}/>
 
                     {/* SUBMIT BUTTON */}
                     <span className="form-element"> 

@@ -131,9 +131,11 @@ export default function BusinessSettings(businessData) {
                         </span>
 
                         {/* Business Welcome Message */}
+                        <label htmlFor='message'>Business Scheduler Welcome Message</label>
                         <textarea
                           name='message'
                           type="textarea"
+                          id='message'
                           rows='10'
                           placeholder="I'm reaching out because..."
                           required
@@ -141,12 +143,15 @@ export default function BusinessSettings(businessData) {
                           onChange={handleChange}
                         ></textarea>
                        
-                        <input
-                          type="submit"
-                          className="button"
-                          id="contact-me-submit"
-                          value="Submit"
-                        />
+                       {/* SUBMIT BUTTON */}
+                        <span className='form-element'>
+                          <input
+                            type="submit"
+                            className="button"
+                            id="contact-me-submit"
+                            value="Submit"
+                          />
+                        </span>
                       </form>
                     </div>
                   )

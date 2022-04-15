@@ -202,10 +202,8 @@ export default function Business() {
           //-- Returns here if user is logged in and successful database request
           case true:  return (
             <section className="page business">
-              
               {/* Aside bar within the business page */}
               <section className="businessAside">
-                {/* TODO:: 04/10/22 #EP || Hide or stylize */}
                 <Aside setPage={setPage} businessName={business.businessData.name} userName={business.userData.name} />
               </section>
               {/* Main Content Area in Business Page */}
@@ -217,8 +215,8 @@ export default function Business() {
 
           //-- if NOT loading, return loading, otherwise not logged in
           case false: return loading ? "Loading..." : <Navigate replace to="/login" />
-          //TODO::04/10/22 #EP | Add loading element
-          default:    return "Loading...";
+         
+          default:    return "Loading...";  //TODO::04/10/22 #EP | Add loading element
         }
     })()}
     </section>

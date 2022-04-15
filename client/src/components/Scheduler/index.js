@@ -1,8 +1,7 @@
 //------------------------------------------------------------------------------
 //-- MODULES
 import React, { useState, useEffect } from 'react';
-import { Redirect, useParams } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { Redirect, useParams, Navigate } from "react-router-dom";
 
 
 //------------------------------------------------------------------------------
@@ -12,7 +11,7 @@ import Appointment from '../../pages/Appointment'; //-- confirmation page
 
 //------------------------------------------------------------------------------
 //-- SUB COMPONENTS
-import StatusBar from './components/StatusBar';
+import ProgressBar from './../ProgressBar';
 import AppointmentTypes from './components/AppointmentTypes';
 import DateTime from './components/DateTime';
 import Client from './components/Client';
@@ -79,7 +78,7 @@ export default function Scheduler() {
   //----------------------------------------------------------------------------
   /* VALIDATING PARAMS  */
 
-  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
+  const validateParams = async () => {  //-- Determine which params are sent in and route or re-route accordingly.
 
     let validRequest = null;
     // 1. If No business_id, no business_name or invalid values found, exit
@@ -175,10 +174,10 @@ export default function Scheduler() {
                   {schedulerPages[step]}
                   
                   {/* The bottom status bar */}
-                  <StatusBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
+                  <ProgressBar step={step} state={state} maxSteps={maxSteps} formerStep={formerStep} />
               </section>
             );
-            case false: return <PageNotFound />;
+            case false: return validateParams ? <PageNotFound /> : <Navigate replace to="/" />;
             //TODO:: 04/10/22 #EP || Add component for loading
             default:    return "Loading...";
           }
