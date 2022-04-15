@@ -8,6 +8,9 @@ This application is for scheduling appointments. It can be customized per the bu
 
 ## What does it look like?
 
+
+![calendariGif](client/public/calendariHomeGIF.gif)
+
 ## Where can I find this?
 
 ---
