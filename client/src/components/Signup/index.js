@@ -66,6 +66,7 @@ export default function Signup() {
     "user"  : {
       "businessId"  : '',
       "brandName"   : '',
+      "business_brand_name" : '',
       "nameFirst" : '',
       "nameLast"  : '',
       "email" : '',
@@ -194,6 +195,7 @@ export default function Signup() {
         
         businessId = results.data.addBusiness._id;
         brandName = results.data.addBusiness.brandName ? results.data.addBusiness.brandName : "NaN";
+        // brandName = results.data.addBusiness.business_brand_name ? results.data.addBusiness.business_brand_name : "NaN";
         setNewBusiness({ results });
         setNewAccount({...newAccount, business_id: [results.data] })
 
