@@ -20,7 +20,7 @@ export default function Business({nextStep}) {
   
   const [businessDetails, setBusinessDetails] = useState({
     business_name: '',
-    brand_name: '',
+    business_brand_name: '',
     to_name: 'Calendari',
     from_phone: '',
     message: '',
@@ -67,15 +67,15 @@ export default function Business({nextStep}) {
                     
                     {/* BRAND_NAME */}
                     <span className="form-element">
-                      <label htmlFor="brandName">Your URL Name:</label>
+                      <label htmlFor="business_brand_name">Your URL Name:</label>
                       <input
-                        name='brandName'
-                        id="brandName"
+                        name='business_brand_name'
+                        id="business_brand_name"
                         type='text'
                         placeholder='Enter your business name'
                         // required
                         onChange={handleChange}
-                        value={businessDetails.brandName}
+                        value={businessDetails.business_brand_name}
                       />
                       {/* <span>
                         https://calendari.day/s/<span id="brand-name-url"></span>

@@ -75,8 +75,8 @@ export default function Signup() {
       "phoneNumber" : '',
     },
     "appointment_type" : {
-      "businessId"  : "",
-      "business_id"  : "",
+      // "businessId"  : "",
+      // "business_id"  : "",
       "apptTypeName": "General",
       "summary"     : "Schedule an appointment"
       // TODO:: Add more than 1 type
@@ -173,34 +173,42 @@ export default function Signup() {
 
     //- -try to create new business, then new user
     try {
-      var businessId= "NaN"; //-- to be defined at time of biz creation
-      var brandName = 'NaN';
+      var businessId= "NaN"; //-- EU form input
+      var brandName = "NaN"; //-- EU form input
+      
       
 
+      //--      0. STARTING THE CREATION PROCESS MESSAGE IF IN DEVELOPMENT
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-        console.log("//-- Creating New Account..", newAccount)
+        console.log("//-----------------------------------------------------//")
+        console.log("//-- STARTING... ")
+        console.log("//-- Creating New Account...", newAccount)
       }
       
       
       //--      1. ATTEMPT TO CREATE BUSINESS
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-        console.log("//-- creating business...", newAccount.business)
+        console.log("//-- Creating new business...", newAccount.business)
       }
       const create = await addBusiness({
         variables: { ...newAccount.business },
       })    
       
+      
       //--      2. ADD businessId RESPONSE TO STATE
-      .then(results=>{
-        
+      .then(results=>{  
         businessId = results.data.addBusiness._id;
         brandName = results.data.addBusiness.brandName ? results.data.addBusiness.brandName : "NaN";
-        // brandName = results.data.addBusiness.business_brand_name ? results.data.addBusiness.business_brand_name : "NaN";
-        setNewBusiness({ results });
-        setNewAccount({...newAccount, business_id: [results.data] })
-
+        // setNewBusiness({ results }); //TODO:: 04/27/22 #EP || Is this needed? Console.log is empty
+        setNewAccount({...newAccount, businessId: [results.data] })
+        //TODO:: 04/27/22 #EP || Updated so not needed as brandName isn't used. just testing to verify problem/fix.
+        if(brandName != "NaN"){ 
+          setNewAccount(...newAccount, newAccount.user.business_brand_name = brandName);
+        }
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-          console.log("//-- Created new business...",results)
+          console.log("//-- RESULTS: ", results)
+          // console.log("//-- SUCCESS: newBusiness...", newBusiness)
+          console.log("//-- SUCCESS: newAccount...", newAccount)
         }
        
       });

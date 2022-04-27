@@ -13,8 +13,8 @@ export const ADD_BUSINESS = gql`
 `;
 // create new user
 export const ADD_USER = gql`
-    mutation AddUser($nameFirst: String!, $nameLast: String!, $email: String!, $username: String!, $password: String!, $phoneNumber: String!, $businessId: ID!) {
-        addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId) {
+    mutation AddUser($nameFirst: String!, $nameLast: String!, $email: String!, $username: String!, $password: String!, $phoneNumber: String!, $businessId: ID!, $business_brand_name: String!) {
+        addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId, business_brand_name: $business_brand_name) {
             _id
             business_id
             business_brand_name
