@@ -43,7 +43,7 @@ const {
 export default function Signup() {
 
   //-- MUTATIONS
-  const [addUser, { addUserError }] = useMutation(ADD_USER); 
+  const [addUser, { addUserError }] = useMutation(ADD_USER);
   const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
   const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE);
 
@@ -66,7 +66,7 @@ export default function Signup() {
     "user"  : {
       "businessId"  : '',
       "brandName"   : '',
-      "business_brand_name" : '', //-- 04/27/22 #EP || Adding as a placeholder likely not needed
+      // "businessBrandName" : '', //-- 04/27/22 #EP || Adding as a placeholder likely not needed
       "nameFirst" : '',
       "nameLast"  : '',
       "email" : '',
@@ -129,24 +129,33 @@ export default function Signup() {
       formResults[results[i].id] = results[i].value; //-- adds to dictionary
     }
     
+
     //---------------------------------
     //-- 2. form for business submitted
     if(nextStepButton.target.id == "business-form"){
       
-      setNewAccount({...newAccount, business: formResults })
+      setNewAccount({...newAccount, business: formResults }) //-- GRAB FORM DATA FOR BUSINESS FOR MUTATION ON COMPLETION
+      setNewBusiness({...newBusiness, brandName: formResults.brandName })
+      console.log(newBusiness)
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Printing Business form results...")
         console.log(nextStepButton.target.id)
         console.log(newAccount)
         console.log(formResults)
       }
     }
 
+
     //------------------------------
     //-- 3.  form for user submitted
     if(nextStepButton.target.id == "user-form"){
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Printing User form results...")
+      }
       setNewAccount({...newAccount, user: formResults })
     }
     
+
     //------------------------------------------
     //-- 4. Final Form to submit so actual last step,here
     if(nextStepButton_id == "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
@@ -175,6 +184,7 @@ export default function Signup() {
     try {
       var businessId= "NaN"; //-- EU form input
       var brandName = "NaN"; //-- EU form input
+      var businessBrandName = "NaN";
       
       
 
@@ -188,57 +198,59 @@ export default function Signup() {
       
       //--      1. ATTEMPT TO CREATE BUSINESS
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-        console.log("//-- Creating new business...", newAccount.business)
+        console.log("//-- Creating new business...")
       }
       const create = await addBusiness({
         variables: { ...newAccount.business },
       })    
       
       
+      
       //--      2. ADD businessId RESPONSE TO STATE
       .then(results=>{  
         businessId = results.data.addBusiness._id;
-        brandName = results.data.addBusiness.brandName ? results.data.addBusiness.brandName : "NaN";
+        brandName = results.data.addBusiness.brand_name ? results.data.addBusiness.brand_name : "NaN";
+
+        // setNewAccount({...newAccount, user['brand_name'] : brandName});
+        // businessBrandName = results.data.addBusiness.businessBrandName ? results.data.addBusiness.businessBrandName : "NaN";
         // setNewBusiness({ results }); //TODO:: 04/27/22 #EP || Is this needed? Console.log is empty
-        setNewAccount({...newAccount, businessId: [results.data] })
-        //TODO:: 04/27/22 #EP || Updated so not needed as brandName isn't used. just testing to verify problem/fix.
-        if(brandName != "NaN"){ 
-          setNewAccount(...newAccount, newAccount.user.business_brand_name = brandName);
-        }
+        // setNewAccount({...newAccount, businessId: [results.data] }) //-- 
+        
+        
+
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-          console.log("//-- RESULTS: ", results)
+          // console.log("//-- businessBrandName:", businessBrandName)
+          console.log("//-- RESULTS: addBusiness... ", results.data)
           // console.log("//-- SUCCESS: newBusiness...", newBusiness)
           console.log("//-- SUCCESS: newAccount...", newAccount)
         }
        
       });
 
+      
+      
       //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
-      
-      // newAccount.appointment_type['businessId'] = '6258512a827ae3493855de82';
-      newAccount.appointment_type['businessId'] = businessId;
-      
-      //-- If in development, print logs
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
         console.log("//-- Creating default appointment_type for newAccount...", newAccount.appointment_type)
       }
-      
+
+      newAccount.appointment_type['businessId'] = businessId;
       const apptType = await addApptType({
         variables: { ...newAccount.appointment_type },
       })
       .then(results => {
-        
-        //-- If development, print logs
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
           console.log("//-- Creating business and default appointment_type complete!")
+          console.log("//-- RESULTS: addAppointmentType... ", results.data)
         }
       })
        
       
 
       //--      4. ATTEMPT TO CREATE USER
-      newAccount.user['businessId'] = businessId;
-      newAccount.user['brandName'] = brandName;
+      
+      newAccount.user['businessId'] = businessId; //TODO:: 04/27/22 #EP || Remove hard-coded updates to states to verify problem/resolution
+      newAccount.user['brand_name'] = brandName;   //TODO:: 04/27/22 #EP || Remove hard-coded updates to states to verify problem/resolution
       
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
         console.log(`//-- Creating new User within new businessId: ${newAccount.user.businessId} ... `, newAccount.user)
@@ -246,20 +258,15 @@ export default function Signup() {
       
       //--  4.1 ATTEMPTING TO CREATE USER
       const userData  = await addUser({
-        variables: { ...newAccount.user },
+        variables: { ...newAccount.user, brandName: newAccount.business.brandName },
       })      
       .then(results =>{
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-          console.log("//-- creating user completed! Results: ", results)
+          console.log(`//-- Attempting auth with new user: ${results.data}`)
+          console.log("//-- RESULTS: addUser...",results.data.addUser)
         }
         
-      
-        //-- 5 ATTEMPTING TO LOGIN WITH NEWLY CREATED USER
-        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-          console.log(`//-- Attempting auth with new user: ${results}`)
-          console.log("//-- Results:",results.data.addUser)
-        }
-        
+      //-- 5 ATTEMPTING TO LOGIN WITH NEWLY CREATED USER
         const loginData={
           _id     : results.data.addUser._id,
           password : newAccount.user.password,

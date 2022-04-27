@@ -7,7 +7,7 @@ const userSchema = new Schema(
             type: String,
             required: true
         },
-        business_brand_name: {
+        brand_name: {
             type: String,
             required: true
         },
