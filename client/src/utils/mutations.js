@@ -38,6 +38,7 @@ export const LOGIN_USER = gql`
         username
         date_created
         business_id
+        brand_name
       }
     }
   }

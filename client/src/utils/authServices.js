@@ -17,7 +17,7 @@ class AuthService {
   getBusinessBrandName(){
     let results = JSON.parse(localStorage.getItem('calendari'));
     
-    return results.branName;
+    return results.brand_name;
   }
 
   // Checks if there is a saved token and it's still valid
@@ -71,7 +71,7 @@ class AuthService {
     const username      = user.username  ? user.username  : "NaN";
     const date_created  = user.date_created  ? user.date_created  : "NaN";
     const business_id   = user.business_id ? user.business_id : "NaN";
-    const brandName     = user.branName ? user.brandName : "NaN";
+    const brand_name     = user.brand_name ? user.brand_name : "NaN";
 
     const jwtData = {
       "id_token"      :  idToken,
@@ -79,7 +79,7 @@ class AuthService {
       "name"          : username,
       "date_created"  : date_created,
       "business_id"   : business_id,
-      "brandName"     : brandName
+      "brand_name"     : brand_name
     };
     localStorage.setItem('calendari', JSON.stringify(jwtData));
 
