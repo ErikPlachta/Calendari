@@ -39,25 +39,19 @@ const {
 
 
 //------------------------------------------------------------------------------
-/* EXPORT FUNCTION - Signup */
+/* EXPORT FUNCTION - Signup Component */
 export default function Signup() {
 
   //-- MUTATIONS
-  const [addUser, { addUserError }] = useMutation(ADD_USER);
-  const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
-  const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE);
-
-  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
-
-  useEffect(() => { //-- updates the page title
-    document.title = `Calendari - Signup`;
-  },[]);
+  const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);  //-- When new account created, create business
+  const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE); //-- When new business created, create and assign default apt types
+  const [addUser, { addUserError }] = useMutation(ADD_USER);              //-- When new business created, create new user then assign it to business
+  const [login, { error }] = useMutation(LOGIN_USER);                     //-- When account creation completed, login
 
   const [newBusiness, setNewBusiness] = useState({
     'name' :'',
     'brandName' :''
   })
-
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
     "business": {
       'name' :'',
@@ -66,7 +60,6 @@ export default function Signup() {
     "user"  : {
       "businessId"  : '',
       "brandName"   : '',
-      // "businessBrandName" : '', //-- 04/27/22 #EP || Adding as a placeholder likely not needed
       "nameFirst" : '',
       "nameLast"  : '',
       "email" : '',
@@ -75,30 +68,27 @@ export default function Signup() {
       "phoneNumber" : '',
     },
     "appointment_type" : {
-      // "businessId"  : "",
-      // "business_id"  : "",
+      "businessId"  : "",
       "apptTypeName": "General",
       "summary"     : "Schedule an appointment"
       // TODO:: Add more than 1 type
     }
   })
-
-  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
-  const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
+  const [appointment_template, setAppointment_template] = useState(); //-- when it's to be built, know what to do with it
   
+  //TODO:: 04/27/22 #EP || Add this feature
+  // const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
+  
+  //----------------------------------------------------------------------------
+
+  const [state, setState] = useState( false ); //-- Verifying if requests are made properly or not
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
-  
-  const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
-  // let appointment_confirmation_id = ""; //-- placeholder
-  //-- Extract URL Parameters
-  const {business_id_or_brand_name, appointment_type_id} = useParams();
 
-  //-- Verifying if requests are made properly or not
-  const [state, setState] = useState( false );
 
   //----------------------------------------------------------------------------
-  /* VALIDATING PARAMS  */
-  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
+  //-- ON RUN EVENT -> If page load is valid 
+
+  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly. 
     let validRequest = true; //-- 04/10/22 #EP || ATM always true, but need to know if  offline
     setState(validRequest)
     return validRequest; //-- return results to update the title-bar accordingly
@@ -110,6 +100,7 @@ export default function Signup() {
     if(!validRequest){ document.title = `Calendari - Invalid Request`}; //-- IF NOTE valid request is TRUE, update title with Invalid Request
   },[]);
   
+
 
   //----------------------------------------------------------------------------
   /* Page Location and Logic */

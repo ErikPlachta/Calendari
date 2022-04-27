@@ -20,7 +20,6 @@ export default function Business({nextStep}) {
   
   const [businessDetails, setBusinessDetails] = useState({
     business_name: '',
-    business_brand_name: '',
     brand_name: '',
     to_name: 'Calendari',
     from_phone: '',
