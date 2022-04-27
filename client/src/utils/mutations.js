@@ -17,6 +17,7 @@ export const ADD_USER = gql`
         addUser(name_first: $nameFirst, name_last: $nameLast, email: $email, username: $username, password: $password, phone_number: $phoneNumber, business_id: $businessId, brand_name: $brand_name) {
             _id
             business_id
+            brand_name
             name_first
             name_last
             username
