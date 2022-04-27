@@ -131,10 +131,13 @@ export default function Signup() {
     //---------------------------------
     //-- 2. form for business submitted
     if(nextStepButton.target.id == "business-form"){
-      console.log(nextStepButton.target.id)
+      
       setNewAccount({...newAccount, business: formResults })
-      console.log(newAccount)
-      console.log(formResults)
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log(nextStepButton.target.id)
+        console.log(newAccount)
+        console.log(formResults)
+      }
     }
 
     //------------------------------
@@ -146,7 +149,6 @@ export default function Signup() {
     //------------------------------------------
     //-- 4. Final Form to submit so actual last step,here
     if(nextStepButton_id == "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
-      // setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
       createAppointment(); //-- runs the mutations
     }
 
@@ -174,11 +176,15 @@ export default function Signup() {
       var brandName = 'NaN';
       
 
-      console.log("//-- Creating New Account..", newAccount)
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Creating New Account..", newAccount)
+      }
       
       
       //--      1. ATTEMPT TO CREATE BUSINESS
-      console.log("//-- creating business...", newAccount.business)
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- creating business...", newAccount.business)
+      }
       const create = await addBusiness({
         variables: { ...newAccount.business },
       })    
@@ -188,64 +194,65 @@ export default function Signup() {
         
         businessId = results.data.addBusiness._id;
         brandName = results.data.addBusiness.brandName ? results.data.addBusiness.brandName : "NaN";
-        // const businessId = { 
-        //   "businessId" : results.data.addBusiness._id  //-- extract business ID from response
-        // }
-        // setNewAccount({
-        //   ...newAccount,
-        //   [results] : results,
-        // }); //-- update user to post
-        // setNewAccount({...newAccount, user: businessId }) //-- update user to post
-        // setNewAccount({...newAccount, appointment_type: businessId }) //-- update user to post
         setNewBusiness({ results });
         setNewAccount({...newAccount, business_id: [results.data] })
+
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          console.log("//-- Created new business...",results)
+        }
        
-        // console.log("//-- results businessData..")
-        // console.log(results)
-        // console.log("//-- creating business completed!")
-        // console.log(`businessId`)
-        // console.log(businessId)
-        // console.log("//-- completed business_id value!")
       });
 
-      // console.log("//-- New Account with Business")
-      // console.log(newAccount)
-      // console.log(newBusiness)
-      
-      // var businessId = '6258512a827ae3493855de82'
       //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
       
       // newAccount.appointment_type['businessId'] = '6258512a827ae3493855de82';
       newAccount.appointment_type['businessId'] = businessId;
       
+      //-- If in development, print logs
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Assigning default appointment_type to newAccount...", newAccount.appointment_type)
+      }
+      
       const apptType = await addApptType({
         variables: { ...newAccount.appointment_type },
       })
       .then(results => {
-        console.log(results)
+        
+        //-- If development, print logs
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          console.log("//-- Creating appointment type completed!")
+        }
       })
        
       
-      //--      4. ATTEMPT TO CREATE USER
-      // console.log("//-- creating user...")
 
-      
-      // newAccount.user['businessId'] = '6258512a827ae3493855de82';
+      //--      4. ATTEMPT TO CREATE USER
       newAccount.user['businessId'] = businessId;
       newAccount.user['brandName'] = brandName;
-      // console.log(newAccount.user)
+      
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Creating new User... ", newAccount.user)
+      }
+
+      
       
       const userData  = await addUser({
         variables: { ...newAccount.user },
       })
+      
+      
+      //-- ONCE USER CREATED, ATTEMPT TO LOGIN WITH USER.
+      
       .then(results =>{
-        
-        console.log("//-- creating user completed!")
-        
-
-
-        console.log("attempt auth")
-        console.log(results.data.addUser)
+        //-- 
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          console.log("//-- creating user completed! Results: ", results)
+        }
+      
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          console.log("//-- Attempting auth...")
+          console.log("//-- Results:",results.data.addUser)
+        }
         
         const loginData={
           _id     : results.data.addUser._id,
@@ -254,44 +261,15 @@ export default function Signup() {
         }
 
         
-        //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-        const userData = login({
+        //-- LOGIN WITH NEW USER, UPDATE JWT, REROUTE TO HOMEPAGE
+        const userData = login( {
             variables: { ...loginData },
-        }).
-        then(results =>{
+          }
+        ).then(results => {
           Auth.login(results.data.login);
         })
 
       })
-
-      
-
-      /*
-        resultsfunction
-      */
-      
-      // .then(()=>{
-
-      //   console.log("//-- creating appointment types", newAccount.appointment_type)  
-      //   const { apptType } = addApptType({
-      //   variables: { ...newAccount.apptType },
-      //   })
-      //   return apptType;
-      // })
-
-      //--      4. ATTEMPT TO CREATE USER
-
-      // console.log("//-- creating user...")
-      // console.log(newAccount.user)
-      // const { userData } = await addUser({
-      //   variables: { ...newAccount.user },
-      // });
-      // console.log("//-- creating user completed!")
-      // console.log(userData)
-
-
-      //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-      // Auth.login(userData.login);
     }
     
 
@@ -303,10 +281,12 @@ export default function Signup() {
         'addApptTypeError'  : addApptTypeError
       }
       
-      //-- PRINTING ERRORS
-      console.log(`Catch Error: ${error}` )
-      console.log(`Database Errors:`)
-      console.log(databaseErrors)
+      //-- PRINTING ERRORS //-- If development, print logs
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log(`Catch Error: ${error}` )
+        console.log(`Database Errors:`)
+        console.log(databaseErrors)
+      }
       errorPopup(error,databaseErrors) //-- THIS HAPPENS IN THE COMPONENT CONFIRMATION
     }
     // return response;
