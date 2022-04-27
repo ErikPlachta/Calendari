@@ -149,7 +149,7 @@ export default function Signup() {
     //------------------------------------------
     //-- 4. Final Form to submit so actual last step,here
     if(nextStepButton_id == "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
-      createAppointment(); //-- runs the mutations
+      createNewAccount(); //-- runs the mutations
     }
 
     //-- 5. move to next step
@@ -167,7 +167,7 @@ export default function Signup() {
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
 
-  const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
+  const createNewAccount = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When user information verified and submitted, update database with appointment data
 
     //- -try to create new business, then new user
@@ -210,7 +210,7 @@ export default function Signup() {
       
       //-- If in development, print logs
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-        console.log("//-- Assigning default appointment_type to newAccount...", newAccount.appointment_type)
+        console.log("//-- Creating default appointment_type for newAccount...", newAccount.appointment_type)
       }
       
       const apptType = await addApptType({
@@ -220,7 +220,7 @@ export default function Signup() {
         
         //-- If development, print logs
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-          console.log("//-- Creating appointment type completed!")
+          console.log("//-- Creating business and default appointment_type complete!")
         }
       })
        
@@ -231,26 +231,22 @@ export default function Signup() {
       newAccount.user['brandName'] = brandName;
       
       if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-        console.log("//-- Creating new User... ", newAccount.user)
+        console.log(`//-- Creating new User within new businessId: ${newAccount.user.businessId} ... `, newAccount.user)
       }
-
       
-      
+      //--  4.1 ATTEMPTING TO CREATE USER
       const userData  = await addUser({
         variables: { ...newAccount.user },
-      })
-      
-      
-      //-- ONCE USER CREATED, ATTEMPT TO LOGIN WITH USER.
-      
+      })      
       .then(results =>{
-        //-- 
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
           console.log("//-- creating user completed! Results: ", results)
         }
+        
       
+        //-- 5 ATTEMPTING TO LOGIN WITH NEWLY CREATED USER
         if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
-          console.log("//-- Attempting auth...")
+          console.log(`//-- Attempting auth with new user: ${results}`)
           console.log("//-- Results:",results.data.addUser)
         }
         
