@@ -66,7 +66,7 @@ export default function Signup() {
     "user"  : {
       "businessId"  : '',
       "brandName"   : '',
-      "business_brand_name" : '',
+      "business_brand_name" : '', //-- 04/27/22 #EP || Adding as a placeholder likely not needed
       "nameFirst" : '',
       "nameLast"  : '',
       "email" : '',
