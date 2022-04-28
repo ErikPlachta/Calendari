@@ -39,25 +39,19 @@ const {
 
 
 //------------------------------------------------------------------------------
-/* EXPORT FUNCTION - Signup */
+/* EXPORT FUNCTION - Signup Component */
 export default function Signup() {
 
   //-- MUTATIONS
-  const [addUser, { addUserError }] = useMutation(ADD_USER); 
-  const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);
-  const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE);
-
-  const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
-
-  useEffect(() => { //-- updates the page title
-    document.title = `Calendari - Signup`;
-  },[]);
+  const [addBusiness, { addBusinessError }] = useMutation(ADD_BUSINESS);  //-- When new account created, create business
+  const [addApptType, { addApptTypeError }] = useMutation(ADD_APPT_TYPE); //-- When new business created, create and assign default apt types
+  const [addUser, { addUserError }] = useMutation(ADD_USER);              //-- When new business created, create new user then assign it to business
+  const [login, { error }] = useMutation(LOGIN_USER);                     //-- When account creation completed, login
 
   const [newBusiness, setNewBusiness] = useState({
     'name' :'',
     'brandName' :''
   })
-
   const [newAccount, setNewAccount] = useState({ //-- the user form payload
     "business": {
       'name' :'',
@@ -75,29 +69,26 @@ export default function Signup() {
     },
     "appointment_type" : {
       "businessId"  : "",
-      "business_id"  : "",
       "apptTypeName": "General",
       "summary"     : "Schedule an appointment"
       // TODO:: Add more than 1 type
     }
   })
-
-  // const [appointment_types,set_appointment_types] = useState({}); //-- types of appointments to be loaded on businessScheduler page
-  const [appointment_template, setAppointment_template] = useState("test"); //-- when it's to be built, know what to do with it
+  const [appointment_template, setAppointment_template] = useState(); //-- when it's to be built, know what to do with it
   
+  //TODO:: 04/27/22 #EP || Add this feature
+  // const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
+  
+  //----------------------------------------------------------------------------
+
+  const [state, setState] = useState( false ); //-- Verifying if requests are made properly or not
   const [step, setStep] = useState(1);  //-- The current step for scheduling is always 1 by default  
-  
-  const [appointment_confirmation_id, setAppointment_confirmation_id] = useState(); //-- when finalized used to build appt
-  // let appointment_confirmation_id = ""; //-- placeholder
-  //-- Extract URL Parameters
-  const {business_id_or_brand_name, appointment_type_id} = useParams();
 
-  //-- Verifying if requests are made properly or not
-  const [state, setState] = useState( false );
 
   //----------------------------------------------------------------------------
-  /* VALIDATING PARAMS  */
-  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly.
+  //-- ON RUN EVENT -> If page load is valid 
+
+  const validateParams = () => {  //-- Determine which params are sent in and route or re-route accordingly. 
     let validRequest = true; //-- 04/10/22 #EP || ATM always true, but need to know if  offline
     setState(validRequest)
     return validRequest; //-- return results to update the title-bar accordingly
@@ -109,6 +100,7 @@ export default function Signup() {
     if(!validRequest){ document.title = `Calendari - Invalid Request`}; //-- IF NOTE valid request is TRUE, update title with Invalid Request
   },[]);
   
+
 
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
@@ -128,26 +120,37 @@ export default function Signup() {
       formResults[results[i].id] = results[i].value; //-- adds to dictionary
     }
     
+
     //---------------------------------
     //-- 2. form for business submitted
     if(nextStepButton.target.id == "business-form"){
-      console.log(nextStepButton.target.id)
-      setNewAccount({...newAccount, business: formResults })
-      console.log(newAccount)
-      console.log(formResults)
+      
+      setNewAccount({...newAccount, business: formResults }) //-- GRAB FORM DATA FOR BUSINESS FOR MUTATION ON COMPLETION
+      setNewBusiness({...newBusiness, brandName: formResults.brandName })
+      console.log(newBusiness)
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Printing Business form results...")
+        console.log(nextStepButton.target.id)
+        console.log(newAccount)
+        console.log(formResults)
+      }
     }
+
 
     //------------------------------
     //-- 3.  form for user submitted
     if(nextStepButton.target.id == "user-form"){
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Printing User form results...")
+      }
       setNewAccount({...newAccount, user: formResults })
     }
     
+
     //------------------------------------------
     //-- 4. Final Form to submit so actual last step,here
     if(nextStepButton_id == "confirmation-submit"){ //-- if the contact-submit ( final button ) do API call
-      // setAppointment_confirmation_id(nextStepButton_id); //TODO:: 04/10/22 #EP || Get form data here
-      createAppointment(); //-- runs the mutations
+      createNewAccount(); //-- runs the mutations
     }
 
     //-- 5. move to next step
@@ -165,88 +168,96 @@ export default function Signup() {
   //----------------------------------------------------------------------------
   /* Page Location and Logic */
 
-  const createAppointment = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
+  const createNewAccount = async params => {// TODO 04/10/22 #EP || to run the API REQUEST from form submit
     //-- When user information verified and submitted, update database with appointment data
 
     //- -try to create new business, then new user
     try {
-      var businessId= "NaN"; //-- to be defined at time of biz creation
-      var brandName = 'NaN';
+      var businessId= "NaN"; //-- EU form input
+      var brandName = "NaN"; //-- EU form input
+      var businessBrandName = "NaN";
+      
       
 
-      console.log("//-- Creating New Account..", newAccount)
+      //--      0. STARTING THE CREATION PROCESS MESSAGE IF IN DEVELOPMENT
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-----------------------------------------------------//")
+        console.log("//-- STARTING... ")
+        console.log("//-- Creating New Account...", newAccount)
+      }
       
       
       //--      1. ATTEMPT TO CREATE BUSINESS
-      console.log("//-- creating business...", newAccount.business)
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Creating new business...")
+      }
       const create = await addBusiness({
         variables: { ...newAccount.business },
       })    
       
+      
+      
       //--      2. ADD businessId RESPONSE TO STATE
-      .then(results=>{
-        
+      .then(results=>{  
         businessId = results.data.addBusiness._id;
-        brandName = results.data.addBusiness.brandName ? results.data.addBusiness.brandName : "NaN";
-        // const businessId = { 
-        //   "businessId" : results.data.addBusiness._id  //-- extract business ID from response
-        // }
-        // setNewAccount({
-        //   ...newAccount,
-        //   [results] : results,
-        // }); //-- update user to post
-        // setNewAccount({...newAccount, user: businessId }) //-- update user to post
-        // setNewAccount({...newAccount, appointment_type: businessId }) //-- update user to post
-        setNewBusiness({ results });
-        setNewAccount({...newAccount, business_id: [results.data] })
+        brandName = results.data.addBusiness.brand_name ? results.data.addBusiness.brand_name : "NaN";
+
+        // setNewAccount({...newAccount, user['brand_name'] : brandName});
+        // businessBrandName = results.data.addBusiness.businessBrandName ? results.data.addBusiness.businessBrandName : "NaN";
+        // setNewBusiness({ results }); //TODO:: 04/27/22 #EP || Is this needed? Console.log is empty
+        // setNewAccount({...newAccount, businessId: [results.data] }) //-- 
+        
+        
+
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          // console.log("//-- businessBrandName:", businessBrandName)
+          console.log("//-- RESULTS: addBusiness... ", results.data)
+          // console.log("//-- SUCCESS: newBusiness...", newBusiness)
+          console.log("//-- SUCCESS: newAccount...", newAccount)
+        }
        
-        // console.log("//-- results businessData..")
-        // console.log(results)
-        // console.log("//-- creating business completed!")
-        // console.log(`businessId`)
-        // console.log(businessId)
-        // console.log("//-- completed business_id value!")
       });
 
-      // console.log("//-- New Account with Business")
-      // console.log(newAccount)
-      // console.log(newBusiness)
       
-      // var businessId = '6258512a827ae3493855de82'
+      
       //--      3. ATTEMPT TO CREATE APPOINTMENT_TYPE 
-      
-      // newAccount.appointment_type['businessId'] = '6258512a827ae3493855de82';
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log("//-- Creating default appointment_type for newAccount...", newAccount.appointment_type)
+      }
+
       newAccount.appointment_type['businessId'] = businessId;
-      
       const apptType = await addApptType({
         variables: { ...newAccount.appointment_type },
       })
       .then(results => {
-        console.log(results)
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          console.log("//-- Creating business and default appointment_type complete!")
+          console.log("//-- RESULTS: addAppointmentType... ", results.data)
+        }
       })
        
       
+
       //--      4. ATTEMPT TO CREATE USER
-      // console.log("//-- creating user...")
-
       
-      // newAccount.user['businessId'] = '6258512a827ae3493855de82';
-      newAccount.user['businessId'] = businessId;
-      newAccount.user['brandName'] = brandName;
-      // console.log(newAccount.user)
+      newAccount.user['businessId'] = businessId; //TODO:: 04/27/22 #EP || Remove hard-coded updates to states to verify problem/resolution
+      newAccount.user['brand_name'] = brandName;   //TODO:: 04/27/22 #EP || Remove hard-coded updates to states to verify problem/resolution
       
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log(`//-- Creating new User within new businessId: ${newAccount.user.businessId} ... `, newAccount.user)
+      }
+      
+      //--  4.1 ATTEMPTING TO CREATE USER
       const userData  = await addUser({
-        variables: { ...newAccount.user },
-      })
+        variables: { ...newAccount.user, brandName: newAccount.business.brandName },
+      })      
       .then(results =>{
+        if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+          console.log(`//-- Attempting auth with new user: ${results.data}`)
+          console.log("//-- RESULTS: addUser...",results.data.addUser)
+        }
         
-        console.log("//-- creating user completed!")
-        
-
-
-        console.log("attempt auth")
-        console.log(results.data.addUser)
-        
+      //-- 5 ATTEMPTING TO LOGIN WITH NEWLY CREATED USER
         const loginData={
           _id     : results.data.addUser._id,
           password : newAccount.user.password,
@@ -254,44 +265,15 @@ export default function Signup() {
         }
 
         
-        //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-        const userData = login({
+        //-- LOGIN WITH NEW USER, UPDATE JWT, REROUTE TO HOMEPAGE
+        const userData = login( {
             variables: { ...loginData },
-        }).
-        then(results =>{
+          }
+        ).then(results => {
           Auth.login(results.data.login);
         })
 
       })
-
-      
-
-      /*
-        resultsfunction
-      */
-      
-      // .then(()=>{
-
-      //   console.log("//-- creating appointment types", newAccount.appointment_type)  
-      //   const { apptType } = addApptType({
-      //   variables: { ...newAccount.apptType },
-      //   })
-      //   return apptType;
-      // })
-
-      //--      4. ATTEMPT TO CREATE USER
-
-      // console.log("//-- creating user...")
-      // console.log(newAccount.user)
-      // const { userData } = await addUser({
-      //   variables: { ...newAccount.user },
-      // });
-      // console.log("//-- creating user completed!")
-      // console.log(userData)
-
-
-      //-- LOGIN SUCCESS, UPDATE JWT WITH AUTH AND RE-ROUTE
-      // Auth.login(userData.login);
     }
     
 
@@ -303,10 +285,12 @@ export default function Signup() {
         'addApptTypeError'  : addApptTypeError
       }
       
-      //-- PRINTING ERRORS
-      console.log(`Catch Error: ${error}` )
-      console.log(`Database Errors:`)
-      console.log(databaseErrors)
+      //-- PRINTING ERRORS //-- If development, print logs
+      if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development'){
+        console.log(`Catch Error: ${error}` )
+        console.log(`Database Errors:`)
+        console.log(databaseErrors)
+      }
       errorPopup(error,databaseErrors) //-- THIS HAPPENS IN THE COMPONENT CONFIRMATION
     }
     // return response;

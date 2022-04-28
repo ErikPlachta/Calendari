@@ -7,7 +7,7 @@ const typeDefs = gql`
     type User {
         _id: ID
         business_id: ID
-        business_brand_name: String
+        brand_name: String
         name_first: String
         name_last: String
         username: String
@@ -65,7 +65,7 @@ const typeDefs = gql`
     type Mutation {
         addUser(
             business_id: ID!
-            business_brand_name: String!
+            brand_name: String!
             name_first: String!, 
             name_last: String!, 
             email: String!, 
