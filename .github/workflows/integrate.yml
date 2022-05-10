@@ -1,4 +1,4 @@
-name: Node - Continuous Integration Check
+name: Client - Continuous Integration Check
 
 on:
   pull_request:
@@ -13,6 +13,6 @@ jobs:
       - uses: actions/setup-node@v1
         with:
           node-version: 12
-      - run: npm ci
-      - run: npm test
-      - run: npm run build
+      - run: cd client && npm ci
+      - run: cd client && npm test
+      - run: cd client && npm run build
