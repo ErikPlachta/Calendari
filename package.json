@@ -3,7 +3,6 @@
   "version": "1.0.0",
   "description": "Calendari is a scheduling app for your business. It gives business owners the ability to streamline the appointment booking process by letting the users schedule their own appointments based on the business's availability. This app can be used by any business in any industy, and future development includes plans to customize the look of the website!",
   "main": "server/server.js",
-  "build": "node --max_old_space_size=8192 <entry_file_path> --progress --env.<dev/prod>",
   "scripts": {
     "seed": "cd server && npm run seed",
     "build": "cd client && npm run build",
