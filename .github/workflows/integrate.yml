@@ -12,7 +12,7 @@ jobs:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: 12
+          node-version: 16.13.1
       - run: cd client && npm ci
       - run: cd client && npm test
       - run: cd client && npm run build
