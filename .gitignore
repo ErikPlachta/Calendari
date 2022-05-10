@@ -12,7 +12,7 @@ _ARCHIVE
 
 #node
 node_modules
-package-lock.json
+# package-lock.json #050922#EP - commented out as required for CI
 
 #app
 .env
