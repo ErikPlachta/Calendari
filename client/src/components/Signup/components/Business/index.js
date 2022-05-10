@@ -29,12 +29,11 @@ export default function Business({nextStep}) {
     'g-recaptcha-response': '',
   });
 
-  //-- event listner on input
+  //-- event listener on input
   const handleChange = (event) => {
     setBusinessDetails({ ...businessDetails, [event.target.name]: event.target.value,  });
   };
 
-  // console.log(appointment_template)
   return (
     <section className="signupBusiness">
       <header>

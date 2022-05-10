@@ -7,6 +7,10 @@ const userSchema = new Schema(
             type: String,
             required: true
         },
+        brand_name: {
+            type: String,
+            required: true
+        },
         name_first: {
             type: String,
             required: true,
