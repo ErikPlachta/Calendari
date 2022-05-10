@@ -1,4 +1,4 @@
-name: Node Continuous Integration
+name: Continuous Integration
 
 on:
   pull_request:
@@ -9,17 +9,11 @@ jobs:
   test_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
+      - uses: actions/checkout@v2
       - uses: actions/setup-node@v1
         with:
-          node-version: '12.x'
-      - name: Build
-        run: |
-          if [ -e yarn.lock ]; then
-          yarn install --frozen-lockfile
-          elif [ -e package-lock.json ]; then
-          npm ci
-          else
-          npm i
-          fi
-          npm run build
+          node-version: '16.x'
+      - name: Install Client and Server
+        run: npm install
+      - name: Build Client
+        run: npm run build
