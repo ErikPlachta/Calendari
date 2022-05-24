@@ -11,6 +11,7 @@ export const ADD_BUSINESS = gql`
         }
     }
 `;
+
 // create new user
 export const ADD_USER = gql`
     mutation AddUser($nameFirst: String!, $nameLast: String!, $email: String!, $username: String!, $password: String!, $phoneNumber: String!, $businessId: ID!, $brand_name: String!) {
@@ -27,6 +28,7 @@ export const ADD_USER = gql`
         }
     }
 `;
+
 //-- Login existing user
 //TODO:: 04/11/22 #EP || Add business business_id/brand_name on return
 export const LOGIN_USER = gql`
@@ -43,6 +45,7 @@ export const LOGIN_USER = gql`
     }
   }
 `;
+
 // create new appointment type
 export const ADD_APPT_TYPE = gql`
     mutation AddApptType($businessId: ID!, $apptTypeName: String!, $summary: String!) {
@@ -54,6 +57,7 @@ export const ADD_APPT_TYPE = gql`
         }
     }
 `;
+
 // create new appointment
 export const ADD_APPT = gql`
     mutation AddAppt($businessId: ID!, $userId: ID!, $appointmentStatus: String!, $appointmentTime: String!, $appointmentDate: String!, $apptTypeId: ID!) {
