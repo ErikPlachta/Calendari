@@ -92,10 +92,9 @@ const typeDefs = gql`
         ): AppointmentField
         addAppt(
             business_id: ID!, 
-            user_id: ID!, 
-            appt_type_id: ID!
             appointment_date: String!, 
-            appointment_time: String!, appointment_status: String!
+            appointment_time: String!, 
+            appointment_status: String!
         ): Appointment
         updateBusiness(
             _id: ID!

@@ -60,8 +60,8 @@ export const ADD_APPT_TYPE = gql`
 
 // create new appointment
 export const ADD_APPT = gql`
-    mutation AddAppt($businessId: ID!, $userId: ID!, $appointmentStatus: String!, $appointmentTime: String!, $appointmentDate: String!, $apptTypeId: ID!) {
-        addAppt(business_id: $businessId, user_id: $userId, appointment_status: $appointmentStatus, appointment_date: $appointmentDate, appointment_time: $appointmentTime, appt_type_id: $apptTypeId) {
+    mutation AddAppt($businessId: ID!, $appointmentStatus: String!, $appointmentTime: String!, $appointmentDate: String!) {
+        addAppt(business_id: $businessId, appointment_status: $appointmentStatus, appointment_date: $appointmentDate, appointment_time: $appointmentTime) {
             _id
             appointment_date
             appointment_time

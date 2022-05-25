@@ -102,12 +102,6 @@ const resolvers = {
                 { new: true, runValidators: true }
             );
 
-            // add new appt to user's list of appts
-            await User.findByIdAndUpdate(
-                { _id: args.user_id },
-                { $push: { appointments: appt._id } },
-                { new: true, runValidators: true }
-            )
             return appt;
         },
         // update business brand or name
