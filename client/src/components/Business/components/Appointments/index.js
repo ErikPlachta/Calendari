@@ -33,8 +33,6 @@ const {
     // add appt test object
     const apptTest = {
       businessId: "625608e9d634e02c54faece3",
-      userId: "625608f3d634e02c54faece5",
-      apptTypeId: "6256090ed634e02c54faece8",
       appointmentDate: "date",
       appointmentTime: "time"
     }
