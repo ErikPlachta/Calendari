@@ -15,7 +15,7 @@ Please see a screenshot and a gif below of the home page of our application:
 
 
 ## Where can I find this?
-You can either visit our github repository (https://github.com/ErikPlachta/Calendari) or visit the deployed application at https://calendari-day.herokuapp.com/
+You can either visit our github repository (https://github.com/ErikPlachta/Calendari) or visit the deployed application at https://calendari.erikplachta.com
 
 
 ---
