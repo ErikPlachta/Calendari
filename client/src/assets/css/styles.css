@@ -1076,6 +1076,7 @@ footer {
   justify-content: space-around; 
   z-index: 1001; /* puts it in front of the progressbar */
   height: 40px;
+  /* text-align: center; */
 }
 
 .footerElements {

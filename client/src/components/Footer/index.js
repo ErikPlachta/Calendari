@@ -7,8 +7,10 @@ export default function Footer({bobData, bob2}) {
       <div className="footerElements">
         <img className="brandLogo"alt="Bob" src={bob2} width="50px"></img>
         <p>
-          <b>&#169; 2022</b> Christiana Sullivan Morales,
-          Erik Plachta, and Mary Margaret Lawton
+          By Christiana Sullivan Morales,
+          Erik Plachta, & Mary Margaret Lawton
+          <br/>
+          <b>&#169; 2022</b> 
           
         </p>
       </div>
