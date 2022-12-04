@@ -256,7 +256,7 @@ select::-ms-expand {
 }
 
 
-/* SHARED ANIMATIONS BETWEEN INPUT AND TEXTAREAS */
+/* SHARED ANIMATIONS BETWEEN INPUT AND TEXT AREAS */
 textarea:is(:placeholder-shown),
 input:is(:placeholder-shown){
   opacity: .5;
@@ -477,10 +477,11 @@ button:hover,
 .homeInformation {
   flex: 100%;
   width: 90%;
+  max-width: 800px;
   
   box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
   border-radius: var(--br_primary);
-  padding: 1rem;
+  padding: 2rem;
   margin: 20px auto 0px auto;
   line-height: 2;
   background-color: white;
