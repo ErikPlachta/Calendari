@@ -4,8 +4,8 @@
   "description" : "Your Calendar -- untangled.",
   "scope" : "/",
   "start_url": ".",
-  "theme_color": "#fafa",
-  "background_color": "#fdfd",
+  "theme_color": "#3B00868A",
+  "background_color": "#3b0086",
   "display": "standalone",
   "orientation" : "portrait",
   "icons": [

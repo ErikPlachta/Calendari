@@ -476,7 +476,8 @@ button:hover,
 .signupCard,
 .homeInformation {
   flex: 100%;
-  width: 70%;
+  width: 90%;
+  
   box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
   border-radius: var(--br_primary);
   padding: 1rem;
@@ -710,7 +711,8 @@ SHARED STYLES -> Business, Scheduler, PageNotFound, SignUp
   align-items: center;
   flex: 100%;
   min-width: 40%;
-  max-width: 70%; /* Updated this to 70% to match the homepage styling */
+  max-width: 90%; /* Updated this to 70% to match the  homepage styling */
+  
   height: auto;
   box-shadow: rgba(82, 0, 190, 0.9) 0px -2px 6px 0px inset;;
   border-radius: var(--br_primary);
@@ -1088,7 +1090,13 @@ footer p{
 
 
 
-@media (min-width: 600px) {
+@media (max-width: 600px) {
+
+  .appointmentCard,
+  .signupCard,
+  .homeInformation {
+    width: calc(100% - 1rem);
+  }
 
 
 }

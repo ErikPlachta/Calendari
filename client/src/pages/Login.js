@@ -97,7 +97,7 @@ export default function Login() {
           
           //-- IF NOT, LOAD LOGIN PAGE CONTENT
           case false:    return ( 
-            <div className="signupInformation">
+            <div className="  signupInformation">
               <h2 alt="please login">Get Logged In</h2>
               {/* Used to notify if login event failure */}
               <h5 id="login-form-message" style={{opacity: "0"}}>

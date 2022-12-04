@@ -27,19 +27,15 @@ export default function Home() {
         </div>
       </div>
       <div id="whatIsThis" className="homeInformation">
-        <h3>What is Calendari?</h3>
+        <h3>About</h3>
         <p>
-          Calendari is a scheduling app for your business. It gives business owners the
-          ability to streamline the appointment booking process by letting the users
-          schedule their own appointments based on the business's availability. This
-          app can be used by any business in any industy, and future development includes
-          plans to customize the look of the website!
+          Calendari is a concept online scheduling app for small businesses. 
         </p>
       </div>
       <br></br>
       <br></br>
       <br></br>
-      <div id="whyIsThisDifferent" className="homeInformation">
+      <div id="about" className="homeInformation">
       <h3>Why is Calendari Different from Other Scheduling Apps?</h3>
         <p>
           Calendari differs from other scheduling apps because of it's easy, clean interface
@@ -64,46 +60,6 @@ export default function Home() {
           <li>Schedule Selection - Allows the busines owner the option to select their hours of operation per day instead of the same hours every day.</li>
         </ul>
       </div>
-      <br></br>
-      <br></br>
-      <br></br>
-      <div id="freeVsPremium" className="homeInformation">
-      <h3>What's the Difference Between Free and Premium?</h3>
-      <br></br>
-        <div className="tableContainer">
-          <table align="center">
-            <thead>
-              <tr>
-                <th>Feature</th>
-                <th>Free</th>
-                <th>Premium</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Theme Selection</td>
-                <td> ❌ </td>
-                <td> ✔️ </td>
-              </tr>
-              <tr>
-                <td>6+ Month Scheduling</td>
-                <td> ❌ </td>
-                <td> ✔️ </td>
-              </tr>
-              <tr>
-                <td>24/7 tech Support</td>
-                <td> ❌ </td>
-                <td> ✔️ </td>
-              </tr>
-              <tr>
-                <td>Toggle Week Start Day</td>
-                <td> ❌ </td>
-                <td> ✔️ </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </section>
+     </section>
   )
 }
