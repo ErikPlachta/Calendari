@@ -6,10 +6,13 @@ export default function Home() {
 
   return (
     <section>
-      <div id="wavecontainer">
+      
+      {/* WAVE CONTAINER */}
+      <div className="wavecontainer">
+      
+        {/* SLOGAN */}
           <div className="slogan">
-            <h3 id="sloganForHero" className="inner-header flex">Your Schedule: Untangled</h3>
-            <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
+          <svg className="waves" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shapeRendering="auto">
               <defs>
                 <path id="gentle-wave" d="M-160 44c30 0 58-18 88-18s 58 18 88 18 58-18 88-18 58 18 88 18 v44h-352z" />
               </defs>
@@ -20,13 +23,11 @@ export default function Home() {
                 <use xlinkHref="#gentle-wave" x="48" y="7" fill="#fff" />
                 </g>
             </svg>
+            <h3 id="sloganForHero" className="inner-header flex">Your Schedule: Untangled</h3>
           </div>
-        
-        <div className="content flex">
-          <p>By Erik, Christiana and Mary Margaret</p>
-        </div>
       </div>
       
+{/* ABOUT SECTION */}
       <div id="about" className="homeInformation">
         <h3>About</h3>
         <p>
@@ -40,8 +41,8 @@ export default function Home() {
         </p>
       </div>
       
-      <div id="futureDev" className="homeInformation">
-        <h3>Future Goals ( Concept )</h3>
+      <div id="milestones" className="homeInformation">
+        <h3>Milestones</h3>
         <p>
           As a Concept application, we've outline some future goals the project could take on.
         </p>

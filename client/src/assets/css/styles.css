@@ -384,11 +384,12 @@ button:hover,
 .waves {
   position:relative;
   width: 100%;
-  height:15vh;
   margin-bottom:-7px; /*Fix for safari gap*/
   min-height:100px;
-  max-height:300px;
-  margin-top:3rem;
+  max-height:100px;
+  /* height:15vh; */
+  /* margin-top:1.5rem; */
+  transform: rotate(180deg);
 }
 
 .content {
@@ -528,26 +529,50 @@ table {
    
  }
  
+ .wavecontainer {
+  /* Wrapper around Waves and Slogan */
+  
+  /* display: flex;
+  flex-direction: column;
+  flex: 100%; */
+ }
+
  .slogan {
-   text-align:center;
-   vertical-align: middle;
-   background: 
-              linear-gradient(180deg, 
-              var(--theme_plum) 0%,
-              var(--darker-purple) 5%,
-              var(--lighter-purple) 30%,
-              var(--darker-pink) 70%,
-              var(--light-pink) 100%);
-   color:white;   
-  padding-top:0;
+  /* wrapper of #wavecontainer that holds ALL wave content */
+  text-align:center;
+  vertical-align: middle;
+  padding-top:0 !important;
+
+  /* background: linear-gradient(
+      180deg, 
+      var(--theme_plum) 0%,
+      var(--darker-purple) 5%,
+      var(--lighter-purple) 30%,
+      var(--darker-pink) 70%,
+      var(--light-pink) 100%
+    ); */
+
+  background: linear-gradient(
+      180deg, 
+      var(--light-pink) 0%,
+      var(--darker-pink) 5%,
+      var(--lighter-purple) 30%,
+      var(--darker-purple) 100%
+    );
+  /* height: 200px; */
+  padding-bottom: 2rem;
  }
  
  #sloganForHero {
+  /* Slogan font inside of .slogan containing "Your Schedule: Untangled*/
    z-index:99999;
    color: white;
    font-size: 3rem;
-   font-weight: 400;
+   font-weight: 500;
    filter: var(--ds-02_focus);
+   margin: 0;
+   padding: 3rem 0;
+  text-shadow: var(--bs-01);
  }
 
 

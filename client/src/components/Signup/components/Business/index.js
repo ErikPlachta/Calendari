@@ -36,13 +36,14 @@ export default function Business({nextStep}) {
 
   return (
     <section className="signupBusiness">
-      <header>
+      <div>
+        <br />
         <h3>Tell us about your Business</h3>
         <p>
           In this section you'll define your business details, some of which are
           displayed on your public scheduler link.
         </p>
-      </header>
+      </div>
       <form id="business-form" className="signupCard" onSubmit={nextStep}>
         {/* {appointment_template} */}
         {(() => {
