@@ -10,6 +10,7 @@
     "heroku-postbuild": "npm run install && npm run build",
     "server": "cd server && nodemon server.js",
     "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "dev": "npm run develop",
     "start": "node server/server.js"
   },
   "keywords": [

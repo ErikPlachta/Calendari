@@ -23,7 +23,7 @@ export default function Login() {
     "email"     : "",
     "password"  : "",
     "submitAttempts" : 0,
-    'g-recaptcha-response': '',
+    'g-recaptcha-response': ''
   });
 
   const [login, { error }] = useMutation(LOGIN_USER); //-- When login pressed, attempt to login 
@@ -134,7 +134,7 @@ export default function Login() {
                   />
                 </span>
                 {/* RECAPTCHA */}
-                <Recaptcha formDetails={formDetails}  />
+                {/* <Recaptcha formDetails={formDetails}/> */}
                 {/* SUBMIT BUTTON */}
                 <button>Login</button>
               </form>
